@@ -63,7 +63,7 @@ session_start();
         }
     </style>
 </head>
-<body class="<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
+<body class=""<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
     <header class="header">
         <div class="logo">
             <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
@@ -77,7 +77,7 @@ session_start();
                 <?php if (isset($_SESSION['vendedor_nome'])): ?>
                     <li><a href="loginV/cadastroproduto.php">Cadastrar meu Produto</a></li>
                 <?php else: ?>
-                    <li><a href="vendedor/cadastrovendedor.php">Criar Conta de Vendas</a></li>
+                    <li><a href="vendedor/cadastrovendedor.php">Começar Vendas</a></li>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
@@ -91,9 +91,9 @@ session_start();
                 <a href="#" class="cart-icon">🛒</a>
 
                 <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                    <a href="loginV/loginV.php" class="button-login-login">Comece a Vender</a>
+                    <a href="loginV/loginV.php" class="button-login-login">Venda</a>
                     <a href="login/login.php" class="button-login-login">Logar</a>
-                    <a href="cadastro/cadastro.php" class="button-login">Criar Usúario</a>
+                    <a href="cadastro/cadastro.php" class="button-login">Criar Conta</a>
                 <?php endif; ?>
 
 
@@ -137,7 +137,7 @@ session_start();
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
         <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
-        <img src="img/gamer2.avif" alt="Banner MaxAcess" class="banner-destaque" />
+        <img src="img/gamer.jpg" alt="Banner MaxAcess" class="banner-destaque" />
 
         <section class="produtos-destaque">
         <h3>Categorias em Destaque</h3>
