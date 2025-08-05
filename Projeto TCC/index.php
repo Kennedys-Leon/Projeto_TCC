@@ -60,7 +60,7 @@ session_start();
         }
     </style>
 </head>
-<body class="header-fixado"<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
+<body class="dark-mode"<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
     <header class="header">
         <div class="logo">
             <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
@@ -71,30 +71,30 @@ session_start();
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Serviços</a></li>
 
-                <?php if (isset($_SESSION['vendedor_nome'])): ?>
+                    <?php if (isset($_SESSION['vendedor_nome'])): ?>
                     <li><a href="loginV/cadastroproduto.php">Cadastrar meu Produto</a></li>
-                <?php else: ?>
+                    <?php else: ?>
                     <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
-                <?php endif; ?>
+                    <?php endif; ?>
 
-                <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+                    <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
                     <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
                     <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
                     <li><a href="consultageral.php">Consulta Geral</a></li>
-                <?php endif; ?>
+                    <?php endif; ?>
             </ul>
             <div class="search-cart">
                 <input class="search-bar" type="text" placeholder="Buscar..." />
                 <a href="#" class="cart-icon">🛒</a>
 
-                <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
+                    <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
                     <a href="loginV/loginV.php" class="button-login-login">Começar Vendas</a>
                     <a href="login/login.php" class="button-login-login">Logar</a>
                     <a href="cadastro/cadastro.php" class="button-login">Comprar</a>
-                <?php endif; ?>
+                    <?php endif; ?>
 
 
-                <?php if (isset($_SESSION['vendedor_cadastrado'])): ?>
+                    <?php if (isset($_SESSION['vendedor_cadastrado'])): ?>
                     <a href="produto" class="button-login" style="background-color: #8C5B3F; color: white;">
                         Logar como Vendedor
                     </a>
