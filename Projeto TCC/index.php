@@ -63,7 +63,7 @@ session_start();
 <body class="header-fixado"<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
     <header class="header">
         <div class="logo">
-            <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
+            <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
         </div>
         <nav class="navbar">
             <ul>
@@ -134,7 +134,7 @@ session_start();
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
         <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
-        <img src="img/gamer.jpg" alt="Banner MaxAcess" class="banner-destaque" />
+        <img src="img/banner.png" alt="Banner MaxAcess" class="banner-destaque" />
 
         <section class="produtos-destaque">
         <h3>Categorias em Destaque</h3>

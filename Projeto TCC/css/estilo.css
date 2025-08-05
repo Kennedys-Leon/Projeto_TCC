@@ -9,6 +9,7 @@ body {
     background-color: #f2f2f7;
     color: #333;
     transition: background-color 0.3s, color 0.3s;
+    padding-top: 80px; /* Adicionado para compensar o header fixo */
 }
 
 body.dark-mode {
@@ -17,6 +18,11 @@ body.dark-mode {
 }
 
 .header {
+    position: fixed; /* Mantém o header visível ao rolar */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     background: linear-gradient(90deg, #6a11cb 0%, #0059f3 100%);
     padding: 10px 30px;
     display: flex;
@@ -193,15 +199,21 @@ body.dark-mode .rodape {
 }
 
 .produtos-destaque {
-    margin-top: 30px;
-    padding-left: 0px;  /* Dá um espaçamento à esquerda */
-    text-align: left;    /* Alinha o título à esquerda */
+    margin-top: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: left;
+}
+
+.produtos-destaque h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .lista-produtos {
     display: flex;
     gap: 20px;
-    justify-content: center; /* Alinha os produtos à esquerda */
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -230,6 +242,7 @@ body.dark-mode .rodape {
 body.dark-mode .produto p {
     color: #f2f2f7;
 }
+
 .banner-destaque {
     display: block;
     margin: 20px auto;
@@ -238,17 +251,8 @@ body.dark-mode .produto p {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-/* ------------ Produtos em Destaque (Cards com Preço) ------------ */
-.produtos-destaque {
-    margin-top: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
 
-.produtos-destaque h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
-}
+/* ------------ Produtos em Destaque (Cards com Preço) ------------ */
 
 .lista-produtos-destaque {
     display: grid;
@@ -311,4 +315,41 @@ body.dark-mode .card-produto p {
 body.dark-mode .card-produto .preco {
     background-color: #555;
     color: #ffd700;
+}
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    padding: 8px 14px;
+    border-radius: 30px;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+body.dark-mode .user-box {
+    background-color: #222;
+}
+
+body.dark-mode .user-name {
+    color: #f2f2f7;
 }
