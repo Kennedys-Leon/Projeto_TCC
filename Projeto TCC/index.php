@@ -67,12 +67,12 @@ session_start();
         </div>
         <nav class="navbar">
             <ul>
-                <li><a href="#">Anunciar</a></li>
+                <li><a href="#">Como Funciona?</a></li>
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Serviços</a></li>
 
                     <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                    <li><a href="loginV/cadastroproduto.php">Cadastrar meu Produto</a></li>
+                    <li><a href="loginV/cadastroproduto.php">Cadastrar meus Produtos</a></li>
                     <?php else: ?>
                     <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                     <?php endif; ?>
@@ -88,9 +88,8 @@ session_start();
                 <a href="#" class="cart-icon">🛒</a>
 
                     <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                    <a href="loginV/loginV.php" class="button-login-login">Começar Vendas</a>
                     <a href="login/login.php" class="button-login-login">Logar</a>
-                    <a href="cadastro/cadastro.php" class="button-login">Comprar</a>
+                    <a href="cadastro/cadastro.php" class="button-login">Cadastar Conta</a>
                     <?php endif; ?>
 
 
@@ -108,19 +107,19 @@ session_start();
 
     <?php if (isset($_SESSION['usuario_nome'])): ?>
         <div class="usuario-box">
-            <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
-            <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
-            <form action="logout.php" method="post" style="margin: 0;">
+                <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
+                <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
+                <form action="logout.php" method="post" style="margin: 0;">
                 <button class="logout-btn" type="submit">Sair</button>
-            </form>
+                </form>
         </div>
     <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
         <div class="usuario-box">
-            <img src="img/user-icon.png" alt="Vendedor" class="usuario-icone-img">
-            <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
-            <form action="logout.php" method="post" style="margin: 0;">
+                <img src="img/user-icon.png" alt="Vendedor" class="usuario-icone-img">
+                <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
+                <form action="logout.php" method="post" style="margin: 0;">
                 <button class="logout-btn" type="submit">Sair</button>
-            </form>
+                </form>
         </div>
     <?php else: ?>
         <div class="usuario-box">
@@ -143,40 +142,40 @@ session_start();
                 <img src="img/FF.jpeg" alt="Produto 1" />
                 <p>Free Fire</p>
             </div>
+
             <div class="produto">
                 <img src="img/clash.jpeg" alt="Produto 2" />
                 <p>Clash Royale</p>
             </div>
+
             <div class="produto">
                 <img src="img/genshim.jpeg" alt="Produto 3" />
-                <p>Genshim Impact</p>
-                
+                <p>Genshim Impact</p>   
             </div>
+
              <div class="produto">
                 <img src="img/fifa.jpeg" alt="Produto 3" />
                 <p>Fifa</p>
-                
             </div>
+
              <div class="produto">
                 <img src="img/lol.jpeg" alt="Produto 3" />
-                <p>League Of Legends</p>
-                
+                <p>League Of Legends</p> 
             </div>
+
              <div class="produto">
                 <img src="img/roblox.jpeg" alt="Produto 3" />
-                <p>Roblox</p>
-                
+                <p>Roblox</p>   
             </div>
+
              <div class="produto">
                 <img src="img/fortnite.jpeg" alt="Produto 3" />
-                <p>Fortnite</p>
-                                
+                <p>Fortnite</p>                 
             </div>
             
              <div class="produto">
                 <img src="img/minecraft.jpeg" alt="Produto 3" />
-                <p>Mine</p>
-                                
+                <p>Mine</p>               
             </div>
         </div>
     </section>

@@ -147,6 +147,26 @@ if (!isset($_SESSION['usuario_nome']) || $_SESSION['usuario_nome'] !== 'adm') {
             echo "</tr>";
             }
         echo '</table>';
+
+        $stmt = $conn->query("SELECT * FROM produto");
+        echo '<table border="1">';
+            echo "<tr>";
+                echo "<th>Código</th>";
+                echo "<th>Nome</th>";
+                echo "<th>Preço</th>";
+                echo "<th>Categoria</th>";
+                echo "<th>Quantidade</th>";
+            echo "</tr>"; 
+        while ($row = $stmt->fetch()) {
+            echo "<tr>";
+                echo "<td>".$row['idproduto']."</td>";
+                echo "<td>".$row['nome']."</td>";
+                echo "<td>".$row['preco']."</td>";
+                echo "<td>".$row['categoria']."</td>";
+                echo "<td>".$row['quantidade_estoque']."</td>";
+            echo "</tr>";
+            }
+        echo '</table>';
     ?>
     </main>
 
