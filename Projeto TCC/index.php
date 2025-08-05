@@ -7,23 +7,20 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Site nosso</title>
+    <title>Projeto TCC</title>
     <link rel="stylesheet" href="css/estilo.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        
         .usuario-box {
-            position: fixed;
-            top: 15px;
-            left: 90px;
             display: flex;
             align-items: center;
             background-color: #000;
             color: white;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 14px;
-            z-index: 1000;
             box-shadow: 0 0 8px rgba(0,0,0,0.4);
         }
 
@@ -63,7 +60,7 @@ session_start();
         }
     </style>
 </head>
-<body class=""<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
+<body class="header-fixado"<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>">
     <header class="header">
         <div class="logo">
             <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
@@ -77,7 +74,7 @@ session_start();
                 <?php if (isset($_SESSION['vendedor_nome'])): ?>
                     <li><a href="loginV/cadastroproduto.php">Cadastrar meu Produto</a></li>
                 <?php else: ?>
-                    <li><a href="vendedor/cadastrovendedor.php">Começar Vendas</a></li>
+                    <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
@@ -91,9 +88,9 @@ session_start();
                 <a href="#" class="cart-icon">🛒</a>
 
                 <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                    <a href="loginV/loginV.php" class="button-login-login">Venda</a>
+                    <a href="loginV/loginV.php" class="button-login-login">Começar Vendas</a>
                     <a href="login/login.php" class="button-login-login">Logar</a>
-                    <a href="cadastro/cadastro.php" class="button-login">Criar Conta</a>
+                    <a href="cadastro/cadastro.php" class="button-login">Comprar</a>
                 <?php endif; ?>
 
 
