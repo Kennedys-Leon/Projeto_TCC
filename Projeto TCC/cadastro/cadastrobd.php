@@ -3,7 +3,7 @@ include 'conexao.php';
 
 $nome = $_POST['nome'];
 $cpf = $_POST['cpf'];
-$endereco = $_POST['endereco'];
+$endereco = $_POST['cep'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -19,12 +19,12 @@ if (!is_dir('../uploads')) {
 
 try {
     if (move_uploaded_file($foto_tmp, $caminho_destino)) {
-        $sql = "INSERT INTO cadastro (nome, cpf, endereco, telefone, email, senha, foto) 
-                VALUES (:nome, :cpf, :endereco, :telefone, :email, :senha, :foto)";
+        $sql = "INSERT INTO cadastro (nome, cpf, cep, telefone, email, senha, foto) 
+                VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':cpf', $cpf);
-        $stmt->bindParam(':endereco', $endereco);
+        $stmt->bindParam(':endereco', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);

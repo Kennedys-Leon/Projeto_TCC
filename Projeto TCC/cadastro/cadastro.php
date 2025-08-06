@@ -16,8 +16,8 @@
         <label for="CampCPF">CPF:</label>
         <input type="text" name="cpf" required>
 
-        <label for="CampEndereco">Endereço:</label>
-        <input type="text" name="endereco" required>
+        <label for="CampCep">CEP:</label>
+        <input type="text" name="cep" required>
 
         <label for="CampTelefone">Telefone:</label>
         <input type="text" name="telefone" required>

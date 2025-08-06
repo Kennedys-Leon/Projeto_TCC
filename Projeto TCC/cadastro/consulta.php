@@ -68,7 +68,7 @@
                 echo "<th>Código</th>";
                 echo "<th>Nome</th>";
                  echo "<th>CPF</th>";
-                echo "<th>Endereco</th>";
+                echo "<th>CEP</th>";
                  echo "<th>Telefone</th>";
                 echo "<th>Email</th>";
                 echo "<th>Senha</th>";
@@ -78,7 +78,7 @@
                 echo "<td>".$row['idcadastro']."</td>";
                 echo "<td>".$row['nome']."</td>";
                  echo "<td>".$row['cpf']."</td>";
-                echo "<td>".$row['endereco']."</td>";
+                echo "<td>".$row['cep']."</td>";
                  echo "<td>".$row['telefone']."</td>";
                 echo "<td>".$row['email']."</td>";
                 echo "<td>".$row['senha']."</td>";
