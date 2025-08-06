@@ -148,19 +148,9 @@ session_start();
                 <p>Clash Royale</p>
             </div>
 
-            <div class="produto">
-                <img src="img/genshim.jpeg" alt="Produto 3" />
-                <p>Genshim Impact</p>   
-            </div>
-
              <div class="produto">
                 <img src="img/fifa.jpeg" alt="Produto 3" />
                 <p>Fifa</p>
-            </div>
-
-             <div class="produto">
-                <img src="img/lol.jpeg" alt="Produto 3" />
-                <p>League Of Legends</p> 
             </div>
 
              <div class="produto">

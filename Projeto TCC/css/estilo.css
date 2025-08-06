@@ -98,44 +98,79 @@ body.dark-mode {
 }
 
 .button-login {
-    background-color: #000000;
-    padding: 10px 18px;
-    border-radius: 25px;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    padding: 12px 22px;
+    border-radius: 30px;
     text-decoration: none;
-    color: #fff;
+    color: #000;
     font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 201, 255, 0.3);
+    cursor: pointer;
 }
+
+.button-login:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 14px rgba(0, 201, 255, 0.5);
+}
+
+
+.button-login:hover {
+    background: linear-gradient(90deg, #ff6b6b, #ff3c3c);
+    transform: scale(1.05);
+}
+
 
 .button-login:hover {
     background-color: #ff6b6b;
 }
 
 .button-login-login {
-    background-color: #000000;
-    padding: 10px 18px;
+    background: linear-gradient(90deg, #000000, #1a1a1a);
+    padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
+
+.button-login-login:hover {
+    background: linear-gradient(90deg, #3b89ff, #0059f3);
+    transform: scale(1.05);
+}
+
 
 .button-login-login:hover {
     background-color: #3b89ff;
 }
 
 .toggle-theme {
-    padding: 8px 15px;
-    border: 1px solid #fff;
+    padding: 8px 18px;
+    border: none;
     border-radius: 30px;
     color: #fff;
-    background-color: #333;
+    background: linear-gradient(90deg, #444, #111);
     cursor: pointer;
     font-size: 16px;
     text-align: center;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
+
+body.dark-mode .toggle-theme {
+    background: linear-gradient(90deg, #666, #222);
+    color: #f2f2f7;
+}
+
+.toggle-theme:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #555, #000);
+}
+
 
 body.dark-mode .toggle-theme {
     background-color: #555;
