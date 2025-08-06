@@ -24,7 +24,7 @@ try {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':cpf', $cpf);
-        $stmt->bindParam(':endereco', $cep);
+        $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
