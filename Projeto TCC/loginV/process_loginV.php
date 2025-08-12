@@ -18,7 +18,7 @@ try {
         header('Location: ../index.php');
         exit();
     } else {
-        header('Location: login.php?error=1');
+        header('Location: loginV.php?error=1');
         exit();
     }
 } catch (PDOException $e) {
