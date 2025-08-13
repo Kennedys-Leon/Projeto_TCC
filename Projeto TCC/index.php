@@ -340,7 +340,7 @@ session_start();
 
                 <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
                     <a href="login/login.php" class="button-login-login">Logar</a>
-                    <a href="cadastro/cadastro.php" class="button-login">Cadastar Conta</a>
+                    <a href="cadastro/cadastro.php" class="button-login">Cadastrar Conta</a>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['vendedor_cadastrado'])): ?>

@@ -33,7 +33,7 @@
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
         <div class="botoes-inicio">
-            <a href="../login/login.php" class="btn-primario">Já possui uma conta? Entrar</a>
+            <a href="../loginV/loginV.php" class="btn-primario">Já possui uma conta? Entrar</a>
         </div>
     </form>
 </body>

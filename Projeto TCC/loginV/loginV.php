@@ -9,7 +9,7 @@
 <body>
     <div class="container-login">
         <form action="process_loginV.php" method="post" class="formulario-login">
-            <h2>Opa novo vendedor!! Logue abaixo👇</h2>
+            <h2>Olá vendedor!! Logue suas informações👇</h2>
 
             <label for="nome">Nome:</label>
             <input type="text" name="nome" required>
