@@ -28,7 +28,7 @@ body.dark-mode {
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: rgb(26, 83, 94);
+    background-color: rgb(25 71 130);;
 }
 
 .header .logo {
@@ -222,7 +222,7 @@ body.dark-mode .rodape {
 .logo-img {
     height: 70px;
     object-fit: contain;
-    border-radius: 20%;
+    border-radius: 15%;
 }
 
 /* ------------------- Estilo para produtos em destaque ------------------- */
@@ -363,7 +363,7 @@ body.dark-mode .card-produto .preco {
     align-items: center;
     background-color: #000;
     padding: 8px 14px;
-    border-radius: 30px;
+    border-radius: 20px;
     gap: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }

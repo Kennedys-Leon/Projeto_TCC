@@ -14,14 +14,13 @@ session_start();
         .usuario-box {
             display: flex;
             align-items: center;
-            background-color: #000;
+            background-color: #00c6fd;
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 4px 20px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.4);
-            margin-left: 15px;
+            font-size: 17px;
+            margin-left: 40px;
         }
 
         .usuario-icone-img {
