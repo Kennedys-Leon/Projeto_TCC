@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleThemeInput) {
         // Inicializa o tema escuro ao carregar
         document.body.classList.add('dark-mode');
-        toggleThemeInput.value = '☀️ Tema Claro';
+        toggleThemeInput.value = '☀️';
 
         toggleThemeInput.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
 
             if (document.body.classList.contains('dark-mode')) {
-                toggleThemeInput.value = '☀️ Tema Claro';
+                toggleThemeInput.value = '☀️';
             } else {
-                toggleThemeInput.value = '🌙 Tema Escuro';
+                toggleThemeInput.value = '🌙';
             }
         });
     }

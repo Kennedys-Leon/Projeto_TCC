@@ -87,12 +87,13 @@ body.dark-mode {
 }
 
 .cart-icon {
-    
-    font-size: 20px;
+    font-size: 334px;
     color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
     cursor: pointer;
-    transition: color 0.3s;
 }
+
 
 .cart-icon:hover {
     color: #00c9ff;
@@ -151,16 +152,19 @@ body.dark-mode {
 }
 
 .toggle-theme {
-    padding: 8px 18px;
+    width: 36px;
+    height: 36px;
     border: none;
-    border-radius: 30px;
-    color: #000;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     text-align: center;
-    transition: all 0.3s ease;
 }
-
 body.dark-mode .toggle-theme {
     background: linear-gradient(90deg, #000 );
     color: #f2f2f7;
@@ -173,7 +177,7 @@ body.dark-mode .toggle-theme {
 
 
 body.dark-mode .toggle-theme {
-    background-color: #555;
+    background-color: rgb(255, 255, 255);
     color: #f2f2f7;
 }
 
