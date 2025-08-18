@@ -76,7 +76,6 @@ session_start();
     color: #ffd700; /* Dourado */
 }
 
-/* Indicador de número de itens no carrinho */
 .cart-icon::after {
     content: attr(data-count);
     position: absolute;
@@ -383,7 +382,7 @@ session_start();
                         <button class="btn-preco">R$ 25,00 +</button>
                     </div>
                     <div class="card-produto">
-                        <img src="img/chave.jpeg" alt="Steam Key Aleatória">
+                        <img src="img/chave.png" alt="Steam Key Aleatória">
                         <p>STEAM ALEATÓRIA - KEY ATIVÁVEL EM SUA CONTA - ENTREGA AUTOMÁTICA</p>
                         <button class="btn-preco">R$ 25,00 +</button>
                     </div>
@@ -409,3 +408,93 @@ session_start();
     <script src="script.js"></script>
 </body>
 </html>
+
+<script>
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+function updateCartCount() {
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = cartItems.length;
+    cartIcon.setAttribute('data-count', cartCount);
+}
+
+function addToCart(productId, productName, productPrice, productImage) {
+    const existingItemIndex = cartItems.findIndex(item => item.id === productId);
+
+    if (existingItemIndex === -1) {
+        cartItems.push({
+            id: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+
+    updateCartCount();
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Produto Adicionado!',
+        text: `${productName} foi adicionado ao seu carrinho.`,
+    });
+}
+
+document.getElementById('cart-icon').addEventListener('click', function() {
+    const modal = document.getElementById('cart-modal');
+    const cartItemsList = document.querySelector('.cart-items');
+    const cartTotal = document.getElementById('cart-total-price');
+    const emptyMessage = document.getElementById('cart-empty-message');
+
+    cartItemsList.innerHTML = '';
+
+    if (cartItems.length > 0) {
+        cartItems.forEach(item => {
+            const cartItem = document.createElement('li');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="uploads/${item.image}" alt="${item.name}" class="cart-item-image" />
+                <div class="cart-item-details">
+                    <h4>${item.name}</h4>
+                    <p>R$ ${item.price}</p>
+                </div>
+                <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">🗑️</button>
+            `;
+            cartItemsList.appendChild(cartItem);
+        });
+
+        const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+        cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
+        emptyMessage.style.display = 'none'; 
+    } else {
+        emptyMessage.style.display = 'block'; 
+    }
+
+    modal.style.display = 'block';
+});
+
+document.querySelector('.cart-close-btn').addEventListener('click', function() {
+    document.getElementById('cart-modal').style.display = 'none';
+});
+
+function removeFromCart(productId) {
+    cartItems = cartItems.filter(item => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    updateCartCount();
+    document.getElementById('cart-icon').click(); 
+}
+
+document.querySelectorAll('.btn-preco').forEach((button, index) => {
+    button.addEventListener('click', function() {
+        const productId = `product-${index + 1}`; 
+        const productName = button.previousElementSibling.textContent.trim();
+        const productPrice = 25.00; 
+        const productImage = button.previousElementSibling.previousElementSibling.src.split('/').pop(); 
+
+        addToCart(productId, productName, productPrice, productImage);
+    });
+});
+
+updateCartCount();
+</script>
