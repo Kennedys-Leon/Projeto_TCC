@@ -495,6 +495,12 @@ document.querySelectorAll('.btn-preco').forEach((button, index) => {
         addToCart(productId, productName, productPrice, productImage);
     });
 });
+// Seleciona o botão de finalizar compra
+document.querySelector('.cart-checkout-btn').addEventListener('click', function () {
+    // Aqui você pode salvar os itens no servidor antes, se quiser
+    // Exemplo: enviar para checkout.php
+    window.location.href = "checkout.php";
+});
 
 updateCartCount();
 </script>
