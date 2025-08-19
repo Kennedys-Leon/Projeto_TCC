@@ -33,7 +33,7 @@
     <main class="conteudo">
         <h2>Consulta Vendedor</h2>
         <?php
-        include 'conexao2.php';
+        include '../cadastro/conexao.php';
         $stmt = $conn->query("SELECT * FROM vendedor");
         echo '
         <style>

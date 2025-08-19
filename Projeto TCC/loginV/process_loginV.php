@@ -1,5 +1,5 @@
 <?php
-include 'conexao_loginV.php';
+include '../cadastro/conexao.php';
 
 $nome = trim(htmlspecialchars($_POST['nome']));
 $email = trim(htmlspecialchars($_POST['email']));
