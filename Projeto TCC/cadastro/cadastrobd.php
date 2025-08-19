@@ -3,7 +3,7 @@ include 'conexao.php';
 
 $nome = $_POST['nome'];
 $cpf = $_POST['cpf'];
-$endereco = $_POST['cep'];
+$cep = $_POST['cep'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];

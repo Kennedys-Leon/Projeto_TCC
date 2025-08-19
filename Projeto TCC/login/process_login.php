@@ -1,12 +1,12 @@
 <?php
-include 'conexao_login.php';
+include '../cadastro/conexao.php';
 
 $nome = trim(htmlspecialchars($_POST['nome']));
 $email = trim(htmlspecialchars($_POST['email']));
 $senha = trim(htmlspecialchars($_POST['senha']));
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM cadastro WHERE nome = ? AND email = ? AND senha = ?");
+    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE nome = ? AND email = ? AND senha = ?");
     $stmt->execute([$nome, $email, $senha]);
 
     $usuario_db = $stmt->fetch(PDO::FETCH_ASSOC);

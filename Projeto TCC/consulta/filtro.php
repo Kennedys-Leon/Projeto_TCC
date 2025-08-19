@@ -7,7 +7,7 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare("SELECT * FROM cadastro WHERE nome = :firstname");
+    $stmt = $conn->prepare("SELECT * FROM usuario WHERE nome = :firstname");
     $stmt->bindParam(':firstname', $firstname);
     $stmt->execute();
 

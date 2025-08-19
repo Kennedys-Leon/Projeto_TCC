@@ -1,4 +1,4 @@
-<?php
+<!--<?php
 session_start();
 include '../cadastro/conexao.php';
 
@@ -27,4 +27,4 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-?>
+?>!-->

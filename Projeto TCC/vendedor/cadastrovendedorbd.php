@@ -1,5 +1,5 @@
 <?php
-include 'conexao2.php';
+include '../cadastro/conexao.php';
 
 $nome = $_POST['nome'];
 $cpf = $_POST['CampCPF'];

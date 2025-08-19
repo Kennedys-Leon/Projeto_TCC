@@ -1,5 +1,5 @@
 <?php
-include '../vendedor/conexao2.php';
+include '../cadastro/conexao.php';
 
 $firstname = $_POST['nome'];
 

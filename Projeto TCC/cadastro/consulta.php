@@ -34,7 +34,7 @@
         <h2>Consulta</h2>
         <?php
         include 'conexao.php';
-        $stmt = $conn->query("SELECT * FROM cadastro");
+        $stmt = $conn->query("SELECT * FROM usuario");
         echo '
         <style>
             table {

@@ -42,7 +42,7 @@ if (!isset($_SESSION['usuario_nome']) || $_SESSION['usuario_nome'] !== 'adm') {
         <h2>Consulta</h2>
         <?php
         include 'cadastro/conexao.php';
-        $stmt = $conn->query("SELECT * FROM cadastro");
+        $stmt = $conn->query("SELECT * FROM usuario");
         echo '
         <style>
             table {
