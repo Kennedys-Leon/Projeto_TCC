@@ -1,0 +1,111 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2f2f7;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container centralizado */
+.pagamento-container,
+.container-pagamento {
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: 350px;
+    text-align: center;
+}
+
+/* Títulos */
+.pagamento-container h2,
+.container-pagamento h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #194782;
+}
+
+/* Opções de pagamento */
+.metodo {
+    display: block;
+    margin: 15px 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.metodo input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007bff;
+}
+
+/* Botões */
+.btn-pagar,
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #00c9ff, #0066ff);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-pagar:hover,
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #0066ff, #00c9ff);
+}
+
+/* Formulário cartão */
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+form input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px #007bff;
+}
+
+/* QR Code Pix */
+.qr-code {
+    margin: 20px 0;
+}
+
+.qr-code img {
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Boleto */
+a button {
+    text-decoration: none;
+}
+
+/* Responsivo */
+@media (max-width: 400px) {
+    .pagamento-container,
+    .container-pagamento {
+        width: 90%;
+        padding: 20px;
+    }
+}

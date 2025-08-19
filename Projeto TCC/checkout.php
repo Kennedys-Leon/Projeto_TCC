@@ -8,8 +8,7 @@ session_start();
     <title>Checkout - MaxAcess</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
-   
+    
 </head>
 <body>
     <div class="checkout-container">
@@ -21,8 +20,9 @@ session_start();
         <div id="checkout-items" class="checkout-items"></div>
 
         <div class="checkout-summary">
+            <img src="img/FF.jpeg" alt="Produto 1" />
             <div class="checkout-total">Total: R$ <span id="checkout-total">0,00</span></div>
-            <button class="checkout-btn">Pagar Agora</button>
+            <button id="btn-pagar" class="checkout-btn">Pagar Agora</button>
         </div>
     </div>
 
@@ -50,6 +50,11 @@ session_start();
     } else {
         checkoutDiv.innerHTML = "<p>Carrinho vazio.</p>";
     }
+
+    // Redireciona para página de pagamento
+    document.getElementById("btn-pagar").addEventListener("click", () => {
+        window.location.href = "pagamento.php";
+    });
 </script>
 </body>
 </html>
