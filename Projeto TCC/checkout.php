@@ -51,7 +51,6 @@ session_start();
         checkoutDiv.innerHTML = "<p>Carrinho vazio.</p>";
     }
 
-    // Redireciona para página de pagamento
     document.getElementById("btn-pagar").addEventListener("click", () => {
         window.location.href = "pagamento.php";
     });

@@ -16,6 +16,8 @@ session_start();
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PIX_SIMULADO" alt="QR Code Pix">
         </div>
         <button onclick="alert('Pagamento Pix simulado concluído!')">Finalizar</button>
+        <a href="pagamento.php" class="voltar"> Voltar</a>
+
     </div>
 </body>
 </html>

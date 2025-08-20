@@ -7,81 +7,94 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f2f2f7;
+    background-color: #e9eff5;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow: hidden; /* Impede o scroll em dispositivos móveis */
 }
 
 /* Container centralizado */
 .pagamento-container,
 .container-pagamento {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px 25px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    width: 350px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 380px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito ao passar o mouse sobre o container */
+.pagamento-container:hover,
+.container-pagamento:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
 /* Títulos */
 .pagamento-container h2,
 .container-pagamento h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
-    color: #194782;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #1e3a8a; /* Azul mais escuro */
+    font-weight: 600;
 }
 
 /* Opções de pagamento */
 .metodo {
     display: block;
-    margin: 15px 0;
+    margin: 12px 0;
     font-size: 18px;
     cursor: pointer;
+    color: #555;
 }
 
 .metodo input[type="radio"] {
     margin-right: 10px;
-    accent-color: #007bff;
+    accent-color: #4CAF50; /* Verde claro */
 }
 
 /* Botões */
 .btn-pagar,
 button {
     margin-top: 20px;
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(90deg, #00c9ff, #0066ff);
+    padding: 14px 30px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(90deg, #0066ff, #00c9ff);
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .btn-pagar:hover,
 button:hover {
     transform: scale(1.05);
-    background: linear-gradient(90deg, #0066ff, #00c9ff);
+    background: linear-gradient(90deg, #00c9ff, #0066ff);
 }
 
 /* Formulário cartão */
 form input[type="text"] {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+    padding: 12px;
+    margin: 10px 0;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form input[type="text"]:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px #007bff;
+    border-color: #0066ff;
+    box-shadow: 0 0 6px rgba(0, 102, 255, 0.3);
 }
 
 /* QR Code Pix */
@@ -90,10 +103,15 @@ form input[type="text"]:focus {
 }
 
 .qr-code img {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.qr-code img:hover {
+    transform: scale(1.05);
 }
 
 /* Boleto */
@@ -102,10 +120,24 @@ a button {
 }
 
 /* Responsivo */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .pagamento-container,
     .container-pagamento {
         width: 90%;
-        padding: 20px;
+        padding: 20px 20px;
+    }
+
+    .btn-pagar,
+    button {
+        width: 100%;
+    }
+
+    form input[type="text"] {
+        font-size: 15px;
+    }
+
+    .qr-code img {
+        width: 180px;
+        height: 180px;
     }
 }
