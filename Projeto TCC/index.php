@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
@@ -10,17 +11,18 @@ session_start();
     <title>Projeto TCC</title>
     <link rel="stylesheet" href="css/estilo.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <link rel="stylesheet" href="css/cart.css">
 </head>
-<body class="dark-mode"<?= isset($_SESSION['usuario_nome']) ? 'logged-in' : '' ?>>
+
+<body class="dark-mode"<?= isset($_SESSION['usuario_nome']) ? ' logged-in' : '' ?>>
 
     <header class="header">
-    <a href="#" class="cart-icon" id="cart-icon" data-count="0">🛒</a>
+        <a href="#" class="cart-icon" id="cart-icon" data-count="0">🛒</a>
         <div class="logo-user-container">
             <div class="logo">
                 <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
             </div>
+
             <?php if (isset($_SESSION['usuario_nome'])): ?>
                 <div class="usuario-box">
                     <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
@@ -52,7 +54,7 @@ session_start();
                 <li><a href="#">Serviços</a></li>
 
                 <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                    <li><a href="loginV/cadastroproduto.php">Cadastrar meus Produtos</a></li>
+                    <li><a href="produtos/cadastroproduto.php">Cadastrar meus Produtos</a></li>
                 <?php else: ?>
                     <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                 <?php endif; ?>
@@ -67,20 +69,19 @@ session_start();
             <div class="search-cart">
                 <input class="search-bar" type="text" placeholder="Buscar..." />
                 <div id="cart-modal" class="cart-modal">
-  <div class="cart-modal-content">
-    <div class="cart-modal-header">
-      <h2>Seu Carrinho</h2>
-      <span class="cart-close-btn">&times;</span>
-    </div>
-    <ul class="cart-items">
-      </ul>
-    <p id="cart-empty-message" class="cart-empty-message" style="display: block;">Seu carrinho está vazio.</p>
-    <div class="cart-summary">
-      <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
-      <button class="cart-checkout-btn">Finalizar Compra</button>
-    </div>
-  </div>
-</div>
+                    <div class="cart-modal-content">
+                        <div class="cart-modal-header">
+                            <h2>Seu Carrinho</h2>
+                            <span class="cart-close-btn">&times;</span>
+                        </div>
+                        <ul class="cart-items"></ul>
+                        <p id="cart-empty-message" class="cart-empty-message" style="display: block;">Seu carrinho está vazio.</p>
+                        <div class="cart-summary">
+                            <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
+                            <button class="cart-checkout-btn">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
 
                 <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
                     <a href="login/login.php" class="button-login-login">Logar</a>
@@ -107,35 +108,34 @@ session_start();
             <img src="img/banner.png" alt="Banner MaxAcess" class="banner-destaque" />
 
             <section class="produtos-destaque">
-             <h3>Categorias em Destaque</h3>
-             <div class="lista-produtos">
-          <a href="freefire.php" class="produto">
-            <img src="img/FF.jpeg" alt="Produto 1" />
-            <p>Free Fire</p>
-        </a>
-         <a href="clashroyale.php" class="produto">
-            <img src="img/clash.jpeg" alt="Produto 2" />
-            <p>Clash Royale</p>
-        </a>
-           <a href="fifa.php" class="produto">
-            <img src="img/fifa.jpeg" alt="Produto 3" />
-            <p>Fifa</p>
-        </a>
-          <a href="roblox.php" class="produto">
-            <img src="img/roblox.jpeg" alt="Produto 4" />
-            <p>Roblox</p>
-        </a>
-          <a href="fortnite.php" class="produto">
-            <img src="img/fortnite.jpeg" alt="Produto 5" />
-            <p>Fortnite</p>
-        </a>
-        <a href="minecraft.php" class="produto">
-            <img src="img/minecraft.jpeg" alt="Produto 6" />
-            <p>Mine</p>
-        </a>
-    </div>
-</section>
-
+                <h3>Categorias em Destaque</h3>
+                <div class="lista-produtos">
+                    <a href="freefire.php" class="produto">
+                        <img src="img/FF.jpeg" alt="Produto 1" />
+                        <p>Free Fire</p>
+                    </a>
+                    <a href="clashroyale.php" class="produto">
+                        <img src="img/clash.jpeg" alt="Produto 2" />
+                        <p>Clash Royale</p>
+                    </a>
+                    <a href="fifa.php" class="produto">
+                        <img src="img/fifa.jpeg" alt="Produto 3" />
+                        <p>Fifa</p>
+                    </a>
+                    <a href="roblox.php" class="produto">
+                        <img src="img/roblox.jpeg" alt="Produto 4" />
+                        <p>Roblox</p>
+                    </a>
+                    <a href="fortnite.php" class="produto">
+                        <img src="img/fortnite.jpeg" alt="Produto 5" />
+                        <p>Fortnite</p>
+                    </a>
+                    <a href="minecraft.php" class="produto">
+                        <img src="img/minecraft.jpeg" alt="Produto 6" />
+                        <p>Mine</p>
+                    </a>
+                </div>
+            </section>
 
             <section class="produtos-destaque">
                 <h3>Produtos em Destaques</h3>
@@ -171,6 +171,7 @@ session_start();
 
     <script src="script.js"></script>
 </body>
+
 </html>
 
 <script>
@@ -179,92 +180,4 @@ let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 function updateCartCount() {
     const cartIcon = document.getElementById('cart-icon');
     const cartCount = cartItems.length;
-    cartIcon.setAttribute('data-count', cartCount);
-}
-
-function addToCart(productId, productName, productPrice, productImage) {
-    const existingItemIndex = cartItems.findIndex(item => item.id === productId);
-
-    if (existingItemIndex === -1) {
-        cartItems.push({
-            id: productId,
-            name: productName,
-            price: productPrice,
-            image: productImage
-        });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-
-    updateCartCount();
-
-    Swal.fire({
-        icon: 'success',
-        title: 'Produto Adicionado!',
-        text: `${productName} foi adicionado ao seu carrinho.`,
-    });
-}
-
-document.getElementById('cart-icon').addEventListener('click', function() {
-    const modal = document.getElementById('cart-modal');
-    const cartItemsList = document.querySelector('.cart-items');
-    const cartTotal = document.getElementById('cart-total-price');
-    const emptyMessage = document.getElementById('cart-empty-message');
-
-    cartItemsList.innerHTML = '';
-
-    if (cartItems.length > 0) {
-        cartItems.forEach(item => {
-            const cartItem = document.createElement('li');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                <img src="uploads/${item.image}" alt="${item.name}" class="cart-item-image" />
-                <div class="cart-item-details">
-                    <h4>${item.name}</h4>
-                    <p>R$ ${item.price}</p>
-                </div>
-                <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">🗑️</button>
-            `;
-            cartItemsList.appendChild(cartItem);
-        });
-
-        const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
-        cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
-        emptyMessage.style.display = 'none'; 
-    } else {
-        emptyMessage.style.display = 'block'; 
-    }
-
-    modal.style.display = 'block';
-});
-
-document.querySelector('.cart-close-btn').addEventListener('click', function() {
-    document.getElementById('cart-modal').style.display = 'none';
-});
-
-function removeFromCart(productId) {
-    cartItems = cartItems.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    updateCartCount();
-    document.getElementById('cart-icon').click(); 
-}
-
-document.querySelectorAll('.btn-preco').forEach((button, index) => {
-    button.addEventListener('click', function() {
-        const productId = `product-${index + 1}`; 
-        const productName = button.previousElementSibling.textContent.trim();
-        const productPrice = 25.00; 
-        const productImage = button.previousElementSibling.previousElementSibling.src.split('/').pop(); 
-
-        addToCart(productId, productName, productPrice, productImage);
-    });
-});
-// Seleciona o botão de finalizar compra
-document.querySelector('.cart-checkout-btn').addEventListener('click', function () {
-    // Aqui você pode salvar os itens no servidor antes, se quiser
-    // Exemplo: enviar para checkout.php
-    window.location.href = "checkout.php";
-});
-
-updateCartCount();
-</script>
+    cartIcon.setAttribute

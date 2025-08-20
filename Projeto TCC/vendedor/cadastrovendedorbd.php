@@ -10,7 +10,7 @@ $CNPJ = $_POST['CampCNPJ'];
 
 try{
 $sql = "INSERT INTO vendedor (nome, cpf, telefone, email, senha, CNPJ) VALUES ('$nome', '$cpf', '$telefone', '$email', '$senha', '$CNPJ')";
-$conn -> exec($sql);
+$pdo -> exec($sql);
     echo "Insercao de cagao:";
     header("Location: ../loginV/LoginV.php");
     

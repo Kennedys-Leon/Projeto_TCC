@@ -19,7 +19,7 @@ if (!is_dir('../uploads')) {
 
 try {
     if (move_uploaded_file($foto_tmp, $caminho_destino)) {
-        $sql = "INSERT INTO cadastro (nome, cpf, cep, telefone, email, senha, foto) 
+        $sql = "INSERT INTO usuario (nome, cpf, cep, telefone, email, senha, foto) 
                 VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':nome', $nome);

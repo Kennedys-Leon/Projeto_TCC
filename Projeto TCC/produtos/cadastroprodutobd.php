@@ -11,7 +11,7 @@ $descricao = $_POST['descricao'];
 
 try{
 $sql = "INSERT INTO produto (nome, preco, quantidade_estoque, categoria, descricao ) VALUES ('$nome', '$preco', '$categoria', '$quantidade_estoque', '$data_pub', '$descricao')";
-$conn -> exec($sql);
+$pdo -> exec($sql);
     echo "Cadastro realizado com sucesso!";
     header("Location: ../index.php");
     

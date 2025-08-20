@@ -5,11 +5,9 @@ $password = "";
 $dbname = "banco";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->exec("SET SESSION sql_mode='STRICT_TRANS_TABLES'");
-    //$conn->exec("SET SESSION sql_mode=''");
-    //echo "Conectado com sucesso!";
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password); // <--- alterado aqui
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->exec("SET SESSION sql_mode='STRICT_TRANS_TABLES'");
 } catch(PDOException $e) {
     echo "Erro: " . $e->getMessage();
     die();
