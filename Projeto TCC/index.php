@@ -10,11 +10,12 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Projeto TCC</title>
     <link rel="stylesheet" href="css/estilo.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/sidebar.css"> <!-- Sidebar -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="dark-mode"<?= isset($_SESSION['usuario_nome']) ? ' logged-in' : '' ?>>
+<body class="dark-mode<?= isset($_SESSION['usuario_nome']) ? ' logged-in' : '' ?>">
 
     <header class="header">
         <a href="#" class="cart-icon" id="cart-icon" data-count="0">🛒</a>
@@ -75,7 +76,7 @@ session_start();
                             <span class="cart-close-btn">&times;</span>
                         </div>
                         <ul class="cart-items"></ul>
-                        <p id="cart-empty-message" class="cart-empty-message" style="display: block;">Seu carrinho está vazio.</p>
+                        <p id="cart-empty-message" class="cart-empty-message">Seu carrinho está vazio.</p>
                         <div class="cart-summary">
                             <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
                             <button class="cart-checkout-btn">Finalizar Compra</button>
@@ -95,7 +96,7 @@ session_start();
                     <?php unset($_SESSION['vendedor_cadastrado']); ?>
                 <?php endif; ?>
 
-                <input type="text" id="toggle-theme" class="toggle-theme" value="🌙 Tema Escuro" readonly />
+                <input type="text" id="toggle-theme" class="toggle-theme" value="☾" readonly />
             </div>
         </nav>
     </header>
@@ -173,11 +174,3 @@ session_start();
 </body>
 
 </html>
-
-<script>
-let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-
-function updateCartCount() {
-    const cartIcon = document.getElementById('cart-icon');
-    const cartCount = cartItems.length;
-    cartIcon.setAttribute
