@@ -1,50 +1,86 @@
-/* Sidebar base */
-.sidebar {
+/* Botão hambúrguer */
+.menu-toggle{
+    position: fixed;         /* fica no canto independente do scroll */
+    top: 14px;
+    left: 14px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1100;           /* acima do header */
+    transition: background .2s ease;
+}
+.menu-toggle:hover{ background: rgba(255,255,255,.15); }
+
+/* Sidebar */
+.sidebar{
     position: fixed;
     top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
+    left: -280px;            /* escondida */
+    width: 280px;
+    height: 100vh;
     background: #222;
     color: #fff;
-    padding: 20px;
-    transition: left 0.3s ease;
-    z-index: 9999;
+    padding: 20px 14px;
+    box-shadow: 2px 0 10px rgba(0,0,0,.45);
+    transition: left .3s ease;
+    z-index: 1500;           /* acima de tudo */
+}
+.sidebar.active{ left: 0; }
+
+.sidebar .close-btn{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
 }
 
-.sidebar.active {
-    left: 0;
-}
-
-.sidebar h2 {
-    margin-bottom: 20px;
-    font-size: 20px;
-}
-
-.sidebar ul {
+.sidebar ul{
     list-style: none;
+    margin: 60px 0 0 0;
     padding: 0;
 }
+.sidebar li{ margin: 10px 0; }
 
-.sidebar ul li {
-    margin: 15px 0;
-}
-
-.sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.sidebar-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 25px;
-    background: #444;
-    color: white;
-    padding: 10px;
+.sidebar a,
+.sidebar button{
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    background: none;
     border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    text-decoration: none;
     cursor: pointer;
-    z-index: 10000;
-    border-radius: 5px;
+    transition: background .2s ease, padding-left .2s ease;
 }
+.sidebar a:hover,
+.sidebar button:hover{
+    background: rgba(255,255,255,.12);
+    padding-left: 16px;
+}
+
+/* botão sair dentro da sidebar */
+.logout-btn-sidebar{
+    width: 100%;
+    text-align: left;
+}
+
+/* Dark mode já existe no seu CSS principal,
+   mas deixo compatível com o modal dentro da sidebar */
+body.dark-mode .sidebar{ background: #1c1c1c; }

@@ -9,16 +9,26 @@ session_start();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Projeto TCC</title>
+
+    <!-- Seus estilos -->
     <link rel="stylesheet" href="css/estilo.css" />
     <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="css/sidebar.css"> <!-- Sidebar -->
+
+    <!-- Estilo da sidebar (só a lateral) -->
+    <link rel="stylesheet" href="css/sidebar.css">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="dark-mode<?= isset($_SESSION['usuario_nome']) ? ' logged-in' : '' ?>">
 
     <header class="header">
+        <!-- Botão hambúrguer (abre a sidebar) -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <!-- Ícone do carrinho original (continua funcionando) -->
         <a href="#" class="cart-icon" id="cart-icon" data-count="0">🛒</a>
+
         <div class="logo-user-container">
             <div class="logo">
                 <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
@@ -50,6 +60,7 @@ session_start();
 
         <nav class="navbar">
             <ul>
+                <!-- Estes 3 ficam fora da sidebar, como você pediu -->
                 <li><a href="#">Como Funciona?</a></li>
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Serviços</a></li>
@@ -69,6 +80,8 @@ session_start();
 
             <div class="search-cart">
                 <input class="search-bar" type="text" placeholder="Buscar..." />
+
+                <!-- Modal do carrinho -->
                 <div id="cart-modal" class="cart-modal">
                     <div class="cart-modal-content">
                         <div class="cart-modal-header">
@@ -96,10 +109,48 @@ session_start();
                     <?php unset($_SESSION['vendedor_cadastrado']); ?>
                 <?php endif; ?>
 
+                <!-- Botão de tema (continua no header) -->
                 <input type="text" id="toggle-theme" class="toggle-theme" value="☾" readonly />
             </div>
         </nav>
     </header>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
+        <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
+        <ul>
+            <li><a href="index.php">🏠 Início</a></li>
+            <li><a href="#" id="open-cart">🛒 Carrinho</a></li>
+
+            <?php if (isset($_SESSION['vendedor_nome'])): ?>
+                <li><a href="produtos/cadastroproduto.php">📦 Cadastrar meus Produtos</a></li>
+            <?php else: ?>
+                <li><a href="vendedor/cadastrovendedor.php">📣 Anunciar</a></li>
+            <?php endif; ?>
+
+            <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
+                <li><a href="login/login.php">🔑 Logar</a></li>
+                <li><a href="cadastro/cadastro.php">📝 Cadastrar Conta</a></li>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+                <li><a href="consulta/buscar.php">👥 Consulta Usuários</a></li>
+                <li><a href="consultaV/buscar2.php">🛍️ Consulta Vendedor</a></li>
+                <li><a href="consultageral.php">📊 Consulta Geral</a></li>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
+                <li>
+                    <form action="logout.php" method="post">
+                        <button type="submit" class="logout-btn-sidebar">🚪 Sair</button>
+                    </form>
+                </li>
+            <?php endif; ?>
+
+            <li><button type="button" id="toggle-theme-sidebar">🌙 Tema escuro</button></li>
+        </ul>
+    </aside>
+    <!-- ========== FIM SIDEBAR ========== -->
 
     <main class="conteudo">
         <div class="container">
@@ -170,6 +221,7 @@ session_start();
         <p>&copy; 2025 MaxAcess. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- Seu JS (carrinho + tema + sidebar juntos) -->
     <script src="script.js"></script>
 </body>
 
