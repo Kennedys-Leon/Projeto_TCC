@@ -1,45 +1,53 @@
+// ===================
+//  SIDEBAR
+// ===================
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- Funcionalidade do Tema Escuro/Claro ----
-    const toggleThemeInput = document.getElementById('toggle-theme');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+    const toggleThemeSidebar = document.getElementById('toggle-theme-sidebar');
+    const toggleThemeInput = document.getElementById('toggle-theme'); // já existe
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartIcon = document.getElementById('cart-icon');
 
-    if (toggleThemeInput) {
-        // Inicializa o tema escuro ao carregar
-        document.body.classList.add('dark-mode');
-        toggleThemeInput.value = '☀️';
+    if (menuToggle && sidebar && closeSidebar) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
 
-        toggleThemeInput.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
 
-            if (document.body.classList.contains('dark-mode')) {
-                toggleThemeInput.value = '☀️';
-            } else {
-                toggleThemeInput.value = '🌙';
+        // Fecha clicando fora
+        window.addEventListener('click', (e) => {
+            if (e.target === sidebar) {
+                sidebar.classList.remove('active');
             }
         });
     }
 
-    // ---- Funcionalidade do Carrinho de Compras (Modal) ----
-    const cartIcon = document.getElementById('cart-icon');
-    const cartModal = document.getElementById('cart-modal');
-    const closeBtn = document.querySelector('.cart-close-btn');
+    // Alternar tema também pela sidebar
+    if (toggleThemeSidebar) {
+        toggleThemeSidebar.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
 
-    if (cartIcon && cartModal && closeBtn) {
-        // Abre o modal do carrinho
-        cartIcon.addEventListener('click', (event) => {
-            event.preventDefault(); // Evita que a página recarregue
-            cartModal.style.display = 'block';
-        });
-
-        // Fecha o modal do carrinho pelo botão 'X'
-        closeBtn.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
-
-        // Fecha o modal se o usuário clicar fora dele
-        window.addEventListener('click', (event) => {
-            if (event.target === cartModal) {
-                cartModal.style.display = 'none';
+            if (document.body.classList.contains('dark-mode')) {
+                toggleThemeInput.value = '☀️';
+                toggleThemeSidebar.textContent = '☀️ Tema';
+            } else {
+                toggleThemeInput.value = '🌙';
+                toggleThemeSidebar.textContent = '🌙 Tema';
             }
+        });
+    }
+
+    // Abrir carrinho também pelo menu lateral
+    if (cartSidebar && cartIcon) {
+        cartSidebar.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartIcon.click();
+            sidebar.classList.remove('active');
         });
     }
 });
