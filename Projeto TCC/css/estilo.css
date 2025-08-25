@@ -227,7 +227,9 @@ body.dark-mode .rodape {
     height: 70px;
     object-fit: contain;
     border-radius: 15%;
+    margin-left: 50px; /* Ajuste conforme necessário */
 }
+
 
 /* ------------------- Estilo para produtos em destaque ------------------- */
 

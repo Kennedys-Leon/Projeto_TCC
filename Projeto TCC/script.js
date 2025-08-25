@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // botão da sidebar mostra texto
         if (toggleThemeSideBtn) {
             toggleThemeSideBtn.textContent =
-                document.body.classList.contains('dark-mode') ? '☀️ Tema claro' : '🌙 Tema escuro';
+                document.body.classList.contains('dark-mode') ? '☀' : '☾';
         }
     }
 

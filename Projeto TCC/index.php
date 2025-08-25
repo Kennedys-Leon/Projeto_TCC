@@ -27,7 +27,7 @@ session_start();
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
 
         <!-- Ícone do carrinho original (continua funcionando) -->
-        <a href="#" class="cart-icon" id="cart-icon" data-count="0">🛒</a>
+        
 
         <div class="logo-user-container">
             <div class="logo">
@@ -97,11 +97,6 @@ session_start();
                     </div>
                 </div>
 
-                <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                    <a href="login/login.php" class="button-login-login">Logar</a>
-                    <a href="cadastro/cadastro.php" class="button-login">Cadastrar Conta</a>
-                <?php endif; ?>
-
                 <?php if (isset($_SESSION['vendedor_cadastrado'])): ?>
                     <a href="produto" class="button-login" style="background-color: #8C5B3F; color: white;">
                         Logar como Vendedor
@@ -147,7 +142,7 @@ session_start();
                 </li>
             <?php endif; ?>
 
-            <li><button type="button" id="toggle-theme-sidebar">🌙 Tema escuro</button></li>
+            <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
         </ul>
     </aside>
     <!-- ========== FIM SIDEBAR ========== -->
