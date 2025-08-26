@@ -66,7 +66,6 @@ session_start();
                 <li><a href="#">Serviços</a></li>
 
                 <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                    <li><a href="produtos/cadastroproduto.php">Cadastrar meus Produtos</a></li>
                 <?php else: ?>
                     <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                 <?php endif; ?>
