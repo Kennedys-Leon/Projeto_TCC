@@ -79,7 +79,6 @@ session_start();
             </ul>
 
             <div class="search-cart">
-                <input class="search-bar" type="text" placeholder="Buscar..." />
 
                 <!-- Modal do carrinho -->
                 <div id="cart-modal" class="cart-modal">
@@ -151,6 +150,10 @@ session_start();
         <div class="container">
             <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
             <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
+
+            <div class="search-cart">
+                <input class="search-bar" type="text" placeholder="Buscar 🔍︎" />
+            </div>        
 
             <img src="img/banner.png" alt="Banner MaxAcess" class="banner-destaque" />
 

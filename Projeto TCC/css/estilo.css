@@ -74,11 +74,13 @@ body.dark-mode {
 }
 
 .search-bar {
-    padding: 8px;
+    padding: 12px;
     border: none;
     border-radius: 25px;
-    width: 200px;
-    font-size: 14px;
+    width: 400px;        
+    font-size: 16px;
+    display: block;      
+    margin: 20px auto;   
 }
 
 .search-bar:focus {
