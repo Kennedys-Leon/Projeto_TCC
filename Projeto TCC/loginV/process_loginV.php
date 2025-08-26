@@ -9,12 +9,12 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM vendedor WHERE nome = ? AND email = ? AND senha = ?");
     $stmt->execute([$nome, $email, $senha]);
 
-    $usuario_db = $stmt->fetch(PDO::FETCH_ASSOC);
+    $vendedor_db = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($usuario_db) {
+    if ($vendedor_db) {
         session_start();
-        $_SESSION['usuario_logado'] = $usuario_db['idvendedor'];
-        $_SESSION['vendedor_nome'] = $usuario_db['nome'];
+        $_SESSION['usuario_logado'] = $vendedor_db['idvendedor'];
+        $_SESSION['vendedor_nome'] = $vendedor_db['nome'];
         header('Location: ../index.php');
         exit();
     } else {

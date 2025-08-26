@@ -28,7 +28,7 @@
         <input type="password" name="CampSenha" required>
 
         <label for="CampCNPJ">CNPJ:</label>
-        <input type="text" name="CampCNPJ" required>
+        <input type="text" name="CampCNPJ">
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
