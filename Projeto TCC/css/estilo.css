@@ -23,7 +23,7 @@ body.dark-mode {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 30px;
+    padding: 3px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -79,7 +79,13 @@ body.dark-mode {
     border-radius: 25px;
     width: 200px;
     font-size: 14px;
+    
 }
+.search-container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+  }
 
 .search-bar:focus {
     outline: none;
@@ -224,10 +230,11 @@ body.dark-mode .rodape {
 }
 
 .logo-img {
-    height: 70px;
+    height: 60px;
     object-fit: contain;
     border-radius: 15%;
     margin-left: 50px; /* Ajuste conforme necessário */
+    transform: translateY(6px); /* Move 6px para cima */
 }
 
 
