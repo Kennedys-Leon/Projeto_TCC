@@ -77,16 +77,12 @@ body.dark-mode {
     padding: 12px;
     border: none;
     border-radius: 25px;
-<<<<<<< HEAD
     width: 400px;        
     font-size: 16px;
     display: block;      
     margin: 20px auto;   
-=======
     width: 200px;
     font-size: 14px;
-    
->>>>>>> 98c532028c12bacf6e154f50d1bf49fed1230c3f
 }
 .search-container {
     flex: 1;
