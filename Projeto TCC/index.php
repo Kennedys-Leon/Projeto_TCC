@@ -136,7 +136,7 @@ session_start();
     <aside class="sidebar" id="sidebar" aria-hidden="true">
         <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
         <ul>
-            <li><a href="index.php">🏠 Início</a></li>
+            <li><img scr="img/casa.png" alt="Icone 1" /><a href="index.php">Início</a></li>
             <li><a href="#" id="open-cart">🛒 Carrinho</a></li>
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>

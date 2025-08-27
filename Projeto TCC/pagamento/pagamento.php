@@ -6,8 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Pagamento - MaxAcess</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/pagamento.css">
+    <link rel="stylesheet" href="..css/style.css">
+    <link rel="stylesheet" href="..css/pagamento.css">
 </head>
 <body>
     <div class="pagamento-container">
