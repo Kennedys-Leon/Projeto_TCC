@@ -1,8 +1,19 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "banco";
+
+    $db = 2;
+
+if( $db == 1){
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "banco";
+}else{
+    $servername = "localhost";
+    $username = "u557720587_2025_php04";
+    $password = "Mtec@php4";
+    $dbname = "u557720587_2025_php04";
+}
+
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password); // <--- alterado aqui
