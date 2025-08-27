@@ -136,18 +136,21 @@ session_start();
     <aside class="sidebar" id="sidebar" aria-hidden="true">
         <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
         <ul>
-            <li><img scr="img/casa.png" alt="Icone 1" /><a href="index.php">Início</a></li>
-            <li><a href="#" id="open-cart">🛒 Carrinho</a></li>
+
+        <li><a href="index.php"><img src="img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
+        
+        <li><a href="#" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
+
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
                 <li><a href="produtos/cadastroproduto.php">📦 Cadastrar meus Produtos</a></li>
             <?php else: ?>
-                <li><a href="vendedor/cadastrovendedor.php">📣 Anunciar</a></li>
+                <li><a href="vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
             <?php endif; ?>
 
             <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                <li><a href="login/login.php">🔑 Logar</a></li>
-                <li><a href="cadastro/cadastro.php">📝 Cadastrar Conta</a></li>
+                <li><a href="login/login.php"><img src="img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
+                <li><a href="cadastro/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
