@@ -219,22 +219,22 @@ session_start();
                     <div class="card-produto">
                         <img src="img/steam.jpeg" alt="Jogos Steam">
                         <p>STEAM JOGOS (CÓDIGOS DE ATIVAÇÃO) - CONTA STEAM OFICIAL (ENTREGA AUTOMÁTICA)</p>
-                        <button class="btn-preco">R$ 25,00 +</button>
+                        <button class="btn-preco">Adicionar ao Carrinho</button>
                     </div>
                     <div class="card-produto">
                         <img src="img/chave.png" alt="Steam Key Aleatória">
                         <p>STEAM ALEATÓRIA - KEY ATIVÁVEL EM SUA CONTA - ENTREGA AUTOMÁTICA</p>
-                        <button class="btn-preco">R$ 25,00 +</button>
+                        <button class="btn-preco">Adicionar ao Carrinho</button>
                     </div>
                     <div class="card-produto">
                         <img src="img/mine.jpeg" alt="Conta Minecraft">
                         <p>CONTA COM 1 CURSO BLOCKCITY E 1 SKIN EXCLUSIVA</p>
-                        <button class="btn-preco">R$ 25,00 +</button>
+                        <button class="btn-preco">Adicionar ao Carrinho</button>
                     </div>
                     <div class="card-produto">
                         <img src="img/cs.jpeg" alt="CS:GO Premium">
                         <p>CONTA EXCLUSIVA COM AS MELHORES SKINS</p>
-                        <button class="btn-preco">R$ 25,00 +</button>
+                        <button class="btn-preco">Adicionar ao Carrinho</button>
                     </div>
                 </div>
             </section>

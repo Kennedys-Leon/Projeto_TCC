@@ -405,3 +405,86 @@ body.dark-mode .user-box {
 body.dark-mode .user-name {
     color: #f2f2f7;
 }
+
+/* ===== Botão  ===== */
+/* ===== Botão Premium Gamer ===== */
+.btn-preco {
+    display: inline-block;
+    position: relative;
+    padding: 14px 28px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    background: linear-gradient(135deg, #00f2ff, #007bff, #00c9ff);
+    background-size: 300% 300%;
+    animation: gradientMove 4s ease infinite;
+    box-shadow: 0 0 20px rgba(0, 201, 255, 0.6), 0 0 40px rgba(0, 201, 255, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+}
+
+/* Animação do gradiente pulsante */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Efeito de brilho animado por cima */
+.btn-preco::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+    transform: rotate(25deg);
+    animation: shineEffect 3s infinite;
+}
+
+@keyframes shineEffect {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(25deg);
+    }
+}
+
+/* Efeito ao passar o mouse */
+.btn-preco:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 25px #00c9ff, 0 0 55px #007bff, 0 0 80px #00f2ff;
+    color: #fff;
+}
+
+/* Efeito de clique */
+.btn-preco:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 12px #00c9ff;
+}
+
+/* ===== MODO DARK ===== */
+body.dark-mode .btn-preco {
+    background: linear-gradient(135deg, #1f1f1f, #222, #2e2e2e);
+    color: #ffd700;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+body.dark-mode .btn-preco:hover {
+    transform: scale(1.12);
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a, #1e1e1e);
+    box-shadow: 0 0 25px #ffd700, 0 0 55px #ffaa00, 0 0 80px #ffcc00;
+}
