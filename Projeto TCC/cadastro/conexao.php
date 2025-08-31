@@ -1,6 +1,6 @@
 <?php
 
-    $db = 2;
+    $db = 1;
 
 if( $db == 1){
     $servername = "localhost";
@@ -16,7 +16,7 @@ if( $db == 1){
 
 
 try {
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password); // <--- alterado aqui
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->exec("SET SESSION sql_mode='STRICT_TRANS_TABLES'");
 } catch(PDOException $e) {

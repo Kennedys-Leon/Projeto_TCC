@@ -6,8 +6,14 @@ $email = trim(htmlspecialchars($_POST['email']));
 $senha = trim(htmlspecialchars($_POST['senha']));
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM vendedor WHERE nome = ? AND email = ? AND senha = ?");
-    $stmt->execute([$nome, $email, $senha]);
+    $sql = "SELECT * FROM vendedor WHERE nome = :nome AND email = :email AND senha = :senha";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':nome', $nome);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':senha', $senha);
+
+    $stmt->execute();
 
     $vendedor_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -15,6 +21,7 @@ try {
         session_start();
         $_SESSION['usuario_logado'] = $vendedor_id['idvendedor'];
         $_SESSION['vendedor_nome'] = $vendedor_id['nome'];
+
         header('Location: ../index.php');
         exit();
     } else {

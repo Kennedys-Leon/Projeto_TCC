@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function setThemeLabels() {
         // input do header mostra só o ícone
         if (toggleThemeHeader) {
-            toggleThemeHeader.value = document.body.classList.contains('dark-mode') ? '☾' : '☀';
+            toggleThemeHeader.value = document.body.classList.contains('dark-mode') ? '☾' : '☀Tema Claro';
         }
         // botão da sidebar mostra texto
         if (toggleThemeSideBtn) {
             toggleThemeSideBtn.textContent =
-                document.body.classList.contains('dark-mode') ? '☀' : '☾';
+                document.body.classList.contains('dark-mode') ? '☀Tema Claro' : '☾';
         }
     }
 

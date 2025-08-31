@@ -143,7 +143,7 @@ session_start();
 
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                <li><a href="produtos/cadastroproduto.php">📦 Cadastrar meus Produtos</a></li>
+                <li><a href="produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
             <?php else: ?>
                 <li><a href="vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
             <?php endif; ?>
@@ -162,7 +162,7 @@ session_start();
             <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
                 <li>
                     <form action="logout.php" method="post">
-                        <button type="submit" class="logout-btn-sidebar">🚪 Sair</button>
+                        <button type="submit" class="logout-btn-sidebar"><img src="img/sair.png" alt="Sair" style="width:16px; height:16px; vertical-align:middle;"> Sair</button>
                     </form>
                 </li>
             <?php endif; ?>
@@ -245,7 +245,6 @@ session_start();
         <p>&copy; 2025 MaxAcess. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Seu JS (carrinho + tema + sidebar juntos) -->
     <script src="script.js"></script>
 </body>
 

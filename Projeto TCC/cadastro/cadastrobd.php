@@ -21,7 +21,7 @@ try {
     if (move_uploaded_file($foto_tmp, $caminho_destino)) {
         $sql = "INSERT INTO usuario (nome, cpf, cep, telefone, email, senha, foto) 
                 VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':cpf', $cpf);
         $stmt->bindParam(':cep', $cep);
