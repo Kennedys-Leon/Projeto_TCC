@@ -17,6 +17,8 @@ session_start();
     <!-- Estilo da sidebar (só a lateral) -->
     <link rel="stylesheet" href="../css/sidebar.css">
 
+    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -176,11 +178,9 @@ session_start();
             <h2>Bem-vindo ao painel de vendedor!</h2>
             <p>Aproveite sua estadia e cadastre seus produtos :></p>
 
-            <div class="search-cart">
-                <input class="search-bar" type="text" placeholder="Buscar 🔍︎" />
-            </div>        
+                   
 
-            <img src="../img/banner.png" alt="Banner MaxAcess" class="banner-destaque" />
+            
         </div>
     </main>
 
