@@ -24,10 +24,13 @@ $vendedor = $stmt->fetch(PDO::FETCH_ASSOC);
 // ============================
 $stmt = $pdo->prepare("SELECT COUNT(*) as total_vendas FROM vendas WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
-$total_vendas = $stmt->fetch(PDO::FETCH_ASSOC)['total_vendas'] ?? 0;
+$total_vendas = isset($row['total_vendas']) ? intval($row['total_vendas']) : 0;
+
 
 $stmt = $pdo->query("SELECT COUNT(*) as todas_vendas FROM vendas");
-$todas_vendas = $stmt->fetch(PDO::FETCH_ASSOC)['todas_vendas'] ?? 1;
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$todas_vendas = isset($row['todas_vendas']) ? (int)$row['todas_vendas'] : 1;
+
 
 if ($todas_vendas == 0) {
     $percentual = 0;
@@ -48,87 +51,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Painel do Vendedor - MaxAcess</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <style>
-        /* Layout geral */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f8f8f8;
-        }
-        header, footer {
-            background: #3c2c20;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-        }
-        footer { margin-top: 20px; }
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 20px auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,.2);
-            padding: 20px;
-        }
-        h2 { color: #3c2c20; }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #ccc;
-        }
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
-            background: #e2d3c4;
-            margin-right: 5px;
-        }
-        .tab.active {
-            background: #3c2c20;
-            color: #fff;
-        }
-        .tab-content {
-            display: none;
-            padding: 20px 0;
-        }
-        .tab-content.active { display: block; }
-
-        /* Tabelas */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        table th {
-            background: #3c2c20;
-            color: #fff;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background: #3c2c20;
-            color: #fff;
-        }
-        .btn:hover { background: #5a4030; }
-
-        .percentual {
-            font-size: 22px;
-            font-weight: bold;
-            color: #3c2c20;
-        }
-    </style>
     <script>
         // Função JS para trocar abas
         function openTab(tabName) {
@@ -145,7 +67,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>MaxAcess - Painel do Vendedor</h1>
         <p>Bem-vindo, <?php echo htmlspecialchars($vendedor['nome']); ?>!</p>
+        <link rel="stylesheet" href="../css/painel.css">
+
     </header>
+    
 
     <div class="container">
         <!-- Abas -->
