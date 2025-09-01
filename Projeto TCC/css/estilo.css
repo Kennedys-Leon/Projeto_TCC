@@ -250,18 +250,60 @@ body.dark-mode .rodape {
     box-sizing: border-box;
 }
 
+.produto-destaque-container {
+    display: flex;
+    align-items: center;   /* centraliza vertical */
+    justify-content: center; /* centraliza horizontal */
+    min-height: 100vh;    /* ocupa a altura inteira da tela */
+    background-color: #f9f9f9; /* só exemplo */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* ===== Espaçamento entre seções ===== */
+/* ===== Ajuste de fontes ===== */
+
+/* Títulos das seções (Categorias e Produtos) */
+.categorias-destaque,
 .produtos-destaque {
-    margin-top: 50px;
-    padding-left: 30px;
-    padding-right: 30px;
-    text-align: left;
+    font-size: 1.2rem;  /* antes 1.6rem */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 40px;
 }
 
-.produtos-destaque h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
+/* Título pequeno dentro de categorias */
+.titulo-categorias {
+    font-size: 16px;  /* antes 18px */
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
+/* Nome dos produtos */
+.produto p {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 13px;  /* antes maior */
+    color: #333;
+    text-align: center;
+}
+
+.card-produto p {
+    font-size: 13px;  /* antes 14px */
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+    flex: 1;
+    text-align: center;
+}
+
+/* Dark mode compatibilidade */
+body.dark-mode .produto p,
+body.dark-mode .card-produto p {
+    color: #f2f2f7;
+}
+
+  
 .lista-produtos {
     display: flex;
     gap: 20px;
@@ -295,14 +337,21 @@ body.dark-mode .produto p {
     color: #f2f2f7;
 }
 
+.titulo-categorias {
+    font-size: 18px;  /* menor ainda */
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
 .banner-destaque {
     display: block;
-    margin: 20px auto;
-    width: 85%;
-    max-width: 1200px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;         /* ocupa toda a largura */
+    height: auto;        /* mantém proporção */
+    margin: 20px 0;      /* espaço em cima e embaixo */
+    border-radius: 0;    /* remove cantos arredondados */
+    box-shadow: none;    /* opcional: remove sombra */
 }
+
 
 /* ------------ Produtos em Destaque (Cards com Preço) ------------ */
 

@@ -1,109 +1,143 @@
+:root {
+  --primary: #356de5;
+  --primary-dark: #1b75e2;
+  --primary-light: #f0f4ff;
+  --success: #43a047;
+  --success-dark: #2e7d32;
+  --error: #e53935;
+  --text: #333;
+  --text-light: #000;
+  --card-bg: #fff;
+  --border: #ddd;
+  --radius: 10px;
+  --transition: 0.3s ease;
+  --shadow-md: 0 8px 20px rgba(0,0,0,0.07);
+  --shadow-lg: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== BODY COM IMAGEM ===== */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #e9ecef;
-    color: #333;
-  }
-  
-  .container-login {
-    width: 100%;
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 35px 30px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .container-login:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  }
-  
-  .formulario-login {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .formulario-login h2 {
-    text-align: center;
-    margin-bottom: 28px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #222;
-  }
-  
-  .formulario-login label {
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #444;
-  }
-  
-  .formulario-login input[type="text"],
-  .formulario-login input[type="email"],
-  .formulario-login input[type="password"] {
-    padding: 12px 14px;
-    margin-bottom: 20px;
-    border: 1.8px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box;
-  }
-  
-  .formulario-login input[type="text"]:focus,
-  .formulario-login input[type="email"]:focus,
-  .formulario-login input[type="password"]:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
-    outline: none;
-  }
-  
-  .btn-login {
-    padding: 14px;
-    background: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 17px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.1px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.45);
-  }
-  
-  .btn-login:hover {
-    background: #3b8e3b;
-    box-shadow: 0 6px 16px rgba(59, 142, 59, 0.6);
-  }
-  
-  .botoes-inicio {
-    margin-top: 22px;
-    text-align: center;
-  }
-  
-  .botoes-inicio a {
-    color: #4CAF50;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    transition: color 0.25s ease;
-  }
-  
-  .botoes-inicio a:hover {
-    text-decoration: underline;
-    color: #388e3c;
-  }
-  
-  .container-login p {
-    font-size: 14px;
-    color: #666;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url("../img/fundo-login.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* tela inteira */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== FORM LOGIN ===== */
+.formulario-login {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 360px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.formulario-login::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+}
+
+.formulario-login:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.formulario-login h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ===== CAMPOS ===== */
+.formulario-login label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+}
+
+.formulario-login input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text);
+  transition: var(--transition);
+  background-color: var(--primary-light);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.formulario-login input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(53, 109, 229, 0.2);
+  background-color: #fff;
+}
+
+/* ===== BOTÃO LOGIN ===== */
+.btn-login {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 10px rgba(53, 109, 229, 0.35);
+  width: 100%;
+}
+
+.btn-login:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 6px 14px rgba(27, 117, 226, 0.5);
+}
+
+/* ===== LINK CADASTRO ===== */
+.botoes-inicio {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.botoes-inicio a {
+  color: var(--success);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.25s ease;
+}
+
+.botoes-inicio a:hover {
+  color: var(--success-dark);
+}
+
+/* ===== MENSAGEM DE ERRO ===== */
+.mensagem-erro {
+  color: var(--error);
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

@@ -1,103 +1,162 @@
+:root {
+  --primary: #356de5;
+  --primary-dark: #1b75e2;
+  --primary-light: #f0f4ff;
+  --success: #43a047;
+  --success-dark: #2e7d32;
+  --text: #333;
+  --text-light: #666;
+  --card-bg: #fff;
+  --border: #ddd;
+  --radius: 8px;
+  --transition: 0.3s ease;
+  --shadow-md: 0 6px 14px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;
   margin: 0;
-  padding: 20px;
-  color: #333;
+  padding: 15px;
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===== FORM PRINCIPAL ===== */
 .form-cadastro {
-  background-color: #fff;
-  padding: 30px 25px;
-  max-width: 420px;
-  margin: 30px auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.07);
-  transition: box-shadow 0.3s ease;
+  background-color: var(--card-bg);
+  padding: 18px 15px;        /* menor */
+  width: 100%;
+  max-width: 300px;          /* reduzido mais */
+  margin: 20px auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-cadastro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px; /* menor */
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
 }
 
 .form-cadastro:hover {
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px); /* menor */
+}
+
+/* ===== CABEÇALHO ===== */
+.form-cadastro__header {
+  text-align: center;
+  margin-bottom: 14px; /* menor */
+}
+
+.form-cadastro__title {
+  font-size: 18px;     /* menor */
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;  /* menor */
+}
+
+.form-cadastro__subtitle {
+  color: var(--text-light);
+  font-size: 12px;     /* menor */
+}
+
+/* ===== CAMPOS ===== */
+.form-cadastro__group {
+  margin-bottom: 12px; /* menor */
+  position: relative;
 }
 
 .form-cadastro label {
   display: block;
-  margin-top: 18px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;  /* menor */
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 13px;     /* menor */
   color: #444;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .form-cadastro input,
 .form-cadastro select {
   width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 18px;
-  border: 1.8px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box;
-  outline-offset: 2px;
-}
-
-.form-cadastro input:focus,
-.form-cadastro select:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  padding: 8px 10px;   /* menor */
+  margin-bottom: 10px;
+  border: 1.8px solid var(--border);
+  border-radius: 5px;  /* menor */
+  font-size: 13px;     /* menor */
+  color: var(--text);
+  transition: var(--transition);
+  background-color: var(--primary-light);
   outline: none;
+  box-sizing: border-box;
 }
 
+.form-cadastro input::placeholder,
+.form-cadastro select::placeholder {
+  color: #999;
+  font-size: 12px; /* menor */
+}
+
+/* ===== BOTÃO SUBMIT ===== */
 .form-cadastro input[type="submit"] {
-  background-color: #356de5;
+  background-color: var(--primary);
   color: #fff;
-  padding: 14px;
+  padding: 10px;      /* menor */
   border: none;
-  border-radius: 10px;
+  border-radius: 6px; /* menor */
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 0.9rem;  /* menor */
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.25s ease;
-  box-shadow: 0 4px 10px rgba(53, 109, 229, 0.35);
+  letter-spacing: 0.5px;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 3px 8px rgba(53, 109, 229, 0.3);
 }
 
 .form-cadastro input[type="submit"]:hover {
-  background-color: #1b75e2;
-  box-shadow: 0 6px 14px rgba(27, 117, 226, 0.5);
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 10px rgba(27, 117, 226, 0.45);
 }
 
+/* ===== BOTÕES DE AÇÃO ===== */
 .botoes-inicio {
   text-align: center;
-  margin-top: 25px;
+  margin-top: 14px; /* menor */
 }
 
 .btn-primario {
   display: inline-block;
-  background-color: #43a047;
+  background-color: var(--success);
   color: #fff;
-  padding: 12px 28px;
+  padding: 8px 18px;   /* menor */
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 6px;  /* menor */
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;  /* menor */
   transition: background-color 0.25s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+  box-shadow: 0 3px 10px rgba(67, 160, 71, 0.35);
 }
 
 .btn-primario:hover {
-  background-color: #2e7d32;
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6);
+  background-color: var(--success-dark);
+  box-shadow: 0 5px 12px rgba(46, 125, 50, 0.5);
 }
 
-/* Opcional: ajuste para botões focados para acessibilidade */
+/* Acessibilidade */
 .btn-primario:focus,
 .form-cadastro input[type="submit"]:focus {
-  outline: 3px solid #80b3ff;
-  outline-offset: 3px;
+  outline: 2px solid #80b3ff;
+  outline-offset: 2px;
 }
