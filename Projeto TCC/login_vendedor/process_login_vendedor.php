@@ -22,10 +22,10 @@ try {
         $_SESSION['usuario_logado'] = $vendedor_id['idvendedor'];
         $_SESSION['vendedor_nome'] = $vendedor_id['nome'];
 
-        header('Location: ../index.php');
+        header('Location: ../painel_vendedor/pagina_vendedor.php');
         exit();
     } else {
-        header('Location: loginV.php?error=1');
+        header('Location: login_vendedor.php?error=1');
         exit();
     }
 } catch (PDOException $e) {

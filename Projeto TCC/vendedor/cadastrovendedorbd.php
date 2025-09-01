@@ -12,7 +12,7 @@ try{
 $sql = "INSERT INTO vendedor (nome, cpf, telefone, email, senha, CNPJ) VALUES ('$nome', '$cpf', '$telefone', '$email', '$senha', '$CNPJ')";
 $pdo -> exec($sql);
     echo "Insercao de cagao:";
-    header("Location: ../loginV/LoginV.php");
+    header("Location: ../login_vendedor/login_vendedor.php");
     
 } catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();

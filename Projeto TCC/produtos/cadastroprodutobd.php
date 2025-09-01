@@ -45,8 +45,7 @@ try {
 
         $stmt->execute();
 
-        echo "Cadastro realizado com sucesso!";
-        header("Location: ../index.php");
+        header("Location: ../painel_vendedor/pagina_vendedor.php");
         exit;
     } else {
         echo "Erro: vendedor não identificado!";

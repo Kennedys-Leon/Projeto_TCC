@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container-login">
-        <form action="process_loginV.php" method="post" class="formulario-login">
+        <form action="process_login_vendedor.php" method="post" class="formulario-login">
             <h2>Olá vendedor! Faça seu login 👇</h2>
 
             <label for="nome">Nome:</label>
