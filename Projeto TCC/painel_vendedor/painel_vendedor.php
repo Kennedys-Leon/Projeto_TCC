@@ -19,19 +19,31 @@ $stmt = $pdo->prepare("SELECT * FROM vendedor WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
 $vendedor = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Se não achar vendedor, volta pro login
+if (!$vendedor) {
+    session_destroy();
+    header("Location: ../login_vendedor/login_vendedor.php");
+    exit;
+}
+
 // ============================
 // Total de vendas do vendedor
 // ============================
 $stmt = $pdo->prepare("SELECT COUNT(*) as total_vendas FROM vendas WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 $total_vendas = isset($row['total_vendas']) ? intval($row['total_vendas']) : 0;
 
-
+// ============================
+// Total de vendas do site
+// ============================
 $stmt = $pdo->query("SELECT COUNT(*) as todas_vendas FROM vendas");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-$todas_vendas = isset($row['todas_vendas']) ? (int)$row['todas_vendas'] : 1;
+$todas_vendas = isset($row['todas_vendas']) ? intval($row['todas_vendas']) : 0;
 
-
+// ============================
+// Calcular percentual
+// ============================
 if ($todas_vendas == 0) {
     $percentual = 0;
 } else {
@@ -51,6 +63,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Painel do Vendedor - MaxAcess</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/painel.css">
     <script>
         // Função JS para trocar abas
         function openTab(tabName) {
@@ -67,8 +80,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>MaxAcess - Painel do Vendedor</h1>
         <p>Bem-vindo, <?php echo htmlspecialchars($vendedor['nome']); ?>!</p>
-        <link rel="stylesheet" href="../css/painel.css">
-
     </header>
     
 
@@ -85,7 +96,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Resumo de Vendas</h2>
             <p>Total de vendas realizadas: <b><?php echo $total_vendas; ?></b></p>
             <p>Total do site: <b><?php echo $todas_vendas; ?></b></p>
-            <p class="percentual">Participação: <?php echo number_format($percentual, 2); ?>%</p>
+            <p class="percentual">Participação: <?php echo number_format($percentual, 2, ",", "."); ?>%</p>
         </div>
 
         <!-- Produtos -->
@@ -100,19 +111,23 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Qtd</th>
                     <th>Ações</th>
                 </tr>
-                <?php foreach ($produtos as $p): ?>
-                <tr>
-                    <td><?php echo $p['idproduto']; ?></td>
-                    <td><?php echo htmlspecialchars($p['nome']); ?></td>
-                    <td>R$ <?php echo number_format($p['preco'],2,",","."); ?></td>
-                    <td><?php echo htmlspecialchars($p['categoria']); ?></td>
-                    <td><?php echo $p['quantidade_estoque']; ?></td>
-                    <td>
-                        <button class="btn">Editar</button>
-                        <button class="btn">Excluir</button>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
+                <?php if ($produtos): ?>
+                    <?php foreach ($produtos as $p): ?>
+                    <tr>
+                        <td><?php echo $p['idproduto']; ?></td>
+                        <td><?php echo htmlspecialchars($p['nome']); ?></td>
+                        <td>R$ <?php echo number_format($p['preco'], 2, ",", "."); ?></td>
+                        <td><?php echo htmlspecialchars($p['categoria']); ?></td>
+                        <td><?php echo $p['quantidade_estoque']; ?></td>
+                        <td>
+                            <button class="btn">Editar</button>
+                            <button class="btn">Excluir</button>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="6">Nenhum produto cadastrado.</td></tr>
+                <?php endif; ?>
             </table>
         </div>
 

@@ -41,11 +41,12 @@ CREATE TABLE IF NOT EXISTS `banco`.`produto` (
   `quantidade_estoque` INT NULL,
   `data_pub` DATE NULL,
   `descricao` VARCHAR(255) NULL,
-  `vendedor_idvendedor` INT NOT NULL,
-  PRIMARY KEY (`idproduto`, `vendedor_idvendedor`),
-  INDEX `fk_produto_vendedor1_idx` (`vendedor_idvendedor` ASC) VISIBLE,
+  `criado_em` TIMESTAMP NULL,
+  `idvendedor` INT NOT NULL,
+  PRIMARY KEY (`idproduto`, `idvendedor`),
+  INDEX `fk_produto_vendedor1_idx` (`idvendedor` ASC) VISIBLE,
   CONSTRAINT `fk_produto_vendedor1`
-    FOREIGN KEY (`vendedor_idvendedor`)
+    FOREIGN KEY (`idvendedor`)
     REFERENCES `banco`.`vendedor` (`idvendedor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -75,11 +76,11 @@ CREATE TABLE IF NOT EXISTS `banco`.`pedido` (
   `idpedido` INT NOT NULL AUTO_INCREMENT,
   `valor_total` INT NULL,
   `data_pedido` DATE NULL,
-  `usuario_idusuario` INT NOT NULL,
-  PRIMARY KEY (`idpedido`, `usuario_idusuario`),
-  INDEX `fk_pedido_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
+  `idusuario` INT NOT NULL,
+  PRIMARY KEY (`idpedido`, `idusuario`),
+  INDEX `fk_pedido_usuario1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_pedido_usuario1`
-    FOREIGN KEY (`usuario_idusuario`)
+    FOREIGN KEY (`idusuario`)
     REFERENCES `banco`.`usuario` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -92,13 +93,13 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `banco`.`item_pedido` (
   `iditem_pedido` INT NOT NULL AUTO_INCREMENT,
   `quantidade` INT NULL,
-  `pedido_idpedido` INT NOT NULL,
+  `idpedido` INT NOT NULL,
   `idproduto` INT NOT NULL,
-  PRIMARY KEY (`iditem_pedido`, `pedido_idpedido`),
-  INDEX `fk_item_pedido_pedido1_idx` (`pedido_idpedido` ASC) VISIBLE,
+  PRIMARY KEY (`iditem_pedido`, `idpedido`),
+  INDEX `fk_item_pedido_pedido1_idx` (`idpedido` ASC) VISIBLE,
   INDEX `fk_item_pedido_produto1_idx` (`idproduto` ASC) VISIBLE,
   CONSTRAINT `fk_item_pedido_pedido1`
-    FOREIGN KEY (`pedido_idpedido`)
+    FOREIGN KEY (`idpedido`)
     REFERENCES `banco`.`pedido` (`idpedido`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -117,11 +118,11 @@ CREATE TABLE IF NOT EXISTS `banco`.`loginusuario` (
   `idlogin` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NULL,
   `senha` VARCHAR(255) NULL,
-  `usuario_idusuario` INT NOT NULL,
-  PRIMARY KEY (`idlogin`, `usuario_idusuario`),
-  INDEX `fk_login_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
+  `idusuario` INT NOT NULL,
+  PRIMARY KEY (`idlogin`, `idusuario`),
+  INDEX `fk_login_usuario1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_login_usuario1`
-    FOREIGN KEY (`usuario_idusuario`)
+    FOREIGN KEY (`idusuario`)
     REFERENCES `banco`.`usuario` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -134,11 +135,11 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `banco`.`imagens` (
   `idimagens` INT NOT NULL AUTO_INCREMENT,
   `imagem` LONGBLOB NULL,
-  `produto_idproduto` INT NOT NULL,
-  PRIMARY KEY (`idimagens`, `produto_idproduto`),
-  INDEX `fk_imagens_produto1_idx` (`produto_idproduto` ASC) VISIBLE,
+  `idproduto` INT NOT NULL,
+  PRIMARY KEY (`idimagens`, `idproduto`),
+  INDEX `fk_imagens_produto1_idx` (`idproduto` ASC) VISIBLE,
   CONSTRAINT `fk_imagens_produto1`
-    FOREIGN KEY (`produto_idproduto`)
+    FOREIGN KEY (`idproduto`)
     REFERENCES `banco`.`produto` (`idproduto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -153,12 +154,37 @@ CREATE TABLE IF NOT EXISTS `banco`.`loginvendedor` (
   `email` VARCHAR(50) NULL,
   `senha` VARCHAR(255) NULL,
   `nome` VARCHAR(255) NULL,
-  `vendedor_idvendedor` INT NOT NULL,
-  PRIMARY KEY (`idloginvendedor`, `vendedor_idvendedor`),
-  INDEX `fk_loginvendedor_vendedor1_idx` (`vendedor_idvendedor` ASC) VISIBLE,
+  `idvendedor` INT NOT NULL,
+  PRIMARY KEY (`idloginvendedor`, `idvendedor`),
+  INDEX `fk_loginvendedor_vendedor1_idx` (`idvendedor` ASC) VISIBLE,
   CONSTRAINT `fk_loginvendedor_vendedor1`
-    FOREIGN KEY (`vendedor_idvendedor`)
+    FOREIGN KEY (`idvendedor`)
     REFERENCES `banco`.`vendedor` (`idvendedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `banco`.`vendas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `banco`.`vendas` (
+  `idvendas` INT NOT NULL AUTO_INCREMENT,
+  `quantidade` INT NULL,
+  `data_venda` DATETIME NULL,
+  `idvendedor` INT NOT NULL,
+  `idproduto` INT NOT NULL,
+  PRIMARY KEY (`idvendas`, `idvendedor`, `idproduto`),
+  INDEX `fk_vendas_vendedor1_idx` (`idvendedor` ASC) VISIBLE,
+  INDEX `fk_vendas_produto1_idx` (`idproduto` ASC) VISIBLE,
+  CONSTRAINT `fk_vendas_vendedor1`
+    FOREIGN KEY (`idvendedor`)
+    REFERENCES `banco`.`vendedor` (`idvendedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vendas_produto1`
+    FOREIGN KEY (`idproduto`)
+    REFERENCES `banco`.`produto` (`idproduto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
