@@ -51,10 +51,7 @@ session_start();
                     </form>
                 </div>
             <?php else: ?>
-                <div class="usuario-box">
-                    <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
-                    Usuário
-                </div>
+                
             <?php endif; ?>
         </div>
 
@@ -134,42 +131,58 @@ session_start();
 
     <!-- ============ SIDEBAR ============ -->
     <aside class="sidebar" id="sidebar" aria-hidden="true">
-        <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
-        <ul>
-
+    <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
+    <ul>
         <li><a href="index.php"><img src="img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
-        
         <li><a href="#" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
+        <?php if (isset($_SESSION['vendedor_nome'])): ?>
+            <li><a href="produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
+        <?php else: ?>
+            <li><a href="vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
+        <?php endif; ?>
+        <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
+            <li><a href="login/login.php"><img src="img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
+            <li><a href="cadastro/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+            <li><a href="consulta/buscar.php">👥 Consulta Usuários</a></li>
+            <li><a href="consultaV/buscar2.php">🛍️ Consulta Vendedor</a></li>
+            <li><a href="consultageral.php">📊 Consulta Geral</a></li>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
+            <li>
+                <form action="logout.php" method="post">
+                    <button type="submit" class="logout-btn-sidebar"><img src="img/sair.png" alt="Sair" style="width:16px; height:16px; vertical-align:middle;"> Sair</button>
+                </form>
+            </li>
+        <?php endif; ?>
+        <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
+    </ul>
 
-
-            <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                <li><a href="produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
-            <?php else: ?>
-                <li><a href="vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
-            <?php endif; ?>
-
-            <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-                <li><a href="login/login.php"><img src="img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
-                <li><a href="cadastro/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
-                <li><a href="consulta/buscar.php">👥 Consulta Usuários</a></li>
-                <li><a href="consultaV/buscar2.php">🛍️ Consulta Vendedor</a></li>
-                <li><a href="consultageral.php">📊 Consulta Geral</a></li>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
-                <li>
-                    <form action="logout.php" method="post">
-                        <button type="submit" class="logout-btn-sidebar"><img src="img/sair.png" alt="Sair" style="width:16px; height:16px; vertical-align:middle;"> Sair</button>
-                    </form>
-                </li>
-            <?php endif; ?>
-
-            <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
-        </ul>
-    </aside>
+    <!-- Usuário lá embaixo da sidebar -->
+    <?php if (isset($_SESSION['usuario_nome'])): ?>
+        <div class="usuario-box">
+            <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
+            <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
+            <form action="logout.php" method="post" style="margin: 0;">
+                <button class="logout-btn" type="submit">Sair</button>
+            </form>
+        </div>
+    <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
+        <div class="usuario-box">
+            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Vendedor" class="usuario-icone-img">
+            <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
+            <form action="logout.php" method="post" style="margin: 0;">
+                <button class="logout-btn" type="submit">Sair</button>
+            </form>
+        </div>
+    <?php else: ?>
+        <div class="usuario-box">
+            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
+            Usuário
+        </div>
+    <?php endif; ?>
+</aside>
     <!-- ========== FIM SIDEBAR ========== -->
 
     <main class="conteudo">

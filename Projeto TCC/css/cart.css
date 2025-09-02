@@ -1,17 +1,25 @@
 .usuario-box {
     display: flex;
     align-items: center;
-    background-color: #00c6fd;
-    color: white;
-    padding: 4px 20px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 17px;
+    background: linear-gradient(90deg, #52a5fe 60%, #00c9ff 100%);
+    color: #ffffff;
+    padding: 5px 20px;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 18px;
     margin-left: 40px;
+    box-shadow: 0 2px 8px rgba(37, 61, 67, 0.06);
+    gap: 10px;
+    transition: box-shadow 0.2s;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+.usuario-box:hover {
+    box-shadow: 0 4px 16px rgba(37, 61, 67, 0.10);
 }
 .usuario-icone-img {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background-color: white;
     object-fit: cover;
@@ -217,4 +225,21 @@ body.logged-in .button-login {
     font-size: 18px;
     color: #7f8c8d;
     padding: 40px 0;
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.usuario-box {
+    align-self: center;
+    transform: translateY(60%);
+    margin-left: 0;
+    margin-top: auto;
+    margin-bottom: 24px;
+    width: 85%;
+    max-width: 320px;
 }
