@@ -2,7 +2,7 @@
 
     $db = 1;
 
-if( $db == 1){
+if( $db == 2){
     $servername = "localhost";
     $username = "root";
     $password = "";
