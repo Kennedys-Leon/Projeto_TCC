@@ -175,7 +175,7 @@ body.dark-mode {
     text-align: center;
 }
 body.dark-mode .toggle-theme {
-    background: linear-gradient(90deg, #000 );
+    background: linear-gradient(90deg, #f5f4f4 );
     color: #f2f2f7;
 }
 
@@ -190,9 +190,7 @@ body.dark-mode .toggle-theme {
     color: #f2f2f7;
 }
 
-.toggle-theme:hover {
-    background-color: rgb(0, 0, 0);
-}
+
 
 .conteudo {
     padding: 30px;
@@ -268,7 +266,7 @@ body.dark-mode .rodape {
 .produtos-destaque {
     font-size: 1.2rem;  /* antes 1.6rem */
     font-weight: 700;
-    color: #fff;
+    color: #ffffff;
     margin-bottom: 40px;
 }
 
@@ -489,6 +487,19 @@ body.dark-mode .user-name {
     background: linear-gradient(90deg, #0056b3 60%, #00aaff 100%);
     transform: scale(1.07);
     color: #fff;
+}
+
+body.dark-mode .produtos-destaque h3 {
+    color: #ffffff;
+}
+
+/* Títulos das seções em destaque */
+.produtos-destaque h3 {
+    color: #222; /* Cor escura para tema claro */
+}
+
+body.dark-mode .produtos-destaque h3 {
+    color: #f2f2f7; /* Cor clara para tema escuro */
 }
 
 
