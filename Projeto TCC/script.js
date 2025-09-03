@@ -6,14 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleThemeSideBtn = document.getElementById('toggle-theme-sidebar');
 
     function setThemeLabels() {
-        // input do header mostra só o ícone
         if (toggleThemeHeader) {
-            toggleThemeHeader.value = document.body.classList.contains('dark-mode') ? '☾Tema escuro' : '☀Tema claro';
+            const isDark = document.body.classList.contains('dark-mode');
+            toggleThemeHeader.innerHTML = isDark
+                ? `<img src="img/sol.png" alt="Tema claro" style="width:22px; vertical-align:middle;">`
+                : `<img src="img/lua.png" alt="Tema escuro" style="width:22px; vertical-align:middle;">`;
         }
-        // botão da sidebar mostra texto
+        // Botão da sidebar: igual ao anterior
         if (toggleThemeSideBtn) {
-            toggleThemeSideBtn.textContent =
-                document.body.classList.contains('dark-mode') ? '☀Tema claro' : '☾Tema escuro';
+            const isDark = document.body.classList.contains('dark-mode');
+            const icon = isDark
+                ? '<img src="img/sol.png" alt="Tema claro" style="width:18px; vertical-align:middle; margin-right:6px;">'
+                : '<img src="img/lua.png" alt="Tema escuro" style="width:18px; vertical-align:middle; margin-right:6px;">';
+            toggleThemeSideBtn.innerHTML = `
+                ${icon}
+                ${isDark ? ' Tema claro' : ' Tema escuro'}
+            `;
         }
     }
 
