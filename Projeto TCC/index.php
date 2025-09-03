@@ -1,6 +1,20 @@
 <?php
 session_start();
+
+include 'cadastro/conexao.php';
+
+// Buscar os últimos produtos com imagem (pega a primeira imagem de cada produto)
+$stmt = $pdo->query("
+    SELECT p.idproduto, p.nome, p.preco, p.descricao, p.data_pub, i.imagem
+    FROM produto p
+    LEFT JOIN imagens i ON p.idproduto = i.idproduto
+    GROUP BY p.idproduto
+    ORDER BY p.data_pub DESC
+    LIMIT 12
+");
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -224,6 +238,27 @@ session_start();
                         <button class="btn-preco">Adicionar ao Carrinho</button>
                     </div>
                 </div>
+            </section>
+
+            <section class="produtos-destaque">
+                <h3>Novos Produtos dos Vendedores</h3>
+                <div class="lista-produtos-destaque">
+                    <?php if (count($produtos) > 0): ?>
+                        <?php foreach ($produtos as $produto): ?>
+                        <div class="card-produto">
+                        <img src="uploads/<?php echo htmlspecialchars($produto['imagem']); ?>" 
+                         alt="<?php echo htmlspecialchars($produto['nome']); ?>">
+                        <p><?php echo htmlspecialchars($produto['nome']); ?></p>
+                        <p><strong>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></strong></p>
+                        <a href="produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
+                        Ver Detalhes
+                    </a>
+                </div>
+            <?php endforeach; ?>
+            <?php else: ?>
+                <p>Nenhum produto cadastrado ainda.</p>
+            <?php endif; ?>
+            </div>
             </section>
         </div>
     </main>

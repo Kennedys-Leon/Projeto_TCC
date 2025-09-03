@@ -28,6 +28,9 @@
         <label for="CampDescricao">Descrição do produto:</label>
         <textarea id="CampDescricao" name="descricao" rows="4" required></textarea>
 
+        <label>Foto do seu produto:</label>
+        <input type="file" name="foto" accept="image/*"><br><br>
+
         <input type="submit" value="Cadastrar" class="btn-vermelho">
 
         <div class="botoes-inicio">
