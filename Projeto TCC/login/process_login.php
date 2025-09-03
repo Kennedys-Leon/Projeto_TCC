@@ -16,6 +16,7 @@ try {
         $_SESSION['usuario_logado'] = $usuario_db['idcadastro'];
         $_SESSION['usuario_nome'] = $usuario_db['nome'];
         $_SESSION['usuario_foto'] = $usuario_db['foto'];
+        
         header('Location: ../index.php');
         exit();
     } else {

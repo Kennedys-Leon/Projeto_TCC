@@ -19,11 +19,8 @@ $stmt = $pdo->prepare("SELECT * FROM vendedor WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
 $vendedor = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Se não achar vendedor, volta pro login
 if (!$vendedor) {
-    session_destroy();
-    header("Location: ../login_vendedor/login_vendedor.php");
-    exit;
+    die("Erro: vendedor não encontrado.");
 }
 
 // ============================
@@ -34,16 +31,10 @@ $stmt->execute([$vendedor_id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $total_vendas = isset($row['total_vendas']) ? intval($row['total_vendas']) : 0;
 
-// ============================
-// Total de vendas do site
-// ============================
 $stmt = $pdo->query("SELECT COUNT(*) as todas_vendas FROM vendas");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-$todas_vendas = isset($row['todas_vendas']) ? intval($row['todas_vendas']) : 0;
+$todas_vendas = isset($row['todas_vendas']) ? (int)$row['todas_vendas'] : 1;
 
-// ============================
-// Calcular percentual
-// ============================
 if ($todas_vendas == 0) {
     $percentual = 0;
 } else {
@@ -74,6 +65,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById(tabName).classList.add('active');
             document.querySelector('[data-tab="'+tabName+'"]').classList.add('active');
         }
+
+        // Mostrar/ocultar formulário de novo produto
+        function toggleNovoProduto() {
+            let form = document.getElementById("formNovoProduto");
+            form.style.display = (form.style.display === "none" ? "block" : "none");
+        }
     </script>
 </head>
 <body>
@@ -96,56 +93,96 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Resumo de Vendas</h2>
             <p>Total de vendas realizadas: <b><?php echo $total_vendas; ?></b></p>
             <p>Total do site: <b><?php echo $todas_vendas; ?></b></p>
-            <p class="percentual">Participação: <?php echo number_format($percentual, 2, ",", "."); ?>%</p>
+            <p class="percentual">Participação: <?php echo number_format($percentual, 2); ?>%</p>
         </div>
 
         <!-- Produtos -->
         <div id="produtos" class="tab-content">
             <h2>Meus Produtos</h2>
+            <button class="btn" onclick="toggleNovoProduto()">Cadastrar Novo Produto</button>
+            
+            <!-- Formulário de Novo Produto -->
+            <div id="formNovoProduto" style="display:none; margin-top:15px;">
+                <form method="post" action="salvar_produto.php">
+                    <label>Nome do Produto:</label><br>
+                    <input type="text" name="nome" required><br><br>
+
+                    <label>Preço:</label><br>
+                    <input type="number" name="preco" step="0.01" required><br><br>
+
+                    <label>Categoria:</label><br>
+                    <input type="text" name="categoria" required><br><br>
+
+                    <label>Quantidade em Estoque:</label><br>
+                    <input type="number" name="quantidade" required><br><br>
+
+                    <label>Descrição de Publicação:</label><br>
+                    <input type="text" name="data_pub" required><br><br>
+
+                    <label>Descrição do Produto:</label><br>
+                    <input type="text" name="descricao" required><br><br>
+
+                    <label>Imagem do produto:</label>
+                    <input type="file" name="imagem" accept="image/*" required><br><br>
+
+
+                    <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
+
+                    <button type="submit" class="btn">Salvar Produto</button>
+                </form>
+            </div>
+
+            <!-- Lista de Produtos -->
             <table>
                 <tr>
-                    <th>Código</th>
-                    <th>Nome</th>
+                    <th>Nome do produto</th>
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Qtd</th>
+                    <th>Data Pub.</th>
+                    <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
-                <?php if ($produtos): ?>
-                    <?php foreach ($produtos as $p): ?>
-                    <tr>
-                        <td><?php echo $p['idproduto']; ?></td>
-                        <td><?php echo htmlspecialchars($p['nome']); ?></td>
-                        <td>R$ <?php echo number_format($p['preco'], 2, ",", "."); ?></td>
-                        <td><?php echo htmlspecialchars($p['categoria']); ?></td>
-                        <td><?php echo $p['quantidade_estoque']; ?></td>
-                        <td>
-                            <button class="btn">Editar</button>
-                            <button class="btn">Excluir</button>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr><td colspan="6">Nenhum produto cadastrado.</td></tr>
-                <?php endif; ?>
+                <?php foreach ($produtos as $p): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($p['nome']); ?></td>
+                    <td>R$ <?php echo number_format($p['preco'],2,",","."); ?></td>
+                    <td><?php echo htmlspecialchars($p['categoria']); ?></td>
+                    <td><?php echo $p['quantidade_estoque']; ?></td>
+                    <td><?php echo date("d/m/Y", strtotime($p['data_pub'])); ?></td>
+                    <td><?php echo htmlspecialchars($p['descricao']); ?></td>
+                    <td>
+                        <button class="btn">Editar</button>
+                        <button class="btn">Excluir</button>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
             </table>
         </div>
 
         <!-- Perfil -->
         <div id="perfil" class="tab-content">
-            <h2>Meu Perfil</h2>
-            <form method="post" action="editar_perfil.php">
-                <label>Nome:</label><br>
-                <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>"><br><br>
-                <label>Email:</label><br>
-                <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>"><br><br>
-                <label>Telefone:</label><br>
-                <input type="text" name="telefone" value="<?php echo htmlspecialchars($vendedor['telefone']); ?>"><br><br>
-                <label>CNPJ:</label><br>
-                <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj']); ?>"><br><br>
-                <button type="submit" class="btn">Salvar Alterações</button>
-            </form>
-        </div>
+        <h2>Meu Perfil</h2>
+        <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data">
+            <label>Nome:</label><br>
+            <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>" required><br><br>
+        
+            <label>Email:</label><br>
+            <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>" required><br><br>
+        
+            <label>Telefone:</label><br>
+            <input type="text" name="telefone" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>"><br><br>
+        
+            <label>CNPJ:</label><br>
+            <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>"><br><br>
+        
+            <label>Foto de Perfil:</label><br>
+            <input type="file" name="foto" accept="image/*"><br><br>
+        
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+</div>
+
     </div>
 
     <footer>

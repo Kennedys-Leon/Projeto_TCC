@@ -35,29 +35,6 @@ session_start();
             <div class="logo">
                 <img src="../img/Logos.png" alt="MaxAcess" class="logo-img" />
             </div>
-
-            <?php if (isset($_SESSION['usuario_nome'])): ?>
-                <div class="usuario-box">
-                    <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
-                    <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
-                    <form action="../logout.php" method="post" style="margin: 0;">
-                        <button class="logout-btn" type="submit">Sair</button>
-                    </form>
-                </div>
-            <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
-                <div class="usuario-box">
-                    <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Vendedor" class="usuario-icone-img">
-                    <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
-                    <form action="../logout.php" method="post" style="margin: 0;">
-                        <button class="logout-btn" type="submit">Sair</button>
-                    </form>
-                </div>
-            <?php else: ?>
-                <div class="usuario-box">
-                    <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
-                    Usuário
-                </div>
-            <?php endif; ?>
         </div>
 
         <nav class="navbar">
@@ -141,7 +118,7 @@ session_start();
 
         <li><a href="pagina_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
 
-        <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Ver informações</a></li>
+        <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Informações" style="width:16px; height:16px; vertical-align:middle;"> Minhas informações</a></li>
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
                 <li><a href="../produtos/cadastroproduto.php"><img src="../img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
@@ -170,6 +147,29 @@ session_start();
 
             <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
         </ul>
+
+        <?php if (isset($_SESSION['usuario_nome'])): ?>
+                <div class="usuario-box">
+                    <img src="../uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
+                    <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
+                    <form action="../logout.php" method="post" style="margin: 0;">
+                        <button class="logout-btn" type="submit">Sair</button>
+                    </form>
+                </div>
+            <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
+                <div class="usuario-box">
+                    <img src="../uploads/<?php echo isset($_SESSION['vendedor_foto']) ? htmlspecialchars($_SESSION['vendedor_foto']) : 'user-icon.png'; ?>" alt="Foto do vendedor" class="usuario-icone-img">
+                    <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
+                    <form action="../logout.php" method="post" style="margin: 0;">
+                        <button class="logout-btn" type="submit">Sair</button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div class="usuario-box">
+                    <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
+                    Usuário
+                </div>
+            <?php endif; ?>
     </aside>
     <!-- ========== FIM SIDEBAR ========== -->
 

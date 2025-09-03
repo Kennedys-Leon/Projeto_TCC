@@ -43,13 +43,7 @@ session_start();
                     </form>
                 </div>
             <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
-                <div class="usuario-box">
-                    <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Vendedor" class="usuario-icone-img">
-                    <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
-                    <form action="logout.php" method="post" style="margin: 0;">
-                        <button class="logout-btn" type="submit">Sair</button>
-                    </form>
-                </div>
+                
             <?php else: ?>
                 
             <?php endif; ?>
@@ -170,7 +164,7 @@ session_start();
         </div>
     <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
         <div class="usuario-box">
-            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Vendedor" class="usuario-icone-img">
+            <img src="uploads/<?php echo isset($_SESSION['vendedor_foto']) ? htmlspecialchars($_SESSION['vendedor_foto']) : 'user-icon.png'; ?>" alt="Foto do vendedor" class="usuario-icone-img">
             <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
             <form action="logout.php" method="post" style="margin: 0;">
                 <button class="logout-btn" type="submit">Sair</button>
@@ -179,7 +173,7 @@ session_start();
     <?php else: ?>
         <div class="usuario-box">
             <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
-            Usuário
+            Não logado
         </div>
     <?php endif; ?>
 </aside>

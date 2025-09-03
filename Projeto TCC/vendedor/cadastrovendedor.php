@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="../css/cadastro.css">
-    
+    <link rel="stylesheet" href="../css/cadastro.css"> 
 </head>
 <body>
-    <form action="cadastrovendedorbd.php" method="post" class="form-cadastro">
+    <form action="cadastrovendedorbd.php" method="post" enctype="multipart/form-data" class="form-cadastro">
         <h2>Seja Bem-vindo, Novo Vendedor!</h2>
         <p>Se Cadastre abaixo com suas informações👇</p>
 
@@ -16,19 +15,23 @@
         <input type="text" name="nome" required>
 
         <label for="CampCPF">CPF:</label>
-        <input type="text" name="CampCPF" required>
+        <input type="text" name="cpf" required>
 
         <label for="CampTelefone">Telefone:</label>
-        <input type="text" name="CampTelefone" required>
+        <input type="text" name="telefone" required>
 
         <label for="CampEmail">Email:</label>
-        <input type="email" name="CampEmail" required>
+        <input type="email" name="email" required>
 
         <label for="CampSenha">Senha:</label>
-        <input type="password" name="CampSenha" required>
+        <input type="password" name="senha" required>
 
         <label for="CampCNPJ">CNPJ:</label>
-        <input type="text" name="CampCNPJ">
+        <input type="text" name="cnpj">
+
+        <label>Sua foto de preferência:</label>
+        <input type="file" name="foto" accept="image/*"><br><br>
+
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
