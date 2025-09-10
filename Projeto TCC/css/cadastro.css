@@ -6,8 +6,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f1f1f1, #dcdcdc);
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #61618e;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -17,27 +17,29 @@ body {
 
 /* Formulário */
 .form-cadastro {
-  background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background: #484872;
+  padding: 32px 40px;
+  border-radius: 14px;
   width: 100%;
-  max-width: 500px;
+  max-width: 580px;
+  box-shadow: 0 2px 16px rgba(40, 40, 60, 0.10);
 }
 
 .form-cadastro h2 {
   margin-bottom: 20px;
   font-size: 22px;
-  color: #333;
+  color: #b0b3c6;
   text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 /* Labels e Inputs */
 .form-cadastro label {
   display: block;
   margin-bottom: 6px;
-  font-weight: 600;
-  color: #555;
+  font-weight: 500;
+  color: #b0b3c6;
 }
 
 .form-cadastro input[type="text"],
@@ -46,48 +48,54 @@ body {
 .form-cadastro input[type="file"] {
   width: 100%;
   padding: 10px 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.3s;
+  margin-bottom: 14px;
+  border: none;
+  border-radius: 7px;
+  font-size: 15px;
+  background: #23233a;
+  color: #eaeaea;
+  box-shadow: 0 1px 4px rgba(40, 40, 60, 0.07);
+  transition: background 0.2s;
 }
 
 .form-cadastro input:focus {
-  border-color: #d9534f;
+  background: #39395a;
   outline: none;
 }
 
 /* Botão de Cadastrar */
 .btn-vermelho {
-  background-color: #d9534f;
-  color: #fff;
+  background: #39395a;
+  color: #eaeaea;
   border: none;
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
+  padding: 11px;
+  font-size: 15px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
 }
 
 .btn-vermelho:hover {
-  background-color: #c9302c;
+  background: #23233a;
+  transform: scale(1.03);
 }
 
 /* Link para login */
 .botoes-inicio {
-  margin-top: 20px;
+  margin-top: 16px;
   text-align: center;
 }
 
 .btn-primario {
-  color: #d9534f;
+  color: #b0b3c6;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s;
 }
 
 .btn-primario:hover {
-  color: #a52a2a;
+  color: #eaeaea;
 }

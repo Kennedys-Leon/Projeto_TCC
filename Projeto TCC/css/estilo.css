@@ -28,7 +28,7 @@ body.dark-mode {
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: rgb(25 71 130);;
+    background-color: rgb(21, 55, 100);;
 }
 
 .header .logo {
@@ -343,10 +343,10 @@ body.dark-mode .produto p {
 
 .banner-destaque {
     display: block;
-    width: 100%;         /* ocupa toda a largura */
+    width: 105%;         /* ocupa toda a largura */
     height: auto;        /* mantém proporção */
     margin: 20px 0;      /* espaço em cima e embaixo */
-    border-radius: 0;    /* remove cantos arredondados */
+    border-radius: 30px;    /* remove cantos arredondados */
     box-shadow: none;    /* opcional: remove sombra */
 }
 
