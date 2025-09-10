@@ -1,162 +1,93 @@
-:root {
-  --primary: #356de5;
-  --primary-dark: #1b75e2;
-  --primary-light: #f0f4ff;
-  --success: #43a047;
-  --success-dark: #2e7d32;
-  --text: #333;
-  --text-light: #666;
-  --card-bg: #fff;
-  --border: #ddd;
-  --radius: 8px;
-  --transition: 0.3s ease;
-  --shadow-md: 0 6px 14px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  margin: 0;
-  padding: 15px;
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f1f1f1, #dcdcdc);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-/* ===== FORM PRINCIPAL ===== */
+/* Formulário */
 .form-cadastro {
-  background-color: var(--card-bg);
-  padding: 18px 15px;        /* menor */
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 300px;          /* reduzido mais */
-  margin: 20px auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  max-width: 500px;
 }
 
-.form-cadastro::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px; /* menor */
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-}
-
-.form-cadastro:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px); /* menor */
-}
-
-/* ===== CABEÇALHO ===== */
-.form-cadastro__header {
+.form-cadastro h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
   text-align: center;
-  margin-bottom: 14px; /* menor */
 }
 
-.form-cadastro__title {
-  font-size: 18px;     /* menor */
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;  /* menor */
-}
-
-.form-cadastro__subtitle {
-  color: var(--text-light);
-  font-size: 12px;     /* menor */
-}
-
-/* ===== CAMPOS ===== */
-.form-cadastro__group {
-  margin-bottom: 12px; /* menor */
-  position: relative;
-}
-
+/* Labels e Inputs */
 .form-cadastro label {
   display: block;
-  margin-bottom: 4px;  /* menor */
+  margin-bottom: 6px;
   font-weight: 600;
-  font-size: 13px;     /* menor */
-  color: #444;
-  display: flex;
-  align-items: center;
-  gap: 3px;
+  color: #555;
 }
 
-.form-cadastro input,
-.form-cadastro select {
+.form-cadastro input[type="text"],
+.form-cadastro input[type="email"],
+.form-cadastro input[type="password"],
+.form-cadastro input[type="file"] {
   width: 100%;
-  padding: 8px 10px;   /* menor */
-  margin-bottom: 10px;
-  border: 1.8px solid var(--border);
-  border-radius: 5px;  /* menor */
-  font-size: 13px;     /* menor */
-  color: var(--text);
-  transition: var(--transition);
-  background-color: var(--primary-light);
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-cadastro input:focus {
+  border-color: #d9534f;
   outline: none;
-  box-sizing: border-box;
 }
 
-.form-cadastro input::placeholder,
-.form-cadastro select::placeholder {
-  color: #999;
-  font-size: 12px; /* menor */
-}
-
-/* ===== BOTÃO SUBMIT ===== */
-.form-cadastro input[type="submit"] {
-  background-color: var(--primary);
+/* Botão de Cadastrar */
+.btn-vermelho {
+  background-color: #d9534f;
   color: #fff;
-  padding: 10px;      /* menor */
   border: none;
-  border-radius: 6px; /* menor */
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 0.9rem;  /* menor */
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 3px 8px rgba(53, 109, 229, 0.3);
+  transition: background-color 0.3s;
 }
 
-.form-cadastro input[type="submit"]:hover {
-  background-color: var(--primary-dark);
-  box-shadow: 0 4px 10px rgba(27, 117, 226, 0.45);
+.btn-vermelho:hover {
+  background-color: #c9302c;
 }
 
-/* ===== BOTÕES DE AÇÃO ===== */
+/* Link para login */
 .botoes-inicio {
+  margin-top: 20px;
   text-align: center;
-  margin-top: 14px; /* menor */
 }
 
 .btn-primario {
-  display: inline-block;
-  background-color: var(--success);
-  color: #fff;
-  padding: 8px 18px;   /* menor */
+  color: #d9534f;
   text-decoration: none;
-  border-radius: 6px;  /* menor */
-  font-weight: 700;
-  font-size: 0.85rem;  /* menor */
-  transition: background-color 0.25s ease, box-shadow 0.3s ease;
-  box-shadow: 0 3px 10px rgba(67, 160, 71, 0.35);
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 .btn-primario:hover {
-  background-color: var(--success-dark);
-  box-shadow: 0 5px 12px rgba(46, 125, 50, 0.5);
-}
-
-/* Acessibilidade */
-.btn-primario:focus,
-.form-cadastro input[type="submit"]:focus {
-  outline: 2px solid #80b3ff;
-  outline-offset: 2px;
+  color: #a52a2a;
 }

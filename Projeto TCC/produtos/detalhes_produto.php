@@ -36,6 +36,8 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/detalhes.css">
+
 </head>
 <body class="dark-mode">
 

@@ -27,7 +27,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Seus estilos -->
     <link rel="stylesheet" href="css/estilo.css" />
     <link rel="stylesheet" href="css/cart.css">
-
+    
     <!-- Estilo da sidebar (só a lateral) -->
     <link rel="stylesheet" href="css/sidebar.css">
 
@@ -187,27 +187,28 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <section class="produtos-destaque">
                 <h3>Categorias em Destaque</h3>
                 <div class="lista-produtos">
-                    <a href="freefire.php" class="produto">
-                        <img src="img/FF.jpeg" alt="Produto 1" />
-                        <p>Free Fire</p>
-                    </a>
-                    <a href="clashroyale.php" class="produto">
+                <a href="jogos/freefire.php" class="produto">
+                <img src="img/FF.jpeg" alt="Produto 1" />
+                <p>Free Fire</p>
+                </a>
+
+                    <a href="jogos/clashroyale.php" class="produto">
                         <img src="img/clash.jpeg" alt="Produto 2" />
                         <p>Clash Royale</p>
                     </a>
-                    <a href="fifa.php" class="produto">
+                    <a href="jogos/fifa.php" class="produto">
                         <img src="img/fifa.jpeg" alt="Produto 3" />
                         <p>Fifa</p>
                     </a>
-                    <a href="roblox.php" class="produto">
+                    <a href="jogos/roblox.php" class="produto">
                         <img src="img/roblox.jpeg" alt="Produto 4" />
                         <p>Roblox</p>
                     </a>
-                    <a href="fortnite.php" class="produto">
+                    <a href="jogos/fortnite.php" class="produto">
                         <img src="img/fortnite.jpeg" alt="Produto 5" />
                         <p>Fortnite</p>
                     </a>
-                    <a href="minecraft.php" class="produto">
+                    <a href="jogos/minecraft.php" class="produto">
                         <img src="img/minecraft.jpeg" alt="Produto 6" />
                         <p>Mine</p>
                     </a>

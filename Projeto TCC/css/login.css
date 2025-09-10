@@ -1,143 +1,98 @@
-:root {
-  --primary: #356de5;
-  --primary-dark: #1b75e2;
-  --primary-light: #f0f4ff;
-  --success: #43a047;
-  --success-dark: #2e7d32;
-  --error: #e53935;
-  --text: #333;
-  --text-light: #000;
-  --card-bg: #fff;
-  --border: #ddd;
-  --radius: 10px;
-  --transition: 0.3s ease;
-  --shadow-md: 0 8px 20px rgba(0,0,0,0.07);
-  --shadow-lg: 0 12px 30px rgba(0,0,0,0.12);
-}
-
-/* ===== BODY COM IMAGEM ===== */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url("../img/fundo-login.jpg") no-repeat center center fixed;
-  background-size: cover;
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
-  color: var(--text);
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ececec, #d3d3d3);
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh; /* tela inteira */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  align-items: center;
+  padding: 20px;
 }
 
-/* ===== FORM LOGIN ===== */
-.formulario-login {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 25px 20px;
+/* Container principal */
+.container-login {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 360px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  max-width: 450px;
 }
 
-.formulario-login::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-}
-
-.formulario-login:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-
+/* Formulário */
 .formulario-login h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
   text-align: center;
-  margin-bottom: 18px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
 }
 
-/* ===== CAMPOS ===== */
 .formulario-login label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  font-size: 14px;
-  color: #444;
+  color: #555;
 }
 
-.formulario-login input {
+.formulario-login input[type="text"],
+.formulario-login input[type="password"] {
   width: 100%;
   padding: 10px 12px;
-  margin-bottom: 14px;
-  border: 2px solid var(--border);
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
-  color: var(--text);
-  transition: var(--transition);
-  background-color: var(--primary-light);
-  outline: none;
-  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
 .formulario-login input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(53, 109, 229, 0.2);
-  background-color: #fff;
+  border-color: #d9534f;
+  outline: none;
 }
 
-/* ===== BOTÃO LOGIN ===== */
+/* Botão de login */
 .btn-login {
-  background-color: var(--primary);
+  background-color: #d9534f;
   color: #fff;
-  padding: 12px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 10px rgba(53, 109, 229, 0.35);
   width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn-login:hover {
-  background-color: var(--primary-dark);
-  box-shadow: 0 6px 14px rgba(27, 117, 226, 0.5);
+  background-color: #c9302c;
 }
 
-/* ===== LINK CADASTRO ===== */
+/* Link para cadastro */
 .botoes-inicio {
+  margin-top: 20px;
   text-align: center;
-  margin-top: 15px;
 }
 
 .botoes-inicio a {
-  color: var(--success);
-  font-weight: 600;
+  color: #d9534f;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.25s ease;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 .botoes-inicio a:hover {
-  color: var(--success-dark);
+  color: #a52a2a;
 }
 
-/* ===== MENSAGEM DE ERRO ===== */
-.mensagem-erro {
-  color: var(--error);
+/* Mensagem de erro */
+p {
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-size: 14px;
 }
