@@ -10,9 +10,8 @@ $quantidade_estoque = $_POST['quantidade_estoque'];
 $data_pub = $_POST['data_pub'];
 $descricao = $_POST['descricao'];
 
-$vendedor_id = $_SESSION['usuario_logado'] ?? null;
+$vendedor_id = $_SESSION['usuario_logado'];
 
-// Trata a data no formato brasileiro (dd/mm/yyyy)
 $data_formatada = DateTime::createFromFormat('d/m/Y', $data_pub);
 if ($data_formatada) {
     $data_pub = $data_formatada->format('Y-m-d');
@@ -36,7 +35,6 @@ try {
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':idvendedor', $vendedor_id, PDO::PARAM_INT);
 
-        // Se tiver data válida, envia como string, senão envia NULL
         if ($data_pub) {
             $stmt->bindParam(':data_pub', $data_pub);
         } else {
@@ -44,6 +42,23 @@ try {
         }
 
         $stmt->execute();
+
+        $idproduto = $pdo->lastInsertId();
+
+        if (!empty($_FILES['imagens']['name'][0])) {
+            foreach ($_FILES['imagens']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['imagens']['error'][$key] === 0) {
+                    $imagem = file_get_contents($tmp_name);
+                    $sql_img = "INSERT INTO imagens (imagem, idproduto) VALUES (:imagem, :idproduto)";
+                    $stmt_img = $pdo->prepare($sql_img);
+                    $stmt_img->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
+                    $stmt_img->bindParam(':idproduto', $idproduto, PDO::PARAM_INT);
+                    $stmt_img->execute();
+                }
+            }
+        } else {
+            die("Pelo menos uma imagem deve ser enviada.");
+        }
 
         header("Location: ../painel_vendedor/pagina_vendedor.php");
         exit;

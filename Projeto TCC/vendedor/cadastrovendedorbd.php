@@ -17,27 +17,14 @@ $telefone = $_POST['telefone'];
 $senha = $_POST['senha'];
 $CNPJ = $_POST['cnpj'];
 
-if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-    $foto = $_FILES['foto'];
-    $foto_nome = uniqid() . '_' . basename($foto['name']);
-    $foto_tmp = $foto['tmp_name'];
-    $caminho_destino = '../uploads/' . $foto_nome;
-
-    if (!is_dir('../uploads')) {
-        mkdir('../uploads', 0755, true);
-    }
-
-    if (!move_uploaded_file($foto_tmp, $caminho_destino)) {
-        echo "Erro ao fazer upload da foto.";
-        exit();
-    }
-} else {
-    $foto_nome = null;
+$foto_de_perfil = null;
+if (isset($_FILES['foto_de_perfil']) && $_FILES['foto_de_perfil']['error'] == 0) {
+    $foto_de_perfil = file_get_contents($_FILES['foto_de_perfil']['tmp_name']);
 }
 
 try {
-    $sql = "INSERT INTO vendedor (nome, cpf, telefone, email, senha, cnpj, foto) 
-            VALUES (:nome, :cpf, :telefone, :email, :senha, :cnpj, :foto)";
+    $sql = "INSERT INTO vendedor (nome, cpf, telefone, email, senha, cnpj, foto_de_perfil) 
+            VALUES (:nome, :cpf, :telefone, :email, :senha, :cnpj, :foto_de_perfil)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':nome', $nome);
     $stmt->bindParam(':cpf', $cpf);
@@ -45,7 +32,8 @@ try {
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':senha', $senha);
     $stmt->bindParam(':cnpj', $CNPJ);
-    $stmt->bindParam(':foto', $foto_nome);
+    $stmt->bindParam(':foto_de_perfil', $foto_de_perfil, PDO::PARAM_LOB);
+    
     $stmt->execute();
 
     header("Location: ../login_vendedor/login_vendedor.php");
@@ -54,5 +42,10 @@ try {
     echo $sql . "<br>" . $e->getMessage();
 }
 
+
+//https://github.com/gouveazs/PROJETO-TCC/blob/main/php/insercao/insercaoVendedor.php
+
 $pdo = null;
 ?>
+
+
