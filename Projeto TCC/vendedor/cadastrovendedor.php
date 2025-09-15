@@ -5,33 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="../css/cadastro.css"> 
+    <style>
+        .linha {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .campo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
 </head>
 <body>
     <form action="cadastrovendedorbd.php" method="post" enctype="multipart/form-data" class="form-cadastro">
         <h2>Seja Bem-vindo, Novo Vendedor!</h2>
-        <p>Se Cadastre abaixo com suas informações👇</p>
 
-        <label for="CampNome">Nome:</label>
-        <input type="text" name="nome" required>
 
-        <label for="CampCPF">CPF:</label>
-        <input type="text" name="cpf" required>
+        <!-- Nome e CPF lado a lado -->
+        <div class="linha">
+            <div class="campo">
+                <label for="CampNome">Nome:</label>
+                <input type="text" name="nome" required>
+            </div>
 
-        <label for="CampTelefone">Telefone:</label>
-        <input type="text" name="telefone" required>
+            <div class="campo">
+                <label for="CampCPF">CPF:</label>
+                <input type="text" name="cpf" required>
+            </div>
+        </div>
 
-        <label for="CampEmail">Email:</label>
-        <input type="email" name="email" required>
+        <!-- Telefone e Email lado a lado -->
+        <div class="linha">
+            <div class="campo">
+                <label for="CampTelefone">Telefone:</label>
+                <input type="text" name="telefone" required>
+            </div>
 
-        <label for="CampSenha">Senha:</label>
+            <div class="campo">
+                <label for="CampEmail">Email:</label>
+                <input type="email" name="email" required>
+            </div>
+        </div>
+
+
+<div class="linha">
+            <div class="campo">
+            <label for="CampSenha">Senha:</label>
         <input type="password" name="senha" required>
+            </div>
 
-        <label for="CampCNPJ">CNPJ:</label>
+            <div class="campo">
+            <label for="CampCNPJ">CNPJ:</label>
         <input type="text" name="cnpj">
+            </div>
+        </div>
+    
 
+        <!-- Foto -->
         <label>Sua foto de preferência:</label>
         <input type="file" name="foto" accept="image/*"><br><br>
-
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
