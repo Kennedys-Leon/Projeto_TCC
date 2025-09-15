@@ -18,10 +18,10 @@ body {
 /* Formulário */
 .form-cadastro {
   background: #484872;
-  padding: 32px 40px;
+  padding: 40px 50px;
   border-radius: 14px;
   width: 100%;
-  max-width: 580px;
+  max-width: 700px;
   box-shadow: 0 2px 16px rgba(40, 40, 60, 0.10);
 }
 
@@ -46,16 +46,20 @@ body {
 .form-cadastro input[type="email"],
 .form-cadastro input[type="password"],
 .form-cadastro input[type="file"] {
-  width: 100%;
+  text-align: center;
   padding: 10px 12px;
   margin-bottom: 14px;
   border: none;
-  border-radius: 7px;
+  border-radius: 10px;
   font-size: 15px;
   background: #23233a;
   color: #eaeaea;
   box-shadow: 0 1px 4px rgba(40, 40, 60, 0.07);
   transition: background 0.2s;
+  display: block;           /* Permite centralizar com margin */
+  margin: 0 auto 14px auto; /* Centraliza horizontalmente */
+  width: 100%;               /* Ou o valor que preferir */
+  max-width: 400px; 
 }
 
 .form-cadastro input:focus {
@@ -99,3 +103,35 @@ body {
 .btn-primario:hover {
   color: #eaeaea;
 }
+
+input[type="file"] {
+  background-color: #2d2d4d; /* cor de fundo escura */
+  color: #fff; /* cor do texto */
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #9d9dfc; /* botão "Escolher arquivo" */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #9d9dfc;
+}
+
+input[type="file"]::file-selector-button {
+  display: block;
+  margin: 0 auto;
+}
+
+
