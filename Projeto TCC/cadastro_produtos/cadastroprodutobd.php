@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 $nome = $_POST['nome'];
 $preco = $_POST['preco'];

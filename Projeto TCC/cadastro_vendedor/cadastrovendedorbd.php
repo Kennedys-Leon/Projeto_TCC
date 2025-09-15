@@ -1,5 +1,5 @@
 <?php
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 $email = $_POST['email'];
 
