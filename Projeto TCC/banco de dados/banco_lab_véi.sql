@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `banco`.`vendedor` (
   `email` VARCHAR(50) NULL,
   `senha` VARCHAR(50) NULL,
   `cnpj` CHAR(14) NULL,
-  `foto` VARCHAR(255) NULL,
+  `foto_de_perfil` LONGBLOB NULL,
   PRIMARY KEY (`idvendedor`))
 ENGINE = InnoDB;
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `banco`.`usuario` (
   `telefone` CHAR(14) NULL,
   `email` VARCHAR(50) NULL,
   `senha` VARCHAR(50) NULL,
-  `foto` VARCHAR(255) NULL,
+  `foto_de_perfil` LONGBLOB NULL,
   PRIMARY KEY (`idusuario`))
 ENGINE = InnoDB;
 
