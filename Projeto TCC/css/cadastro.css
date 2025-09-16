@@ -1,4 +1,4 @@
-/* Reset básico */
+ /* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -43,27 +43,27 @@ body {
 }
 
 .form-cadastro input[type="text"],
-.form-cadastro input[type="email"],
+.form-cadastro input[type="number"],
 .form-cadastro input[type="password"],
-.form-cadastro input[type="file"] {
-  text-align: center;
+.form-cadastro input[type="file"],
+.form-cadastro textarea {
+  background: #4d4970; /* mesma cor do fundo do formulário */
+  color: #fff;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
   padding: 10px 12px;
-  margin-bottom: 14px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  background: #23233a;
-  color: #eaeaea;
-  box-shadow: 0 1px 4px rgba(40, 40, 60, 0.07);
-  transition: background 0.2s;
-  display: block;           /* Permite centralizar com margin */
-  margin: 0 auto 14px auto; /* Centraliza horizontalmente */
-  width: 100%;               /* Ou o valor que preferir */
-  max-width: 400px; 
+  margin-bottom: 10px;
+  transition: border 0.2s, background 0.2s;
 }
 
-.form-cadastro input:focus {
-  background: #39395a;
+.form-cadastro input[type="text"]:focus,
+.form-cadastro input[type="number"]:focus,
+.form-cadastro input[type="password"]:focus,
+.form-cadastro textarea:focus {
+  border: 1.5px solid #a99cff;
+  background: #3c3959;
+  color: #fff;
   outline: none;
 }
 

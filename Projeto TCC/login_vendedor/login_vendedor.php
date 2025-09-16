@@ -23,7 +23,7 @@
             <input type="submit" value="Entrar" class="btn-login">
 
             <div class="botoes-inicio">
-                <a href="../vendedor/cadastrovendedor.php">Não tem conta? Cadastre-se agora!</a>
+                <a href="../cadastro_vendedor/cadastrovendedor.php">Não tem conta? Cadastre-se agora!</a>
             </div>
 
             <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>

@@ -166,8 +166,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="conteudo">
         <div class="container">
+            <br><br><br>
         <img src="img/baner.jpg" alt="Banner MaxAcess" class="banner-destaque" />
-   
+   <br>
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
             <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
@@ -248,7 +249,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <p><?php echo htmlspecialchars($produto['nome']); ?></p>
                             <p><strong>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></strong></p>
-                            <a href="produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
+                            <a href="cadastro_produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
                                 Ver Detalhes
                             </a>
                         </div>

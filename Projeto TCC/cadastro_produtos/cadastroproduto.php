@@ -5,31 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos</title>
     <link rel="stylesheet" href="../css/cadastro.css">
+    <style>
+        .linha {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .campo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
     <form action="cadastroprodutobd.php" method="post" class="form-cadastro" enctype="multipart/form-data">
         <h2>Olá Vendedor, cadastre seus preciosos produtos!</h2>
 
-        <label for="CampNome">Nome:</label>
-        <input type="text" id="CampNome" name="nome" required>
+        <div class="linha">
+            <div class="campo">
+                <label for="CampNome">Nome:</label>
+                <input type="text" id="CampNome" name="nome" required>
+            </div>
+            <div class="campo">
+                <label for="CampCategoria">Categoria:</label>
+                <input type="text" id="CampCategoria" name="categoria" required>
+            </div>
+        </div>
 
-        <label for="CampPreco">Preço:</label>
-        <input type="number" id="CampPreco" name="preco" step="0.01" placeholder="Ex: 49.90" required>
+        <div class="linha">
+            <div class="campo">
+                <label for="CampPreco">Preço:</label>
+                <input type="number" id="CampPreco" name="preco" step="0.01" placeholder="Ex: 49.90" required>
+            </div>
+            <div class="campo">
+                <label for="CampQuantidade_estoque">Quantidade de estoque:</label>
+                <input type="number" id="CampQuantidade_estoque" name="quantidade_estoque" required>
+            </div>
+        </div>
 
-        <label for="CampCategoria">Categoria:</label>
-        <input type="text" id="CampCategoria" name="categoria" required>
+        <div class="linha">
+            <div class="campo">
+                <label for="CampData_pub">Data de publicação:</label>
+                <input type="text" id="CampData_pub" name="data_pub" placeholder="dd/mm/aaaa" required>
+            </div>
+            <div class="campo">
+                <label>Imagem do seu produto:</label>
+                <input type="file" id="imagem" name="imagens[]" accept="image/*" multiple required>
+            </div>
+        </div>
 
-        <label for="CampQuantidade_estoque">Quantidade de estoque:</label>
-        <input type="number" id="CampQuantidade_estoque" name="quantidade_estoque" required>
-
-        <label for="CampData_pub">Data de publicação:</label>
-        <input type="text" id="CampData_pub" name="data_pub" placeholder="dd/mm/aaaa" required>
-
-        <label for="CampDescricao">Descrição do produto:</label>
-        <textarea id="CampDescricao" name="descricao" rows="4" required></textarea>
-
-        <label>Imagem do seu produto:</label>
-        <input type="file" id="imagem" name="imagens[]" accept="image/*" multiple required><br><br>
+        <div class="campo">
+            <label for="CampDescricao">Descrição do produto:</label>
+            <textarea id="CampDescricao" name="descricao" rows="4" required></textarea>
+        </div>
 
         <input type="submit" value="Cadastrar" class="btn-vermelho">
 

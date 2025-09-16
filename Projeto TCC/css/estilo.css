@@ -11,13 +11,13 @@ body {
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 90%;
-    max-width: 1200px;
-    height: auto;
+    width: 100%;
+    max-width: 1500px;      /* Reduzido para não ficar tão largo */
+    height: 500px;         /* Altura fixa mais agradável */
     border-radius: 20px;
     margin: 0 auto;
     display: block;
-    object-fit: cover; /* Alterado */
+    object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -526,4 +526,49 @@ body.dark-mode .produtos-destaque h3 {
     color: #f2f2f7; /* Cor clara para tema escuro */
 }
 
+body, button, input, textarea, select, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Centraliza o container principal */
+.container, .conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Centraliza o banner (já está, mas reforçando) */
+.banner-destaque {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Centraliza listas de produtos e categorias */
+.lista-produtos, .lista-produtos-destaque {
+    justify-content: center;
+    align-items: stretch;
+    margin: 0 auto;
+}
+
+/* Se usar categorias em lista, centralize também */
+.categorias-destaque {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* Centraliza títulos das seções */
+h2, h3, h4 {
+    text-align: center;
+}
