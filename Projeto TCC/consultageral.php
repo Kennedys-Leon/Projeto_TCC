@@ -91,7 +91,7 @@ if (!isset($_SESSION['usuario_nome']) || $_SESSION['usuario_nome'] !== 'adm') {
 
         <?php
         // ==== USUÁRIOS ====
-        include 'cadastro/conexao.php';
+        include '../conexao.php';
         $stmt = $pdo->query("SELECT * FROM usuario");
         echo '<div class="tabela-container">';
         echo '<h3 class="section-title">Usuários</h3>';
@@ -118,7 +118,7 @@ if (!isset($_SESSION['usuario_nome']) || $_SESSION['usuario_nome'] !== 'adm') {
         echo '</div>';
 
         // ==== VENDEDORES ====
-        include 'cadastro/conexao.php';
+        include '../conexao.php';
         $stmt = $pdo->query("SELECT * FROM vendedor");
         echo '<div class="tabela-container">';
         echo '<h3 class="section-title">Vendedores</h3>';
