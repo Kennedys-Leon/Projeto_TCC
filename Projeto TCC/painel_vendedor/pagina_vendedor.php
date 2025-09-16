@@ -124,19 +124,19 @@ $foto_de_perfil = isset($_SESSION['foto_de_perfil']) ? $_SESSION['foto_de_perfil
         <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Informações" style="width:16px; height:16px; vertical-align:middle;"> Minhas informações</a></li>
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                <li><a href="../produtos/cadastroproduto.php"><img src="../img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
+                <li><a href="../cadastro_produtos/cadastroproduto.php"><img src="../img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
             <?php else: ?>
-                <li><a href="../vendedor/cadastrovendedor.php"><img src="../img/megafone.png" alt="Megafone" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
+                <li><a href="../cadastro_vendedor/cadastrovendedor.php"><img src="../img/megafone.png" alt="Megafone" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
             <?php endif; ?>
 
             <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
                 <li><a href="../login/login.php"><img src="../img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
-                <li><a href="../cadastro/cadastro.php"><img src="../img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
+                <li><a href="../cadastro_usuario/cadastro.php"><img src="../img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
-                <li><a href="../consulta/buscar.php">👥 Consulta Usuários</a></li>
-                <li><a href="../buscar2.php">🛍️ Consulta Vendedor</a></li>
+                <li><a href="../consulta_usuario/buscar.php">👥 Consulta Usuários</a></li>
+                <li><a href="../Consulta_vendedor/buscar2.php">🛍️ Consulta Vendedor</a></li>
                 <li><a href="../consultageral.php">📊 Consulta Geral</a></li>
             <?php endif; ?>
 
@@ -180,10 +180,6 @@ $foto_de_perfil = isset($_SESSION['foto_de_perfil']) ? $_SESSION['foto_de_perfil
         <div class="container">
             <h2>Bem-vindo ao painel de vendedor!</h2>
             <p>Aproveite sua estadia e cadastre seus produtos :></p>
-
-                   
-
-            
         </div>
     </main>
 
