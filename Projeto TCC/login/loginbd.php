@@ -1,6 +1,6 @@
 <!--<?php
 session_start();
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 $email = $_POST['CampEmail'];
 $senha = $_POST['CampSenha'];

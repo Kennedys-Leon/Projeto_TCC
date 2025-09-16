@@ -31,10 +31,10 @@
     </header>
 
     <main class="conteudo">
-        <h2>Consulta</h2>
+        <h2>Consulta Vendedor</h2>
         <?php
-        include 'conexao.php';
-        $stmt = $conn->query("SELECT * FROM usuario");
+        include '../conexao.php';
+        $stmt = $conn->query("SELECT * FROM vendedor");
         echo '
         <style>
             table {
@@ -68,20 +68,20 @@
                 echo "<th>Código</th>";
                 echo "<th>Nome</th>";
                  echo "<th>CPF</th>";
-                echo "<th>CEP</th>";
                  echo "<th>Telefone</th>";
                 echo "<th>Email</th>";
                 echo "<th>Senha</th>";
+                echo "<th>CNPJ</th>";
             echo "</tr>"; 
         while ($row = $stmt->fetch()) {
             echo "<tr>";
-                echo "<td>".$row['idcadastro']."</td>";
+                echo "<td>".$row['idvendedor']."</td>";
                 echo "<td>".$row['nome']."</td>";
                  echo "<td>".$row['cpf']."</td>";
-                echo "<td>".$row['cep']."</td>";
                  echo "<td>".$row['telefone']."</td>";
                 echo "<td>".$row['email']."</td>";
                 echo "<td>".$row['senha']."</td>";
+                echo "<td>".$row['cnpj']."</td>";
             echo "</tr>";
             }
         echo '</table>';

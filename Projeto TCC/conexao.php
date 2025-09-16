@@ -1,8 +1,8 @@
 <?php
 
-    $db = 2;
+    $db = 1;
 
-if( $db == 2){
+if( $db == 1){
     $servername = "localhost";
     $username = "root";
     $password = "Kennedyleon456@";

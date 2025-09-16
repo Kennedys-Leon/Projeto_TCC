@@ -1,5 +1,5 @@
 <?php
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 $nome = trim(htmlspecialchars($_POST['nome']));
 $email = trim(htmlspecialchars($_POST['email']));

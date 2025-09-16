@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'cadastro/conexao.php';
+include 'conexao.php';
 
 // Buscar os últimos produtos com imagem (pega a primeira imagem de cada produto)
 $stmt = $pdo->query("
@@ -47,32 +47,17 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="logo">
                 <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
             </div>
-
-            <?php if (isset($_SESSION['usuario_nome'])): ?>
-                <div class="usuario-box">
-                    <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
-                    <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
-                    <form action="logout.php" method="post" style="margin: 0;">
-                        <button class="logout-btn" type="submit">Sair</button>
-                    </form>
-                </div>
-            <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
-                
-            <?php else: ?>
-                
-            <?php endif; ?>
         </div>
 
         <nav class="navbar">
             <ul>
-                <!-- Estes 3 ficam fora da sidebar, como você pediu -->
                 <li><a href="#">Como Funciona?</a></li>
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Serviços</a></li>
 
                 <?php if (isset($_SESSION['vendedor_nome'])): ?>
                 <?php else: ?>
-                    <li><a href="vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
+                    <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
@@ -123,20 +108,24 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <ul>
         <li><a href="index.php"><img src="img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
         <li><a href="#" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
+
         <?php if (isset($_SESSION['vendedor_nome'])): ?>
-            <li><a href="produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
+            <li><a href="cadastro_produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
         <?php else: ?>
-            <li><a href="vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
+            <li><a href="cadastro_vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
         <?php endif; ?>
+
         <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
             <li><a href="login/login.php"><img src="img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
-            <li><a href="cadastro/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
+            <li><a href="cadastro_usuario/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
         <?php endif; ?>
+
         <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
-            <li><a href="consulta/buscar.php">👥 Consulta Usuários</a></li>
-            <li><a href="consultaV/buscar2.php">🛍️ Consulta Vendedor</a></li>
+            <li><a href="consulta_usuario/buscar.php">👥 Consulta Usuários</a></li>
+            <li><a href="consulta_vendedor/buscar2.php">🛍️ Consulta Vendedor</a></li>
             <li><a href="consultageral.php">📊 Consulta Geral</a></li>
         <?php endif; ?>
+
         <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
             <li>
                 <form action="logout.php" method="post">
@@ -144,6 +133,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </li>
         <?php endif; ?>
+
         <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
     </ul>
 
@@ -157,6 +147,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
+
         <div class="usuario-box">
             <img src="uploads/<?php echo isset($_SESSION['vendedor_foto']) ? htmlspecialchars($_SESSION['vendedor_foto']) : 'user-icon.png'; ?>" alt="Foto do vendedor" class="usuario-icone-img">
             <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
@@ -164,6 +155,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <button class="logout-btn" type="submit">Sair</button>
             </form>
         </div>
+        
     <?php else: ?>
         <div class="usuario-box">
             <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
@@ -187,28 +179,28 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <section class="produtos-destaque">
                 <h3>Categorias em Destaque</h3>
                 <div class="lista-produtos">
-                <a href="jogos/freefire.php" class="produto">
+                <a href="categorias/freefire.php" class="produto">
                 <img src="img/FF.jpeg" alt="Produto 1" />
                 <p>Free Fire</p>
                 </a>
 
-                    <a href="jogos/clashroyale.php" class="produto">
+                    <a href="categorias/clashroyale.php" class="produto">
                         <img src="img/clash.jpeg" alt="Produto 2" />
                         <p>Clash Royale</p>
                     </a>
-                    <a href="jogos/fifa.php" class="produto">
+                    <a href="categorias/fifa.php" class="produto">
                         <img src="img/fifa.jpeg" alt="Produto 3" />
                         <p>Fifa</p>
                     </a>
-                    <a href="jogos/roblox.php" class="produto">
+                    <a href="categorias/roblox.php" class="produto">
                         <img src="img/roblox.jpeg" alt="Produto 4" />
                         <p>Roblox</p>
                     </a>
-                    <a href="jogos/fortnite.php" class="produto">
+                    <a href="categorias/fortnite.php" class="produto">
                         <img src="img/fortnite.jpeg" alt="Produto 5" />
                         <p>Fortnite</p>
                     </a>
-                    <a href="jogos/minecraft.php" class="produto">
+                    <a href="categorias/minecraft.php" class="produto">
                         <img src="img/minecraft.jpeg" alt="Produto 6" />
                         <p>Mine</p>
                     </a>
@@ -242,25 +234,30 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </section>
 
             <section class="produtos-destaque">
-                <h3>Novos Produtos dos Vendedores</h3>
-                <div class="lista-produtos-destaque">
-                    <?php if (count($produtos) > 0): ?>
-                        <?php foreach ($produtos as $produto): ?>
+            <h3>Novos Produtos dos Vendedores</h3>
+            <div class="lista-produtos-destaque">
+                <?php if (count($produtos) > 0): ?>
+                    <?php foreach ($produtos as $produto): ?>
                         <div class="card-produto">
-                        <img src="uploads/<?php echo htmlspecialchars($produto['imagem']); ?>" 
-                         alt="<?php echo htmlspecialchars($produto['nome']); ?>">
-                        <p><?php echo htmlspecialchars($produto['nome']); ?></p>
-                        <p><strong>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></strong></p>
-                        <a href="produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
-                        Ver Detalhes
-                    </a>
-                </div>
-            <?php endforeach; ?>
-            <?php else: ?>
-                <p>Nenhum produto cadastrado ainda.</p>
-            <?php endif; ?>
+                            <?php if (!empty($produto['imagem'])): ?>
+                                <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" 
+                                    alt="<?= htmlspecialchars($produto['nome']) ?>">
+                            <?php else: ?>
+                                <img src="img/usuario.png" alt="Foto de Perfil">
+                            <?php endif; ?>
+
+                            <p><?php echo htmlspecialchars($produto['nome']); ?></p>
+                            <p><strong>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></strong></p>
+                            <a href="produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Nenhum produto cadastrado ainda.</p>
+                <?php endif; ?>
             </div>
-            </section>
+        </section>
         </div>
     </main>
 

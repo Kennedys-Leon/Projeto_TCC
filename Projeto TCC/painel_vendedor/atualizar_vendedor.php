@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 // Verifica se o vendedor está logado
 if (!isset($_SESSION['usuario_logado'])) {

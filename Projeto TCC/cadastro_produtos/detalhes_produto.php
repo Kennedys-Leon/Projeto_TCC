@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../cadastro/conexao.php';
+include '../conexao.php';
 
 // Verifica se foi passado um ID
 if (!isset($_GET['id']) || empty($_GET['id'])) {
