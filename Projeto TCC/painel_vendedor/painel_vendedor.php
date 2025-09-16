@@ -53,7 +53,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Painel do Vendedor - MaxAcess</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/painel.css">
     <script>
         // Função JS para trocar abas

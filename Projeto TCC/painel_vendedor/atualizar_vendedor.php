@@ -16,24 +16,28 @@ $email    = trim($_POST['email']);
 $telefone = trim($_POST['telefone'] ?? '');
 $cnpj     = trim($_POST['cnpj'] ?? '');
 
-// Upload da foto (opcional)
-$fotoPath = null;
+// Upload da foto (opcional, armazenando no banco como LONGBLOB)
+$fotoBinario = null;
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-    $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
-    $fotoPath = "uploads/" . uniqid("vendedor_") . "." . $ext;
-    move_uploaded_file($_FILES['foto']['tmp_name'], $fotoPath);
+    $fotoBinario = file_get_contents($_FILES['foto']['tmp_name']);
 }
 
 // Somente nome e email obrigatórios
 if (!empty($nome) && !empty($email)) {
     try {
-        if ($fotoPath) {
+        if ($fotoBinario !== null) {
             $stmt = $pdo->prepare("
                 UPDATE vendedor 
-                SET nome = ?, email = ?, telefone = ?, cnpj = ?, foto = ?
+                SET nome = ?, email = ?, telefone = ?, cnpj = ?, foto_de_perfil = ?
                 WHERE idvendedor = ?
             ");
-            $stmt->execute([$nome, $email, $telefone, $cnpj, $fotoPath, $vendedor_id]);
+            $stmt->bindParam(1, $nome);
+            $stmt->bindParam(2, $email);
+            $stmt->bindParam(3, $telefone);
+            $stmt->bindParam(4, $cnpj);
+            $stmt->bindParam(5, $fotoBinario, PDO::PARAM_LOB);
+            $stmt->bindParam(6, $vendedor_id);
+            $stmt->execute();
         } else {
             $stmt = $pdo->prepare("
                 UPDATE vendedor 
@@ -41,6 +45,12 @@ if (!empty($nome) && !empty($email)) {
                 WHERE idvendedor = ?
             ");
             $stmt->execute([$nome, $email, $telefone, $cnpj, $vendedor_id]);
+        }
+
+        // Atualiza a sessão com a nova foto e nome
+        $_SESSION['vendedor_nome'] = htmlspecialchars($nome);
+        if ($fotoBinario !== null) {
+            $_SESSION['vendedor_foto'] = $fotoBinario;
         }
 
         header("Location: painel_vendedor.php?msg=perfil_atualizado");
