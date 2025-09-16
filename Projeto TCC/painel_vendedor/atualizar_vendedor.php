@@ -3,12 +3,12 @@ session_start();
 include '../conexao.php';
 
 // Verifica se o vendedor está logado
-if (!isset($_SESSION['usuario_logado'])) {
+if (!isset($_SESSION['vendedor_logado'])) {
     header("Location: ../login_vendedor/login_vendedor.php");
     exit;
 }
 
-$vendedor_id = $_SESSION['usuario_logado'];
+$vendedor_id = $_SESSION['vendedor_logado'];
 
 // Captura os dados do formulário
 $nome     = trim($_POST['nome']);

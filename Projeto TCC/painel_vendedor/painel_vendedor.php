@@ -5,12 +5,12 @@ include '../conexao.php';
 // ============================
 // Verifica se vendedor está logado
 // ============================
-if (!isset($_SESSION['usuario_logado'])) {
+if (!isset($_SESSION['vendedor_logado'])) {
     header("Location: ../login_vendedor/login_vendedor.php");
     exit;
 }
 
-$vendedor_id = $_SESSION['usuario_logado'];
+$vendedor_id = $_SESSION['vendedor_logado'];
 
 // ============================
 // Buscar informações do vendedor

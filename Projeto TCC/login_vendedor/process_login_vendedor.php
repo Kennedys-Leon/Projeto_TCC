@@ -19,7 +19,7 @@ try {
 
     if ($vendedor_id) {
         session_start();
-        $_SESSION['usuario_logado'] = $vendedor_id['idvendedor'];
+        $_SESSION['vendedor_logado'] = $vendedor_id['idvendedor'];
         $_SESSION['vendedor_nome'] = $vendedor_id['nome'];
         $_SESSION['vendedor_foto'] = $vendedor_id['foto_de_perfil'];
 
