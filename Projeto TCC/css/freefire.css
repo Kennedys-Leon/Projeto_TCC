@@ -92,48 +92,29 @@
     cursor: pointer;
   }
   
-  .produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    flex: 1;
-  }
-  
   .produto-card {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza conteúdo horizontalmente */
+    text-align: center; /* centraliza o texto dentro */
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .btn-detalhes {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
     cursor: pointer;
-  }
-  
-  .produto-card:hover {
-    transform: scale(1.02);
-  }
-  
-  .produto-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .produto-card h4 {
-    padding: 10px;
     font-size: 14px;
-    height: 40px;
-    overflow: hidden;
+    margin-top: 12px; /* distância entre o texto e o botão */
+    width: 120px; /* largura fixa para ficar mais bonito */
+    transition: background-color 0.3s ease;
   }
   
-  .produto-card .preco {
-    padding: 0 10px;
-    font-weight: bold;
-    color: #28a745;
-  }
-  
-  .produto-card .vendedor {
-    padding: 0 10px 10px;
-    font-size: 13px;
-    color: #666;
+  .btn-detalhes:hover {
+    background-color: #0056b3;
   }
   

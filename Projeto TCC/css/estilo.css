@@ -5,12 +5,42 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f2f2f7;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
-    padding-top: 80px; /* Adicionado para compensar o header fixo */
+    /* Remova ou ajuste o padding-top */
+    padding-top: 60px; /* 80px antes, diminua para aproximar o banner */
 }
+
+/* Banner ajustado para ficar justo ao header */
+.banner-destaque {
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 20px;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover; /* Alterado */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste responsivo permanece igual */
+@media (max-width: 768px) {
+    .banner-destaque {
+        max-width: 95%;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-destaque {
+        max-width: 90%;
+    }
+}
+body {
+    /* Remova ou ajuste o padding-top */
+    padding-top: 41px; /* 80px antes, diminua para aproximar o banner */
+}
+
+/* Banner ajustado para ficar justo ao header */
+
 
 body.dark-mode {
     background-color: #333;
@@ -341,14 +371,8 @@ body.dark-mode .produto p {
     margin-bottom: 12px;
 }
 
-.banner-destaque {
-    display: block;
-    width: 105%;         /* ocupa toda a largura */
-    height: auto;        /* mantém proporção */
-    margin: 20px 0;      /* espaço em cima e embaixo */
-    border-radius: 30px;    /* remove cantos arredondados */
-    box-shadow: none;    /* opcional: remove sombra */
-}
+
+
 
 
 /* ------------ Produtos em Destaque (Cards com Preço) ------------ */

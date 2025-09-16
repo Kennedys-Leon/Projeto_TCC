@@ -36,12 +36,12 @@
     </aside>
 
     <section class="produtos">
-      <div class="produto-card">
-        <img src="img/coc1.jpg" alt="Conta COC 1">
-        <h4>[PROMOÇÃO] Conta com skins raras</h4>
-        <p class="preco">R$ 9,00+</p>
-        
-      </div>
+  <div class="produto-card">
+    <img src="../img/baner.jpg" alt="Descrição">
+    <h4>[PROMOÇÃO] Conta com skins raras</h4>
+    <a href="detalhes.php" class="btn-detalhes">Ver Detalhes</a>
+  </div>
+</section>
 
       <div class="produto-card">
         <img src="img/coc2.jpg" alt="Conta COC 2">
