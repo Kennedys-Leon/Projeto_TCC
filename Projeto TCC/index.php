@@ -166,8 +166,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="conteudo">
         <div class="container">
+            <br><br><br>
         <img src="img/baner.jpg" alt="Banner MaxAcess" class="banner-destaque" />
-   
+   <br>
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
             <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
