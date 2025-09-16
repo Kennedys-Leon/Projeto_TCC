@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+$foto_de_perfil = isset($_SESSION['foto_de_perfil']) ? $_SESSION['foto_de_perfil'] : null;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

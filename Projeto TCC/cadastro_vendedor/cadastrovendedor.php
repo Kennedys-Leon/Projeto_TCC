@@ -52,17 +52,17 @@
         </div>
 
 
-<div class="linha">
-            <div class="campo">
+    <div class="linha">
+        <div class="campo">
             <label for="CampSenha">Senha:</label>
-        <input type="password" name="senha" required>
-            </div>
-
-            <div class="campo">
-            <label for="CampCNPJ">CNPJ:</label>
-        <input type="text" name="cnpj">
-            </div>
+            <input type="password" name="senha" required>
         </div>
+
+        <div class="campo">
+            <label for="CampCNPJ">CNPJ:</label>
+            <input type="text" name="cnpj">
+        </div>
+    </div>
     
 
         <!-- Foto -->

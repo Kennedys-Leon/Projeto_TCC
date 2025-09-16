@@ -3,7 +3,6 @@ session_start();
 
 include 'conexao.php';
 
-// Buscar os últimos produtos com imagem (pega a primeira imagem de cada produto)
 $stmt = $pdo->query("
     SELECT p.idproduto, p.nome, p.preco, p.descricao, p.data_pub, i.imagem
     FROM produto p
@@ -254,7 +253,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>Nenhum produto cadastrado ainda.</p>
+                    <p>Sem produtos cadastrados.</p>
                 <?php endif; ?>
             </div>
         </section>

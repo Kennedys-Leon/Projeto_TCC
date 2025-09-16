@@ -21,7 +21,7 @@ try {
         session_start();
         $_SESSION['usuario_logado'] = $vendedor_id['idvendedor'];
         $_SESSION['vendedor_nome'] = $vendedor_id['nome'];
-        $_SESSION['vendedor_foto'] = $vendedor_id['foto'];
+        $_SESSION['vendedor_foto'] = $vendedor_id['foto_de_perfil'];
 
         header('Location: ../painel_vendedor/pagina_vendedor.php');
         exit();

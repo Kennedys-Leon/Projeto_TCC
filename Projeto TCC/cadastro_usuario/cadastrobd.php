@@ -8,19 +8,20 @@ $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-$foto = $_FILES['foto'];
-$foto_nome = uniqid() . '_' . basename($foto['name']);
-$foto_tmp = $foto['tmp_name'];
-$caminho_destino = '../uploads/' . $foto_nome;
+if ($stmt->fetchColumn() > 0) {
+    echo "<script>alert('E-mail já cadastrado!'); window.history.back();</script>";
+    exit();
+}
 
-if (!is_dir('../uploads')) {
-    mkdir('../uploads', 0755, true);
+$foto_de_perfil = null;
+    if (isset($_FILES['foto_de_perfil']) && $_FILES['foto_de_perfil']['error'] == 0) {
+    $foto_de_perfil = file_get_contents($_FILES['foto_de_perfil']['tmp_name']);
 }
 
 try {
     if (move_uploaded_file($foto_tmp, $caminho_destino)) {
-        $sql = "INSERT INTO usuario (nome, cpf, cep, telefone, email, senha, foto) 
-                VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto)";
+        $sql = "INSERT INTO usuario (nome, cpf, cep, telefone, email, senha, foto_de_perfil) 
+                VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto_de_perfil)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':cpf', $cpf);
@@ -28,7 +29,7 @@ try {
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':foto', $foto_nome);
+        $stmt->bindParam(':foto_de_perfil', $foto_nome);
         $stmt->execute();
 
         header("Location: ../login/login.php");

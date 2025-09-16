@@ -6,6 +6,7 @@ $email = $_POST['email'];
 $stmt = $pdo->prepare("SELECT COUNT(*) FROM vendedor WHERE email = :email");
 $stmt->bindParam(':email', $email);
 $stmt->execute();
+
 if ($stmt->fetchColumn() > 0) {
     echo "<script>alert('E-mail já cadastrado!'); window.history.back();</script>";
     exit();
