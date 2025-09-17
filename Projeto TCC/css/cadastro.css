@@ -46,6 +46,7 @@ body {
 .form-cadastro input[type="number"],
 .form-cadastro input[type="password"],
 .form-cadastro input[type="file"],
+.form-cadastro input[type="email"],
 .form-cadastro textarea {
   background: #4d4970; /* mesma cor do fundo do formulário */
   color: #fff;
