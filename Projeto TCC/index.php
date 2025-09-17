@@ -53,9 +53,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
             <ul>
-                <li><a href="como_funciona.php">Como Funciona?</a></li>
-                <li><a href="sobre.php">Sobre</a></li>
-                <li><a href="servicos.php">Serviços</a></li>
+                <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+                <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
+                <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
 
                 <?php if (!isset($_SESSION['usuario_nome'])): ?>
                     <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
@@ -124,9 +124,17 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php else: ?>
             <!-- Ninguém logado -->
-            <li><a href="cadastro_usuario/cadastrousuario.php">
+            <li><a href="cadastro_vendedor/cadastrovendedor.php">
+                <img src="img/megafone.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
+                Anunciar
+            </a></li>
+            <li><a href="cadastro_usuario/cadastro.php">
                 <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
                 Criar minha Conta
+            </a></li>
+            <li><a href="login/login.php">
+                <img src="img/chavis.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
+                Entrar
             </a></li>
         <?php endif; ?>
 
