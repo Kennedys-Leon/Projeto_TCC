@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Como Funciona</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/como_funciona.css">
+    
 </head>
 <body>
     <div class="conteudo">
         <h1>Como vender seus produtos no MaxAcess</h1>
-        <ol style="max-width:700px; margin:32px auto; font-size:18px; line-height:1.7; text-align:left;">
+        <ol>
             <li><b>Crie sua conta de vendedor:</b> <br>
                 Acesse <a href="cadastro_vendedor/cadastrovendedor.php">Cadastre-se como vendedor</a> e preencha seus dados.
             </li>
@@ -34,7 +35,7 @@
                 - Responda rapidamente aos clientes para aumentar suas vendas!
             </li>
         </ol>
-        <p style="font-size:16px;">Dúvidas? Entre em contato pelo nosso suporte!</p>
+        <p>Dúvidas? Entre em contato pelo nosso suporte!</p>
     </div>
 </body>
 </html>
