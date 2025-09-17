@@ -1,65 +1,139 @@
 <?php
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contas De Free Fire</title>
-  <link rel="stylesheet" href="../css/freefire.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GGMax - Comprar e Vender Free Fire</title>
+  <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
-
-  <header class="topo">
-    <h1>Contas de Free Fire ()</h1>
-    <input type="search" placeholder="Buscar conta, jogador, CV..." />
-    <button class="btn-anunciar">Anunciar</button>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="GGMax" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="categorias/index.php">Início</a></li>
+        <li><a href="#">Jogos</a></li>
+        <li><a href="#">Free Fire</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Anunciar</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="conteudo">
-    <aside class="filtros">
+  <section class="banner">
+    <h1>Categorias De Clash Royale (FF)</h1>
+    <div class="search">
+      <input type="text" placeholder="Buscar produto..." class="search-input" />
+      <button class="search-btn">Buscar</button>
+    </div>
+  </section>
+
+  <section class="content">
+    <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Ver todas</a></li>
-        <li><a href="#">Full Upadas</a></li>
+        <li><a href="#">Contas Free Fire</a></li>
+        <li><a href="#">Diamantes Free Fire</a></li>
+        <li><a href="#">Outros</a></li>
       </ul>
 
       <h3>Filtros</h3>
-      <label>Preço mínimo:</label>
-      <input type="number" placeholder="R$ 0,00" />
+      <form>
+        <label for="min-price">Preço mínimo:</label>
+        <input type="number" id="min-price" name="min-price" placeholder="R$" />
 
-      <label>Preço máximo:</label>
-      <input type="number" placeholder="R$ 999,99" />
+        <label for="max-price">Preço máximo:</label>
+        <input type="number" id="max-price" name="max-price" placeholder="R$" />
 
-      <button class="btn-aplicar">Aplicar Filtro</button>
+        <button type="submit" class="apply-filter-btn">Aplicar filtro</button>
+      </form>
     </aside>
 
-    <section class="produtos">
-      <div class="produto-card">
-        <img src="img/coc1.jpg" alt="Conta COC 1">
-        <h4>[PROMOÇÃO] Conta com skins raras</h4>
-        <p class="preco">R$ 9,00+</p>
+    <div class="content-area">
+      <div class="product-list">
+        <div class="product-card">
+          <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
+          <h4>PASSO BOOYAH PREMIUM</h4>
+          <span>R$ 4,97</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+        <div class="product-card">
+        <img src="../jogos/clash.jpeg" alt="PASSO BOOYAH PREMIUM" />
+        <h4>Conta Free Fire LVL 15</h4>
+          <p>+300 Diamantes</p>
+          <span>R$ 2,99</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
         
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+        <!-- Outros produtos podem ser adicionados aqui -->
       </div>
+    </div>
+  </section>
 
-      <div class="produto-card">
-        <img src="img/coc2.jpg" alt="Conta COC 2">
-        <h4>Clash of Clans CV15 full upado</h4>
-        <p class="preco">R$ 349,99+</p>
-       
-      </div>
-
-      <div class="produto-card">
-        <img src="img/coc3.jpg" alt="Conta COC 3">
-        <h4>Conta rara com skins exclusivas</h4>
-        <p class="preco">R$ 11,19+</p>
-      
-      </div>
-
-      <!-- Adicione mais cards conforme necessário -->
-    </section>
-  </main>
-
+  <footer>
+    <p>&copy; 2025 GGMax. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>

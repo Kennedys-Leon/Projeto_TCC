@@ -1,15 +1,17 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GGMax - Comprar e Vender Free Fire</title>
-  <link rel="stylesheet" href="../css/categoria.css">
+  <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="logo.png" alt="GGMax">
+      <img src="logo.png" alt="GGMax" />
     </div>
     <nav>
       <ul>
@@ -26,7 +28,7 @@
   <section class="banner">
     <h1>Comprar e Vender Contas Free Fire (FF)</h1>
     <div class="search">
-      <input type="text" placeholder="Buscar produto..." class="search-input">
+      <input type="text" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn">Buscar</button>
     </div>
   </section>
@@ -43,67 +45,90 @@
       <h3>Filtros</h3>
       <form>
         <label for="min-price">Preço mínimo:</label>
-        <input type="number" id="min-price" name="min-price" placeholder="R$">
+        <input type="number" id="min-price" name="min-price" placeholder="R$" />
 
         <label for="max-price">Preço máximo:</label>
-        <input type="number" id="max-price" name="max-price" placeholder="R$">
-        
+        <input type="number" id="max-price" name="max-price" placeholder="R$" />
+
         <button type="submit" class="apply-filter-btn">Aplicar filtro</button>
       </form>
     </aside>
 
-    <div class="product-list">
-      <div class="product-card">
-      <img src="../jogos/free.jpg" alt="Descrição" class="imagem-clash">
-        <h4>PASSO BOOYAH PREMIUM</h4>
-        <span>R$ 4,97</span>
-        <button class="buy-btn">Ver Detalhes</button>
-      </div>
+    <div class="content-area">
+      <div class="product-list">
+        <div class="product-card">
+          <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
+          <h4>PASSO BOOYAH PREMIUM</h4>
+          <span>R$ 4,97</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
 
-      <div class="product-card">
-        <img src="product2.jpg" alt="Produto 2">
+        <div class="product-card">
+        <img src="../jogos/clash.jpeg" alt="PASSO BOOYAH PREMIUM" />
         <h4>Conta Free Fire LVL 15</h4>
-        <p>+300 Diamantes</p>
-        <span>R$ 2,99</span>
-        <button class="buy-btn">Ver Detalhes</button>
-      </div>
+          <p>+300 Diamantes</p>
+          <span>R$ 2,99</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
 
-      <div class="product-card">
-        <img src="product3.jpg" alt="Produto 3">
-        <h4>Gift Card Diamantes</h4>
-        <p>Entrega automática</p>
-        <span>R$ 5,19</span>
-        <button class="buy-btn">Ver Detalhes</button>
-      </div>
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+        
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
 
-      <!-- Outros produtos podem ser adicionados aqui -->
-    </div>
-  </section>
-  <div class="product-list">
-      <div class="product-card">
-      <img src="../jogos/free.jpg" alt="Descrição" class="imagem-clash">
-        <h4>PASSO BOOYAH PREMIUM</h4>
-        <span>R$ 4,97</span>
-        <button class="buy-btn">Ver Detalhes</button>
-      </div>
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
 
-      <div class="product-card">
-        <img src="product2.jpg" alt="Produto 2">
-        <h4>Conta Free Fire LVL 15</h4>
-        <p>+300 Diamantes</p>
-        <span>R$ 2,99</span>
-        <button class="buy-btn">Ver Detalhes</button>
-      </div>
+        <div class="product-card">
+          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
 
-      <div class="product-card">
-        <img src="product3.jpg" alt="Produto 3">
-        <h4>Gift Card Diamantes</h4>
-        <p>Entrega automática</p>
-        <span>R$ 5,19</span>
-        <button class="buy-btn">Ver Detalhes</button>
+        <!-- Outros produtos podem ser adicionados aqui -->
       </div>
-
-      <!-- Outros produtos podem ser adicionados aqui -->
     </div>
   </section>
 

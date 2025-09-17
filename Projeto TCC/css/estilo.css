@@ -37,7 +37,6 @@ body.dark-mode .conteudo h1 {
     box-sizing: border-box;
 }
 body {
-    /* Remova ou ajuste o padding-top */
     padding-top: 60px; /* 80px antes, diminua para aproximar o banner */
 }
 
@@ -52,34 +51,10 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para destaque */
 }
 
-/* Ajustes para telas menores (tablets e dispositivos móveis) */
-@media (max-width: 1024px) {
-    .banner-destaque {
-        height: 60vh;      /* Reduz a altura para telas menores, mas ainda mantém uma boa proporção */
-    }
-}
-
-@media (max-width: 768px) {
-    .banner-destaque {
-        height: 50vh;      /* Para telas ainda menores, reduz a altura para 50% */
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-destaque {
-        height: 45vh;      /* Em telas muito pequenas, ajusta a altura para 45% */
-    }
-}
-
-
-
-
 body {
-    /* Remova ou ajuste o padding-top */
     padding-top: 41px; /* 80px antes, diminua para aproximar o banner */
 }
 
-/* Banner ajustado para ficar justo ao header */
 
 
 body.dark-mode {
@@ -143,17 +118,11 @@ body.dark-mode {
     gap: 15px;
 }
 
-.search-bar {
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    width: 400px;        
-    font-size: 16px;
-    display: block;      
-    margin: 20px auto;   
-    width: 700px;
-    font-size: 14px;
+.search-bar:focus {
+    outline: none;
+    box-shadow: none;
 }
+
 .search-container {
     flex: 1;
     display: flex;
