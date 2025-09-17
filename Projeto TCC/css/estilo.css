@@ -11,29 +11,37 @@ body {
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 100%;
-    max-width: 1500px;      /* Reduzido para não ficar tão largo */
-    height: 500px;         /* Altura fixa mais agradável */
-    border-radius: 20px;
-    margin: 0 auto;
+    width: 100%;            /* O banner ocupa toda a largura da tela */
+    height: 70vh;           /* A altura é 70% da altura da janela */
+    max-width: 100%;        /* Largura sem limites, ocupa 100% da tela */
+    margin: 0 auto;         /* Centraliza o banner */
     display: block;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    object-fit: cover;      /* A imagem ocupa o espaço sem distorcer */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para destaque */
 }
 
-/* Ajuste responsivo permanece igual */
+/* Ajustes para telas menores (tablets e dispositivos móveis) */
+@media (max-width: 1024px) {
+    .banner-destaque {
+        height: 60vh;      /* Reduz a altura para telas menores, mas ainda mantém uma boa proporção */
+    }
+}
+
 @media (max-width: 768px) {
     .banner-destaque {
-        max-width: 95%;
-        border-radius: 12px;
+        height: 50vh;      /* Para telas ainda menores, reduz a altura para 50% */
     }
 }
 
 @media (max-width: 480px) {
     .banner-destaque {
-        max-width: 90%;
+        height: 45vh;      /* Em telas muito pequenas, ajusta a altura para 45% */
     }
 }
+
+
+
+
 body {
     /* Remova ou ajuste o padding-top */
     padding-top: 41px; /* 80px antes, diminua para aproximar o banner */

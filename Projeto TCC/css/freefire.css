@@ -117,4 +117,37 @@
   .btn-detalhes:hover {
     background-color: #0056b3;
   }
-  
+  /* Garantir que a imagem seja responsiva e centralizada */
+/* Garantir que a imagem seja responsiva e centralizada */
+/* Imagem quadrada e centralizada */
+.imagem-clash {
+  display: block;            /* Torna a imagem um bloco para centralização */
+  margin-left: auto;         /* Centraliza a imagem horizontalmente */
+  margin-right: auto;        /* Centraliza a imagem horizontalmente */
+  width: 300px;              /* Define a largura da imagem como 300px */
+  height: 300px;             /* Define a altura da imagem como 300px, criando um quadrado */
+  object-fit: cover;         /* Faz com que a imagem cubra completamente o quadrado sem distorcer */
+  border-radius: 15px;       /* Borda arredondada para um visual mais suave */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  transition: transform 0.3s ease; /* Efeito de transição */
+}
+
+/* Efeito de zoom ao passar o mouse */
+.imagem-clash:hover {
+  transform: scale(1.05);    /* A imagem aumenta um pouco */
+}
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+  .imagem-clash {
+      width: 200px;          /* Reduz a largura para 200px em telas menores */
+      height: 200px;         /* Reduz a altura para 200px em telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .imagem-clash {
+      width: 150px;          /* Reduz ainda mais a largura para 150px em dispositivos muito pequenos */
+      height: 150px;         /* Reduz a altura para 150px */
+  }
+}

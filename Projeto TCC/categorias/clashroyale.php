@@ -37,7 +37,7 @@
 
     <section class="produtos">
   <div class="produto-card">
-    <img src="../img/baner.jpg" alt="Descrição">
+  <img src="../img/clash.jpeg" alt="Descrição" class="imagem-clash">
     <h4>[PROMOÇÃO] Conta com skins raras</h4>
     <a href="detalhes.php" class="btn-detalhes">Ver Detalhes</a>
   </div>
