@@ -43,6 +43,7 @@ body {
 }
 
 .formulario-login input[type="text"],
+.formulario-login input[type="email"],
 .formulario-login input[type="password"] {
   width: 100%;
   padding: 10px 12px;

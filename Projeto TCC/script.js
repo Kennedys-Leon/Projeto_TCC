@@ -5,19 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleThemeHeader  = document.getElementById('toggle-theme');
     const toggleThemeSideBtn = document.getElementById('toggle-theme-sidebar');
 
+    function getImgPath(img) {
+        // Detecta se está em subpasta (ex: painel_vendedor) ou na raiz
+        if (window.location.pathname.includes('painel_vendedor/')) {
+            return `../img/${img}`;
+        } else {
+            return `img/${img}`;
+        }
+    }
+
     function setThemeLabels() {
         if (toggleThemeHeader) {
             const isDark = document.body.classList.contains('dark-mode');
             toggleThemeHeader.innerHTML = isDark
-                ? `<img src="img/sol.png" alt="Tema claro" style="width:22px; vertical-align:middle;">`
-                : `<img src="img/lua.png" alt="Tema escuro" style="width:22px; vertical-align:middle;">`;
+                ? `<img src="${getImgPath('sol.png')}" alt="Tema claro" style="width:22px; vertical-align:middle;">`
+                : `<img src="${getImgPath('lua.png')}" alt="Tema escuro" style="width:22px; vertical-align:middle;">`;
         }
         // Botão da sidebar: igual ao anterior
         if (toggleThemeSideBtn) {
             const isDark = document.body.classList.contains('dark-mode');
             const icon = isDark
-                ? '<img src="img/sol.png" alt="Tema claro" style="width:18px; vertical-align:middle; margin-right:6px;">'
-                : '<img src="img/lua.png" alt="Tema escuro" style="width:18px; vertical-align:middle; margin-right:6px;">';
+                ? `<img src="${getImgPath('sol.png')}" alt="Tema claro" style="width:18px; vertical-align:middle; margin-right:6px;">`
+                : `<img src="${getImgPath('lua.png')}" alt="Tema escuro" style="width:18px; vertical-align:middle; margin-right:6px;">`;
             toggleThemeSideBtn.innerHTML = `
                 ${icon}
                 ${isDark ? ' Tema claro' : ' Tema escuro'}

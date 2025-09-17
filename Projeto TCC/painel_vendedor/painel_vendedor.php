@@ -55,6 +55,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Painel do Vendedor - MaxAcess</title>
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/painel.css">
+    <link rel="stylesheet" href="../css/perfil_vendedor.css">
     <script>
         // Função JS para trocar abas
         function openTab(tabName) {
@@ -160,28 +161,31 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
 
+
         <!-- Perfil -->
         <div id="perfil" class="tab-content">
-        <h2>Meu Perfil</h2>
-        <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data">
-            <label>Nome:</label><br>
-            <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>" required><br><br>
-        
-            <label>Email:</label><br>
-            <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>" required><br><br>
-        
-            <label>Telefone:</label><br>
-            <input type="text" name="telefone" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>"><br><br>
-        
-            <label>CNPJ:</label><br>
-            <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>"><br><br>
-        
-            <label>Foto de Perfil:</label><br>
-            <input type="file" name="foto" accept="image/*"><br><br>
-        
-            <button type="submit" class="btn">Salvar Alterações</button>
-        </form>
-</div>
+            <div class="perfil-container">
+                <h2 class="perfil-titulo">Meu Perfil</h2>
+                <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
+                    <label>Nome:</label>
+                    <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>" required>
+
+                    <label>Email:</label>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>" required>
+
+                    <label>Telefone:</label>
+                    <input type="text" name="telefone" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
+
+                    <label>CNPJ:</label>
+                    <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
+
+                    <label>Foto de Perfil:</label>
+                    <input type="file" name="foto" accept="image/*">
+
+                    <button type="submit">Salvar Alterações</button>
+                </form>
+            </div>
+        </div>
 
     </div>
 

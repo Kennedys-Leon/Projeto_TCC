@@ -67,7 +67,7 @@
 
         <!-- Foto -->
         <label>Sua foto de preferência:</label>
-        <input type="file" name="foto" accept="image/*"><br><br>
+        <input type="file" name="foto_de_perfil" accept="image/*"><br><br>
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
