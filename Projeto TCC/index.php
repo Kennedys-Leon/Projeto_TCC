@@ -57,10 +57,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Serviços</a></li>
 
-                <?php if (isset($_SESSION['vendedor_nome'])): ?>
-                <?php else: ?>
+                <?php if (!isset($_SESSION['usuario_nome'])): ?>
                     <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
                 <?php endif; ?>
+
 
                 <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
                     <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
@@ -112,15 +112,24 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <li><a href="#" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
 
         <?php if (isset($_SESSION['vendedor_nome'])): ?>
-            <li><a href="cadastro_produtos/cadastroproduto.php"><img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
+            <!-- Vendedor logado -->
+            <li><a href="cadastro_produtos/cadastroproduto.php">
+                <img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> 
+                Cadastrar meus Produtos
+            </a></li>
+
+        <?php elseif (isset($_SESSION['usuario_nome'])): ?>
+            <!-- Usuário logado -->
+            <!-- Nada aqui, usuário já tem conta -->
+
         <?php else: ?>
-            <li><a href="cadastro_vendedor/cadastrovendedor.php"><img src="img/megafone.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
+            <!-- Ninguém logado -->
+            <li><a href="cadastro_usuario/cadastrousuario.php">
+                <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
+                Criar minha Conta
+            </a></li>
         <?php endif; ?>
 
-        <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
-            <li><a href="login/login.php"><img src="img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
-            <li><a href="cadastro_usuario/cadastro.php"><img src="img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
-        <?php endif; ?>
 
         <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
             <li><a href="consulta_usuario/buscar.php">👥 Consulta Usuários</a></li>
@@ -141,14 +150,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Usuário lá embaixo da sidebar -->
         <div class="usuario-box">
-        <?php if (!empty($foto_de_perfil)): ?>
+        <?php if (($foto_de_perfil)): ?>
             <img src="data:image/*;base64,<?= base64_encode($foto_de_perfil) ?>" 
                 class="usuario-icone-img" 
                 alt="Foto de Perfil">
-        <?php elseif (!empty($nome)): ?>
-            <img src="../img/usuario.png" 
-                class="usuario-icone-img" 
-                alt="Foto de Perfil Padrão">
         <?php else: ?>
             <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
                 class="usuario-icone-img" 
@@ -156,8 +161,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
 
         <?php if (empty($nome)): ?>
-            <a href="../cadastro_vendedor/cadastrovendedor.php" style="text-decoration: none; color: white;">
-                <p class="nome-usuario">Entre ou crie sua conta</p>
+            <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
+                <p class="nome-usuario">Usúario não logado</p>
             </a>
         <?php else: ?>
             <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
