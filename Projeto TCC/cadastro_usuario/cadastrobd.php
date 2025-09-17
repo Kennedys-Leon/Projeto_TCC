@@ -4,10 +4,6 @@ include '../conexao.php';
 $nome     = $_POST['nome'];
 $cpf      = $_POST['cpf'];
 $cep      = $_POST['cep'];
-$endereco = $_POST['endereco'];
-$cidade   = $_POST['cidade'];
-$estado   = $_POST['estado'];
-$bairro   = $_POST['bairro'];
 $telefone = $_POST['telefone'];
 $email    = $_POST['email'];
 $senha    = password_hash($_POST['senha'], PASSWORD_DEFAULT);
@@ -29,17 +25,13 @@ if (isset($_FILES['foto_de_perfil']) && $_FILES['foto_de_perfil']['error'] === U
 
 try {
     $sql = "INSERT INTO usuario 
-        (nome, cpf, cep, endereco, cidade, estado, bairro, telefone, email, senha, foto_de_perfil) 
-        VALUES (:nome, :cpf, :cep, :endereco, :cidade, :estado, :bairro, :telefone, :email, :senha, :foto_de_perfil)";
+        (nome, cpf, cep, telefone, email, senha, foto_de_perfil) 
+        VALUES (:nome, :cpf, :cep, :telefone, :email, :senha, :foto_de_perfil)";
     
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':nome', $nome);
     $stmt->bindParam(':cpf', $cpf);
     $stmt->bindParam(':cep', $cep);
-    $stmt->bindParam(':endereco', $endereco);
-    $stmt->bindParam(':cidade', $cidade);
-    $stmt->bindParam(':estado', $estado);
-    $stmt->bindParam(':bairro', $bairro);
     $stmt->bindParam(':telefone', $telefone);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':senha', $senha);

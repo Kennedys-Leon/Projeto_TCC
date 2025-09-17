@@ -49,33 +49,11 @@
         <input type="text" name="cep" required>
             </div>
 
-            <div class="campo Endereco">
-            <label for="CampCep">Endereço:</label>
-        <input type="text" name="endereco">
-            </div>
-            
-        <div class="linha">
-            <div class="campo Cidade">
-            <label for="CampCep">Cidade:</label>
-        <input type="text" name="cidade">
-            </div>
-            
-            <div class="campo Estado">
-            <label for="CampCep">Estado:</label>
-        <input type="text" name="estado">
-            </div> 
-
-        <div class="campo">
             <div class="campo Telefone">
             <label for="CampTelefone">Telefone:</label>
         <input type="text" name="telefone" required>
             </div>
         </div>
-
-            <div class="campo Bairro">
-            <label for="CampEmail">Bairro:</label>
-        <input type="text" name="bairro">
-            </div>
 
         <div class="linha">
             <div class="campo Email">
