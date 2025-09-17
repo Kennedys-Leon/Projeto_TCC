@@ -23,7 +23,7 @@
             <input type="submit" value="Entrar" class="btn-login">
 
             <div class="botoes-inicio">
-                <a href="../cadastro/cadastro.php">Não tem conta? Cadastre-se</a>
+                <a href="../cadastro_usuario/cadastro.php">Não tem conta? Cadastre-se</a>
             </div>
         </form>
         <?php

@@ -153,22 +153,28 @@ $foto_de_perfil = isset($_SESSION['vendedor_foto']) ? $_SESSION['vendedor_foto']
         </ul>
 
         <div class="usuario-box">
-    <?php if ($foto_de_perfil): ?>
-        <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" class="usuario-icone-img" alt="Foto de Perfil">
-    <?php elseif ($nome): ?>
-        <img src="../img/usuario.png" class="usuario-icone-img" alt="Foto de Perfil Padrão">
+    <?php if (($foto_de_perfil)): ?>
+        <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" 
+             class="usuario-icone-img" 
+             alt="Foto de Perfil">
+    <?php elseif (!empty($nome)): ?>
+        <img src="../img/usuario.png" 
+             class="usuario-icone-img" 
+             alt="Foto de Perfil Padrão">
     <?php else: ?>
-        <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" class="usuario-icone-img" alt="Usuário">
+        <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
+             class="usuario-icone-img" 
+             alt="Usuário">
     <?php endif; ?>
 
-    <?php if (!$nome): ?>
-        <a href="../cadastro_vendedor/cadastrovendedor.php" style="text-decoration: none; color: white;">
+    <?php if (empty($nome)): ?>
+        <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
             <p class="nome-usuario">Entre ou crie sua conta</p>
         </a>
     <?php else: ?>
         <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
     <?php endif; ?>
-</div>
+        </div>
 
     </aside>
     <!-- ========== FIM SIDEBAR ========== -->

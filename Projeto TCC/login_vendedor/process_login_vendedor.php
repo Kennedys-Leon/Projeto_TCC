@@ -1,7 +1,7 @@
 <?php
 include '../conexao.php';
 
-$nome = trim($_POST['nome']);
+$nome  = trim($_POST['nome']);
 $email = trim($_POST['email']);
 $senha = trim($_POST['senha']);
 

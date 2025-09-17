@@ -37,40 +37,59 @@
                 <input type="text" name="nome" required>
             </div>
 
-            <div class="campo nome">
+            <div class="campo CPF">
                 <label for="CampCPF">CPF:</label>
                 <input type="text" name="cpf" required>
             </div>
         </div>
         
         <div class="linha">
-            <div class="campo nome">
+            <div class="campo CEP">
             <label for="CampCep">CEP:</label>
         <input type="text" name="cep" required>
             </div>
 
-            <div class="campo nome">
+            <div class="campo Endereco">
+            <label for="CampCep">Endereço:</label>
+        <input type="text" name="endereco">
+            </div>
+            
+        <div class="linha">
+            <div class="campo Cidade">
+            <label for="CampCep">Cidade:</label>
+        <input type="text" name="cidade">
+            </div>
+            
+            <div class="campo Estado">
+            <label for="CampCep">Estado:</label>
+        <input type="text" name="estado">
+            </div> 
+
+        <div class="campo">
+            <div class="campo Telefone">
             <label for="CampTelefone">Telefone:</label>
         <input type="text" name="telefone" required>
             </div>
         </div>
 
-    <div class="linha">
-            <div class="campo nome">
+            <div class="campo Bairro">
+            <label for="CampEmail">Bairro:</label>
+        <input type="text" name="bairro">
+            </div>
+
+        <div class="linha">
+            <div class="campo Email">
             <label for="CampEmail">Email:</label>
         <input type="email" name="email" required>
             </div>
 
-            <div class="campo nome">
+            <div class="campo Senha">
             <label for="CampSenha">Senha:</label>
         <input type="password" name="senha" required>
             </div>
-        </div>
+        </div>      
 
-        
-
-        
-
+        <div class="campo">
         <label for="CampFoto">Sua foto de preferência:</label>
         <input type="file" name="foto" accept="image/*" required>
 

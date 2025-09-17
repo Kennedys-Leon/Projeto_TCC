@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : null;
+$foto_de_perfil = isset($_SESSION['usuario_foto']) ? $_SESSION['usuario_foto'] : null;
+
 include 'conexao.php';
 
 $stmt = $pdo->query("
@@ -137,30 +140,30 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </ul>
 
     <!-- Usuário lá embaixo da sidebar -->
-    <?php if (isset($_SESSION['usuario_nome'])): ?>
         <div class="usuario-box">
-            <img src="uploads/<?php echo isset($_SESSION['usuario_foto']) ? htmlspecialchars($_SESSION['usuario_foto']) : 'user-icon.png'; ?>" alt="Foto do usuário" class="usuario-icone-img">
-            <?= htmlspecialchars($_SESSION['usuario_nome']) ?>
-            <form action="logout.php" method="post" style="margin: 0;">
-                <button class="logout-btn" type="submit">Sair</button>
-            </form>
-        </div>
-    <?php elseif (isset($_SESSION['vendedor_nome'])): ?>
+        <?php if (!empty($foto_de_perfil)): ?>
+            <img src="data:image/*;base64,<?= base64_encode($foto_de_perfil) ?>" 
+                class="usuario-icone-img" 
+                alt="Foto de Perfil">
+        <?php elseif (!empty($nome)): ?>
+            <img src="../img/usuario.png" 
+                class="usuario-icone-img" 
+                alt="Foto de Perfil Padrão">
+        <?php else: ?>
+            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
+                class="usuario-icone-img" 
+                alt="Usuário">
+        <?php endif; ?>
 
-        <div class="usuario-box">
-            <img src="uploads/<?php echo isset($_SESSION['vendedor_foto']) ? htmlspecialchars($_SESSION['vendedor_foto']) : 'user-icon.png'; ?>" alt="Foto do vendedor" class="usuario-icone-img">
-            <?= htmlspecialchars($_SESSION['vendedor_nome']) ?>
-            <form action="logout.php" method="post" style="margin: 0;">
-                <button class="logout-btn" type="submit">Sair</button>
-            </form>
-        </div>
-        
-    <?php else: ?>
-        <div class="usuario-box">
-            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Usuário" class="usuario-icone-img">
-            Não logado
-        </div>
-    <?php endif; ?>
+        <?php if (empty($nome)): ?>
+            <a href="../cadastro_vendedor/cadastrovendedor.php" style="text-decoration: none; color: white;">
+                <p class="nome-usuario">Entre ou crie sua conta</p>
+            </a>
+        <?php else: ?>
+            <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
+        <?php endif; ?>
+            </div>
+
 </aside>
     <!-- ========== FIM SIDEBAR ========== -->
 

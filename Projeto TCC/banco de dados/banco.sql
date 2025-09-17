@@ -19,11 +19,11 @@ USE `banco` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `banco`.`vendedor` (
   `idvendedor` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NULL,
+  `nome` VARCHAR(100) NULL,
   `cpf` CHAR(11) NULL,
   `telefone` CHAR(11) NULL,
-  `email` VARCHAR(50) NULL,
-  `senha` VARCHAR(50) NULL,
+  `email` VARCHAR(150) NULL,
+  `senha` VARCHAR(255) NULL,
   `cnpj` CHAR(14) NULL,
   `foto_de_perfil` LONGBLOB NULL,
   PRIMARY KEY (`idvendedor`))
@@ -58,15 +58,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `banco`.`usuario` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NULL,
+  `nome` VARCHAR(100) NULL,
   `cpf` VARCHAR(11) NULL,
   `cep` CHAR(8) NULL,
   `endereco` VARCHAR(50) NULL,
   `cidade` VARCHAR(50) NULL,
   `estado` VARCHAR(50) NULL,
+  `bairro` VARCHAR(50) NULL,
   `telefone` CHAR(14) NULL,
-  `email` VARCHAR(50) NULL,
-  `senha` VARCHAR(50) NULL,
+  `email` VARCHAR(150) NULL,
+  `senha` VARCHAR(255) NULL,
   `foto_de_perfil` LONGBLOB NULL,
   PRIMARY KEY (`idusuario`))
 ENGINE = InnoDB;

@@ -1,22 +1,22 @@
 <?php
 include '../conexao.php';
 
-$nome = trim(htmlspecialchars($_POST['nome']));
+$nome  = trim(htmlspecialchars($_POST['nome']));
 $email = trim(htmlspecialchars($_POST['email']));
-$senha = trim(htmlspecialchars($_POST['senha']));
+$senha = trim($_POST['senha']);
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE nome = ? AND email = ? AND senha = ?");
-    $stmt->execute([$nome, $email, $senha]);
+    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE nome = ? AND email = ? LIMIT 1");
+    $stmt->execute([$nome, $email]);
 
     $usuario_db = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($usuario_db) {
+    if ($usuario_db && password_verify($senha, $usuario_db['senha'])) {
         session_start();
         $_SESSION['usuario_logado'] = $usuario_db['idcadastro'];
-        $_SESSION['usuario_nome'] = $usuario_db['nome'];
-        $_SESSION['usuario_foto'] = $usuario_db['foto'];
-        
+        $_SESSION['usuario_nome']   = htmlspecialchars($usuario_db['nome']);
+        $_SESSION['usuario_foto']   = $usuario_db['foto_de_perfil'];
+
         header('Location: ../index.php');
         exit();
     } else {
