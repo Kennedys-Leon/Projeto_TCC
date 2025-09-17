@@ -53,9 +53,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
             <ul>
-                <li><a href="#">Como Funciona?</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Serviços</a></li>
+                <li><a href="como_funciona.php">Como Funciona?</a></li>
+                <li><a href="sobre.php">Sobre</a></li>
+                <li><a href="servicos.php">Serviços</a></li>
 
                 <?php if (!isset($_SESSION['usuario_nome'])): ?>
                     <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
