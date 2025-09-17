@@ -12,10 +12,10 @@
         <h1>Como vender seus produtos no MaxAcess</h1>
         <ol>
             <li><b>Crie sua conta de vendedor:</b> <br>
-                Acesse <a href="cadastro_vendedor/cadastrovendedor.php">Cadastre-se como vendedor</a> e preencha seus dados.
+                Acesse <a href="../cadastro_vendedor/cadastrovendedor.php">Cadastre-se como vendedor</a> e preencha seus dados.
             </li>
             <li><b>Faça login como vendedor:</b> <br>
-                Após o cadastro, acesse <a href="login_vendedor/login_vendedor.php">Login do Vendedor</a> e entre com seu e-mail e senha.
+                Após o cadastro, acesse <a href="../login_vendedor/login_vendedor.php">Login do Vendedor</a> e entre com seu e-mail e senha.
             </li>
             <li><b>Acesse o painel do vendedor:</b> <br>
                 No painel, clique em "Meus Produtos" e depois em "Cadastrar Novo Produto".

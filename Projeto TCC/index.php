@@ -119,6 +119,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </a></li>
 
         <?php elseif (isset($_SESSION['usuario_nome'])): ?>
+            <li><a href="editar_perfil/perfil.php">
+                <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
+                Meu Perfil
+            </a></li>
             <!-- Usuário logado -->
             <!-- Nada aqui, usuário já tem conta -->
 
