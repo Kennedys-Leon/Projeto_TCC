@@ -41,6 +41,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header class="header">
         <!-- Botão hambúrguer (abre a sidebar) -->
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        
 
         <!-- Ícone do carrinho original (continua funcionando) -->
         

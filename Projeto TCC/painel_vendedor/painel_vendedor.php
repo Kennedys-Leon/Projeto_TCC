@@ -1,5 +1,8 @@
 <?php
 session_start();
+$nome = isset($_SESSION['vendedor_nome']) ? $_SESSION['vendedor_nome'] : null;
+$foto_de_perfil = isset($_SESSION['vendedor_foto']) ? $_SESSION['vendedor_foto'] : null;
+
 include '../conexao.php';
 
 // ============================
@@ -179,9 +182,30 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <label>CNPJ:</label>
                     <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
 
-                    <label>Foto de Perfil:</label>
-                    <input type="file" name="foto" accept="image/*">
+                    <label>Sua foto de preferência:</label>
+                    <input type="file" name="foto_de_perfil" accept="image/*"><br><br>
 
+                    <label>Foto de Perfil:</label>
+                    <div class="usuario-box">
+            <?php if (($foto_de_perfil)): ?>
+                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" wight="100" height="100"
+                    class="usuario-icone-img" 
+                    alt="Foto de Perfil">
+            <?php else: ?>
+                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
+                    class="usuario-icone-img" 
+                    alt="Usuário">
+            <?php endif; ?>
+
+            <?php if (empty($nome)): ?>
+                <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
+                    <p class="nome-usuario">Entre ou crie sua conta</p>
+                </a>
+            <?php else: ?>
+                
+            <?php endif; ?>
+        </div>
+                    <input type="file" name="foto_perfil" accept="image/*">     
                     <button type="submit">Salvar Alterações</button>
                 </form>
             </div>
@@ -194,3 +218,4 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 </body>
 </html>
+ 
