@@ -42,7 +42,7 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
 <body class="dark-mode">
 
     <!-- HEADER / SIDEBAR (igual ao index.php) -->
-    <?php include '../header_sidebar.php'; ?>
+
 
     <main class="conteudo">
         <div class="container">

@@ -24,7 +24,7 @@
 
         <div class="linha">
             <div class="campo">
-                <label for="CampNome">Nome:</label>
+                <label for="CampNome">Nome do produto:</label>
                 <input type="text" id="CampNome" name="nome" required>
             </div>
             <div class="campo">

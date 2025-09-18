@@ -10,7 +10,7 @@ $quantidade_estoque = $_POST['quantidade_estoque'];
 $data_pub = $_POST['data_pub'];
 $descricao = $_POST['descricao'];
 
-$vendedor_id = $_SESSION['usuario_logado'];
+$vendedor_id = $_SESSION['vendedor_logado'];
 
 $data_formatada = DateTime::createFromFormat('d/m/Y', $data_pub);
 if ($data_formatada) {
