@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$nome      = $_SESSION['nome']      ?? "Usuário";
+$nome      = $_SESSION['nome']      ?? ($_SESSION['usuario_nome'] ?? "");
 $cpf       = $_SESSION['cpf']       ?? "";
 $cep       = $_SESSION['cep']       ?? "";
 $endereco  = $_SESSION['endereco']  ?? "";
@@ -9,16 +9,22 @@ $cidade    = $_SESSION['cidade']    ?? "";
 $estado    = $_SESSION['estado']    ?? "";
 $bairro    = $_SESSION['bairro']    ?? "";
 $telefone  = $_SESSION['telefone']  ?? "";
-$email     = $_SESSION['email']     ?? "email@exemplo.com";
+$email     = $_SESSION['email']     ?? "";
 $senha     = $_SESSION['senha']     ?? "";
-$foto      = $_SESSION['foto']      ?? "..img/usuario.png"; // caminho padrão caso não tenha
+
+// Foto de perfil (se tiver no banco como LONGBLOB, converte para base64)
+if (!empty($_SESSION['usuario_foto'])) {
+    $foto = "data:image/jpeg;base64," . base64_encode($_SESSION['usuario_foto']);
+} else {
+    $foto = "../img/usuario.png"; // caminho padrão
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
+    <title>Perfil Usuário</title>
     <link rel="stylesheet" href="css/estilo.css">
     <style>
         body {
@@ -95,7 +101,7 @@ $foto      = $_SESSION['foto']      ?? "..img/usuario.png"; // caminho padrão c
 </head>
 <body>
     <div class="form-container">
-        <h2>Editar Perfil</h2>
+        <h2>Meu Perfil</h2>
 
         <!-- Mensagem de sucesso -->
         <?php if (isset($_GET['sucesso'])): ?>
@@ -103,7 +109,7 @@ $foto      = $_SESSION['foto']      ?? "..img/usuario.png"; // caminho padrão c
         <?php endif; ?>
 
         <!-- Foto de perfil -->
-        <img src="<?= htmlspecialchars($foto) ?>" alt="Foto de Perfil" class="foto-perfil">
+        <img src="<?= $foto ?>" alt="Foto de Perfil" class="foto-perfil">
 
         <form method="POST" action="salvar_perfil.php" enctype="multipart/form-data">
             
@@ -144,7 +150,7 @@ $foto      = $_SESSION['foto']      ?? "..img/usuario.png"; // caminho padrão c
         </form>
 
         <!-- Botão de voltar -->
-        <a href="usuario.php" class="btn-voltar">⬅ Voltar para Página Inicial</a>
+        <a href="../index.php" class="btn-voltar">⬅ Voltar para Página Inicial</a>
     </div>
 
     <script>

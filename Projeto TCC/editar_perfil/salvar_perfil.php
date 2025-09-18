@@ -23,7 +23,7 @@ $senha    = trim($_POST['senha']);
 // Foto de perfil
 $foto_perfil = null;
 if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
-    $foto_perfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+    $foto_perfil = file_get_contents($_FILES['foto_perfil']['tmp_name']); // BLOB puro
 }
 
 try {
@@ -71,8 +71,19 @@ try {
     $_SESSION['email']    = $email;
     $_SESSION['senha']    = $senha;
 
+    // Atualiza a foto na sessão
     if ($foto_perfil) {
-        $_SESSION['foto'] = $foto_perfil;
+        $_SESSION['usuario_foto'] = $foto_perfil; // Mantém o blob cru
+    } else {
+        // Caso não tenha feito upload, busca a foto já existente do banco
+        $stmtFoto = $pdo->prepare("SELECT foto_de_perfil FROM usuario WHERE idcadastro = :idusuario");
+        $stmtFoto->bindParam(':idusuario', $idusuario, PDO::PARAM_INT);
+        $stmtFoto->execute();
+        $fotoExistente = $stmtFoto->fetchColumn();
+
+        if ($fotoExistente) {
+            $_SESSION['usuario_foto'] = $fotoExistente;
+        }
     }
 
     header("Location: editar_perfil.php?sucesso=1");

@@ -15,7 +15,7 @@
     </div>
     <nav>
       <ul>
-        <li><a href="categorias/index.php">Início</a></li>
+        <li><a href="../index.php">Início</a></li>
         <li><a href="#">Jogos</a></li>
         <li><a href="#">Free Fire</a></li>
         <li><a href="#">Categorias</a></li>
