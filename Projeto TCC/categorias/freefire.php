@@ -5,19 +5,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GGMax - Comprar e Vender Free Fire</title>
+  <title>MaxAcess</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="GGMax" />
-    </div>
+    
     <nav>
       <ul>
         <li><a href="../index.php">Início</a></li>
-        <li><a href="#">Jogos</a></li>
-        <li><a href="#">Free Fire</a></li>
         <li><a href="#">Categorias</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Anunciar</a></li>
@@ -26,7 +22,7 @@
   </header>
 
   <section class="banner">
-    <h1>Comprar e Vender Contas Free Fire (FF)</h1>
+    <h1>Comprar e Vender Contas De Clash Royale</h1>
     <div class="search">
       <input type="text" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn">Buscar</button>
@@ -37,8 +33,8 @@
     <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Contas Free Fire</a></li>
-        <li><a href="#">Diamantes Free Fire</a></li>
+        <li><a href="#">Contas Clash Royale</a></li>
+        <li><a href="#">Gemas Clash Royale</a></li>
         <li><a href="#">Outros</a></li>
       </ul>
 
@@ -57,22 +53,23 @@
     <div class="content-area">
       <div class="product-list">
         <div class="product-card">
-          <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
-          <h4>PASSO BOOYAH PREMIUM</h4>
-          <span>R$ 4,97</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
+  <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
+  <h4>PASSO BOOYAH PREMIUM</h4>
+  <span>R$ 4,97</span>
+  <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
+</div>
+
 
         <div class="product-card">
-        <img src="../jogos/clash.jpeg" alt="PASSO BOOYAH PREMIUM" />
+        <img src="../jogos/free15.png" alt="PASSO BOOYAH PREMIUM" />
         <h4>Conta Free Fire LVL 15</h4>
           <p>+300 Diamantes</p>
           <span>R$ 2,99</span>
-          <button class="buy-btn">Ver Detalhes</button>
+  <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
         </div>
 
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <img src="../jogos/mestre.png" alt="Gift Card Diamantes" />
           <h4>Gift Card Diamantes</h4>
           <p>Entrega automática</p>
           <span>R$ 5,19</span>
@@ -80,31 +77,15 @@
         </div>
         
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <img src="../jogos/bandeirao.webp" alt="Gift Card Diamantes" />
           <h4>Gift Card Diamantes</h4>
           <p>Entrega automática</p>
           <span>R$ 5,19</span>
           <button class="buy-btn">Ver Detalhes</button>
         </div>
         
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-        
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-        
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <div class="product-card">
+          <img src="../jogos/gemada.png" alt="Gift Card Diamantes" />
           <h4>Gift Card Diamantes</h4>
           <p>Entrega automática</p>
           <span>R$ 5,19</span>
@@ -112,15 +93,39 @@
         </div>
 
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <img src="../jogos/angelical.png" alt="Gift Card Diamantes" />
           <h4>Gift Card Diamantes</h4>
           <p>Entrega automática</p>
           <span>R$ 5,19</span>
           <button class="buy-btn">Ver Detalhes</button>
         </div>
 
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
+          <div class="product-card">
+          <img src="../jogos/upada.png" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+         <div class="product-card">
+          <img src="../jogos/naruto.png" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+        </div>
+
+          <div class="product-card">
+          <img src="../jogos/gemada.png" alt="Gift Card Diamantes" />
+          <h4>Gift Card Diamantes</h4>
+          <p>Entrega automática</p>
+          <span>R$ 5,19</span>
+          <button class="buy-btn">Ver Detalhes</button>
+
+        </div> 
+         <div class="product-card">
+          <img src="../jogos/gemada.png" alt="Gift Card Diamantes" />
           <h4>Gift Card Diamantes</h4>
           <p>Entrega automática</p>
           <span>R$ 5,19</span>
@@ -133,7 +138,6 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 GGMax. Todos os direitos reservados.</p>
   </footer>
 </body>
 </html>

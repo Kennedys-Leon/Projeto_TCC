@@ -5,7 +5,7 @@
 if( $db == 1){
     $servername = "localhost";
     $username = "root";
-    $password = "Kennedyleon456@";
+    $password = "Mococa@123";
     $dbname = "banco";
 }else{
     $servername = "localhost";
