@@ -20,8 +20,7 @@ body {
 }
 .breadcrumb a {
   text-decoration: none;
-  color: #0066cc;
-}
+  background-color: rgb(21, 55, 100);}
 .breadcrumb span {
   font-weight: bold;
 }
@@ -71,8 +70,7 @@ body {
   margin-bottom: 10px;
 }
 .produto-info .tag {
-  background: #007bff;
-  color: #fff;
+  background-color: rgb(21, 55, 100); 
   font-size: 12px;
   padding: 3px 8px;
   border-radius: 6px;
@@ -93,8 +91,7 @@ body {
   margin: 15px 0;
 }
 .btn-comprar {
-  background: #0066cc;
-  color: white;
+  background-color: rgb(21, 55, 100); 
   border: none;
   padding: 14px 25px;
   font-size: 18px;
