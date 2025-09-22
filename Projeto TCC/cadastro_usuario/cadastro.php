@@ -69,7 +69,7 @@
 
         <div class="campo">
         <label for="CampFoto">Sua foto de preferência:</label>
-        <input type="file" name="foto_de_perfil" accept="image/*" required>
+        <input type="file" name="foto_de_perfil" accept="image/*">
 
         <input type="submit" value="Cadastrar" class="btn-vermelho">
 
