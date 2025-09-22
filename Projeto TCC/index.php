@@ -206,9 +206,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p>Free Fire</p>
                 </a>
 
-                    <a href="categorias/clashroyale.php" class="produto">
-                        <img src="img/clash.jpeg" alt="Produto 2" />
-                        <p>Clash Royale</p>
+                    <a href="categorias/brawlstars.php" class="produto">
+                        <img src="img/brawl.webp" alt="Produto 2" />
+                        <p>Brawl Stars </p>
                     </a>
                     <a href="categorias/fifa.php" class="produto">
                         <img src="img/fifa.jpeg" alt="Produto 3" />

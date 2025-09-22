@@ -5,19 +5,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GGMax - Comprar e Vender Free Fire</title>
+  <title>MaxAcess - FIFA</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="GGMax" />
-    </div>
     <nav>
       <ul>
-        <li><a href="categorias/index.php">Início</a></li>
-        <li><a href="#">Jogos</a></li>
-        <li><a href="#">Free Fire</a></li>
+        <li><a href="../index.php">Início</a></li>
         <li><a href="#">Categorias</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Anunciar</a></li>
@@ -26,7 +21,7 @@
   </header>
 
   <section class="banner">
-    <h1>Categorias De Clash Royale (FF)</h1>
+    <h1>Comprar e Vender Contas de FIFA</h1>
     <div class="search">
       <input type="text" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn">Buscar</button>
@@ -37,9 +32,9 @@
     <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Contas Free Fire</a></li>
-        <li><a href="#">Diamantes Free Fire</a></li>
-        <li><a href="#">Outros</a></li>
+        <li><a href="#">Contas FIFA</a></li>
+        <li><a href="#">Coins FIFA</a></li>
+        <li><a href="#">Itens Especiais</a></li>
       </ul>
 
       <h3>Filtros</h3>
@@ -57,83 +52,119 @@
     <div class="content-area">
       <div class="product-list">
         <div class="product-card">
-          <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
-          <h4>PASSO BOOYAH PREMIUM</h4>
-          <span>R$ 4,97</span>
-          <button class="buy-btn">Ver Detalhes</button>
+          <img src="../jogos/fifa.png" alt="Conta FIFA Ultimate" />
+          <h4>Conta FIFA Ultimate Team</h4>
+          <span>R$ 99,99</span>
+          <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
         </div>
 
         <div class="product-card">
-        <img src="../jogos/clash.jpeg" alt="PASSO BOOYAH PREMIUM" />
-        <h4>Conta Free Fire LVL 15</h4>
-          <p>+300 Diamantes</p>
-          <span>R$ 2,99</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
+          <img src="../jogos/coins.png" alt="Coins FIFA" />
+          <h4>100.000 Coins FIFA</h4>
           <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
+          <span>R$ 49,99</span>
+          <a href="detalhes.php?id=2" class="buy-btn">Ver Detalhes</a>
         </div>
+
+        <div class="product-card">
+          <img src="../jogos/kit.png" alt="Kit FIFA Ultimate" />
+          <h4>Kit FIFA Ultimate</h4>
+          <p>Inclui jogadores especiais e pacotes</p>
+          <span>R$ 69,99</span>
+          <a href="detalhes.php?id=3" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <div class="product-card">
+          <img src="../jogos/conta.png" alt="Item raro FIFA" />
+          <h4>Item Raro FIFA</h4>
+          <p>Jogadores e itens exclusivos</p>
+          <span>R$ 120,00</span>
+          <a href="detalhes.php?id=4" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <div class="product-card">
+          <img src="../jogos/lendas.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
+        </div>
+
         
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-        
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-        
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
-        </div>
-        
-        <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
+          <img src="../jogos/fifas.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
         </div>
 
+
+        
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
+          <img src="../jogos/mobiles.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
         </div>
 
+
+        
         <div class="product-card">
-          <img src="product3.jpg" alt="Gift Card Diamantes" />
-          <h4>Gift Card Diamantes</h4>
-          <p>Entrega automática</p>
-          <span>R$ 5,19</span>
-          <button class="buy-btn">Ver Detalhes</button>
+          <img src="../jogos/mobiles.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
         </div>
 
-        <!-- Outros produtos podem ser adicionados aqui -->
+
+        
+        <div class="product-card">
+          <img src="../jogos/fife.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+
+        
+        <div class="product-card">
+          <img src="../jogos/lendas.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+
+        
+        <div class="product-card">
+          <img src="../jogos/lendas.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+
+        
+        <div class="product-card">
+          <img src="../jogos/lendas.png" alt="Lenda FIFA" />
+          <h4>Lenda FIFA</h4>
+          <p>Jogadores lendários de todas as edições</p>
+          <span>R$ 199,99</span>
+          <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <!-- Mais produtos podem ser adicionados aqui -->
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 GGMax. Todos os direitos reservados.</p>
   </footer>
 </body>
 </html>

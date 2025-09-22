@@ -6,7 +6,7 @@ $produtos = [
     "nome" => "PASSO BOOYAH PREMIUM",
     "preco" => "R$ 4,97",
     "descricao" => "Pacote exclusivo com benefícios especiais.",
-    "imagens" => ["../jogos/free.jpg", "../jogos/free.png", "../jogos/free.png"]
+    "imagens" => ["../jogos/brawl.png", "../jogos/bralwer.png", "../jogos/brawls.png"]
   ],
 ];
 
