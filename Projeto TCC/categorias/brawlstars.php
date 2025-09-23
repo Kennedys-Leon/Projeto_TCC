@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GGMax - Comprar e Vender Brawl Stars</title>
+  <title>MaxAcess - Comprar e Vender Brawl Stars</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
@@ -53,7 +53,7 @@
       <div class="product-list">
         <div class="product-card">
           <img src="../jogos/brawl.png" alt="Passaporte Brawl Stars" />
-          <h4>Passaporte Brawl Stars</h4>
+          <h4>BrawlPass Brawl Stars</h4>
           <span>R$ 9,99</span>
           <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
         </div>

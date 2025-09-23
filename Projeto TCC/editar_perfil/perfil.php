@@ -25,82 +25,39 @@ if (!empty($_SESSION['usuario_foto'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Usuário</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
     <style>
-        body {
-            font-family: Poppins, sans-serif;
-            background-color: #f4f4f9;
+        .linha {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-
-        .form-container {
-            width: 100%;
-            max-width: 500px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
+        .campo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin: 10px 0 5px;
-            text-align: left;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
-        }
-
-        button, .btn-voltar {
-            width: 100%;
-            padding: 12px;
-            background: #007BFF;
-            border: none;
-            color: white;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        button:hover, .btn-voltar:hover {
-            background: #0056b3;
-        }
-
-        .sucesso {
-            color: green;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
         .foto-perfil {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 15px;
-            border: 2px solid #ccc;
+            margin: 0 auto 18px auto;
+            display: block;
+            border: 2px solid #bbb;
+            background: #2d2d4d;
+        }
+        .sucesso {
+            color: #2ecc71;
+            font-weight: 500;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
+    <form class="form-cadastro" method="POST" action="salvar_perfil.php" enctype="multipart/form-data">
         <h2>Meu Perfil</h2>
 
         <!-- Mensagem de sucesso -->
@@ -111,47 +68,67 @@ if (!empty($_SESSION['usuario_foto'])) {
         <!-- Foto de perfil -->
         <img src="<?= $foto ?>" alt="Foto de Perfil" class="foto-perfil">
 
-        <form method="POST" action="salvar_perfil.php" enctype="multipart/form-data">
-            
-            <label for="nome">Nome</label>
-            <input type="text" name="nome" id="nome" value="<?= htmlspecialchars($nome) ?>">
-
-            <label for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" maxlength="11" value="<?= htmlspecialchars($cpf) ?>">
-
-            <label for="cep">CEP</label>
-            <input type="text" name="cep" id="cep" maxlength="8" value="<?= htmlspecialchars($cep) ?>" required>
-
-            <label for="endereco">Endereço</label>
-            <input type="text" name="endereco" id="endereco" value="<?= htmlspecialchars($endereco) ?>" readonly>
-
-            <label for="cidade">Cidade</label>
-            <input type="text" name="cidade" id="cidade" value="<?= htmlspecialchars($cidade) ?>" readonly>
-
-            <label for="estado">Estado</label>
-            <input type="text" name="estado" id="estado" value="<?= htmlspecialchars($estado) ?>" readonly>
-
-            <label for="bairro">Bairro</label>
-            <input type="text" name="bairro" id="bairro" value="<?= htmlspecialchars($bairro) ?>" readonly>
-
-            <label for="telefone">Telefone</label>
-            <input type="text" name="telefone" id="telefone" maxlength="14" value="<?= htmlspecialchars($telefone) ?>">
-
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>">
-
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" value="<?= htmlspecialchars($senha) ?>">
-
+        <div class="linha">
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" value="<?= htmlspecialchars($nome) ?>">
+            </div>
+            <div class="campo">
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" id="cpf" maxlength="11" value="<?= htmlspecialchars($cpf) ?>">
+            </div>
+        </div>
+        <div class="linha">
+            <div class="campo">
+                <label for="cep">CEP</label>
+                <input type="text" name="cep" id="cep" maxlength="8" value="<?= htmlspecialchars($cep) ?>" required>
+            </div>
+            <div class="campo">
+                <label for="telefone">Telefone</label>
+                <input type="text" name="telefone" id="telefone" maxlength="14" value="<?= htmlspecialchars($telefone) ?>">
+            </div>
+        </div>
+        <div class="linha">
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>">
+            </div>
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" value="<?= htmlspecialchars($senha) ?>">
+            </div>
+        </div>
+        <div class="linha">
+            <div class="campo">
+                <label for="endereco">Endereço</label>
+                <input type="text" name="endereco" id="endereco" value="<?= htmlspecialchars($endereco) ?>" readonly>
+            </div>
+            <div class="campo">
+                <label for="bairro">Bairro</label>
+                <input type="text" name="bairro" id="bairro" value="<?= htmlspecialchars($bairro) ?>" readonly>
+            </div>
+        </div>
+        <div class="linha">
+            <div class="campo">
+                <label for="cidade">Cidade</label>
+                <input type="text" name="cidade" id="cidade" value="<?= htmlspecialchars($cidade) ?>" readonly>
+            </div>
+            <div class="campo">
+                <label for="estado">Estado</label>
+                <input type="text" name="estado" id="estado" value="<?= htmlspecialchars($estado) ?>" readonly>
+            </div>
+        </div>
+        <div class="alterar-foto-container">
             <label for="foto_perfil">Alterar Foto de Perfil</label>
             <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
+        </div>
 
-            <button type="submit">Salvar Alterações</button>
-        </form>
+        <input type="submit" value="Salvar Alterações" class="btn-vermelho">
 
-        <!-- Botão de voltar -->
-        <a href="../index.php" class="btn-voltar">⬅ Voltar para Página Inicial</a>
-    </div>
+        <div class="botoes-inicio">
+            <a href="../index.php" class="btn-primario">⬅ Voltar para Página Inicial</a>
+        </div>
+    </form>
 
     <script>
         // Buscar endereço via ViaCEP
