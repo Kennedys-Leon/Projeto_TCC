@@ -59,6 +59,15 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border: 1px solid #bbb;
             background: #2d2d4d;
         }
+
+        select, input, textarea {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
     </style>
 
     <script>
@@ -75,6 +84,96 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             let form = document.getElementById("formNovoProduto");
             form.style.display = (form.style.display === "none" ? "block" : "none");
         }
+
+        // ========== Máscaras automáticas ==========
+        document.addEventListener("DOMContentLoaded", () => {
+            // Preço produto
+            const precoInput = document.getElementById("CampPreco");
+            if (precoInput) {
+                precoInput.addEventListener("input", function(e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor === "") {
+                        e.target.value = "";
+                        return;
+                    }
+                    valor = (valor / 100).toFixed(2) + "";
+                    valor = valor.replace(".", ",");
+                    e.target.value = valor;
+                });
+            }
+
+            // Data publicação
+            const dataInput = document.getElementById("CampData_pub");
+            if (dataInput) {
+                dataInput.addEventListener("input", function(e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 8) valor = valor.substring(0, 8);
+                    let formatado = "";
+                    if (valor.length > 4) {
+                        formatado = valor.substring(0, 2) + "/" + valor.substring(2, 4) + "/" + valor.substring(4);
+                    } else if (valor.length > 2) {
+                        formatado = valor.substring(0, 2) + "/" + valor.substring(2);
+                    } else {
+                        formatado = valor;
+                    }
+                    e.target.value = formatado;
+                });
+            }
+
+            // Telefone
+            const telInput = document.getElementById("CampTelefone");
+            if (telInput) {
+                telInput.addEventListener("input", function(e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 11) valor = valor.substring(0, 11);
+                    if (valor.length > 6) {
+                        e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2, 7)}-${valor.substring(7)}`;
+                    } else if (valor.length > 2) {
+                        e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2)}`;
+                    } else {
+                        e.target.value = valor;
+                    }
+                });
+            }
+
+            // CPF
+            const cpfInput = document.getElementById("CampCPF");
+            if (cpfInput) {
+                cpfInput.addEventListener("input", function(e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 11) valor = valor.substring(0, 11);
+                    if (valor.length > 9) {
+                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6, 9) + "-" + valor.substring(9);
+                    } else if (valor.length > 6) {
+                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6);
+                    } else if (valor.length > 3) {
+                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3);
+                    } else {
+                        e.target.value = valor;
+                    }
+                });
+            }
+
+            // CNPJ
+            const cnpjInput = document.getElementById("CampCNPJ");
+            if (cnpjInput) {
+                cnpjInput.addEventListener("input", function(e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 14) valor = valor.substring(0, 14);
+                    if (valor.length > 12) {
+                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8, 12) + "-" + valor.substring(12);
+                    } else if (valor.length > 8) {
+                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8);
+                    } else if (valor.length > 5) {
+                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5);
+                    } else if (valor.length > 2) {
+                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2);
+                    } else {
+                        e.target.value = valor;
+                    }
+                });
+            }
+        });
     </script>
 </head>
 <body>
@@ -107,23 +206,31 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- Formulário de Novo Produto -->
             <div id="formNovoProduto" style="display:none; margin-top:15px;">
                 <form method="post" action="salvar_produto.php" enctype="multipart/form-data">
-                    <label>Nome do Produto:</label><br>
-                    <input type="text" name="nome" required><br><br>
+                    <label>Nome do Produto:</label>
+                    <input type="text" name="nome" required maxlength="100"><br><br>
 
-                    <label>Preço:</label><br>
-                    <input type="number" name="preco" step="0.01" required><br><br>
+                    <label>Preço:</label>
+                    <input type="text" id="CampPreco" name="preco" placeholder="0,00" required maxlength="15"><br><br>
 
-                    <label>Categoria:</label><br>
-                    <input type="text" name="categoria" required><br><br>
+                    <label>Categoria:</label>
+                    <select id="CampCategoria" name="categoria" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="conta_stream">Conta de Stream</option>
+                        <option value="gift_card">Gift Card</option>
+                        <option value="itens_jogos">Itens em Jogos</option>
+                        <option value="conta_jogo">Conta de Jogo</option>
+                        <option value="jogos">Jogos</option>
+                        <option value="chaves_jogos">Chaves de Jogos</option>
+                    </select><br><br>
 
-                    <label>Quantidade em Estoque:</label><br>
-                    <input type="number" name="quantidade" required><br><br>
+                    <label>Quantidade em Estoque:</label>
+                    <input type="number" name="quantidade" required min="1" max="9999"><br><br>
 
-                    <label>Descrição de Publicação:</label><br>
-                    <input type="text" name="data_pub" required><br><br>
+                    <label>Data de Publicação:</label>
+                    <input type="text" id="CampData_pub" name="data_pub" placeholder="dd/mm/aaaa" required maxlength="10"><br><br>
 
-                    <label>Descrição do Produto:</label><br>
-                    <input type="text" name="descricao" required><br><br>
+                    <label>Descrição do Produto:</label>
+                    <textarea name="descricao" rows="4" required maxlength="500"></textarea><br><br>
 
                     <label>Imagem do produto:</label>
                     <input type="file" name="imagem" accept="image/*" required><br><br>
@@ -167,7 +274,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="perfil-container">
                 <h2 class="perfil-titulo">Meu Perfil</h2>
 
-                <!-- Foto de Perfil no topo -->
+                <!-- Foto de Perfil -->
                 <div class="perfil-imagem">
                     <?php if (!empty($foto_de_perfil)): ?>
                         <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
@@ -179,16 +286,19 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Formulário de edição -->
                 <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
                     <label>Nome:</label>
-                    <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>" required>
+                    <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>">
 
                     <label>Email:</label>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>" required>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>">
 
                     <label>Telefone:</label>
-                    <input type="text" name="telefone" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
+                    <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
+
+                    <label>CPF:</label>
+                    <input type="text" id="CampCPF" name="cpf" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
 
                     <label>CNPJ:</label>
-                    <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
+                    <input type="text" id="CampCNPJ" name="cnpj" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
 
                     <label>Sua foto de preferência:</label>
                     <input type="file" name="foto" accept="image/*"><br><br>

@@ -48,7 +48,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="logo-user-container">
             <div class="logo">
-                <img src="img/Logos.png" alt="MaxAcess" class="logo-img" />
+                <img src="img/Logo.png" alt="MaxAcess" class="logo-img" />
             </div>
         </div>
 
