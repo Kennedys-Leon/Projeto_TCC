@@ -5,9 +5,7 @@ $foto_de_perfil = isset($_SESSION['vendedor_foto']) ? $_SESSION['vendedor_foto']
 
 include '../conexao.php';
 
-// ============================
 // Verifica se vendedor está logado
-// ============================
 if (!isset($_SESSION['vendedor_logado'])) {
     header("Location: ../login_vendedor/login_vendedor.php");
     exit;
@@ -15,9 +13,7 @@ if (!isset($_SESSION['vendedor_logado'])) {
 
 $vendedor_id = $_SESSION['vendedor_logado'];
 
-// ============================
 // Buscar informações do vendedor
-// ============================
 $stmt = $pdo->prepare("SELECT * FROM vendedor WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
 $vendedor = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,9 +22,7 @@ if (!$vendedor) {
     die("Erro: vendedor não encontrado.");
 }
 
-// ============================
 // Total de vendas do vendedor
-// ============================
 $stmt = $pdo->prepare("SELECT COUNT(*) as total_vendas FROM vendas WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -38,15 +32,9 @@ $stmt = $pdo->query("SELECT COUNT(*) as todas_vendas FROM vendas");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $todas_vendas = isset($row['todas_vendas']) ? (int)$row['todas_vendas'] : 1;
 
-if ($todas_vendas == 0) {
-    $percentual = 0;
-} else {
-    $percentual = ($total_vendas / $todas_vendas) * 100;
-}
+$percentual = ($todas_vendas == 0) ? 0 : ($total_vendas / $todas_vendas) * 100;
 
-// ============================
 // Produtos cadastrados pelo vendedor
-// ============================
 $stmt = $pdo->prepare("SELECT * FROM produto WHERE idvendedor = ?");
 $stmt->execute([$vendedor_id]);
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -59,8 +47,21 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/painel.css">
     <link rel="stylesheet" href="../css/perfil_vendedor.css">
+
+    <style>
+        .perfil-imagem-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 18px auto;
+            display: block;
+            border: 1px solid #bbb;
+            background: #2d2d4d;
+        }
+    </style>
+
     <script>
-        // Função JS para trocar abas
         function openTab(tabName) {
             let tabs = document.querySelectorAll('.tab-content');
             let buttons = document.querySelectorAll('.tab');
@@ -70,7 +71,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.querySelector('[data-tab="'+tabName+'"]').classList.add('active');
         }
 
-        // Mostrar/ocultar formulário de novo produto
         function toggleNovoProduto() {
             let form = document.getElementById("formNovoProduto");
             form.style.display = (form.style.display === "none" ? "block" : "none");
@@ -83,7 +83,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p>Bem-vindo, <?php echo htmlspecialchars($vendedor['nome']); ?>!</p>
     </header>
     
-
     <div class="container">
         <!-- Abas -->
         <div class="tabs">
@@ -107,7 +106,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             <!-- Formulário de Novo Produto -->
             <div id="formNovoProduto" style="display:none; margin-top:15px;">
-                <form method="post" action="salvar_produto.php">
+                <form method="post" action="salvar_produto.php" enctype="multipart/form-data">
                     <label>Nome do Produto:</label><br>
                     <input type="text" name="nome" required><br><br>
 
@@ -128,7 +127,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <label>Imagem do produto:</label>
                     <input type="file" name="imagem" accept="image/*" required><br><br>
-
 
                     <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
 
@@ -164,11 +162,21 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
 
-
-        <!-- Perfil -->
+        <!-- Meu Perfil -->
         <div id="perfil" class="tab-content">
             <div class="perfil-container">
                 <h2 class="perfil-titulo">Meu Perfil</h2>
+
+                <!-- Foto de Perfil no topo -->
+                <div class="perfil-imagem">
+                    <?php if (!empty($foto_de_perfil)): ?>
+                        <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
+                    <?php else: ?>
+                        <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
+                    <?php endif; ?>
+                </div>
+
+                <!-- Formulário de edição -->
                 <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
                     <label>Nome:</label>
                     <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>" required>
@@ -183,34 +191,16 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="text" name="cnpj" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
 
                     <label>Sua foto de preferência:</label>
-                    <input type="file" name="foto_de_perfil" accept="image/*"><br><br>
+                    <input type="file" name="foto" accept="image/*"><br><br>
 
-                    <label>Foto de Perfil:</label>
-                    <div class="usuario-box">
-            <?php if (($foto_de_perfil)): ?>
-                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" wight="100" height="100"
-                    class="usuario-icone-img" 
-                    alt="Foto de Perfil">
-            <?php else: ?>
-                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
-                    class="usuario-icone-img" 
-                    alt="Usuário">
-            <?php endif; ?>
-
-            <?php if (empty($nome)): ?>
-                <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
-                    <p class="nome-usuario">Entre ou crie sua conta</p>
-                </a>
-            <?php else: ?>
-                
-            <?php endif; ?>
-        </div>
-                    <input type="file" name="foto_perfil" accept="image/*">     
                     <button type="submit">Salvar Alterações</button>
+
+                    <div class="botoes-inicio">
+                        <a href="pagina_vendedor" class="btn-primario">Retornar a Página Inicial</a>
+                    </div>
                 </form>
             </div>
         </div>
-
     </div>
 
     <footer>
@@ -218,4 +208,3 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 </body>
 </html>
- 

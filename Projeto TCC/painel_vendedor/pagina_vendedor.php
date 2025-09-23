@@ -150,7 +150,6 @@ $foto_de_perfil = isset($_SESSION['vendedor_foto']) ? $_SESSION['vendedor_foto']
                 <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
             <?php endif; ?>
         </div>
-
     </aside>
     <!-- ========== FIM SIDEBAR ========== -->
 

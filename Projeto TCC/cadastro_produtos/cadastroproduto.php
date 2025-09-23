@@ -48,7 +48,7 @@
                 <label for="CampCategoria">Categoria:</label>
                 <select id="CampCategoria" name="categoria" required>
                     <option value="" disabled selected>Selecione</option>
-                    <option value="Conta de Stream">Conta de Stream</option>
+                    <option value="Conta de Stream">Serviço de Stream</option>
                     <option value="Gift Card">Gift Card</option>
                     <option value="Itens em Jogos">Itens em Jogos</option>
                     <option value="Conta de Jogo">Conta de Jogo</option>
