@@ -33,8 +33,8 @@
     <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Contas Clash Royale</a></li>
-        <li><a href="#">Gemas Clash Royale</a></li>
+        <li><a href="#">Contas Free Fire</a></li>
+        <li><a href="#">Diamantes Free Fire</a></li>
         <li><a href="#">Outros</a></li>
       </ul>
 
@@ -65,7 +65,7 @@
         <h4>Conta Free Fire LVL 15</h4>
           <p>+300 Diamantes</p>
           <span>R$ 2,99</span>
-  <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
+  <a href="detalhes.php?id=2" class="buy-btn">Ver Detalhes</a>
         </div>
 
         <div class="product-card">
