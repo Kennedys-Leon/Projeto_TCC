@@ -116,6 +116,7 @@ body.dark-mode {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-right: 1px;
 }
 
 .search-bar:focus {
@@ -123,15 +124,58 @@ body.dark-mode {
     box-shadow: none;
 }
 
-.search-container {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-  }
+.search-bar {
+    width: 260px;
+    padding: 10px 38px 10px 16px; /* espaço para ícone à direita */
+    border: 2px solid #00c9ff;
+    border-radius: 25px;
+    background: #f7fafd;
+    font-size: 16px;
+    color: #222;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,201,255,0.07);
+    position: relative;
+}
 
 .search-bar:focus {
-    outline: none;
-    box-shadow: 0 0 10px #6a11cb;
+    border-color: #007bff;
+    box-shadow: 0 0 10px #00c9ff;
+    background: #fff;
+}
+
+/* Ícone de busca dentro do campo */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #00c9ff;
+    pointer-events: none;
+}
+
+/* Dark mode */
+body.dark-mode .search-bar {
+    background: #222;
+    color: #f2f2f7;
+    border-color: #555;
+}
+
+body.dark-mode .search-bar:focus {
+    background: #333;
+    border-color: #00c9ff;
+}
+
+body.dark-mode .search-container .search-icon {
+    color: #ffd700;
 }
 
 .cart-icon {
@@ -580,4 +624,49 @@ h1, h2, h3, h4, h5, h6 {
 /* Centraliza títulos das seções */
 h2, h3, h4 {
     text-align: center;
+}
+
+/* Estilos para a página de Serviços */
+.servicos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.servico-item {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.servico-item:hover {
+    transform: translateY(-5px);
+}
+
+.servico-item h3 {
+    color: #2E3B4E;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.servico-item p {
+    color: #555;
+    line-height: 1.6;
+}
+
+body.dark-mode .servico-item {
+    background-color: #444;
+    color: #f2f2f7;
+}
+
+body.dark-mode .servico-item h3 {
+    color: #f2f2f7;
+}
+
+body.dark-mode .servico-item p {
+    color: #ddd;
 }

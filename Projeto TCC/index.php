@@ -54,6 +54,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
             <ul>
+
                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
@@ -69,6 +70,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li><a href="consultageral.php">Consulta Geral</a></li>
                 <?php endif; ?>
             </ul>
+
+            <div class="search-bar-wrapper">
+                <input class="search-bar" type="text" placeholder="Buscar 🔍︎" />
+            </div>
 
             <div class="search-cart">
 
@@ -193,9 +198,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
             <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
-            <div class="search-cart">
-                <input class="search-bar" type="text" placeholder="Buscar 🔍︎" />
-            </div>        
+                  
 
 
             <section class="produtos-destaque">
