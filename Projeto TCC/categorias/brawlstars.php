@@ -53,16 +53,16 @@
       <div class="product-list">
         <div class="product-card">
           <img src="../jogos/brawl.png" alt="Passaporte Brawl Stars" />
-          <h4>BrawlPass Brawl Stars</h4>
-          <span>R$ 9,99</span>
+          <h4>Conta De Brawl Stars De 63 mil trofeus</h4>
+          <span>R$ 150,97</span>
           <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
         </div>
 
         <div class="product-card">
-          <img src="../jogos/conta_brawl_lv30.png" alt="Conta Brawl Stars LVL 30" />
-          <h4>Conta Brawl Stars LVL 30</h4>
-          <p>Com 2 Brawlers Lendários</p>
-          <span>R$ 39,99</span>
+          <img src="../jogos/rian.png" alt="Conta Brawl Stars LVL 30" />
+          <h4>Conta De Brawl Stars de 34 mil trofeus</h4>
+          <p>Com 20 Brawlers No Mil</p>
+          <span>R$ 50,00</span>
           <a href="detalhes.php?id=2" class="buy-btn">Ver Detalhes</a>
         </div>
 

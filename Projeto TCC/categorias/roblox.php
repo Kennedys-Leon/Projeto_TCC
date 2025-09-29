@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MaxAcess - Roblox</title>
+  <title>MaxAcess - Comprar e Vender Contas e Itens de Roblox</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
@@ -21,7 +21,7 @@
   </header>
 
   <section class="banner">
-    <h1>Comprar e Vender Itens de Roblox</h1>
+    <h1>Comprar e Vender Contas e Itens de Roblox</h1>
     <div class="search">
       <input type="text" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn">Buscar</button>
@@ -34,7 +34,7 @@
       <ul>
         <li><a href="#">Contas Roblox</a></li>
         <li><a href="#">Robux</a></li>
-        <li><a href="#">Itens Especiais</a></li>
+        <li><a href="#">Skins e Itens Exclusivos</a></li>
       </ul>
 
       <h3>Filtros</h3>
@@ -51,58 +51,90 @@
 
     <div class="content-area">
       <div class="product-list">
+        <!-- Produto 1 -->
         <div class="product-card">
-          <img src="../jogos/robux.png" alt="Robux" />
-          <h4>1000 Robux</h4>
-          <span>R$ 29,99</span>
+          <img src="../jogos/brainroot.png" alt="Conta Roblox com 100K Robux" />
+          <h4>Conta Roblox com 100K Robux</h4>
+          <span>R$ 500,00</span>
           <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
         </div>
 
+        <!-- Produto 2 -->
         <div class="product-card">
-          <img src="../jogos/conta-roblox.png" alt="Conta Roblox" />
-          <h4>Conta Roblox Premium</h4>
-          <p>Com benefícios exclusivos</p>
-          <span>R$ 99,99</span>
+          <img src="../jogos/blox.png" alt="Conta Roblox com 50K Robux" />
+          <h4>Conta Roblox com 50K Robux</h4>
+          <p>Com várias skins raras</p>
+          <span>R$ 250,00</span>
           <a href="detalhes.php?id=2" class="buy-btn">Ver Detalhes</a>
         </div>
 
+        <!-- Produto 3 -->
         <div class="product-card">
-          <img src="../jogos/itens-especiais.png" alt="Itens Especiais" />
-          <h4>Itens Especiais Roblox</h4>
-          <p>Inclui skins raras e acessórios</p>
-          <span>R$ 69,99</span>
+          <img src="../jogos/robux_1000.png" alt="1000 Robux" />
+          <h4>1000 Robux</h4>
+          <span>R$ 30,00</span>
           <a href="detalhes.php?id=3" class="buy-btn">Ver Detalhes</a>
         </div>
 
+        <!-- Produto 4 -->
         <div class="product-card">
-          <img src="../jogos/robux-promo.png" alt="Robux Promo" />
-          <h4>Promoção Robux</h4>
-          <p>Ganhe bônus com a compra de Robux</p>
-          <span>R$ 49,99</span>
+          <img src="../jogos/roblox_skin1.png" alt="Skin Exclusiva Roblox" />
+          <h4>Skin Exclusiva para Roblox</h4>
+          <p>Skin rara e limitada</p>
+          <span>R$ 40,00</span>
           <a href="detalhes.php?id=4" class="buy-btn">Ver Detalhes</a>
         </div>
 
+        <!-- Produto 5 -->
         <div class="product-card">
-          <img src="../jogos/avatar-roblox.png" alt="Avatar Roblox" />
-          <h4>Avatar Roblox Exclusivo</h4>
-          <p>Crie seu avatar único</p>
-          <span>R$ 79,99</span>
+          <img src="../jogos/roblox_skin2.png" alt="Skin Lendária Roblox" />
+          <h4>Skin Lendária para Roblox</h4>
+          <p>Exclusiva e colecionável</p>
+          <span>R$ 80,00</span>
           <a href="detalhes.php?id=5" class="buy-btn">Ver Detalhes</a>
         </div>
 
+        <!-- Produto 6 -->
         <div class="product-card">
-          <img src="../jogos/robux.png" alt="Robux" />
-          <h4>5000 Robux</h4>
-          <span>R$ 149,99</span>
+          <img src="../jogos/roblox_conta3.png" alt="Conta Roblox com 10K Robux" />
+          <h4>Conta Roblox com 10K Robux</h4>
+          <span>R$ 150,00</span>
           <a href="detalhes.php?id=6" class="buy-btn">Ver Detalhes</a>
         </div>
 
-        <!-- Mais produtos podem ser adicionados aqui -->
+        <!-- Produto 7 -->
+        <div class="product-card">
+          <img src="../jogos/roblox_skin_amber.png" alt="Skin Amber Roblox" />
+          <h4>Skin Amber - Roblox</h4>
+          <p>Skin exclusiva para sua conta</p>
+          <span>R$ 25,00</span>
+          <a href="detalhes.php?id=7" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <!-- Produto 8 -->
+        <div class="product-card">
+          <img src="../jogos/roblox_premium.png" alt="Conta Roblox Premium" />
+          <h4>Conta Roblox Premium</h4>
+          <p>Assinatura Premium com benefícios exclusivos</p>
+          <span>R$ 120,00</span>
+          <a href="detalhes.php?id=8" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <!-- Produto 9 -->
+        <div class="product-card">
+          <img src="../jogos/roblox_skin_legendary.png" alt="Skin Lendária Roblox" />
+          <h4>Skin Lendária para Roblox</h4>
+          <span>R$ 50,00</span>
+          <a href="detalhes.php?id=9" class="buy-btn">Ver Detalhes</a>
+        </div>
+
+        <!-- Outros produtos podem ser adicionados aqui -->
       </div>
     </div>
   </section>
 
   <footer>
+    <p>&copy; 2025 GGMax. Todos os direitos reservados.</p>
   </footer>
 </body>
 </html>

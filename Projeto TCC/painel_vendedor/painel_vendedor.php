@@ -215,12 +215,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <label>Categoria:</label>
                     <select id="CampCategoria" name="categoria" required>
                         <option value="" disabled selected>Selecione</option>
-                        <option value="conta_stream">Conta de Stream</option>
-                        <option value="gift_card">Gift Card</option>
-                        <option value="itens_jogos">Itens em Jogos</option>
-                        <option value="conta_jogo">Conta de Jogo</option>
-                        <option value="jogos">Jogos</option>
-                        <option value="chaves_jogos">Chaves de Jogos</option>
+                        <option value="Conta de Stream">Conta de Stream</option>
+                        <option value="Gift Card">Gift Card</option>
+                        <option value="Itens de Jogos">Itens em Jogos</option>
+                        <option value="Conta em Jogos">Conta em Jogos</option>
+                        <option value="Jogos">Jogos</option>
+                        <option value="Chaves de Jogos">Chaves de Jogos</option>
                     </select><br><br>
 
                     <label>Quantidade em Estoque:</label>
@@ -242,31 +242,64 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <!-- Lista de Produtos -->
-            <table>
+            <table class="produtos-tabela">
                 <tr>
+                    <th>Imagem</th>
                     <th>Nome do produto</th>
                     <th>Preço</th>
                     <th>Categoria</th>
-                    <th>Qtd</th>
+                    <th>Estoque</th>
                     <th>Data Pub.</th>
                     <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
                 <?php foreach ($produtos as $p): ?>
-                <tr>
+                <tr style="text-align:center; vertical-align:middle;">
+                    <td style="text-align:center;">
+                        <?php
+                        // Busca a imagem do produto
+                        $stmtImg = $pdo->prepare("SELECT imagem FROM imagens WHERE idproduto = ? LIMIT 1");
+                        $stmtImg->execute([$p['idproduto']]);
+                        $img = $stmtImg->fetch(PDO::FETCH_ASSOC);
+                        if ($img && !empty($img['imagem'])) {
+                            echo '<img src="data:image/jpeg;base64,' . base64_encode($img['imagem']) . '" alt="Imagem do Produto" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">';
+                        } else {
+                            echo '<img src="https://via.placeholder.com/60x60?text=Sem+Imagem" alt="Sem Imagem" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">';
+                        }
+                        ?>
+                    </td>
                     <td><?php echo htmlspecialchars($p['nome']); ?></td>
                     <td>R$ <?php echo number_format($p['preco'],2,",","."); ?></td>
                     <td><?php echo htmlspecialchars($p['categoria']); ?></td>
                     <td><?php echo $p['quantidade_estoque']; ?></td>
                     <td><?php echo date("d/m/Y", strtotime($p['data_pub'])); ?></td>
-                    <td><?php echo htmlspecialchars($p['descricao']); ?></td>
+                    <td style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center;" title="<?php echo htmlspecialchars($p['descricao']); ?>"> <?php echo htmlspecialchars($p['descricao']); ?> </td>
                     <td>
                         <button class="btn">Editar</button>
-                        <button class="btn">Excluir</button>
+                        <form method="post" action="excluir_produto.php" style="display:inline;">
+                            <input type="hidden" name="idproduto" value="<?php echo $p['idproduto']; ?>">
+                            <button type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este produto?');">Excluir</button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
+    <style>
+    .produtos-tabela th, .produtos-tabela td {
+        text-align: center;
+        vertical-align: middle;
+    }
+    .produtos-tabela td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 180px;
+    }
+    .produtos-tabela td img {
+        display: block;
+        margin: 0 auto;
+    }
+    </style>
         </div>
 
         <!-- Meu Perfil -->
