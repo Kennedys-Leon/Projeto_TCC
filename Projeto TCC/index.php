@@ -256,7 +256,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </section>
 
             <section class="produtos-destaque">
-            <h3>Novos Produtos dos Vendedores</h3>
+            <h3>Produtos recém adicionados</h3>
             <div class="lista-produtos-destaque">
                 <?php if (count($produtos) > 0): ?>
                     <?php foreach ($produtos as $produto): ?>
