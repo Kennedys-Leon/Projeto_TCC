@@ -215,12 +215,13 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <label>Categoria:</label>
                     <select id="CampCategoria" name="categoria" required>
                         <option value="" disabled selected>Selecione</option>
-                        <option value="Conta de Stream">Conta de Stream</option>
-                        <option value="Gift Card">Gift Card</option>
-                        <option value="Itens de Jogos">Itens em Jogos</option>
-                        <option value="Conta em Jogos">Conta em Jogos</option>
-                        <option value="Jogos">Jogos</option>
-                        <option value="Chaves de Jogos">Chaves de Jogos</option>
+                        <option value="Contas de Streaming">Contas de Streaming</option>
+                        <option value="Gift Cards">Gift Cards</option>
+                        <option value="Itens Digitais em Jogos">Itens Digitais em Jogos</option>
+                        <option value="Contas de Jogos">Contas de Jogos</option>
+                        <option value="Jogos Digitais ou Mídia Física">Jogos Digitais ou Mídia Física</option>
+                        <option value="Keys de Jogos">Keys de Jogos</option>
+                        <option value="Outros">Outros</option>
                     </select><br><br>
 
                     <label>Quantidade em Estoque:</label>
@@ -273,9 +274,13 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($p['categoria']); ?></td>
                     <td><?php echo $p['quantidade_estoque']; ?></td>
                     <td><?php echo date("d/m/Y", strtotime($p['data_pub'])); ?></td>
-                    <td style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center;" title="<?php echo htmlspecialchars($p['descricao']); ?>"> <?php echo htmlspecialchars($p['descricao']); ?> </td>
+                    <td style="text-align:center; white-space:normal; word-wrap:break-word;">
+                        <?php echo htmlspecialchars($p['descricao']); ?>
+                    </td>
                     <td>
-                        <button class="btn">Editar</button>
+                    
+                        <a href="editar_produto.php?id=<?php echo $p['idproduto']; ?>" class="btn">Editar</a>
+
                         <form method="post" action="excluir_produto.php" style="display:inline;">
                             <input type="hidden" name="idproduto" value="<?php echo $p['idproduto']; ?>">
                             <button type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este produto?');">Excluir</button>
@@ -284,22 +289,24 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
                 <?php endforeach; ?>
             </table>
-    <style>
-    .produtos-tabela th, .produtos-tabela td {
-        text-align: center;
-        vertical-align: middle;
-    }
-    .produtos-tabela td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 180px;
-    }
-    .produtos-tabela td img {
-        display: block;
-        margin: 0 auto;
-    }
-    </style>
+                <style>
+                .produtos-tabela th, .produtos-tabela td {
+                    text-align: center;
+                    vertical-align: middle;
+                    white-space: normal;
+                    word-wrap: break-word;
+                }
+                .produtos-tabela td {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 180px;
+                }
+                .produtos-tabela td img {
+                    display: block;
+                    margin: 0 auto;
+                }
+                </style>
         </div>
 
         <!-- Meu Perfil -->
