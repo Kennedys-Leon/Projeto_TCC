@@ -107,14 +107,25 @@ body {
   color: #eaeaea;
 }
 
-input[type="file"] {
+.form-cadastro input[type="file"] {
   background-color: #2d2d4d; /* cor de fundo escura */
   color: #fff; /* cor do texto */
-  border: none;
-  padding: 8px;
-  border-radius: 6px;
+  border: 1px solid #bbb;
+  padding: 10px 10px;
+  border-radius: 8px;
   font-family: inherit;
   cursor: pointer;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 1px 4px rgba(40, 40, 60, 0.07);
+  transition: border 0.2s, background 0.2s;
+}
+
+input[type="file"]:focus {
+  border: 1.5px solid #a99cff;
+  background: #3c3959;
+  color: #fff;
+  outline: none;
 }
 
 input[type="file"]::file-selector-button {
@@ -126,15 +137,13 @@ input[type="file"]::file-selector-button {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: #9d9dfc;
-}
-
-input[type="file"]::file-selector-button {
   display: block;
   margin: 0 auto;
+}
+
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #7a78d9;
 }
 
 .alterar-foto-container {

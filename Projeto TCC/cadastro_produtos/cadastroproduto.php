@@ -30,7 +30,7 @@
         }
 
         select:focus {
-            border-color: #e63946; /* vermelho igual ao botão */
+            border-color: #78d9f4ff; /* vermelho igual ao botão */
             outline: none;
         }
     </style>

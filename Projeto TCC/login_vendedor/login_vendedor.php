@@ -4,32 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Vendedor</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
 </head>
 <body>
-    <div class="container-login">
-        <form action="process_login_vendedor.php" method="post" class="formulario-login">
-            <h2>Olá vendedor! Faça seu login 👇</h2>
+    <form action="process_login_vendedor.php" method="post" class="form-cadastro">
+        <h2>Olá vendedor! Faça seu login 👇</h2>
 
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
 
-            <input type="submit" value="Entrar" class="btn-login">
+        <input type="submit" value="Entrar" class="btn-vermelho">
 
-            <div class="botoes-inicio">
-                <a href="../cadastro_vendedor/cadastrovendedor.php">Não tem conta? Cadastre-se agora!</a>
-            </div>
+        <div class="botoes-inicio">
+            <a href="../cadastro_vendedor/cadastrovendedor.php" class="btn-primario">Não tem conta? Cadastre-se agora!</a>
+        </div>
 
-            <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
-                <p style="color: red; margin-top: 10px;">Email ou senha incorretos.</p>
-            <?php endif; ?>
-        </form>
-    </div>
+        <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+            <p style="color: red; margin-top: 10px;">Email ou senha incorretos.</p>
+        <?php endif; ?>
+    </form>
 </body>
 </html>
