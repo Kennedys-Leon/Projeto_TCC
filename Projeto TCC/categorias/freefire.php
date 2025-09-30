@@ -56,16 +56,16 @@
   <img src="../jogos/free.jpg" alt="PASSO BOOYAH PREMIUM" />
   <h4>PASSO BOOYAH PREMIUM</h4>
   <span>R$ 4,97</span>
-  <a href="detalhes.php?id=1" class="buy-btn">Ver Detalhes</a>
+  <a href="detalhes.php?id=" class="buy-btn">Ver Detalhes</a>
 </div>
 
 
         <div class="product-card">
         <img src="../jogos/free15.png" alt="PASSO BOOYAH PREMIUM" />
-        <h4>Conta Free Fire LVL 15</h4>
-          <p>+300 Diamantes</p>
+        <h4>Conta Free Fire LVL 38</h4>
+          <p>Já está mestre</p>
           <span>R$ 2,99</span>
-  <a href="detalhes.php?id=2" class="buy-btn">Ver Detalhes</a>
+  <a href="detalhes.php?id=" class="buy-btn">Ver Detalhes</a>
         </div>
 
         <div class="product-card">

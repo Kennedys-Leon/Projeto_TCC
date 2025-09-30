@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clickInsideSidebar = sidebar.contains(e.target);
         const clickedToggle = e.target === menuToggle;
         if (!clickInsideSidebar && !clickedToggle) closeSide();
+        
     });
 
 });

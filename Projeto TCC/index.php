@@ -48,16 +48,19 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="logo-user-container">
             <div class="logo">
-                <img src="img/Logo.png" alt="MaxAcess" class="logo-img" />
+                <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
             </div>
         </div>
 
         <nav class="navbar">
             <ul>
 
-                <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+            <li><a href="informacoes_cabecalho/.php">Categorias ▼</a></li>
+
+                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
+                
 
                 <?php if (!isset($_SESSION['usuario_nome'])): ?>
                     <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
