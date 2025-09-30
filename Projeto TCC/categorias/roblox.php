@@ -122,7 +122,7 @@
 
         <!-- Produto 9 -->
         <div class="product-card">
-          <img src="../jogos/roblox_skin_legendary.png" alt="Skin Lendária Roblox" />
+          <img src="../jogos/lendarios.png" alt="Skin Lendária Roblox" />
           <h4>Skin Lendária para Roblox</h4>
           <span>R$ 50,00</span>
           <a href="detalhes.php?id=9" class="buy-btn">Ver Detalhes</a>

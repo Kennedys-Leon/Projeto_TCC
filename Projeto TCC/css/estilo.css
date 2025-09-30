@@ -677,3 +677,46 @@ body.dark-mode .servico-item h3 {
 body.dark-mode .servico-item p {
     color: #ddd;
 }
+/* Deixa o submenu escondido por padrão */
+.dropdown .submenu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+  }
+  
+  /* Mostra quando passa o mouse */
+  .dropdown:hover .submenu {
+    display: block;
+  }
+  
+  .dropdown .submenu li {
+    margin: 5px 0;
+  }
+  
+  .dropdown .submenu a {
+    color: #333;
+    text-decoration: none;
+  }
+  .submenu {
+    display: flex;
+    flex-direction: column; /* coloca em coluna */
+    gap: 10px;              /* espaço entre os itens */
+    padding: 10px;
+  }
+  
+  .submenu a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #333;
+    transition: background 0.3s;
+  }
+  
+  .submenu a:hover {
+    background: #f0f0f0;
+  }
+  
