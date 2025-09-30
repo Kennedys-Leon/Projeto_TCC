@@ -70,7 +70,7 @@
 
         <!-- Produto 3 -->
         <div class="product-card">
-          <img src="../jogos/robux_1000.png" alt="1000 Robux" />
+          <img src="../jogos/roblox.png" alt="1000 Robux" />
           <h4>1000 Robux</h4>
           <span>R$ 30,00</span>
           <a href="detalhes.php?id=3" class="buy-btn">Ver Detalhes</a>
@@ -78,7 +78,7 @@
 
         <!-- Produto 4 -->
         <div class="product-card">
-          <img src="../jogos/roblox_skin1.png" alt="Skin Exclusiva Roblox" />
+          <img src="../jogos/fruit.png" alt="Skin Exclusiva Roblox" />
           <h4>Skin Exclusiva para Roblox</h4>
           <p>Skin rara e limitada</p>
           <span>R$ 40,00</span>
@@ -87,7 +87,7 @@
 
         <!-- Produto 5 -->
         <div class="product-card">
-          <img src="../jogos/roblox_skin2.png" alt="Skin Lendária Roblox" />
+          <img src="../jogos/lendario.png" alt="Skin Lendária Roblox" />
           <h4>Skin Lendária para Roblox</h4>
           <p>Exclusiva e colecionável</p>
           <span>R$ 80,00</span>
@@ -96,7 +96,7 @@
 
         <!-- Produto 6 -->
         <div class="product-card">
-          <img src="../jogos/roblox_conta3.png" alt="Conta Roblox com 10K Robux" />
+          <img src="../jogos/blox1.png" alt="Conta Roblox com 10K Robux" />
           <h4>Conta Roblox com 10K Robux</h4>
           <span>R$ 150,00</span>
           <a href="detalhes.php?id=6" class="buy-btn">Ver Detalhes</a>
@@ -104,7 +104,7 @@
 
         <!-- Produto 7 -->
         <div class="product-card">
-          <img src="../jogos/roblox_skin_amber.png" alt="Skin Amber Roblox" />
+          <img src="../jogos/acessorio.png" alt="Skin Amber Roblox" />
           <h4>Skin Amber - Roblox</h4>
           <p>Skin exclusiva para sua conta</p>
           <span>R$ 25,00</span>
@@ -113,7 +113,7 @@
 
         <!-- Produto 8 -->
         <div class="product-card">
-          <img src="../jogos/roblox_premium.png" alt="Conta Roblox Premium" />
+          <img src="../jogos/premium.png" alt="Conta Roblox Premium" />
           <h4>Conta Roblox Premium</h4>
           <p>Assinatura Premium com benefícios exclusivos</p>
           <span>R$ 120,00</span>

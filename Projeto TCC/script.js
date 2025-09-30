@@ -35,10 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        setThemeLabels();
-        // (opcional) persistir tema
-        localStorage.setItem('ma_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        // Adiciona um leve delay antes de alternar o tema
+        setTimeout(() => {
+            const isDark = document.body.classList.contains('dark-mode');
+            if (isDark) {
+                // Se estiver no modo escuro, remove com delay
+                document.body.classList.remove('dark-mode');
+            } else {
+                // Se estiver no modo claro, adiciona com delay
+                document.body.classList.add('dark-mode');
+            }
+            setThemeLabels();
+            // (opcional) persistir tema
+            localStorage.setItem('ma_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }, 200); // 200ms de delay
     }
 
     // inicia tema (padrão dark + recupera preferido)
@@ -164,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clickInsideSidebar = sidebar.contains(e.target);
         const clickedToggle = e.target === menuToggle;
         if (!clickInsideSidebar && !clickedToggle) closeSide();
+        
     });
 
 });

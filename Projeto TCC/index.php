@@ -24,12 +24,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Projeto TCC</title>
+    <title>Projeto TCC - MaxAcess</title>
 
     <!-- Seus estilos -->
     <link rel="stylesheet" href="css/estilo.css" />
     <link rel="stylesheet" href="css/cart.css">
-    
+
     <!-- Estilo da sidebar (só a lateral) -->
     <link rel="stylesheet" href="css/sidebar.css">
 
@@ -40,7 +40,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <header class="header">
         <!-- Botão hambúrguer (abre a sidebar) -->
-        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu lateral" aria-expanded="false">☰</button>
         
 
         <!-- Ícone do carrinho original (continua funcionando) -->
@@ -48,16 +48,19 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="logo-user-container">
             <div class="logo">
-                <img src="img/Logo.png" alt="MaxAcess" class="logo-img" />
+                <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
             </div>
         </div>
 
         <nav class="navbar">
             <ul>
 
-                <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+            <li><a href="informacoes_cabecalho/.php">Categorias ▼</a></li>
+
+                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
+                
 
                 <?php if (!isset($_SESSION['usuario_nome'])): ?>
                     <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
@@ -72,19 +75,22 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </ul>
 
             <div class="search-bar-wrapper">
-                <input class="search-bar" type="text" placeholder="Buscar 🔍︎" />
+                
+                <input id="search-input" class="search-bar" type="text" placeholder="Buscar 🔍︎" aria-describedby="search-icon" />
             </div>
 
             <div class="search-cart">
 
+            <br>
+
                 <!-- Modal do carrinho -->
-                <div id="cart-modal" class="cart-modal">
-                    <div class="cart-modal-content">
+                <div id="cart-modal" class="cart-modal" role="dialog" aria-labelledby="cart-modal-header" aria-describedby="cart-modal-content" aria-hidden="true">
+                    <div class="cart-modal-content" id="cart-modal-content">
                         <div class="cart-modal-header">
-                            <h2>Seu Carrinho</h2>
-                            <span class="cart-close-btn">&times;</span>
+                            <h2 id="cart-modal-header">Seu Carrinho</h2>
+                            <button class="cart-close-btn" aria-label="Fechar carrinho">&times;</button>
                         </div>
-                        <ul class="cart-items"></ul>
+                        <ul class="cart-items" aria-label="Itens no carrinho"></ul>
                         <p id="cart-empty-message" class="cart-empty-message">Seu carrinho está vazio.</p>
                         <div class="cart-summary">
                             <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
@@ -163,7 +169,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
         <?php endif; ?>
 
-        <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
+        <li><button type="button" id="toggle-theme-sidebar" aria-label="Alternar tema na sidebar">☾</button></li>
     </ul>
 
     <!-- Usuário lá embaixo da sidebar -->
@@ -190,11 +196,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </aside>
     <!-- ========== FIM SIDEBAR ========== -->
 
-    <main class="conteudo">
-        <div class="container">
-            <br><br><br>
+    <main id="main-content" class="conteudo">
         <img src="img/banneratu.png" alt="Banner MaxAcess" class="banner-destaque" />
-   <br>
+        <div class="container">
+            <br>
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
             <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
 
@@ -205,28 +210,28 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <h3>Categorias em Destaque</h3>
                 <div class="lista-produtos">
                 <a href="categorias/freefire.php" class="produto">
-                <img src="img/FF.jpeg" alt="Produto 1" />
+                <img src="img/FF.jpeg" alt="Categoria Free Fire" />
                 <p>Free Fire</p>
                 </a>
 
                     <a href="categorias/brawlstars.php" class="produto">
-                        <img src="img/brawl.webp" alt="Produto 2" />
+                        <img src="img/brawl.webp" alt="Categoria Brawl Stars" />
                         <p>Brawl Stars </p>
                     </a>
                     <a href="categorias/fifa.php" class="produto">
-                        <img src="img/fifa.jpeg" alt="Produto 3" />
+                        <img src="img/fifa.jpeg" alt="Categoria FIFA" />
                         <p>Fifa</p>
                     </a>
                     <a href="categorias/roblox.php" class="produto">
-                        <img src="img/roblox.jpeg" alt="Produto 4" />
+                        <img src="img/roblox.jpeg" alt="Categoria Roblox" />
                         <p>Roblox</p>
                     </a>
                     <a href="categorias/fortnite.php" class="produto">
-                        <img src="img/fortnite.jpeg" alt="Produto 5" />
+                        <img src="img/fortnite.jpeg" alt="Categoria Fortnite" />
                         <p>Fortnite</p>
                     </a>
                     <a href="categorias/minecraft.php" class="produto">
-                        <img src="img/minecraft.jpeg" alt="Produto 6" />
+                        <img src="img/minecraft.jpeg" alt="Categoria Minecraft" />
                         <p>Mine</p>
                     </a>
                 </div>
