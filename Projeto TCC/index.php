@@ -21,7 +21,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="pt-BR">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair Display:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Projeto TCC - MaxAcess</title>
@@ -121,7 +121,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
     <ul>
         <li><a href="index.php"><img src="img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
-        <li><a href="#" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
+        <li><a href="carrinho/checkout.php" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
 
         <?php if (isset($_SESSION['vendedor_nome'])): ?>
             <!-- Vendedor logado -->
@@ -142,7 +142,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- Ninguém logado -->
             <li><a href="cadastro_vendedor/cadastrovendedor.php">
                 <img src="img/megafone.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
-                Anunciar
+                Quero Vender
             </a></li>
             <li><a href="cadastro_usuario/cadastro.php">
                 <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
@@ -201,10 +201,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container">
             <br>
         <h2>Bem-vindo ao MaxAcess, venda ou compre</h2>
-            <p>contas, jogos, gift cards, gold, itens digitais e mais :></p>
-
-                  
-
+            <p>contas, jogos, gift cards, gold, itens digitais e mais :></p><br>
 
             <section class="produtos-destaque">
                 <h3>Categorias em Destaque</h3>

@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Playfair';
   background: #F4F1EE;
   min-height: 100vh;
   display: flex;
@@ -32,6 +32,7 @@ body {
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
+  font-family: 'Playfair Display', serif;
 }
 
 /* Labels e Inputs */
@@ -40,6 +41,7 @@ body {
   margin-bottom: 6px;
   font-weight: 500;
   color: #fefeff;
+  font-family: 'Playfair Display', serif;
 }
 
 .form-cadastro input[type="text"],
@@ -48,17 +50,15 @@ body {
 .form-cadastro input[type="file"],
 .form-cadastro input[type="email"],
 .form-cadastro textarea {
-  background: #242426; /* mesma cor do fundo do formulário */
-  color: #fff;
-  width: 100%;
-  max-width: 500px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  font-size: 16px;
-  padding: 10px 10px;
-  margin-bottom: 20px;
-  transition: border 0.2s, background 0.2s;
+    background: #242426; /* mesma cor do fundo do formulário */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    font-family: 'Playfair Display', serif;
 }
+
 
 .form-cadastro input[type="text"]:focus,
 .form-cadastro input[type="number"]:focus,
@@ -82,6 +82,7 @@ body {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s, transform 0.15s;
+  font-family: 'Playfair Display', serif;
 }
 
 .btn-vermelho:hover {

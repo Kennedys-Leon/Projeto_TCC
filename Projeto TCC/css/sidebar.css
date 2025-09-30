@@ -1,6 +1,5 @@
-/* Botão hambúrguer */
 .menu-toggle{
-    position: fixed;         /* fica no canto independente do scroll */
+    position: fixed; 
     top: 20px;
     left: 20px;
     width: 40px;
@@ -15,7 +14,7 @@
     justify-content: center;
     border-radius: 10px;
     cursor: pointer;
-    z-index: 1100;           /* acima do header */
+    z-index: 1100;
 }
 .menu-toggle:hover{ background: rgba(255,255,255,.15); }
 
@@ -67,6 +66,7 @@
     text-decoration: none;
     cursor: pointer;
     transition: background .2s ease, padding-left .2s ease;
+    font-family: 'Playfair Display', serif;
 }
 .sidebar a:hover,
 .sidebar button:hover{

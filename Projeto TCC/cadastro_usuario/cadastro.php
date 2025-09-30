@@ -52,7 +52,7 @@
 
             <div class="campo Senha">
                 <label for="CampSenha"></label>
-                <input type="password" name="senha" placeholder="Senha" required>
+                <input type="password" name="senha" placeholder="Senha" required><br>
             </div>
         </div>      
 

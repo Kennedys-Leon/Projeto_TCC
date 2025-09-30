@@ -27,7 +27,7 @@
         <div class="linha">
             <div class="campo">
                 <label for="CampNome">Nome:</label>
-                <input type="text" name="nome" maxlength="100" required>
+                <input type="text" name="nome" maxlength="100" placeholder="Nome de Vendedor" required>
             </div>
 
             <div class="campo">
