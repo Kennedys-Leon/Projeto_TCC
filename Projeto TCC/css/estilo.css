@@ -1,4 +1,4 @@
-/* ===== Listas de instrução (Como Funciona) ===== */
+    /* ===== Listas de instrução (Como Funciona) ===== */
 .conteudo ol {
     max-width: 700px;
     margin: 32px auto;
@@ -38,21 +38,28 @@ body.dark-mode .conteudo h1 {
 }
 body {
     padding-top: 60px; /* 80px antes, diminua para aproximar o banner */
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #f2f2f7;
 }
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 100%;            /* O banner ocupa toda a largura da tela */
+    width: 95vw;
     height: 70vh;           /* A altura é 70% da altura da janela */
-    max-width: 100%;        /* Largura sem limites, ocupa 100% da tela */
-    margin: 0 auto;         /* Centraliza o banner */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
     object-fit: cover;      /* A imagem ocupa o espaço sem distorcer */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para destaque */
 }
 
 body {
-    padding-top: 41px; /* 80px antes, diminua para aproximar o banner */
+    padding-top: 120px; /* 80px antes, diminua para aproximar o banner */
 }
 
 
