@@ -39,42 +39,20 @@
     <form id="formCadastro" action="cadastrobd.php" method="post" enctype="multipart/form-data" class="form-cadastro">
         <h2>Bem-Vindo! Cadastre-se com suas informações abaixo</h2>
 
-        <div class="linha">
+        <div class="campo.nome">
             <div class="campo nome">
-                <label for="CampNome">Nome:</label>
-                <input type="text" name="nome" required>
+                <label for="CampNome"></label>
+                <input type="text" name="nome" placeholder="Nome de Usuário" required>
             </div>
 
-            <div class="campo CPF">
-                <label for="CampCPF">CPF:</label>
-                <input type="text" name="cpf" id="cpf" maxlength="14" placeholder="000.000.000-00" required>
-                <small id="erro-cpf">CPF inválido.</small>
-            </div>
-        </div>
-        
-        <div class="linha">
-            <div class="campo CEP">
-                <label for="CampCep">CEP:</label>
-                <input type="text" name="cep" id="cep" maxlength="9" placeholder="0000-000" required>
-                <small id="erro-cep">CEP deve conter 8 dígitos.</small>
-            </div>
-
-            <div class="campo Telefone">
-                <label for="CampTelefone">Telefone:</label>
-                <input type="text" name="telefone" id="telefone" maxlength="14" placeholder="(00) 00000-0000" required>
-                <small id="erro-telefone">Telefone inválido.</small>
-            </div>
-        </div>
-
-        <div class="linha">
             <div class="campo Email">
-                <label for="CampEmail">Email:</label>
+                <label for="CampEmail"></label>
                 <input type="email" name="email" placeholder="nome@exemplo.com" required>
             </div>
 
             <div class="campo Senha">
-                <label for="CampSenha">Senha:</label>
-                <input type="password" name="senha" required>
+                <label for="CampSenha"></label>
+                <input type="password" name="senha" placeholder="Senha" required>
             </div>
         </div>      
 
