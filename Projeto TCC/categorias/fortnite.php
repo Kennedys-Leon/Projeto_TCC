@@ -105,7 +105,7 @@
 
         <!-- Produto 7 -->
         <div class="product-card">
-          <img src="../jogos/fortnite_skin_blackknight.png" alt="Skin Black Knight" />
+          <img src="../jogos/knight.png" alt="Skin Black Knight" />
           <h4>Skin Black Knight</h4>
           <p>Do Battle Pass da Temporada 2</p>
           <span>R$ 500,00</span>
@@ -114,7 +114,7 @@
 
         <!-- Produto 8 -->
         <div class="product-card">
-          <img src="../jogos/fortnite_pacote.png" alt="Pacote de Itens Exclusivos" />
+          <img src="../jogos/pacote.png" alt="Pacote de Itens Exclusivos" />
           <h4>Pacote de Itens Exclusivos</h4>
           <p>Inclui mochilas, picaretas e danças raras</p>
           <span>R$ 120,00</span>

@@ -55,7 +55,17 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <nav class="navbar">
             <ul>
 
-            <li><a href="informacoes_cabecalho/.php">Categorias ▼</a></li>
+            <li class="dropdown">
+  <a href="#">Categorias ▼</a>
+  <ul class="submenu">
+    <li><a href="categorias/brawlstars.php">Brawl Stars</a></li>
+    <li><a href="categorias/fifa.php">FIFA</a></li>
+    <li><a href="categorias/fortnite.php">Fortnite</a></li>
+    <li><a href="categorias/freefire.php">Free Fire</a></li>
+    <li><a href="categorias/minecraft.php">Minecraft</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+  </ul>
+</li>
 
                  <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
