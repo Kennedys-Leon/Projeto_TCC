@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
 /* Reset básico */
 * {
   margin: 0;
@@ -32,7 +34,7 @@ body {
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Labels e Inputs */
@@ -41,7 +43,7 @@ body {
   margin-bottom: 6px;
   font-weight: 500;
   color: #fefeff;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .form-cadastro input[type="text"],
@@ -51,12 +53,16 @@ body {
 .form-cadastro input[type="email"],
 .form-cadastro textarea {
     background: #242426; /* mesma cor do fundo do formulário */
+    color:#ffffff;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.3s ease;
     font-family: 'Playfair Display', serif;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 12px;
 }
 
 
