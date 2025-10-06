@@ -1,55 +1,79 @@
+
 <?php
 session_start();
 include '../conexao.php';
 
-// Verifica se vendedor está logado
+// ============================
+// Verifica se o vendedor está logado
+// ============================
 if (!isset($_SESSION['vendedor_logado'])) {
     header("Location: ../login_vendedor/login_vendedor.php");
     exit;
 }
 
-$vendedor_id = $_SESSION['vendedor_logado'];
+$idvendedor = $_SESSION['vendedor_logado'];
 
-// Verifica se o formulário foi enviado via POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome        = trim($_POST['nome']);
-    $preco       = str_replace(",", ".", preg_replace('/[^\d,]/', '', $_POST['preco'])); // limpa e ajusta preço
-    $categoria   = $_POST['categoria'];
-    $quantidade  = (int) $_POST['quantidade'];
-    $data_pub    = DateTime::createFromFormat('d/m/Y', $_POST['data_pub']);
-    $descricao   = trim($_POST['descricao']);
+// ============================
+// Coleta e valida dados do formulário
+// ============================
+$idproduto   = $_POST['idproduto'] ?? null;
+$nome        = trim($_POST['nome'] ?? '');
+$preco       = $_POST['preco'] ?? '';
+$categoria   = $_POST['categoria'] ?? '';
+$quantidade  = $_POST['quantidade'] ?? 0;
+$descricao   = trim($_POST['descricao'] ?? '');
 
-    if ($data_pub) {
-        $data_pub = $data_pub->format('Y-m-d');
-    } else {
-        $data_pub = date('Y-m-d');
-    }
-
-    // Atualizar imagem apenas se foi enviada
-    if (!empty($_FILES['imagem']['name'])) {
-        $img = file_get_contents($_FILES['imagem']['tmp_name']);
-        if ($img && !empty($img['imagem'])) {
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($img['imagem']) . '" alt="Imagem do Produto" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">';
-        } else {
-            echo '<img src="https://via.placeholder.com/60x60?text=Sem+Imagem" alt="Sem Imagem" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">';
-        }
-        $stmt = $pdo->prepare("UPDATE produto 
-            SET nome = ?, preco = ?, categoria = ?, quantidade_estoque = ?, data_pub = ?, descricao = ?, imagem = ?
-            WHERE idproduto = ? AND idvendedor = ?");
-        $ok = $stmt->execute([$nome, $preco, $categoria, $quantidade, $data_pub, $descricao, $img, $vendedor_id]);
-    } else {
-        $stmt = $pdo->prepare("UPDATE produto 
-            SET nome = ?, preco = ?, categoria = ?, quantidade_estoque = ?, data_pub = ?, descricao = ?
-            WHERE idproduto = ? AND idvendedor = ?");
-        $ok = $stmt->execute([$nome, $preco, $categoria, $quantidade, $data_pub, $descricao, $vendedor_id]);
-    }
-
-    if ($ok) {
-        header("Location: painel_vendedor.php?tab=produtos&msg=Produto atualizado com sucesso");
-        exit;
-    } else {
-        echo "Erro ao atualizar produto!";
-    }
-} else {
-    echo "Requisição inválida!";
+if (!$idproduto || empty($nome) || empty($preco) || empty($categoria) || $quantidade <= 0) {
+    die("Preencha todos os campos obrigatórios.");
 }
+
+// ============================
+// Verifica se o produto pertence ao vendedor logado
+// ============================
+$stmt = $pdo->prepare("SELECT idproduto FROM produto WHERE idproduto = ? AND idvendedor = ?");
+$stmt->execute([$idproduto, $idvendedor]);
+if (!$stmt->fetch()) {
+    die("Produto não encontrado ou sem permissão para editar.");
+}
+
+// ============================
+// Converte o preço para formato de banco
+// ============================
+$preco = str_replace(['.', ','], ['', '.'], $preco);
+
+// ============================
+// Atualiza os dados principais do produto
+// ============================
+$stmt = $pdo->prepare("UPDATE produto 
+                       SET nome = ?, preco = ?, categoria = ?, quantidade_estoque = ?, descricao = ? 
+                       WHERE idproduto = ?");
+$stmt->execute([$nome, $preco, $categoria, $quantidade, $descricao, $idproduto]);
+
+// ============================
+// Atualiza a imagem (se enviada)
+// ============================
+if (!empty($_FILES['imagem']['tmp_name'])) {
+    $imgData = file_get_contents($_FILES['imagem']['tmp_name']);
+
+    // Verifica se já existe imagem para este produto
+    $stmtImg = $pdo->prepare("SELECT idimagens FROM imagens WHERE idproduto = ?");
+    $stmtImg->execute([$idproduto]);
+    $imagemExistente = $stmtImg->fetch(PDO::FETCH_ASSOC);
+
+    if ($imagemExistente) {
+        // Atualiza imagem existente
+        $stmt = $pdo->prepare("UPDATE imagens SET imagem = ? WHERE idproduto = ?");
+        $stmt->execute([$imgData, $idproduto]);
+    } else {
+        // Insere nova imagem se ainda não existir
+        $stmt = $pdo->prepare("INSERT INTO imagens (idproduto, imagem) VALUES (?, ?)");
+        $stmt->execute([$idproduto, $imgData]);
+    }
+}
+
+// ============================
+// Redireciona de volta para o painel com sucesso
+// ============================
+header("Location: painel_vendedor.php?msg=Produto atualizado com sucesso");
+exit;
+?>

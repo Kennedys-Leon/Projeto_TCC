@@ -70,113 +70,114 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     </style>
 
-    <script>
-        function openTab(tabName) {
-            let tabs = document.querySelectorAll('.tab-content');
-            let buttons = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            buttons.forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            document.querySelector('[data-tab="'+tabName+'"]').classList.add('active');
-        }
-
-        function toggleNovoProduto() {
-            let form = document.getElementById("formNovoProduto");
-            form.style.display = (form.style.display === "none" ? "block" : "none");
-        }
-
-        // ========== Máscaras automáticas ==========
-        document.addEventListener("DOMContentLoaded", () => {
-            // Preço produto
-            const precoInput = document.getElementById("CampPreco");
-            if (precoInput) {
-                precoInput.addEventListener("input", function(e) {
-                    let valor = e.target.value.replace(/\D/g, "");
-                    if (valor === "") {
-                        e.target.value = "";
-                        return;
-                    }
-                    valor = (valor / 100).toFixed(2) + "";
-                    valor = valor.replace(".", ",");
-                    e.target.value = valor;
-                });
+        <script>
+            function openTab(tabName) {
+                let tabs = document.querySelectorAll('.tab-content');
+                let buttons = document.querySelectorAll('.tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                buttons.forEach(btn => btn.classList.remove('active'));
+                document.getElementById(tabName).classList.add('active');
+                document.querySelector('[data-tab="'+tabName+'"]').classList.add('active');
             }
 
-            // Data publicação
-            const dataInput = document.getElementById("CampData_pub");
-            if (dataInput) {
-                dataInput.addEventListener("input", function(e) {
-                    let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 8) valor = valor.substring(0, 8);
-                    let formatado = "";
-                    if (valor.length > 4) {
-                        formatado = valor.substring(0, 2) + "/" + valor.substring(2, 4) + "/" + valor.substring(4);
-                    } else if (valor.length > 2) {
-                        formatado = valor.substring(0, 2) + "/" + valor.substring(2);
-                    } else {
-                        formatado = valor;
-                    }
-                    e.target.value = formatado;
-                });
+            function toggleNovoProduto() {
+                let form = document.getElementById("formNovoProduto");
+                form.style.display = (form.style.display === "none" ? "block" : "none");
             }
 
-            // Telefone
-            const telInput = document.getElementById("CampTelefone");
-            if (telInput) {
-                telInput.addEventListener("input", function(e) {
-                    let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 11) valor = valor.substring(0, 11);
-                    if (valor.length > 6) {
-                        e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2, 7)}-${valor.substring(7)}`;
-                    } else if (valor.length > 2) {
-                        e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2)}`;
-                    } else {
+            // ========== Máscaras automáticas ==========
+            document.addEventListener("DOMContentLoaded", () => {
+                // Preço produto
+                const precoInput = document.getElementById("CampPreco");
+                if (precoInput) {
+                    precoInput.addEventListener("input", function(e) {
+                        let valor = e.target.value.replace(/\D/g, "");
+                        if (valor === "") {
+                            e.target.value = "";
+                            return;
+                        }
+                        valor = (valor / 100).toFixed(2) + "";
+                        valor = valor.replace(".", ",");
                         e.target.value = valor;
-                    }
-                });
-            }
+                    });
+                }
 
-            // CPF
-            const cpfInput = document.getElementById("CampCPF");
-            if (cpfInput) {
-                cpfInput.addEventListener("input", function(e) {
-                    let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 11) valor = valor.substring(0, 11);
-                    if (valor.length > 9) {
-                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6, 9) + "-" + valor.substring(9);
-                    } else if (valor.length > 6) {
-                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6);
-                    } else if (valor.length > 3) {
-                        e.target.value = valor.substring(0, 3) + "." + valor.substring(3);
-                    } else {
-                        e.target.value = valor;
-                    }
-                });
-            }
+                // Data publicação
+                const dataInput = document.getElementById("CampData_pub");
+                if (dataInput) {
+                    dataInput.addEventListener("input", function(e) {
+                        let valor = e.target.value.replace(/\D/g, "");
+                        if (valor.length > 8) valor = valor.substring(0, 8);
+                        let formatado = "";
+                        if (valor.length > 4) {
+                            formatado = valor.substring(0, 2) + "/" + valor.substring(2, 4) + "/" + valor.substring(4);
+                        } else if (valor.length > 2) {
+                            formatado = valor.substring(0, 2) + "/" + valor.substring(2);
+                        } else {
+                            formatado = valor;
+                        }
+                        e.target.value = formatado;
+                    });
+                }
 
-            // CNPJ
-            const cnpjInput = document.getElementById("CampCNPJ");
-            if (cnpjInput) {
-                cnpjInput.addEventListener("input", function(e) {
-                    let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 14) valor = valor.substring(0, 14);
-                    if (valor.length > 12) {
-                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8, 12) + "-" + valor.substring(12);
-                    } else if (valor.length > 8) {
-                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8);
-                    } else if (valor.length > 5) {
-                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5);
-                    } else if (valor.length > 2) {
-                        e.target.value = valor.substring(0, 2) + "." + valor.substring(2);
-                    } else {
-                        e.target.value = valor;
-                    }
-                });
-            }
-        });
-    </script>
-</head>
+                // Telefone
+                const telInput = document.getElementById("CampTelefone");
+                if (telInput) {
+                    telInput.addEventListener("input", function(e) {
+                        let valor = e.target.value.replace(/\D/g, "");
+                        if (valor.length > 11) valor = valor.substring(0, 11);
+                        if (valor.length > 6) {
+                            e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2, 7)}-${valor.substring(7)}`;
+                        } else if (valor.length > 2) {
+                            e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2)}`;
+                        } else {
+                            e.target.value = valor;
+                        }
+                    });
+                }
+
+                // CPF
+                const cpfInput = document.getElementById("CampCPF");
+                if (cpfInput) {
+                    cpfInput.addEventListener("input", function(e) {
+                        let valor = e.target.value.replace(/\D/g, "");
+                        if (valor.length > 11) valor = valor.substring(0, 11);
+                        if (valor.length > 9) {
+                            e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6, 9) + "-" + valor.substring(9);
+                        } else if (valor.length > 6) {
+                            e.target.value = valor.substring(0, 3) + "." + valor.substring(3, 6) + "." + valor.substring(6);
+                        } else if (valor.length > 3) {
+                            e.target.value = valor.substring(0, 3) + "." + valor.substring(3);
+                        } else {
+                            e.target.value = valor;
+                        }
+                    });
+                }
+
+                // CNPJ
+                const cnpjInput = document.getElementById("CampCNPJ");
+                if (cnpjInput) {
+                    cnpjInput.addEventListener("input", function(e) {
+                        let valor = e.target.value.replace(/\D/g, "");
+                        if (valor.length > 14) valor = valor.substring(0, 14);
+                        if (valor.length > 12) {
+                            e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8, 12) + "-" + valor.substring(12);
+                        } else if (valor.length > 8) {
+                            e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5, 8) + "/" + valor.substring(8);
+                        } else if (valor.length > 5) {
+                            e.target.value = valor.substring(0, 2) + "." + valor.substring(2, 5) + "." + valor.substring(5);
+                        } else if (valor.length > 2) {
+                            e.target.value = valor.substring(0, 2) + "." + valor.substring(2);
+                        } else {
+                            e.target.value = valor;
+                        }
+                    });
+                }
+            });
+        </script>
+    </head>
 <body>
+
     <header>
         <h1>MaxAcess - Painel do Vendedor</h1>
         <p>Bem-vindo, <?php echo htmlspecialchars($vendedor['nome']); ?>!</p>

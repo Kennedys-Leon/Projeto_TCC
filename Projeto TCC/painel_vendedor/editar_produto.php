@@ -2,7 +2,9 @@
 session_start();
 include '../conexao.php';
 
-// Verifica login do vendedor
+// ============================
+// Verifica se o vendedor está logado
+// ============================
 if (!isset($_SESSION['vendedor_logado'])) {
     header("Location: ../login_vendedor/login_vendedor.php");
     exit;
@@ -11,7 +13,9 @@ if (!isset($_SESSION['vendedor_logado'])) {
 $idvendedor = $_SESSION['vendedor_logado'];
 $idproduto  = $_GET['id'] ?? null;
 
-// Busca produto do vendedor logado
+// ============================
+// Busca o produto pertencente ao vendedor logado
+// ============================
 $stmt = $pdo->prepare("SELECT * FROM produto WHERE idproduto = ? AND idvendedor = ?");
 $stmt->execute([$idproduto, $idvendedor]);
 $produto = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +37,7 @@ if (!$produto) {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         .form-container {
             background: #fff;
@@ -75,6 +79,18 @@ if (!$produto) {
         .form-container button:hover {
             background: #45a049;
         }
+        .preview {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -85,24 +101,23 @@ if (!$produto) {
 
         <label for="nome">Nome do Produto</label>
         <input type="text" id="nome" name="nome" maxlength="100"
-               value="<?php echo htmlspecialchars($produto['nome']); ?>">
+               value="<?php echo htmlspecialchars($produto['nome']); ?>" required>
 
         <label for="preco">Preço</label>
-        <input type="text" id="preco" name="preco" maxlength="10"
-               value="<?php echo number_format($produto['preco'], 2, ',', '.'); ?>">
+        <input type="text" id="preco" name="preco" maxlength="15"
+               value="<?php echo number_format($produto['preco'], 2, ',', '.'); ?>" required>
 
         <label for="quantidade">Quantidade em Estoque</label>
         <input type="number" id="quantidade" name="quantidade" min="1" max="9999"
-               value="<?php echo $produto['quantidade_estoque']; ?>">
+               value="<?php echo $produto['quantidade_estoque']; ?>" required>
 
         <label for="descricao">Descrição</label>
-        <textarea id="descricao" name="descricao" maxlength="500" rows="5"><?php echo htmlspecialchars($produto['descricao']); ?></textarea>
+        <textarea id="descricao" name="descricao" maxlength="500" rows="5" required><?php echo htmlspecialchars($produto['descricao']); ?></textarea>
 
-        <!-- Campo de Categorias fixas -->
         <label for="categoria">Categoria</label>
         <select id="categoria" name="categoria" required>
             <option value="">Selecione uma categoria</option>
-            <option value="Contas de Streaming" <?php echo ($produto['categoria'] === 'Contas de Streaming') ? 'selected' : ''; ?>>Contas de Stream</option>
+            <option value="Contas de Streaming" <?php echo ($produto['categoria'] === 'Contas de Streaming') ? 'selected' : ''; ?>>Contas de Streaming</option>
             <option value="Gift Cards" <?php echo ($produto['categoria'] === 'Gift Cards') ? 'selected' : ''; ?>>Gift Cards</option>
             <option value="Itens Digitais em Jogos" <?php echo ($produto['categoria'] === 'Itens Digitais em Jogos') ? 'selected' : ''; ?>>Itens Digitais em Jogos</option>
             <option value="Contas de Jogos" <?php echo ($produto['categoria'] === 'Contas de Jogos') ? 'selected' : ''; ?>>Contas de Jogos</option>
@@ -111,15 +126,30 @@ if (!$produto) {
             <option value="Outros" <?php echo ($produto['categoria'] === 'Outros') ? 'selected' : ''; ?>>Outros</option>
         </select>
 
+        <div class="preview">
+            <?php
+            // Mostra imagem atual do produto
+            $stmtImg = $pdo->prepare("SELECT imagem FROM imagens WHERE idproduto = ? LIMIT 1");
+            $stmtImg->execute([$produto['idproduto']]);
+            $img = $stmtImg->fetch(PDO::FETCH_ASSOC);
+
+            if ($img && !empty($img['imagem'])) {
+                echo '<img id="imgPreview" src="data:image/jpeg;base64,' . base64_encode($img['imagem']) . '" alt="Imagem atual">';
+            } else {
+                echo '<img id="imgPreview" src="https://via.placeholder.com/100x100?text=Sem+Imagem" alt="Sem imagem">';
+            }
+            ?>
+        </div>
+
         <label for="imagem">Nova Imagem (opcional)</label>
-        <input type="file" id="imagem" name="imagem" accept="image/*">
+        <input type="file" id="imagem" name="imagem" accept="image/*" onchange="previewImagem(event)">
 
         <button type="submit">Salvar Alterações</button>
     </form>
 </div>
 
 <script>
-// Mascara de preço automática
+// Mascara de preço
 const precoInput = document.getElementById('preco');
 precoInput.addEventListener('input', () => {
     let valor = precoInput.value.replace(/\D/g, '');
@@ -128,6 +158,15 @@ precoInput.addEventListener('input', () => {
     valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     precoInput.value = valor;
 });
+
+// Preview de imagem
+function previewImagem(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById('imgPreview').src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
 </script>
 </body>
 </html>
