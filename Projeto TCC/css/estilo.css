@@ -1,4 +1,6 @@
-    /* ===== Listas de instrução (Como Funciona) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
+/* ===== Listas de instrução (Como Funciona) ===== */
 .conteudo ol {
     max-width: 700px;
     margin: 32px auto;
@@ -113,7 +115,7 @@ body.dark-mode {
     font-weight: 500;
     font-size: 16px;
     transition: color 0.3s;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .navbar ul li a:hover {
@@ -144,7 +146,7 @@ body.dark-mode {
     outline: none;
     box-shadow: 0 2px 8px rgba(0,201,255,0.07);
     position: relative;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .search-bar:focus {
@@ -612,7 +614,7 @@ body.dark-mode .produtos-destaque h3 {
 }
 
 body, button, input, textarea, select, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     letter-spacing: 0.01em;
 }
