@@ -565,6 +565,29 @@ body.dark-mode .user-name {
     text-transform: none;
     letter-spacing: 0.5px;
 }
+.btn-detalhes {
+    display: inline-block;
+    position: relative;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #007bff 60%, #00c9ff 100%);
+    transition: background 0.2s, transform 0.2s;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    text-decoration: none; /* para links */
+    text-align: center;
+}
+
+.btn-detalhes:hover {
+    background: linear-gradient(90deg, #218838 60%, #17a2b8 100%);
+    transform: scale(1.05);
+    color: #fff;
+}
 
 
 

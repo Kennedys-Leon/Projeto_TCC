@@ -197,9 +197,9 @@ body {
                     <p><strong>Nome:</strong> <?php echo htmlspecialchars($produto['vendedor_nome']); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($produto['vendedor_email']); ?></p>
 
-                    <button class="btn-preco" onclick="addToCart(<?php echo $produto['idproduto']; ?>)">
-                        Adicionar ao Carrinho
-                    </button>
+                    <a href="cadastro_produtos/checkout.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
+Adicionar ao Carrinho                       
+     </a>
                 </div>
             </div>
         </div>
