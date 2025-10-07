@@ -47,6 +47,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/painel.css">
     <link rel="stylesheet" href="../css/perfil_vendedor.css">
+    <link rel="stylesheet" href="../css/cart.css">
+
+    <!-- Estilo da sidebar (só a lateral) -->
+    <link rel="stylesheet" href="../css/sidebar.css">
 
     <style>
         .perfil-imagem-display {
@@ -175,13 +179,73 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             });
         </script>
+        
     </head>
 <body>
 
     <header>
         <h1>MaxAcess - Painel do Vendedor</h1>
         <p>Bem-vindo, <?php echo htmlspecialchars($vendedor['nome']); ?>!</p>
+        
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
     </header>
+
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
+        <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
+        <ul>
+
+        <li><a href="pagina_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
+
+        <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Informações" style="width:16px; height:16px; vertical-align:middle;"> Minhas informações</a></li>
+
+            <?php if (isset($_SESSION['vendedor_nome'])): ?>
+                <li><a href="../cadastro_produtos/cadastroproduto.php"><img src="../img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
+            <?php else: ?>
+                <li><a href="../cadastro_vendedor/cadastrovendedor.php"><img src="../img/megafone.png" alt="Megafone" style="width:16px; height:16px; vertical-align:middle;">Anunciar</a></li>
+            <?php endif; ?>
+
+            <?php if (!isset($_SESSION['usuario_nome']) && !isset($_SESSION['vendedor_nome'])): ?>
+                <li><a href="../login/login.php"><img src="../img/chavis.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Logar</a></li>
+                <li><a href="../cadastro_usuario/cadastro.php"><img src="../img/editar.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar Conta</a></li>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+                <li><a href="../consulta_usuario/buscar.php">👥 Consulta Usuários</a></li>
+                <li><a href="../Consulta_vendedor/buscar2.php">🛍️ Consulta Vendedor</a></li>
+                <li><a href="../consultageral.php">📊 Consulta Geral</a></li>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
+                <li>
+                    <form action="../logout.php" method="post">
+                        <button type="submit" class="logout-btn-sidebar"><img src="../img/sair.png" alt="Sair" style="width:16px; height:16px; vertical-align:middle;"> Sair</button>
+                    </form>
+                </li>
+            <?php endif; ?>
+
+            <li><button type="button" id="toggle-theme-sidebar">☾</button></li>
+        </ul>
+
+        <div class="usuario-box">
+            <?php if (($foto_de_perfil)): ?>
+                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" 
+                    class="usuario-icone-img" 
+                    alt="Foto de Perfil">
+            <?php else: ?>
+                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
+                    class="usuario-icone-img" 
+                    alt="Usuário">
+            <?php endif; ?>
+
+            <?php if (empty($nome)): ?>
+                <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
+                    <p class="nome-usuario">Entre ou crie sua conta</p>
+                </a>
+            <?php else: ?>
+                <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
+            <?php endif; ?>
+        </div>
+    </aside>
     
     <div class="container">
         <!-- Abas -->
@@ -309,6 +373,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
                 </style>
         </div>
+        
 
         <!-- Meu Perfil -->
         <div id="perfil" class="tab-content">
@@ -357,5 +422,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <footer>
         <p>Todos os Direitos Reservados - MaxAcess © 2025</p>
     </footer>
+    <script src="../script.js"></script>
 </body>
 </html>
