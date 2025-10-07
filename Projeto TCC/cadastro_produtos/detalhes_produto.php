@@ -197,7 +197,7 @@ body {
                     <p><strong>Nome:</strong> <?php echo htmlspecialchars($produto['vendedor_nome']); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($produto['vendedor_email']); ?></p>
 
-                    <a href="cadastro_produtos/checkout.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
+                    <a href="../carrinho/checkout.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
 Adicionar ao Carrinho                       
      </a>
                 </div>

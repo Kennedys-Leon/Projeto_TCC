@@ -63,17 +63,12 @@
         </div>
     
         <!-- Foto -->
-<<<<<<< Updated upstream
-        <label>Sua foto de perfil de preferência:</label>
-        <input type="file" name="foto_de_perfil" accept="image/*"><br><br>
-=======
         <label>Sua foto de preferência:</label>
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
             <button type="button" id="openModalBtn" class="btn-vermelho" style="width: 200px;">Escolher arquivo</button>
-            <img id="preview" src="#" alt="Pré-visualização da imagem" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
+            <img id="preview" src="#" alt="Pré-visualização da imagem de Perfil" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
         </div>
         <input type="file" id="foto_de_perfil" name="foto_de_perfil" accept="image/*" style="display:none;">
->>>>>>> Stashed changes
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
@@ -90,7 +85,7 @@
                 <p>Arraste a imagem aqui ou clique para escolher</p>
                 <input type="file" id="modalFileInput" accept="image/*" style="display:none;">
             </div>
-            <img id="modalPreview" src="#" alt="Pré-visualização da imagem" style="display:none; width: 150px; height: 150px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
+            <img id="modalPreview" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
             <button id="closeModalBtn" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
         </div>
     </div>

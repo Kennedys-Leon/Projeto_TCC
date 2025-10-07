@@ -286,16 +286,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <p><?php echo htmlspecialchars($produto['nome']); ?></p>
                             <p><strong>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></strong></p>
-<<<<<<< Updated upstream
                             <a href="cadastro_produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="">
                                 Ver Detalhes
                             </a>
-=======
-                            <a href="cadastro_produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-detalhes">
-    Ver Detalhes
-</a>
-
->>>>>>> Stashed changes
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>

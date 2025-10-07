@@ -8,7 +8,7 @@
 </head>
 <body>
     <form action="process_login.php" method="post" class="form-cadastro">
-        <h2>Olá usuário! Logue suas informações👇</h2>
+        <h2>Olá usuário! Insira seu Login👇</h2>
 
         <label for="nome">Nome:</label>
         <input type="text" name="nome" required>
