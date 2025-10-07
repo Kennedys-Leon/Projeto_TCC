@@ -1,0 +1,122 @@
+/* Fonte principal */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f4f7fa, #e6eef8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.container-pagamento {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container-pagamento h2 {
+    color: #143f74;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.container-pagamento p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Estilo do QR Code */
+.qr-code img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 25px;
+    border: 4px solid #ddeaf7;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.qr-code img:hover {
+    transform: scale(1.05);
+}
+
+/* Botão de Finalizar */
+button {
+    background-color: #143f74;
+    color: #fff;
+    border: none;
+    padding: 14px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0f2d52;
+    transform: translateY(-1px);
+}
+
+/* Link de voltar */
+a.voltar {
+    display: inline-block;
+    margin-top: 20px;
+    color: #143f74;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a.voltar:hover {
+    color: #0d2c53;
+    text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .container-pagamento {
+        padding: 30px 20px;
+    }
+
+    .container-pagamento h2 {
+        font-size: 22px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+
+    .qr-code img {
+        width: 160px;
+        height: 160px;
+    }
+}

@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Pagamento via Pix - MaxAcess</title>
-    <link rel="stylesheet" href="..css/pagamentos.css">
+    <link rel="stylesheet" href="../css/pix.css">
 </head>
 <body>
     <div class="container-pagamento">

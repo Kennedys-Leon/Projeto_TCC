@@ -166,5 +166,22 @@
 
   <footer>
   </footer>
+  <script>
+function buscarProduto() {
+  const termo = document.getElementById("search-input").value.toLowerCase();
+  const produtos = document.querySelectorAll(".product-card");
+
+  produtos.forEach(produto => {
+    const titulo = produto.querySelector("h4").textContent.toLowerCase();
+    const descricao = produto.querySelector("p")?.textContent.toLowerCase() || '';
+
+    if (titulo.includes(termo) || descricao.includes(termo)) {
+      produto.style.display = "block";
+    } else {
+      produto.style.display = "none";
+    }
+  });
+}
+</script>
 </body>
 </html>

@@ -6,30 +6,57 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Pagamento via Cartão - MaxAcess</title>
-    <link rel="stylesheet" href="..css/pagamentos.css">
+    <link rel="stylesheet" href="../css/cartao.css">
+    <style>
+        /* Duas colunas */
+.duas-colunas {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.coluna {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .duas-colunas {
+    flex-direction: column;
+  }
+}
+
+</style>
 </head>
 <body>
     <div class="container-pagamento">
         <h2>Pagamento com Cartão</h2>
         <p>Preencha os dados do seu cartão abaixo:</p>
-
         <form action="#" method="POST" class="form-cartao">
-            <label>Número do Cartão</label>
-            <input type="text" maxlength="16" placeholder="0000 0000 0000 0000" required>
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="numero">Número do Cartão</label>
+      <input type="text" id="numero" maxlength="16" placeholder="0000 0000 0000 0000" required>
+    </div>
 
-            <label>Nome Impresso no Cartão</label>
-            <input type="text" placeholder="Nome" required>
+    <div class="form-group">
+      <label for="nome">Nome Impresso no Cartão</label>
+      <input type="text" id="nome" placeholder="Nome Completo" required>
+    </div>
 
-            <div class="linha-dupla">
-                <div>
-                    <label>Validade</label>
-                    <input type="text" placeholder="MM/AA" required>
-                </div>
-                <div>
-                    <label>Código De Segurança</label>
-                    <input type="text"  placeholder="1234" required>
-                </div>
-            </div>
+    <div class="form-group">
+      <label for="validade">Validade</label>
+      <input type="text" id="validade" placeholder="MM/AA" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cvv">Código de Segurança</label>
+      <input type="text" id="cvv" placeholder="123" required>
+    </div>
+  </div>
+
+</form>
+
+
 
             <button class="btn" type="submit" onclick="alert('Simulado Concretizado !')">Pagar Agora</button>
         </form>

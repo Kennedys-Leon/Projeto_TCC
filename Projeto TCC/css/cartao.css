@@ -1,0 +1,145 @@
+/* Fonte principal */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f4f7fa, #e6eef8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.container-pagamento {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container-pagamento h2 {
+    color: #143f74;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.container-pagamento p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Formulário */
+.form-cartao {
+    text-align: left;
+}
+
+.form-cartao label {
+    display: block;
+    font-weight: 600;
+    color: #143f74;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-cartao input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border: 1.8px solid #cfd7e4;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-cartao input:focus {
+    border-color: #143f74;
+    outline: none;
+}
+
+/* Linha dupla para validade e código */
+.linha-dupla {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.linha-dupla > div {
+    flex: 1;
+}
+
+/* Botão */
+button.btn {
+    background-color: #143f74;
+    color: #fff;
+    border: none;
+    padding: 14px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.btn:hover {
+    background-color: #0f2d52;
+    transform: translateY(-1px);
+}
+
+/* Link de voltar */
+a.voltar {
+    display: inline-block;
+    margin-top: 20px;
+    color: #143f74;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a.voltar:hover {
+    color: #0d2c53;
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .container-pagamento {
+        padding: 30px 20px;
+    }
+
+    .container-pagamento h2 {
+        font-size: 22px;
+    }
+
+    button.btn {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+
+    .linha-dupla {
+        flex-direction: column;
+    }
+}
