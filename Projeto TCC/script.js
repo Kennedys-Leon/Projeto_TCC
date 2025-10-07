@@ -176,5 +176,76 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!clickInsideSidebar && !clickedToggle) closeSide();
         
     });
+    /* =========================
+       MODO DALTÔNICO
+    ========================== */
+        /* =========================
+       MODO DALTÔNICO (PRETO E BRANCO)
+    ========================== */
+        
+    const daltonicoSidebar = document.getElementById('modo-daltonico-sidebar');
+
+    if (daltonicoSidebar) {
+        const isColorblind = localStorage.getItem('colorblind_mode') === 'true';
+        if (isColorblind) {
+            document.body.classList.add('colorblind-mode');
+            daltonicoSidebar.setAttribute('aria-pressed', 'true');
+            daltonicoSidebar.textContent = '👁️ Modo Normal';
+        }
+
+        daltonicoSidebar.addEventListener('click', () => {
+            document.body.classList.toggle('colorblind-mode');
+            const ativo = document.body.classList.contains('colorblind-mode');
+            daltonicoSidebar.setAttribute('aria-pressed', ativo);
+            daltonicoSidebar.textContent = ativo ? '👁️ Modo Normal' : '👁️ Daltonismo';
+            localStorage.setItem('colorblind_mode', ativo);
+        });
+    }
+
+    
+
+    /* =========================
+       ACESSIBILIDADE POR TECLADO + LEITURA DE CAMPOS
+    ========================== */
+
+    // Função que "fala" o texto em voz alta
+    function falar(texto) {
+        const sintese = window.speechSynthesis;
+        const fala = new SpeechSynthesisUtterance(texto);
+        fala.lang = 'pt-BR';
+        sintese.speak(fala);
+    }
+
+    // Mapeia atalhos Alt + tecla → elemento + mensagem falada
+    const atalhos = {
+        '1': { seletor: '#search-input', texto: 'Campo de busca' },
+        '2': { seletor: '#toggle-theme', texto: 'Botão de alternar tema' },
+        '3': { seletor: '#modo-daltonico', texto: 'Botão modo daltônico' },
+        '4': { seletor: '#cart-icon', texto: 'Ícone do carrinho de compras' },
+        '5': { seletor: '#menu-toggle', texto: 'Botão do menu lateral' },
+        '6': { seletor: '#toggle-theme-sidebar', texto: 'Botão de tema na barra lateral' },
+        '7': { seletor: '#modo-daltonico-sidebar', texto: 'Botão modo daltônico na barra lateral' },
+    };
+
+    // Escuta combinações com Alt + número
+    document.addEventListener('keydown', (event) => {
+        if (event.altKey && atalhos[event.key]) {
+            event.preventDefault();
+            const { seletor, texto } = atalhos[event.key];
+            const elemento = document.querySelector(seletor);
+            if (elemento) {
+                elemento.focus();
+                falar(texto);
+            }
+        }
+    });
+
+    // Fala automaticamente o nome ao focar (Tab navega)
+    document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+        el.addEventListener('focus', () => {
+            const texto = el.getAttribute('aria-label') || el.placeholder || el.textContent;
+            if (texto) falar(texto.trim());
+        });
+    });
 
 });

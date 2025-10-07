@@ -173,6 +173,7 @@ body.dark-mode {
     pointer-events: none;
 }
 
+
 /* Dark mode */
 body.dark-mode .search-bar {
     background: #222;
@@ -745,5 +746,59 @@ body.dark-mode .servico-item p {
   
   .submenu a:hover {
     background: #f0f0f0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    display: flex;
+    align-items: center; /* Alinha imagem e texto na vertical */
+    gap: 10px; /* Espaço entre imagem e texto */
+    margin-bottom: 10px;
+}
+
+.categoria-img {
+    width: 30px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: 30px; /* Ajuste o tamanho da imagem conforme necessário */
+    object-fit: cover; /* Garante que a imagem não distorça */
+}
+.img-esfera {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* ===== Botão Modo Daltônico ===== */
+/* ===== Botão Modo Daltônico ===== */
+#modo-daltonico {
+    background: linear-gradient(90deg, #007acc, #00c9ff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 16px;
+    margin-left: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 201, 255, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  #modo-daltonico:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #005fa3, #00aaff);
+  }
+  
+  /* ===== Efeito preto e branco ===== */
+  body.colorblind-mode {
+    filter: grayscale(100%) contrast(1.2);
+    transition: filter 0.3s ease-in-out;
+  }
+  
+  /* Ajuste para evitar distorção em imagens ou ícones */
+  body.colorblind-mode img,
+  body.colorblind-mode video {
+    filter: grayscale(100%) contrast(1.1);
   }
   

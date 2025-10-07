@@ -43,6 +43,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu lateral" aria-expanded="false">☰</button>
         
 
+
         <!-- Ícone do carrinho original (continua funcionando) -->
         
 
@@ -64,6 +65,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <li><a href="categorias/freefire.php">Free Fire</a></li>
     <li><a href="categorias/minecraft.php">Minecraft</a></li>
     <li><a href="categorias/roblox.php">Roblox</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+    <li><a href="categorias/roblox.php">Roblox</a></li>
+
     
   </ul>
 </li>
@@ -128,43 +135,52 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <!-- ============ SIDEBAR ============ -->
-    <aside class="sidebar" id="sidebar" aria-hidden="true">
-    <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
+    <!-- ============ SIDEBAR ACESSÍVEL ============ -->
+<aside class="sidebar" id="sidebar" aria-hidden="true" role="navigation" aria-label="Menu lateral de navegação">
+    <button class="close-btn" id="close-sidebar" aria-label="Fechar menu lateral">&times;</button>
     <ul>
-        <li><a href="index.php"><img src="img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
-        <li><a href="carrinho/checkout.php" id="open-cart"><img src="img/carrinho-de-compras.png" alt="Carrinho" style="width:16px; height:16px; vertical-align:middle;"> Carrinho</a></li>
+        <li>
+            <a href="index.php">
+                <img src="img/casa.png" alt="Página inicial" width="16" height="16"> Início
+            </a>
+        </li>
+        <li>
+            <a href="carrinho/checkout.php" id="open-cart">
+                <img src="img/carrinho-de-compras.png" alt="Carrinho de compras" width="16" height="16"> Carrinho
+            </a>
+        </li>
 
         <?php if (isset($_SESSION['vendedor_nome'])): ?>
-            <!-- Vendedor logado -->
-            <li><a href="cadastro_produtos/cadastroproduto.php">
-                <img src="img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> 
-                Cadastrar meus Produtos
-            </a></li>
-
+            <li>
+                <a href="cadastro_produtos/cadastroproduto.php">
+                    <img src="img/cadastrar_produto.png" alt="Cadastrar Produto" width="16" height="16"> 
+                    Cadastrar meus Produtos
+                </a>
+            </li>
         <?php elseif (isset($_SESSION['usuario_nome'])): ?>
-            <li><a href="editar_perfil/perfil.php">
-                <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
-                Meu Perfil
-            </a></li>
-            <!-- Usuário logado -->
-            <!-- Nada aqui, usuário já tem conta -->
-
+            <li>
+                <a href="editar_perfil/perfil.php">
+                    <img src="img/editar.png" alt="Editar Perfil" width="16" height="16"> 
+                    Meu Perfil
+                </a>
+            </li>
         <?php else: ?>
-            <!-- Ninguém logado -->
-            <li><a href="cadastro_vendedor/cadastrovendedor.php">
-                <img src="img/megafone.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
-                Quero Vender
-            </a></li>
-            <li><a href="cadastro_usuario/cadastro.php">
-                <img src="img/editar.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
-                Criar minha Conta
-            </a></li>
-            <li><a href="login/login.php">
-                <img src="img/chavis.png" alt="Criar Conta" style="width:16px; height:16px; vertical-align:middle;"> 
-                Entrar
-            </a></li>
+            <li>
+                <a href="cadastro_vendedor/cadastrovendedor.php">
+                    <img src="img/megafone.png" alt="Anunciar produto" width="16" height="16"> Quero Vender
+                </a>
+            </li>
+            <li>
+                <a href="cadastro_usuario/cadastro.php">
+                    <img src="img/editar.png" alt="Criar Conta" width="16" height="16"> Criar minha Conta
+                </a>
+            </li>
+            <li>
+                <a href="login/login.php">
+                    <img src="img/chavis.png" alt="Entrar" width="16" height="16"> Entrar
+                </a>
+            </li>
         <?php endif; ?>
-
 
         <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
             <li><a href="consulta_usuario/buscar.php">👥 Consulta Usuários</a></li>
@@ -175,37 +191,44 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (isset($_SESSION['usuario_nome']) || isset($_SESSION['vendedor_nome'])): ?>
             <li>
                 <form action="logout.php" method="post">
-                    <button type="submit" class="logout-btn-sidebar"><img src="img/sair.png" alt="Sair" style="width:16px; height:16px; vertical-align:middle;"> Sair</button>
+                    <button type="submit" class="logout-btn-sidebar" aria-label="Encerrar sessão">
+                        <img src="img/sair.png" alt="Sair" width="16" height="16"> Sair
+                    </button>
                 </form>
             </li>
         <?php endif; ?>
 
-        <li><button type="button" id="toggle-theme-sidebar" aria-label="Alternar tema na sidebar">☾</button></li>
+        <!-- 🌙 Alternância de tema -->
+        <li>
+            <button type="button" id="toggle-theme-sidebar" aria-label="Alternar tema na sidebar">☾</button>
+        </li>
+
+        <!-- 👁️ Modo daltônico (preto e branco) -->
+        <li>
+            <button type="button" id="modo-daltonico-sidebar" aria-pressed="false" aria-label="Ativar modo daltônico na sidebar">
+            <img src="img/eye.png" alt="Sair" width="16" height="16"> Daltonismo
+                
+            </button>
+        </li>
     </ul>
 
-    <!-- Usuário lá embaixo da sidebar -->
-        <div class="usuario-box">
+    <!-- Bloco do usuário -->
+    <div class="usuario-box" aria-label="Informações do usuário logado">
         <?php if (($foto_de_perfil)): ?>
-            <img src="data:image/*;base64,<?= base64_encode($foto_de_perfil) ?>" 
-                class="usuario-icone-img" 
-                alt="Foto de Perfil">
+            <img src="data:image/*;base64,<?= base64_encode($foto_de_perfil) ?>" class="usuario-icone-img" alt="Foto de perfil do usuário">
         <?php else: ?>
-            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
-                class="usuario-icone-img" 
-                alt="Usuário">
+            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" class="usuario-icone-img" alt="Usuário padrão">
         <?php endif; ?>
 
         <?php if (empty($nome)): ?>
-            <a href="cadastro_usuario/cadastro.php" style="text-decoration: none; color: white;">
-                <p class="nome-usuario">Usúario não logado</p>
-            </a>
+            <p class="nome-usuario">Usuário não logado</p>
         <?php else: ?>
             <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
         <?php endif; ?>
-            </div>
-
+    </div>
 </aside>
-    <!-- ========== FIM SIDEBAR ========== -->
+<!-- ========== FIM SIDEBAR ========== -->
+
 
     <main id="main-content" class="conteudo">
         <img src="img/banneratu.png" alt="Banner MaxAcess" class="banner-destaque" />
@@ -305,5 +328,14 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="script.js"></script>
 </body>
-
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
 </html>
