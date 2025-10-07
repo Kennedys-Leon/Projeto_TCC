@@ -72,6 +72,57 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             box-sizing: border-box;
             font-size: 14px;
         }
+
+        /* Styling for the product registration form */
+        .form-card {
+            background: #2E3B4E;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background: #1d1932;
+            color: #fff;
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            border-color: #00c9ff;
+            box-shadow: 0 0 8px rgba(0,201,255,0.5);
+            outline: none;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        select.form-input {
+            /* Inherits from .form-input */
+        }
+
+        input[type="file"].form-input {
+            padding: 5px;
+        }
     </style>
 
         <script>
@@ -177,6 +228,66 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         }
                     });
                 }
+
+                // Modal for Product Image
+                const openModalBtnProduto = document.getElementById("openModalBtnProduto");
+                const fileModalProduto = document.getElementById("fileModalProduto");
+                const closeModalBtnProduto = document.getElementById("closeModalBtnProduto");
+                const dropAreaProduto = document.getElementById("dropAreaProduto");
+                const modalFileInputProduto = document.getElementById("modalFileInputProduto");
+                const mainFileInputProduto = document.getElementById("imagem_produto");
+                const modalPreviewProduto = document.getElementById("modalPreviewProduto");
+                const mainPreviewProduto = document.getElementById("previewProduto");
+
+                openModalBtnProduto.addEventListener("click", () => {
+                    fileModalProduto.style.display = "flex";
+                });
+
+                closeModalBtnProduto.addEventListener("click", () => {
+                    fileModalProduto.style.display = "none";
+                });
+
+                // Clicking drop area triggers file input click
+                dropAreaProduto.addEventListener("click", () => {
+                    modalFileInputProduto.click();
+                });
+
+                // Handle file selection in modal
+                modalFileInputProduto.addEventListener("change", (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            modalPreviewProduto.src = e.target.result;
+                            modalPreviewProduto.style.display = "block";
+                            mainPreviewProduto.src = e.target.result;
+                            mainPreviewProduto.style.display = "block";
+                            mainFileInputProduto.files = modalFileInputProduto.files;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Drag and drop in modal
+                dropAreaProduto.addEventListener("dragover", (event) => {
+                    event.preventDefault();
+                    dropAreaProduto.style.borderColor = "#00c9ff";
+                });
+
+                dropAreaProduto.addEventListener("dragleave", (event) => {
+                    event.preventDefault();
+                    dropAreaProduto.style.borderColor = "#9d9dfc";
+                });
+
+                dropAreaProduto.addEventListener("drop", (event) => {
+                    event.preventDefault();
+                    dropAreaProduto.style.borderColor = "#9d9dfc";
+                    if (event.dataTransfer.files.length > 0) {
+                        modalFileInputProduto.files = event.dataTransfer.files;
+                        const changeEvent = new Event('change');
+                        modalFileInputProduto.dispatchEvent(changeEvent);
+                    }
+                });
             });
         </script>
         
@@ -196,7 +307,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <li><a href="pagina_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
 
-        <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Informações" style="width:16px; height:16px; vertical-align:middle;"> Minhas informações</a></li>
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
                 <li><a href="../cadastro_produtos/cadastroproduto.php"><img src="../img/cadastrar_produto.png" alt="Cadastrar Produto" style="width:16px; height:16px; vertical-align:middle;"> Cadastrar meus Produtos</a></li>
@@ -270,41 +380,74 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             <!-- Formulário de Novo Produto -->
             <div id="formNovoProduto" style="display:none; margin-top:15px;">
-                <form method="post" action="salvar_produto.php" enctype="multipart/form-data">
-                    <label>Nome do Produto:</label>
-                    <input type="text" name="nome" required maxlength="100"><br><br>
+                <div class="form-card">
+                    <form method="post" action="salvar_produto.php" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Nome do Produto:</label>
+                            <input type="text" name="nome" class="form-input" required maxlength="100">
+                        </div>
 
-                    <label>Preço:</label>
-                    <input type="text" id="CampPreco" name="preco" placeholder="0,00" required maxlength="15"><br><br>
+                        <div class="form-group">
+                            <label>Preço:</label>
+                            <input type="text" id="CampPreco" name="preco" class="form-input" placeholder="0,00" required maxlength="15">
+                        </div>
 
-                    <label>Categoria:</label>
-                    <select id="CampCategoria" name="categoria" required>
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="Contas de Streaming">Contas de Streaming</option>
-                        <option value="Gift Cards">Gift Cards</option>
-                        <option value="Itens Digitais em Jogos">Itens Digitais em Jogos</option>
-                        <option value="Contas de Jogos">Contas de Jogos</option>
-                        <option value="Jogos Digitais ou Mídia Física">Jogos Digitais ou Mídia Física</option>
-                        <option value="Keys de Jogos">Keys de Jogos</option>
-                        <option value="Outros">Outros</option>
-                    </select><br><br>
+                        <div class="form-group">
+                            <label>Categoria:</label>
+                            <select id="CampCategoria" name="categoria" class="form-input" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Contas de Streaming">Contas de Streaming</option>
+                                <option value="Gift Cards">Gift Cards</option>
+                                <option value="Itens Digitais em Jogos">Itens Digitais em Jogos</option>
+                                <option value="Contas de Jogos">Contas de Jogos</option>
+                                <option value="Jogos Digitais ou Mídia Física">Jogos Digitais ou Mídia Física</option>
+                                <option value="Keys de Jogos">Keys de Jogos</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
 
-                    <label>Quantidade em Estoque:</label>
-                    <input type="number" name="quantidade" required min="1" max="9999"><br><br>
+                        <div class="form-group">
+                            <label>Quantidade em Estoque:</label>
+                            <input type="number" name="quantidade" class="form-input" required min="1" max="9999">
+                        </div>
 
-                    <label>Data de Publicação:</label>
-                    <input type="text" id="CampData_pub" name="data_pub" placeholder="dd/mm/aaaa" required maxlength="10"><br><br>
+                        <div class="form-group">
+                            <label>Data de Publicação:</label>
+                            <input type="text" id="CampData_pub" name="data_pub" class="form-input" placeholder="dd/mm/aaaa" required maxlength="10">
+                        </div>
 
-                    <label>Descrição do Produto:</label>
-                    <textarea name="descricao" rows="4" required maxlength="500"></textarea><br><br>
+                        <div class="form-group">
+                            <label>Descrição do Produto:</label>
+                            <textarea name="descricao" class="form-input" rows="4" required maxlength="500"></textarea>
+                        </div>
 
-                    <label>Imagem do produto:</label>
-                    <input type="file" name="imagem" accept="image/*" required><br><br>
+                        <div class="form-group">
+                            <label>Imagem do produto:</label>
+                            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
+                                <button type="button" id="openModalBtnProduto" class="btn" style="width: 200px;">Escolher arquivo</button>
+                                <img id="previewProduto" src="#" alt="Pré-visualização da imagem do Produto" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
+                            </div>
+                            <input type="file" id="imagem_produto" name="imagem" accept="image/*" style="display:none;" required>
+                        </div>
 
-                    <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
+                        <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
 
-                    <button type="submit" class="btn">Salvar Produto</button>
-                </form>
+                        <button type="submit" class="btn">Salvar Produto</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal for Product Image -->
+            <div id="fileModalProduto" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
+                <div style="background: #2a2a2aff; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; text-align: center; position: relative;">
+                    <h3>Escolha ou arraste a imagem</h3>
+                    <div id="dropAreaProduto" style="border: 2px dashed #9d9dfc; border-radius: 10px; padding: 30px; cursor: pointer;">
+                        <p>Arraste a imagem aqui ou clique para escolher</p>
+                        <input type="file" id="modalFileInputProduto" accept="image/*" style="display:none;">
+                    </div>
+                    <img id="modalPreviewProduto" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
+                    <button id="closeModalBtnProduto" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
+                </div>
             </div>
 
             <!-- Lista de Produtos -->
