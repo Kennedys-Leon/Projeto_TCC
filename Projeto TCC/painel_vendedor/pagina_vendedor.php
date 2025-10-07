@@ -86,10 +86,7 @@ $foto_de_perfil = isset($_SESSION['vendedor_foto']) ? $_SESSION['vendedor_foto']
                 <?php endif; ?>
 
                                 <!-- Botão de tema igual ao index -->
-                <button id="toggle-theme" class="toggle-theme" aria-label="Alternar tema"></button>
-
-
-                
+                <button id="toggle-theme" class="toggle-theme" aria-label="Alternar tema"></button>            
             </div>
         </nav>
     </header>
