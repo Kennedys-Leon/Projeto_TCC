@@ -17,13 +17,10 @@
         <input type="email" id="email" name="email" placeholder="Seu Email de Vendas" required>
 
         <label for="senha">Senha:</label>
-<<<<<<< Updated upstream
+
         <input type="password" id="senha" name="senha" placeholder="Sua Senha" required><br><br>
 
-=======
-        <input type="password" id="senha" name="senha" required>
         
->>>>>>> Stashed changes
         <input type="submit" value="Entrar" class="btn-vermelho">
 
         <div class="botoes-inicio">

@@ -22,7 +22,7 @@ try {
         $_SESSION['vendedor_nome']   = htmlspecialchars($vendedor['nome']);
         $_SESSION['vendedor_foto']   = $vendedor['foto_de_perfil'];
 
-        header('Location: ../painel_vendedor/pagina_vendedor.php');
+        header('Location: ../painel_vendedor/painel_vendedor.php');
         exit();
     } else {
         header('Location: login_vendedor.php?error=1');
