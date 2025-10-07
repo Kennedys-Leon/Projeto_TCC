@@ -32,7 +32,64 @@ $stmt = $pdo->query("SELECT COUNT(*) as todas_vendas FROM vendas");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $todas_vendas = isset($row['todas_vendas']) ? (int)$row['todas_vendas'] : 1;
 
-$percentual = ($todas_vendas == 0) ? 0 : ($total_vendas / $todas_vendas) * 100;
+// === lógica de participação baseada em níveis (colocar após cálculo de $total_vendas e $todas_vendas) ===
+
+// Busca o nível atual baseado no número de vendas do vendedor
+$stmt = $pdo->prepare("
+    SELECT idparticipacao_percentual, percentual, min_vendas
+    FROM participacao_percentual
+    WHERE min_vendas <= ?
+    ORDER BY min_vendas DESC
+    LIMIT 1
+");
+$stmt->execute([$total_vendas]);
+$nivel = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($nivel) {
+    $id_participacao = (int)$nivel['idparticipacao_percentual'];
+    $percentual = (float)$nivel['percentual'];
+    $nivel_min_vendas = (int)$nivel['min_vendas'];
+} else {
+    // fallback seguro
+    $id_participacao = 1;
+    $percentual = 30.00;
+    $nivel_min_vendas = 0;
+}
+
+// Atualiza a tabela vendedor somente se for diferente (evita updates desnecessários)
+$update = $pdo->prepare("UPDATE vendedor SET idparticipacao_percentual = ? WHERE idvendedor = ? AND (idparticipacao_percentual IS NULL OR idparticipacao_percentual <> ?)");
+$update->execute([$id_participacao, $vendedor_id, $id_participacao]);
+
+// Busca a próxima meta (se houver)
+$stmt = $pdo->prepare("
+    SELECT min_vendas, percentual
+    FROM participacao_percentual
+    WHERE min_vendas > ?
+    ORDER BY min_vendas ASC
+    LIMIT 1
+");
+$stmt->execute([$nivel_min_vendas]);
+$proxima = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Calcula progresso percentual até a próxima meta
+$progresso = 100;
+$meta_vendas = null;
+$vendas_restantes = 0;
+if ($proxima) {
+    $meta_vendas = (int)$proxima['min_vendas'];
+    $distancia = $meta_vendas - $nivel_min_vendas;
+    $atingido = $total_vendas - $nivel_min_vendas;
+    if ($distancia > 0) {
+        $progresso = min(100, max(0, ($atingido / $distancia) * 100));
+    } else {
+        $progresso = 100;
+    }
+    $vendas_restantes = max(0, $meta_vendas - $total_vendas);
+}
+
+// (opcional) métrica antiga: participação relativa ao total de vendas do site
+$participacao_site = ($todas_vendas == 0) ? 0.0 : ($total_vendas / $todas_vendas) * 100.0;
+
 
 // Produtos cadastrados pelo vendedor
 $stmt = $pdo->prepare("SELECT * FROM produto WHERE idvendedor = ?");
@@ -370,7 +427,21 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Resumo de Vendas</h2>
             <p>Total de vendas realizadas: <b><?php echo $total_vendas; ?></b></p>
             <p>Total do site: <b><?php echo $todas_vendas; ?></b></p>
-            <p class="percentual">Participação: <?php echo number_format($percentual, 2); ?>%</p>
+            <!-- Exibe participação fixa por níveis -->
+            <p class="percentual">Participação: <strong><?php echo number_format($percentual, 2, ',', '.'); ?>%</strong></p>
+
+            <?php if ($meta_vendas !== null): ?>
+                <p>Meta seguinte: <?php echo $meta_vendas; ?> vendas (faltam <?php echo $vendas_restantes; ?>)</p>
+                <progress value="<?php echo round($progresso, 2); ?>" max="100" style="width:100%; height:18px;"></progress>
+                <p style="font-size:0.9rem; margin-top:6px;"><?php echo round($progresso, 2); ?>% até o próximo nível</p>
+            <?php else: ?>
+                <p>Você atingiu o nível máximo de participação.</p>
+            <?php endif; ?>
+
+            <!-- (Opcional) Exibir também participação relativa ao site -->
+            <p style="margin-top:8px; font-size:0.9rem; color:#bbb;">
+                Participação relativa ao total do site: <?php echo number_format($participacao_site, 2, ',', '.'); ?>%
+            </p>
         </div>
 
         <!-- Produtos -->

@@ -60,7 +60,7 @@ try {
             die("Pelo menos uma imagem deve ser enviada.");
         }
 
-        header("Location: ../painel_vendedor/pagina_vendedor.php");
+        header("Location: ../painel_vendedor/painel_vendedor.php");
         exit;
     } else {
         echo "Erro: vendedor não identificado!";
