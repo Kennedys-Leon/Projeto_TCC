@@ -202,50 +202,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
-
-    /* =========================
-       ACESSIBILIDADE POR TECLADO + LEITURA DE CAMPOS
-    ========================== */
-
-    // Função que "fala" o texto em voz alta
-    function falar(texto) {
-        const sintese = window.speechSynthesis;
-        const fala = new SpeechSynthesisUtterance(texto);
-        fala.lang = 'pt-BR';
-        sintese.speak(fala);
-    }
-
-    // Mapeia atalhos Alt + tecla → elemento + mensagem falada
-    const atalhos = {
-        '1': { seletor: '#search-input', texto: 'Campo de busca' },
-        '2': { seletor: '#toggle-theme', texto: 'Botão de alternar tema' },
-        '3': { seletor: '#modo-daltonico', texto: 'Botão modo daltônico' },
-        '4': { seletor: '#cart-icon', texto: 'Ícone do carrinho de compras' },
-        '5': { seletor: '#menu-toggle', texto: 'Botão do menu lateral' },
-        '6': { seletor: '#toggle-theme-sidebar', texto: 'Botão de tema na barra lateral' },
-        '7': { seletor: '#modo-daltonico-sidebar', texto: 'Botão modo daltônico na barra lateral' },
-    };
-
-    // Escuta combinações com Alt + número
-    document.addEventListener('keydown', (event) => {
-        if (event.altKey && atalhos[event.key]) {
-            event.preventDefault();
-            const { seletor, texto } = atalhos[event.key];
-            const elemento = document.querySelector(seletor);
-            if (elemento) {
-                elemento.focus();
-                falar(texto);
-            }
-        }
-    });
-
-    // Fala automaticamente o nome ao focar (Tab navega)
-    document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
-        el.addEventListener('focus', () => {
-            const texto = el.getAttribute('aria-label') || el.placeholder || el.textContent;
-            if (texto) falar(texto.trim());
-        });
-    });
 
 });
