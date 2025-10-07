@@ -23,9 +23,9 @@
   <section class="banner">
     <h1>Comprar e Vender Contas e Itens de Roblox</h1>
     <div class="search">
-      <input type="text" placeholder="Buscar produto..." class="search-input" />
-      <button class="search-btn">Buscar</button>
-    </div>
+    <input type="text" id="search-input" placeholder="Buscar produto..." class="search-input" />
+  <button class="search-btn" onclick="buscarProduto()">Buscar</button>
+</div>
   </section>
 
   <section class="content">
@@ -136,5 +136,22 @@
   <footer>
     <p>&copy; 2025 GGMax. Todos os direitos reservados.</p>
   </footer>
+  <script>
+function buscarProduto() {
+  const termo = document.getElementById("search-input").value.toLowerCase();
+  const produtos = document.querySelectorAll(".product-card");
+
+  produtos.forEach(produto => {
+    const titulo = produto.querySelector("h4").textContent.toLowerCase();
+    const descricao = produto.querySelector("p")?.textContent.toLowerCase() || '';
+
+    if (titulo.includes(termo) || descricao.includes(termo)) {
+      produto.style.display = "block";
+    } else {
+      produto.style.display = "none";
+    }
+  });
+}
+</script>
 </body>
 </html>
