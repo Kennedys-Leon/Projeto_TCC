@@ -72,9 +72,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <li><a href="categorias/roblox.php">Roblox</a></li>
 
     
-  </ul>
-</li>
-
+        </ul>
                  <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
@@ -90,7 +88,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
                     <li><a href="consultageral.php">Consulta Geral</a></li>
                 <?php endif; ?>
-            </ul>
+        </ul>
 
             <div class="search-bar-wrapper">
                 
@@ -221,7 +219,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
 
         <?php if (empty($nome)): ?>
-            <p class="nome-usuario">Usuário não logado</p>
+            <a href="cadastro_usuario/cadastro" class="btn-cadastro">Usúario não logado</a>
         <?php else: ?>
             <p class="nome-usuario"><?= htmlspecialchars($nome) ?></p>
         <?php endif; ?>
