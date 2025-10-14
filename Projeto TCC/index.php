@@ -56,28 +56,56 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <nav class="navbar">
     <ul>
             <li class="dropdown">
-            <a href="#">Categorias ▼</a>
-        <ul class="submenu">
-            <li><a href="categorias/brawlstars.php">Brawl Stars</a></li>
-            <li><a href="categorias/fifa.php">FIFA</a></li>
-            <li><a href="categorias/fortnite.php">Fortnite</a></li>
-            <li><a href="categorias/freefire.php">Free Fire</a></li>
-            <li><a href="categorias/minecraft.php">Minecraft</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-            <li><a href="categorias/roblox.php">Roblox</a></li>
-        </ul>
-            </li>
-            <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
-            <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
-            <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
-            
-            <?php if (!isset($_SESSION['usuario_nome'])): ?>
-                <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
-            <?php endif; ?>
+  <a href="#">Categorias ▼</a>
+  <ul class="submenu">
+    <li>
+      <a href="categorias/brawlstars.php">
+        <img src="img/brawl.webp" alt="Brawl Stars" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Brawl Stars
+      </a>
+    </li>
+    <li>
+      <a href="categorias/fifa.php">
+        <img src="img/fifa.jpeg" alt="FIFA" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        FIFA
+      </a>
+    </li>
+    <li>
+      <a href="categorias/fortnite.php">
+        <img src="img/fortnite.jpeg" alt="Fortnite" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Fortnite
+      </a>
+    </li>
+    <li>
+      <a href="categorias/freefire.php">
+        <img src="img/FF.jpeg" alt="Free Fire" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Free Fire
+      </a>
+    </li>
+    <li>
+      <a href="categorias/minecraft.php">
+        <img src="img/minecraft.jpeg" alt="Minecraft" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Minecraft
+      </a>
+    </li>
+    <li>
+      <a href="categorias/roblox.php">
+        <img src="img/roblox.jpeg" alt="Roblox" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Roblox
+      </a>
+    </li>
+  </ul>
+</li>
+
+                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+                <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
+                <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
+                
+
+                <?php if (!isset($_SESSION['usuario_nome'])): ?>
+                    <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
+                <?php endif; ?>
+
 
             <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
                 <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
