@@ -199,9 +199,13 @@ body {
                     <p><strong>Nome:</strong> <?php echo htmlspecialchars($produto['vendedor_nome']); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($produto['vendedor_email']); ?></p>
 
-                    <a href="../carrinho/checkout.php?id=<?php echo $produto['idproduto']; ?>" class="btn-preco">
-Adicionar ao Carrinho                       
-     </a>
+                    <button class="btn-preco add-to-cart"
+    data-id="<?= $produto['idproduto'] ?>"
+    data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+    data-preco="<?= number_format($produto['preco'], 2, '.', '') ?>">
+    Adicionar ao Carrinho
+</button>
+
                 </div>
             </div>
         </div>
@@ -212,6 +216,56 @@ Adicionar ao Carrinho
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const botoes = document.querySelectorAll('.add-to-cart');
+
+    botoes.forEach(botao => {
+        botao.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const nome = this.dataset.nome;
+            const preco = parseFloat(this.dataset.preco);
+
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+            const existente = carrinho.find(item => item.id === id);
+            if (existente) {
+                existente.quantidade += 1;
+            } else {
+                carrinho.push({
+                    id,
+                    nome,
+                    preco,
+                    quantidade: 1
+                });
+            }
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Adicionado ao carrinho!',
+                text: `"${nome}" foi adicionado com sucesso.`,
+                timer: 1800,
+                showConfirmButton: false
+            });
+
+            atualizarResumoCarrinho(); // Se quiser atualizar o total no carrinho em tempo real
+        });
+    });
+
+    function atualizarResumoCarrinho() {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+        const cartTotalEl = document.getElementById('cart-total-price');
+        if (cartTotalEl) {
+            cartTotalEl.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        }
+    }
+});
+</script>
+
 </body>
 <div vw-plugin-wrapper>
         <div class="vw-plugin-top-wrapper"></div>
@@ -220,4 +274,5 @@ Adicionar ao Carrinho
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
       new window.VLibras.Widget('https://vlibras.gov.br/app');
+      
 </html>
