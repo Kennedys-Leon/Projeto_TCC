@@ -180,6 +180,23 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         input[type="file"].form-input {
             padding: 5px;
         }
+
+        .botoes-inicio .btn-primario {
+            background: #2E3B4E;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        .botoes-inicio .btn-primario:hover {
+            background: #1d1932;
+        }
     </style>
 
         <script>
@@ -345,6 +362,67 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         modalFileInputProduto.dispatchEvent(changeEvent);
                     }
                 });
+
+                // Modal para Foto de Perfil
+                const openModalBtnPerfil = document.querySelector("#openModalBtnPerfil");
+                const fileModalPerfil = document.querySelector("#fileModalPerfil");
+                const closeModalBtnPerfil = document.querySelector("#closeModalBtnPerfil");
+                const dropAreaPerfil = document.querySelector("#dropAreaPerfil");
+                const modalFileInputPerfil = document.querySelector("#modalFileInputPerfil");
+                const mainFileInputPerfil = document.querySelector("#foto_perfil");
+                const modalPreviewPerfil = document.querySelector("#modalPreviewPerfil");
+                const mainPreviewPerfil = document.querySelector("#previewPerfil");
+
+                if (openModalBtnPerfil && fileModalPerfil) {
+                    openModalBtnPerfil.addEventListener("click", () => {
+                        fileModalPerfil.style.display = "flex";
+                    });
+                }
+                if (closeModalBtnPerfil && fileModalPerfil) {
+                    closeModalBtnPerfil.addEventListener("click", () => {
+                        fileModalPerfil.style.display = "none";
+                    });
+                }
+                if (dropAreaPerfil && modalFileInputPerfil) {
+                    dropAreaPerfil.addEventListener("click", () => {
+                        modalFileInputPerfil.click();
+                    });
+                }
+                if (modalFileInputPerfil && modalPreviewPerfil && mainPreviewPerfil && mainFileInputPerfil) {
+                    modalFileInputPerfil.addEventListener("change", (event) => {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                modalPreviewPerfil.src = e.target.result;
+                                modalPreviewPerfil.style.display = "block";
+                                mainPreviewPerfil.src = e.target.result;
+                                mainPreviewPerfil.style.display = "block";
+                                mainFileInputPerfil.files = modalFileInputPerfil.files;
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                }
+                if (dropAreaPerfil && modalFileInputPerfil) {
+                    dropAreaPerfil.addEventListener("dragover", (event) => {
+                        event.preventDefault();
+                        dropAreaPerfil.style.borderColor = "#00c9ff";
+                    });
+                    dropAreaPerfil.addEventListener("dragleave", (event) => {
+                        event.preventDefault();
+                        dropAreaPerfil.style.borderColor = "#9d9dfc";
+                    });
+                    dropAreaPerfil.addEventListener("drop", (event) => {
+                        event.preventDefault();
+                        dropAreaPerfil.style.borderColor = "#9d9dfc";
+                        if (event.dataTransfer.files.length > 0) {
+                            modalFileInputPerfil.files = event.dataTransfer.files;
+                            const changeEvent = new Event('change');
+                            modalFileInputPerfil.dispatchEvent(changeEvent);
+                        }
+                    });
+                }
             });
         </script>
         
@@ -399,7 +477,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     class="usuario-icone-img" 
                     alt="Foto de Perfil">
             <?php else: ?>
-                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" 
+                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf
                     class="usuario-icone-img" 
                     alt="Usuário">
             <?php endif; ?>
@@ -521,6 +599,19 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
+            <!-- Adicione logo após o modal do produto -->
+            <div id="fileModalPerfil" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
+                <div style="background: #2a2a2aff; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; text-align: center; position: relative;">
+                    <h3>Escolha ou arraste a imagem</h3>
+                    <div id="dropAreaPerfil" style="border: 2px dashed #9d9dfc; border-radius: 10px; padding: 30px; cursor: pointer;">
+                        <p>Arraste a imagem aqui ou clique para escolher</p>
+                        <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
+                    </div>
+                    <img id="modalPreviewPerfil" src="#" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
+                    <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
+                </div>
+            </div>
+
             <!-- Lista de Produtos -->
             <table class="produtos-tabela">
                 <tr>
@@ -605,13 +696,13 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- Formulário de edição -->
                 <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
-                    <label>Nome:</label>
-                    <input type="text" name="nome" value="<?php echo htmlspecialchars($vendedor['nome']); ?>">
-
-                    <label>Email:</label>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($vendedor['email']); ?>">
-
-                    <label>Telefone:</label>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px;">
+                        <!-- Imagem de Perfil -->
+                        <div class="perfil-imagem" style="margin: 0;">
+                            <?php if (!empty($foto_de_perfil)): ?>
+                                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
+                            <?php else: ?>
+                                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0
                     <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
 
                     <label>CPF:</label>
@@ -621,12 +712,16 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="text" id="CampCNPJ" name="cnpj" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
 
                     <label>Sua foto de preferência:</label>
-                    <input type="file" name="foto" accept="image/*"><br><br>
+                    <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
+                        <button type="button" id="openModalBtnPerfil" class="btn" style="width: 200px;">Escolher arquivo</button>
+                        <img id="previewPerfil" src="#" alt="Pré-visualização da foto de perfil" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
+                    </div>
+                    <input type="file" id="foto_perfil" name="foto" accept="image/*" style="display:none;">
 
                     <button type="submit">Salvar Alterações</button>
 
                     <div class="botoes-inicio">
-                        <a href="pagina_vendedor" class="btn-primario">Retornar a Página Inicial</a>
+                        <button type="button" onclick="window.location.href='pagina_vendedor.php'" style="margin-top:10px;">Retornar a Página Inicial</button>
                     </div>
                 </form>
             </div>
