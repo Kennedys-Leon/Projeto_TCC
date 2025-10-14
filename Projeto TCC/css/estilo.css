@@ -39,7 +39,7 @@ body.dark-mode .conteudo h1 {
     box-sizing: border-box;
 }
 body {
-    padding-top: 60px; /* 80px antes, diminua para aproximar o banner */
+    padding-top: 75px; /* 80px antes, diminua para aproximar o banner */
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -50,21 +50,20 @@ body.dark-mode {
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 95vw;
-    height: 70vh;           /* A altura é 70% da altura da janela */
+    width: 100vw;
+    height: 80vh;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     display: block;
-    object-fit: cover;      /* A imagem ocupa o espaço sem distorcer */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para destaque */
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 10px; /* Pequeno espaçamento do header */
 }
 
 body {
-    padding-top: 120px; /* 80px antes, diminua para aproximar o banner */
+    padding-top: 75px; /* 80px antes, diminua para aproximar o banner */
 }
-
-
 
 body.dark-mode {
     background-color: #333;
@@ -72,17 +71,19 @@ body.dark-mode {
 }
 
 .header {
-    position: fixed; /* Mantém o header visível ao rolar */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 3px 30px;
+    padding: 10px 30px; /* Aumentei o padding vertical */
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: rgb(21, 55, 100);;
+    background-color: rgb(21, 55, 100);
+    min-height: 70px; /* Altura mínima garantida */
+    box-sizing: border-box;
 }
 
 .header .logo {
@@ -103,6 +104,8 @@ body.dark-mode {
     list-style: none;
     gap: 20px;
     margin-right: 20px;
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    align-items: center;
 }
 
 .navbar ul li {
@@ -127,6 +130,7 @@ body.dark-mode {
     align-items: center;
     gap: 15px;
     margin-right: 1px;
+    flex-shrink: 0; /* Impede que diminua muito */
 }
 
 .search-bar:focus {
@@ -197,7 +201,6 @@ body.dark-mode .search-container .search-icon {
     transition: color 0.3s ease;
     cursor: pointer;
 }
-
 
 .cart-icon:hover {
     color: #00c9ff;
@@ -285,11 +288,11 @@ body.dark-mode .toggle-theme {
     color: #f2f2f7;
 }
 
-
-
 .conteudo {
-    padding: 30px;
+    padding: 30px 0; /* Remove padding lateral, mantém vertical */
     text-align: center;
+    width: 100%;
+    max-width: none; /* Remove limitação de largura */
 }
 
 .conteudo h1 {
@@ -591,7 +594,6 @@ body.dark-mode .user-name {
     transform: scale(1.05);
     color: #fff;
 }
-
 
 
 /* Efeito ao passar o mouse */

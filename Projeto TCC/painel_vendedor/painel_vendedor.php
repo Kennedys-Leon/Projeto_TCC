@@ -419,7 +419,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="tabs">
             <div class="tab active" data-tab="vendas" onclick="openTab('vendas')">Resumo de Vendas</div>
             <div class="tab" data-tab="produtos" onclick="openTab('produtos')">Meus Produtos</div>
-            <div class="tab" data-tab="perfil" onclick="openTab('perfil')">Meu Perfil</div>
+            <div class="tab" data-tab="perfil" onclick="openTab('perfil')">Minhas Informações</div>
         </div>
 
         <!-- Resumo de Vendas -->

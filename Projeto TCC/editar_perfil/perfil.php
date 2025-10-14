@@ -150,6 +150,121 @@ if (!empty($_SESSION['usuario_foto'])) {
                     .catch(() => alert('Erro ao buscar CEP!'));
             }
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    // ======= Funções de máscara =======
+    function mascaraCPF(valor) {
+        return valor
+            .replace(/\D/g, "")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    }
+
+    function mascaraCEP(valor) {
+        return valor
+            .replace(/\D/g, "")
+            .replace(/(\d{5})(\d)/, "$1-$2");
+    }
+
+    function mascaraTelefone(valor) {
+        return valor
+            .replace(/\D/g, "")
+            .replace(/^(\d{2})(\d)/g, "($1) $2")
+            .replace(/(\d{4,5})(\d{4})$/, "$1-$2");
+    }
+
+    // ======= Referências (podem ser null) =======
+    const cpfEl = document.getElementById("cpf");
+    const cepEl = document.getElementById("cep");
+    const telefoneEl = document.getElementById("telefone");
+    const form = document.getElementById("formCadastro");
+
+    // só registra listeners se o elemento existir
+    if (cpfEl) cpfEl.addEventListener("input", () => { cpfEl.value = mascaraCPF(cpfEl.value); });
+    if (cepEl) cepEl.addEventListener("input", () => { cepEl.value = mascaraCEP(cepEl.value); });
+    if (telefoneEl) telefoneEl.addEventListener("input", () => { telefoneEl.value = mascaraTelefone(telefoneEl.value); });
+
+    // ======= Validação CPF =======
+    function validarCPF(cpf) {
+        if (!cpf) return false;
+        cpf = cpf.replace(/\D/g, "");
+        if (cpf.length !== 11) return false;
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+        let soma = 0, resto;
+        for (let i = 1; i <= 9; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        }
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+        soma = 0;
+        for (let i = 1; i <= 10; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        }
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+        return true;
+    }
+
+    // ======= Mostrar erro (seguro) =======
+    function mostrarErro(campoId, idErro, msg) {
+        const input = document.getElementById(campoId);
+        const erro = document.getElementById(idErro);
+        if (!input || !erro) return; // evita crash se algum elemento faltar
+
+        if (msg) {
+            erro.innerText = msg;
+            erro.style.display = "block";
+            input.classList.add("erro");
+        } else {
+            erro.innerText = "";
+            erro.style.display = "none";
+            input.classList.remove("erro");
+        }
+    }
+
+    // ======= Validação no submit (só se o form existir) =======
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            let valido = true;
+
+            if (cpfEl) {
+                const cpf = cpfEl.value;
+                if (!validarCPF(cpf)) {
+                    mostrarErro("cpf", "erro-cpf", "CPF inválido.");
+                    valido = false;
+                } else {
+                    mostrarErro("cpf", "erro-cpf", "");
+                }
+            }
+
+            if (cepEl) {
+                const cep = (cepEl.value || "").replace(/\D/g, "");
+                if (cep.length !== 8) {
+                    mostrarErro("cep", "erro-cep", "CEP deve conter 8 dígitos.");
+                    valido = false;
+                } else {
+                    mostrarErro("cep", "erro-cep", "");
+                }
+            }
+
+            if (telefoneEl) {
+                const telefone = telefoneEl.value || "";
+                if (telefone.length < 13 || telefone.length > 14) {
+                    mostrarErro("telefone", "erro-telefone", "Telefone deve ter entre 13 e 14 caracteres.");
+                    valido = false;
+                } else {
+                    mostrarErro("telefone", "erro-telefone", "");
+                }
+            }
+
+            if (!valido) e.preventDefault();
+        });
     </script>
 </body>
 </html>

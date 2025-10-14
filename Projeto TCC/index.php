@@ -54,51 +54,45 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <nav class="navbar">
-            <ul>
-
+    <ul>
             <li class="dropdown">
-  <a href="#">Categorias ▼</a>
-  <ul class="submenu">
-    <li><a href="categorias/brawlstars.php">Brawl Stars</a></li>
-    <li><a href="categorias/fifa.php">FIFA</a></li>
-    <li><a href="categorias/fortnite.php">Fortnite</a></li>
-    <li><a href="categorias/freefire.php">Free Fire</a></li>
-    <li><a href="categorias/minecraft.php">Minecraft</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-
-    
+            <a href="#">Categorias ▼</a>
+        <ul class="submenu">
+            <li><a href="categorias/brawlstars.php">Brawl Stars</a></li>
+            <li><a href="categorias/fifa.php">FIFA</a></li>
+            <li><a href="categorias/fortnite.php">Fortnite</a></li>
+            <li><a href="categorias/freefire.php">Free Fire</a></li>
+            <li><a href="categorias/minecraft.php">Minecraft</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
+            <li><a href="categorias/roblox.php">Roblox</a></li>
         </ul>
-                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
-                <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
-                <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
-                
+            </li>
+            <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+            <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
+            <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
+            
+            <?php if (!isset($_SESSION['usuario_nome'])): ?>
+                <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
+            <?php endif; ?>
 
-                <?php if (!isset($_SESSION['usuario_nome'])): ?>
-                    <li><a href="cadastro_vendedor/cadastrovendedor.php">ANUNCIAR</a></li>
-                <?php endif; ?>
+            <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+                <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
+                <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
+                <li><a href="consultageral.php">Consulta Geral</a></li>
+            <?php endif; ?>
+    </ul>
 
+        <!-- Elementos de busca e carrinho FORA da lista -->
+        <div class="search-bar-wrapper">
+            <input id="search-input" class="search-bar" type="text" placeholder="Buscar 🔍︎" />
+        </div>
 
-                <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
-                    <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
-                    <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
-                    <li><a href="consultageral.php">Consulta Geral</a></li>
-                <?php endif; ?>
-        </ul>
-
-            <div class="search-bar-wrapper">
-                
-                <input id="search-input" class="search-bar" type="text" placeholder="Buscar 🔍︎" aria-describedby="search-icon" />
-            </div>
-
-            <div class="search-cart">
-
+        <div class="search-cart">
             <br>
-
                 <!-- Modal do carrinho -->
                 <div id="cart-modal" class="cart-modal" role="dialog" aria-labelledby="cart-modal-header" aria-describedby="cart-modal-content" aria-hidden="true">
                     <div class="cart-modal-content" id="cart-modal-content">
@@ -125,10 +119,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Botão de tema (continua no header) -->
                 <!-- Botão com ícone moderno -->
                 <button id="toggle-theme" class="toggle-theme" aria-label="Alternar tema"></button>
-
-
-                
-            </div>
+        </div>
         </nav>
     </header>
 
@@ -204,7 +195,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- 👁️ Modo daltônico (preto e branco) -->
         <li>
             <button type="button" id="modo-daltonico-sidebar" aria-pressed="false" aria-label="Ativar modo daltônico na sidebar">
-            <img src="img/eye.png" alt="Sair" width="16" height="16"> Daltonismo
+            <img src="img/eye.png" alt="Sair" width="16" height="16"> Modo Daltonico
                 
             </button>
         </li>
@@ -310,11 +301,23 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a href="cadastro_produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-detalhes">
                                 Ver Detalhes
                             </a>
+                            <?php if (isset($_SESSION['usuario_nome'])): ?>
+                                <a href="add_carrinho.php?id=<?= $produto['idproduto'] ?>" class="btn-preco">
+                                    Adicionar ao Carrinho
+                                </a>
+                            <?php else: ?>
+                                <button 
+                                    class="btn-detalhes"
+                                    onclick="window.location.href='cadastro_usuario/cadastro.php'">
+                                    Adicionar ao Carrinho
+                                </button>
+                            <?php endif; ?>
+
                         </div>
                     <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Sem produtos cadastrados.</p>
-                <?php endif; ?>
+                        <?php else: ?>
+                            <p>Sem produtos cadastrados.</p>
+                        <?php endif; ?>
             </div>
         </section>
         </div>
