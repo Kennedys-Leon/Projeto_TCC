@@ -29,7 +29,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </head>
     <body>
         <div class='mensagem'>
-            <h2>⚠️ Você precisa estar logado para continuar o pagamento!</h2>
+            <h2>Você precisa estar logado para continuar o pagamento!</h2>
             <p>Redirecionando para o login...</p>
         </div>
         <script>
@@ -128,7 +128,7 @@ switch ($metodo) {
         </head>
         <body>
             <div class='erro'>
-                <h2>⚠️ Método de pagamento inválido!</h2>
+                <h2>Método de pagamento inválido!</h2>
                 <p><a href='pagamento.php'>Voltar e tentar novamente</a></p>
             </div>
         </body>

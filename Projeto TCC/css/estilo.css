@@ -50,7 +50,7 @@ body.dark-mode {
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 100vw;
+    width: 90vw;
     height: 80vh;
     position: relative;
     left: 50%;
