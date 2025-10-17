@@ -33,6 +33,40 @@
             border-color: #78d9f4ff; /* vermelho igual ao botão */
             outline: none;
         }
+
+        /* Modal / preview styles (mesmos usados em cadastro.php) */
+        #fileModalProduto {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        #fileModalProduto .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 520px;
+            max-width: 95%;
+            text-align: center;
+            position: relative;
+        }
+        #fileModalProduto #dropAreaProduto {
+            border: 2px dashed #9d9dfc;
+            border-radius: 10px;
+            padding: 30px;
+            cursor: pointer;
+        }
+        #previewProdutoContainer img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +110,15 @@
             </div>
             <div class="campo">
                 <label>Imagem do seu produto:</label>
-                <input type="file" id="imagem" name="imagens[]" accept="image/*" multiple required>
+
+                <!-- botão + preview (substitui input file visível) -->
+                <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:10px;">
+                    <button type="button" id="openModalProdutoBtn" class="btn-vermelho" style="width:200px;">Escolher arquivos</button>
+                    <div id="previewProdutoContainer" style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;"></div>
+                </div>
+
+                <!-- input file real (escondido) -->
+                <input type="file" id="imagem" name="imagens[]" accept="image/*" multiple required style="display:none;">
             </div>
         </div>
 
@@ -91,6 +133,19 @@
             <a href="../index.php" class="btn-primario">Voltar</a>
         </div>
     </form>
+
+    <!-- Modal de seleção/arraste para imagens (produto) -->
+    <div id="fileModalProduto" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <h3>Escolha ou arraste as imagens do produto</h3>
+            <div id="dropAreaProduto">
+                <p>Arraste as imagens aqui ou clique para escolher</p>
+                <input type="file" id="modalFileProdutoInput" accept="image/*" multiple style="display:none;">
+            </div>
+            <div id="modalPreviewProduto" style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;"></div>
+            <button id="closeModalProdutoBtn" style="margin-top:15px; background:#131318; color:#eaeaea; border:none; padding:10px 20px; border-radius:7px; cursor:pointer;">Fechar</button>
+        </div>
+    </div>
 
     <script>
         // Máscara para data dd/mm/aaaa
@@ -127,12 +182,90 @@
             // Converter data dd/mm/aaaa -> aaaa-mm-dd
             let partes = dataInput.value.split("/");
             if (partes.length === 3) {
-                dataInput.value = partes[2] + "-" + partes[1] + "-" + partes[0]; 
+                dataInput.value = partes[2] + "-" + partes[1] + "-" + partes[0];
             }
 
             // Converter preço para formato do banco (com ponto como decimal)
             precoInput.value = precoInput.value.replace(/\./g, "").replace(",", ".");
         });
+
+        // ===== Modal / Upload de imagens do produto =====
+        (function () {
+            const openBtn = document.getElementById("openModalProdutoBtn");
+            const fileModal = document.getElementById("fileModalProduto");
+            const dropArea = document.getElementById("dropAreaProduto");
+            const modalFileInput = document.getElementById("modalFileProdutoInput");
+            const modalPreview = document.getElementById("modalPreviewProduto");
+            const mainInput = document.getElementById("imagem");
+            const previewContainer = document.getElementById("previewProductoContainer") || document.getElementById("previewProdutoContainer");
+            const closeBtn = document.getElementById("closeModalProdutoBtn");
+
+            // fallback for missing elements
+            if (!openBtn || !fileModal || !modalFileInput || !mainInput) return;
+
+            openBtn.addEventListener("click", () => { fileModal.style.display = "flex"; modalPreview.innerHTML = ""; });
+            closeBtn.addEventListener("click", () => { fileModal.style.display = "none"; });
+
+            // close modal clicking outside
+            fileModal.addEventListener("click", (e) => { if (e.target === fileModal) fileModal.style.display = "none"; });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape") fileModal.style.display = "none"; });
+
+            dropArea.addEventListener("click", () => modalFileInput.click());
+            dropArea.addEventListener("dragover", (e) => { e.preventDefault(); dropArea.style.backgroundColor = "#f0f0ff"; });
+            dropArea.addEventListener("dragleave", () => { dropArea.style.backgroundColor = ""; });
+            dropArea.addEventListener("drop", (e) => {
+                e.preventDefault();
+                dropArea.style.backgroundColor = "";
+                const files = Array.from(e.dataTransfer.files || []).filter(f => f.type.startsWith("image/"));
+                if (files.length) handleFilesSelected(files);
+            });
+
+            modalFileInput.addEventListener("change", (e) => {
+                const files = Array.from(e.target.files || []).filter(f => f.type.startsWith("image/"));
+                if (files.length) handleFilesSelected(files);
+            });
+
+            function handleFilesSelected(files) {
+                // mostrar previews no modal
+                modalPreview.innerHTML = "";
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const img = document.createElement("img");
+                        img.src = ev.target.result;
+                        img.alt = file.name;
+                        modalPreview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                // colocar arquivos no input real (DataTransfer)
+                if (typeof DataTransfer !== "undefined") {
+                    const dt = new DataTransfer();
+                    files.forEach(f => dt.items.add(f));
+                    mainInput.files = dt.files;
+                } else {
+                    // fallback: se não suportar DataTransfer, não consigo popular input programaticamente em alguns browsers
+                    // deixamos o modalFileInput com os arquivos para serem enviados (poderá usar server-side para ler modalFileProdutoInput)
+                    modalFileInput.files = files;
+                }
+
+                // atualizar preview visível no formulário
+                if (previewContainer) {
+                    previewContainer.innerHTML = "";
+                    Array.from(mainInput.files).forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            const img = document.createElement("img");
+                            img.src = ev.target.result;
+                            img.alt = file.name;
+                            previewContainer.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        })();
     </script>
 </body>
 <div vw-plugin-wrapper>
