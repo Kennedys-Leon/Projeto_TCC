@@ -702,7 +702,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php if (!empty($foto_de_perfil)): ?>
                                 <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
                             <?php else: ?>
-                                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0
+                                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0">
+                            <?php endif; ?>
+                    
                     <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
 
                     <label>CPF:</label>

@@ -55,47 +55,39 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
     <ul>
-            <li class="dropdown">
-  <a href="#">Categorias ▼</a>
-  <ul class="submenu">
-    <li>
-      <a href="categorias/brawlstars.php">
-        <img src="img/brawl.webp" alt="Brawl Stars" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        Brawl Stars
-      </a>
-    </li>
-    <li>
-      <a href="categorias/fifa.php">
-        <img src="img/fifa.jpeg" alt="FIFA" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        FIFA
-      </a>
-    </li>
-    <li>
-      <a href="categorias/fortnite.php">
-        <img src="img/fortnite.jpeg" alt="Fortnite" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        Fortnite
-      </a>
-    </li>
-    <li>
-      <a href="categorias/freefire.php">
-        <img src="img/FF.jpeg" alt="Free Fire" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        Free Fire
-      </a>
-    </li>
-    <li>
-      <a href="categorias/minecraft.php">
-        <img src="img/minecraft.jpeg" alt="Minecraft" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        Minecraft
-      </a>
-    </li>
-    <li>
-      <a href="categorias/roblox.php">
-        <img src="img/roblox.jpeg" alt="Roblox" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-        Roblox
-      </a>
-    </li>
-  </ul>
+ <li class="dropdown">
+  <a href="#" id="categorias-btn">Categorias ▼</a>
 </li>
+
+<div class="mega-menu" id="mega-menu">
+  <div class="categorias-grid">
+    <a href="categorias/brawlstars.php"><img src="img/brawl.webp" alt="Brawl Stars">Brawl Stars</a>
+    <a href="categorias/fifa.php"><img src="img/fifa.jpeg" alt="FIFA">FIFA</a>
+    <a href="categorias/fortnite.php"><img src="img/fortnite.jpeg" alt="Fortnite">Fortnite</a>
+    <a href="categorias/freefire.php"><img src="img/FF.jpeg" alt="Free Fire">Free Fire</a>
+    <a href="categorias/minecraft.php"><img src="img/minecraft.jpeg" alt="Minecraft">Minecraft</a>
+    <a href="categorias/roblox.php"><img src="img/roblox.jpeg" alt="Roblox">Roblox</a>
+    <a href="categorias/cod.php"><img src="img/cod.webp" alt="Call of Duty">Call of Duty</a>
+    <a href="categorias/valorant.php"><img src="img/val.jpg" alt="Valorant">Valorant</a>
+    <a href="categorias/lol.php"><img src="img/lol.jpeg" alt="League of Legends">League of Legends</a>
+    <a href="categorias/csgo.php"><img src="img/cs.webp" alt="CS:GO">CS:GO</a>
+    <a href="categorias/gta.php"><img src="img/gta.png" alt="GTA V">GTA V</a>
+    <a href="categorias/pubg.php"><img src="img/pubg7.webp" alt="PUBG">PUBG</a>
+    <a href="categorias/clashroyale.php"><img src="img/clash.jpeg" alt="Clash Royale">Clash Royale</a>
+    <a href="categorias/clashofclans.php"><img src="img/clans.jpg" alt="Clash of Clans">Clash of Clans</a>
+    <a href="categorias/pokemon.php"><img src="img/poke.jpg" alt="Pokémon GO">Pokémon GO</a>
+    <a href="categorias/stumbleguys.php"><img src="img/guys.jpg" alt="Stumble Guys">Stumble Guys</a>
+    <a href="categorias/rocketleague.php"><img src="img/league.jpg" alt="Rocket League">Rocket League</a>
+    <a href="categorias/fallguys.php"><img src="img/fall.webp" alt="Fall Guys">Fall Guys</a>
+    <a href="categorias/thelastofus.php"><img src="img/joel.webp" alt="The Last of Us">The Last of Us</a>
+    <a href="categorias/reddead.php"><img src="img/red.avif" alt="Red Dead Redemption 2">Red Dead Redemption 2</a>
+    <a href="categorias/spiderman.php"><img src="img/aranha.jpg" alt="Spider-Man">Spider-Man</a>
+    <a href="categorias/stream.php"><img src="img/netflix.webp" alt="Serviços Streams">Serviços Streams</a>
+  </div>
+</div>
+
+
+
 
                  <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
@@ -356,6 +348,22 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="script.js"></script>
+    <script>
+    const btn = document.getElementById('categorias-btn');
+const megaMenu = document.getElementById('mega-menu');
+
+btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Fecha o menu se clicar fora
+document.addEventListener('click', function(e) {
+    if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
+        megaMenu.style.display = 'none';
+    }
+});
+</script>
 </body>
 <div vw class="enabled">
     <div vw-access-button class="active"></div>

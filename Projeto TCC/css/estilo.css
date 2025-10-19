@@ -707,85 +707,64 @@ body.dark-mode .servico-item h3 {
 body.dark-mode .servico-item p {
     color: #ddd;
 }
-/* Deixa o submenu escondido por padrão */
-.dropdown .submenu {
+/* Mega menu escondido por padrão */
+.mega-menu {
     display: none;
+    width: 100%;
+    background-color: #fff;
     position: absolute;
-    background: #fff;
-    list-style: none;
-    padding: 10px;
-    margin: 0;
-    border: 1px solid #ccc;
-  }
-  
-  /* Mostra quando passa o mouse */
-  .dropdown:hover .submenu {
-    display: block;
-  }
-  
-  .dropdown .submenu li {
-    margin: 5px 0;
-  }
-  
-  .dropdown .submenu a {
-    color: #333;
-    text-decoration: none;
-  }
-  .submenu {
+    left: 0;
+    top: 70px; /* altura do header */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+/* Grid de categorias */
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.categorias-grid a {
     display: flex;
-    flex-direction: column; /* coloca em coluna */
-    gap: 10px;              /* espaço entre os itens */
-    padding: 10px;
-  }
-  
-  .submenu a {
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 6px;
     color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
     transition: background 0.3s;
-  }
-  
-  .submenu a:hover {
-    background: #f0f0f0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
 }
 
-ul li {
-    display: flex;
-    align-items: center; /* Alinha imagem e texto na vertical */
-    gap: 10px; /* Espaço entre imagem e texto */
-    margin-bottom: 10px;
+.categorias-grid a:hover {
+    background-color: #f0f0f0;
 }
 
-.categoria-img {
-    width: 30px; /* Ajuste o tamanho da imagem conforme necessário */
-    height: 30px; /* Ajuste o tamanho da imagem conforme necessário */
-    object-fit: cover; /* Garante que a imagem não distorça */
-}
-.img-esfera {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.categorias-grid img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
     object-fit: cover;
+    border-radius: 8px;
 }
-/* ===== Botão Modo Daltônico ===== */
-/* ===== Botão Modo Daltônico ===== */
-#modo-daltonico {
-    background: linear-gradient(90deg, #007acc, #00c9ff);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    padding: 8px 16px;
-    margin-left: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 201, 255, 0.3);
-    transition: transform 0.2s, background-color 0.2s;
-  }
+
+/* Dark mode */
+body.dark-mode .mega-menu {
+    background-color: #222;
+}
+
+body.dark-mode .categorias-grid a {
+    color: #f2f2f7;
+}
+
+body.dark-mode .categorias-grid a:hover {
+    background-color: #333;
+}
+
   
   #modo-daltonico:hover {
     transform: scale(1.05);

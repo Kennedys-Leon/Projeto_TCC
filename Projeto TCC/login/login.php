@@ -19,15 +19,16 @@
         <label for="senha">Senha:</label>
         <input type="password" name="senha" required>
 
+        <!-- Mensagem de erro exibida logo abaixo do campo senha -->
+        <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+            <p class="error-msg" role="alert" style="color:#e74c3c; margin-top:8px; font-size:0.95rem;">Email ou senha incorreta.</p>
+        <?php endif; ?>
+
         <input type="submit" value="Entrar" class="btn-vermelho">
 
         <div class="botoes-inicio">
             <a href="../cadastro_usuario/cadastro.php" class="btn-primario">Não tem conta? Cadastre-se</a>
         </div>
     </form>
-    <?php
-    if(isset($_GET['error']) && $_GET['error']== 1){ ?>
-        <p style="color:red;">Email ou senha Incorreta.</p>
-    <?php   } ?>
 </body>
 </html>
