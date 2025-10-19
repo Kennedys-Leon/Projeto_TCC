@@ -62,3 +62,14 @@
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
+/* Adicione ou ajuste: */
+.perfil-imagem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.perfil-imagem-display {
+    margin: 0 0 18px 0; /* Remove auto, deixa só margem inferior */
+}

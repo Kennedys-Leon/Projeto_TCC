@@ -176,9 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!clickInsideSidebar && !clickedToggle) closeSide();
         
     });
-    /* =========================
-       MODO DALTÔNICO
-    ========================== */
         /* =========================
        MODO DALTÔNICO (PRETO E BRANCO)
     ========================== */

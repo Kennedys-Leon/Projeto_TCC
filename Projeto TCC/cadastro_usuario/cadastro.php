@@ -83,7 +83,7 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     // ======= Funções de máscara =======
     function mascaraCPF(valor) {
         return valor

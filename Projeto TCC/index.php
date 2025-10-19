@@ -54,25 +54,41 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <nav class="navbar">
-            <ul>
+    <ul>
+ <li class="dropdown">
+  <a href="#" id="categorias-btn">Categorias ▼</a>
+</li>
 
-            <li class="dropdown">
-  <a href="#">Categorias ▼</a>
-  <ul class="submenu">
-    <li><a href="categorias/brawlstars.php">Brawl Stars</a></li>
-    <li><a href="categorias/fifa.php">FIFA</a></li>
-    <li><a href="categorias/fortnite.php">Fortnite</a></li>
-    <li><a href="categorias/freefire.php">Free Fire</a></li>
-    <li><a href="categorias/minecraft.php">Minecraft</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
-    <li><a href="categorias/roblox.php">Roblox</a></li>
+<div class="mega-menu" id="mega-menu">
+  <div class="categorias-grid">
+    <a href="categorias/brawlstars.php"><img src="img/brawl.webp" alt="Brawl Stars">Brawl Stars</a>
+    <a href="categorias/fifa.php"><img src="img/fifa.jpeg" alt="FIFA">FIFA</a>
+    <a href="categorias/fortnite.php"><img src="img/fortnite.jpeg" alt="Fortnite">Fortnite</a>
+    <a href="categorias/freefire.php"><img src="img/FF.jpeg" alt="Free Fire">Free Fire</a>
+    <a href="categorias/minecraft.php"><img src="img/minecraft.jpeg" alt="Minecraft">Minecraft</a>
+    <a href="categorias/roblox.php"><img src="img/roblox.jpeg" alt="Roblox">Roblox</a>
+    <a href="categorias/cod.php"><img src="img/cod.webp" alt="Call of Duty">Call of Duty</a>
+    <a href="categorias/valorant.php"><img src="img/val.jpg" alt="Valorant">Valorant</a>
+    <a href="categorias/lol.php"><img src="img/lol.jpeg" alt="League of Legends">League of Legends</a>
+    <a href="categorias/csgo.php"><img src="img/cs.webp" alt="CS:GO">CS:GO</a>
+    <a href="categorias/gta.php"><img src="img/gta.png" alt="GTA V">GTA V</a>
+    <a href="categorias/pubg.php"><img src="img/pubg7.webp" alt="PUBG">PUBG</a>
+    <a href="categorias/clashroyale.php"><img src="img/clash.jpeg" alt="Clash Royale">Clash Royale</a>
+    <a href="categorias/clashofclans.php"><img src="img/clans.jpg" alt="Clash of Clans">Clash of Clans</a>
+    <a href="categorias/pokemon.php"><img src="img/poke.jpg" alt="Pokémon GO">Pokémon GO</a>
+    <a href="categorias/stumbleguys.php"><img src="img/guys.jpg" alt="Stumble Guys">Stumble Guys</a>
+    <a href="categorias/rocketleague.php"><img src="img/league.jpg" alt="Rocket League">Rocket League</a>
+    <a href="categorias/fallguys.php"><img src="img/fall.webp" alt="Fall Guys">Fall Guys</a>
+    <a href="categorias/thelastofus.php"><img src="img/joel.webp" alt="The Last of Us">The Last of Us</a>
+    <a href="categorias/reddead.php"><img src="img/red.avif" alt="Red Dead Redemption 2">Red Dead Redemption 2</a>
+    <a href="categorias/spiderman.php"><img src="img/aranha.jpg" alt="Spider-Man">Spider-Man</a>
+    <a href="categorias/stream.php"><img src="img/netflix.webp" alt="Serviços Streams">Serviços Streams</a>
+  </div>
+</div>
 
-    
-        </ul>
+
+
+
                  <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
@@ -83,22 +99,20 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
 
-                <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
-                    <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
-                    <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
-                    <li><a href="consultageral.php">Consulta Geral</a></li>
-                <?php endif; ?>
-        </ul>
+            <?php if (isset($_SESSION['usuario_nome']) && $_SESSION['usuario_nome'] === 'adm'): ?>
+                <li><a href="consulta/buscar.php">Consulta Usúarios</a></li>
+                <li><a href="consultaV/buscar2.php">Consulta Vendedor</a></li>
+                <li><a href="consultageral.php">Consulta Geral</a></li>
+            <?php endif; ?>
+    </ul>
 
-            <div class="search-bar-wrapper">
-                
-                <input id="search-input" class="search-bar" type="text" placeholder="Buscar 🔍︎" aria-describedby="search-icon" />
-            </div>
+        <!-- Elementos de busca e carrinho FORA da lista -->
+        <div class="search-bar-wrapper">
+            <input id="search-input" class="search-bar" type="text" placeholder="Buscar 🔍︎" />
+        </div>
 
-            <div class="search-cart">
-
+        <div class="search-cart">
             <br>
-
                 <!-- Modal do carrinho -->
                 <div id="cart-modal" class="cart-modal" role="dialog" aria-labelledby="cart-modal-header" aria-describedby="cart-modal-content" aria-hidden="true">
                     <div class="cart-modal-content" id="cart-modal-content">
@@ -125,10 +139,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Botão de tema (continua no header) -->
                 <!-- Botão com ícone moderno -->
                 <button id="toggle-theme" class="toggle-theme" aria-label="Alternar tema"></button>
-
-
-                
-            </div>
+        </div>
         </nav>
     </header>
 
@@ -310,11 +321,23 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a href="cadastro_produtos/detalhes_produto.php?id=<?php echo $produto['idproduto']; ?>" class="btn-detalhes">
                                 Ver Detalhes
                             </a>
+                            <?php if (isset($_SESSION['usuario_nome'])): ?>
+                                <a href="add_carrinho.php?id=<?= $produto['idproduto'] ?>" class="btn-preco">
+                                    Adicionar ao Carrinho
+                                </a>
+                            <?php else: ?>
+                                <button 
+                                    class="btn-detalhes"
+                                    onclick="window.location.href='cadastro_usuario/cadastro.php'">
+                                    Adicionar ao Carrinho
+                                </button>
+                            <?php endif; ?>
+
                         </div>
                     <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Sem produtos cadastrados.</p>
-                <?php endif; ?>
+                        <?php else: ?>
+                            <p>Sem produtos cadastrados.</p>
+                        <?php endif; ?>
             </div>
         </section>
         </div>
@@ -325,6 +348,22 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="script.js"></script>
+    <script>
+    const btn = document.getElementById('categorias-btn');
+const megaMenu = document.getElementById('mega-menu');
+
+btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Fecha o menu se clicar fora
+document.addEventListener('click', function(e) {
+    if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
+        megaMenu.style.display = 'none';
+    }
+});
+</script>
 </body>
 <div vw class="enabled">
     <div vw-access-button class="active"></div>

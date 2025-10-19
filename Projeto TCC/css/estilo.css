@@ -39,7 +39,7 @@ body.dark-mode .conteudo h1 {
     box-sizing: border-box;
 }
 body {
-    padding-top: 60px; /* 80px antes, diminua para aproximar o banner */
+    padding-top: 75px; /* 80px antes, diminua para aproximar o banner */
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -50,21 +50,20 @@ body.dark-mode {
 
 /* Banner ajustado para ficar justo ao header */
 .banner-destaque {
-    width: 95vw;
-    height: 70vh;           /* A altura é 70% da altura da janela */
+    width: 90vw;
+    height: 80vh;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     display: block;
-    object-fit: cover;      /* A imagem ocupa o espaço sem distorcer */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para destaque */
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 10px; /* Pequeno espaçamento do header */
 }
 
 body {
-    padding-top: 120px; /* 80px antes, diminua para aproximar o banner */
+    padding-top: 75px; /* 80px antes, diminua para aproximar o banner */
 }
-
-
 
 body.dark-mode {
     background-color: #333;
@@ -72,17 +71,19 @@ body.dark-mode {
 }
 
 .header {
-    position: fixed; /* Mantém o header visível ao rolar */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 3px 30px;
+    padding: 10px 30px; /* Aumentei o padding vertical */
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: rgb(21, 55, 100);;
+    background-color: rgb(21, 55, 100);
+    min-height: 70px; /* Altura mínima garantida */
+    box-sizing: border-box;
 }
 
 .header .logo {
@@ -103,6 +104,8 @@ body.dark-mode {
     list-style: none;
     gap: 20px;
     margin-right: 20px;
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    align-items: center;
 }
 
 .navbar ul li {
@@ -127,6 +130,7 @@ body.dark-mode {
     align-items: center;
     gap: 15px;
     margin-right: 1px;
+    flex-shrink: 0; /* Impede que diminua muito */
 }
 
 .search-bar:focus {
@@ -197,7 +201,6 @@ body.dark-mode .search-container .search-icon {
     transition: color 0.3s ease;
     cursor: pointer;
 }
-
 
 .cart-icon:hover {
     color: #00c9ff;
@@ -285,11 +288,11 @@ body.dark-mode .toggle-theme {
     color: #f2f2f7;
 }
 
-
-
 .conteudo {
-    padding: 30px;
+    padding: 30px 0; /* Remove padding lateral, mantém vertical */
     text-align: center;
+    width: 100%;
+    max-width: none; /* Remove limitação de largura */
 }
 
 .conteudo h1 {
@@ -593,7 +596,6 @@ body.dark-mode .user-name {
 }
 
 
-
 /* Efeito ao passar o mouse */
 .btn-preco:hover {
     background: linear-gradient(90deg, #0056b3 60%, #00aaff 100%);
@@ -705,85 +707,64 @@ body.dark-mode .servico-item h3 {
 body.dark-mode .servico-item p {
     color: #ddd;
 }
-/* Deixa o submenu escondido por padrão */
-.dropdown .submenu {
+/* Mega menu escondido por padrão */
+.mega-menu {
     display: none;
+    width: 100%;
+    background-color: #fff;
     position: absolute;
-    background: #fff;
-    list-style: none;
-    padding: 10px;
-    margin: 0;
-    border: 1px solid #ccc;
-  }
-  
-  /* Mostra quando passa o mouse */
-  .dropdown:hover .submenu {
-    display: block;
-  }
-  
-  .dropdown .submenu li {
-    margin: 5px 0;
-  }
-  
-  .dropdown .submenu a {
-    color: #333;
-    text-decoration: none;
-  }
-  .submenu {
+    left: 0;
+    top: 70px; /* altura do header */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+/* Grid de categorias */
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.categorias-grid a {
     display: flex;
-    flex-direction: column; /* coloca em coluna */
-    gap: 10px;              /* espaço entre os itens */
-    padding: 10px;
-  }
-  
-  .submenu a {
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 6px;
     color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
     transition: background 0.3s;
-  }
-  
-  .submenu a:hover {
-    background: #f0f0f0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
 }
 
-ul li {
-    display: flex;
-    align-items: center; /* Alinha imagem e texto na vertical */
-    gap: 10px; /* Espaço entre imagem e texto */
-    margin-bottom: 10px;
+.categorias-grid a:hover {
+    background-color: #f0f0f0;
 }
 
-.categoria-img {
-    width: 30px; /* Ajuste o tamanho da imagem conforme necessário */
-    height: 30px; /* Ajuste o tamanho da imagem conforme necessário */
-    object-fit: cover; /* Garante que a imagem não distorça */
-}
-.img-esfera {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.categorias-grid img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
     object-fit: cover;
+    border-radius: 8px;
 }
-/* ===== Botão Modo Daltônico ===== */
-/* ===== Botão Modo Daltônico ===== */
-#modo-daltonico {
-    background: linear-gradient(90deg, #007acc, #00c9ff);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    padding: 8px 16px;
-    margin-left: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 201, 255, 0.3);
-    transition: transform 0.2s, background-color 0.2s;
-  }
+
+/* Dark mode */
+body.dark-mode .mega-menu {
+    background-color: #222;
+}
+
+body.dark-mode .categorias-grid a {
+    color: #f2f2f7;
+}
+
+body.dark-mode .categorias-grid a:hover {
+    background-color: #333;
+}
+
   
   #modo-daltonico:hover {
     transform: scale(1.05);
