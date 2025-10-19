@@ -82,7 +82,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="categorias/thelastofus.php"><img src="img/joel.webp" alt="The Last of Us">The Last of Us</a>
     <a href="categorias/reddead.php"><img src="img/red.avif" alt="Red Dead Redemption 2">Red Dead Redemption 2</a>
     <a href="categorias/spiderman.php"><img src="img/aranha.jpg" alt="Spider-Man">Spider-Man</a>
-    <a href="categorias/stream.php"><img src="img/netflix.webp" alt="Serviços Streams">Serviços Streams</a>
+    <a href="categorias/stream.php"><img src="img/netflix.webp" alt="Serviços Streams">Serviços de Streaming</a>
   </div>
 </div>
 
