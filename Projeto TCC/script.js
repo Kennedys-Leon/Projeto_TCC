@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('colorblind-mode');
             const ativo = document.body.classList.contains('colorblind-mode');
             daltonicoSidebar.setAttribute('aria-pressed', ativo);
-            daltonicoSidebar.textContent = ativo ? '👁️ Modo Normal' : '👁️ Daltonismo';
+            daltonicoSidebar.textContent = ativo ? '👁️ Modo Normal' : '👁️ Modo Daltônico';
             localStorage.setItem('colorblind_mode', ativo);
         });
     }

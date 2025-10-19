@@ -204,7 +204,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- 👁️ Modo daltônico (preto e branco) -->
         <li>
             <button type="button" id="modo-daltonico-sidebar" aria-pressed="false" aria-label="Ativar modo daltônico na sidebar">
-            <img src="img/eye.png" alt="Sair" width="16" height="16"> Daltonismo
+            <img src="img/eye.png" alt="Sair" width="16" height="16"> Modo Daltônico
                 
             </button>
         </li>
