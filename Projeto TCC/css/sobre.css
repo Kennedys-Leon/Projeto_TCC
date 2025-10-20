@@ -82,7 +82,7 @@ body {
 }
 
 .ouro {
-    background: #333;
+    background: #FFD700;
     color: #fff;
 }
 
@@ -97,4 +97,103 @@ body {
 
 .diamante li span {
     color: #fff;
+}
+/* === BOTÃO SELECIONAR PLANO === */
+
+.btn-contratar {
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 25px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Efeito quando o mouse passa por cima */
+.btn-contratar:hover {
+    background: linear-gradient(135deg, #0056cc, #0094ff);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Efeito ao clicar */
+.btn-contratar:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tornar o botão responsivo */
+@media (max-width: 600px) {
+    .btn-contratar {
+        width: 100%;
+        font-size: 15px;
+        padding: 14px;
+    }
+}
+/* === RODAPÉ === */
+
+footer {
+    background-color: #111; /* fundo escuro elegante */
+    color: #ccc;
+    text-align: center;
+    padding: 30px 15px;
+    margin-top: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-top: 2px solid #00c6ff;
+}
+
+/* Texto dos direitos reservados */
+footer p {
+    margin: 10px 0;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* === BOTÃO "VOLTAR PARA A PÁGINA INICIAL" === */
+
+footer a {
+    display: inline-block;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+/* Efeito hover */
+footer a:hover {
+    background: linear-gradient(135deg, #0094ff, #0056cc);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Efeito ao clicar */
+footer a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    footer {
+        padding: 25px 10px;
+    }
+
+    footer a {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
 }
