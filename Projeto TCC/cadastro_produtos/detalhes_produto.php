@@ -39,125 +39,173 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/style.css">
 
 <style>
+/* ==================== GERAL ==================== */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #f7f9fc;
-  color: #333;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: #f4f6fb;
+  color: #2c3e50;
   margin: 0;
   padding: 0;
 }
 
 /* Container principal */
 .container {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 30px 40px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Título do produto */
+/* ==================== TÍTULO ==================== */
 .container h2 {
-  font-size: 28px;
-  margin-bottom: 25px;
-  color: rgb(21, 55, 100);
+  font-size: 32px;
+  text-align: center;
+  color: #163b72;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 3px solid #163b72;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
-/* Layout principal de detalhes */
+/* ==================== LAYOUT PRINCIPAL ==================== */
 .detalhes-produto {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 25px;
+  gap: 40px;
   align-items: start;
 }
 
-/* Galeria de imagens */
+/* ==================== GALERIA DE IMAGENS ==================== */
 .galeria-imagens {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
 }
 
 .galeria-imagens .img-detalhe {
   width: 100%;
-  max-width: 450px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  max-width: 480px;
+  border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.galeria-imagens .img-detalhe:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 }
 
-.galeria-imagens img {
-  transition: transform 0.2s ease-in-out;
-}
-
-.galeria-imagens img:hover {
-  transform: scale(1.03);
-}
-
-/* Informações do produto */
+/* ==================== INFO PRODUTO ==================== */
 .info-produto {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .info-produto p {
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+.info-produto strong {
+  color: #163b72;
 }
 
 .info-produto hr {
-  margin: 15px 0;
+  margin: 20px 0;
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #e0e0e0;
 }
 
 .info-produto h4 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: rgb(21, 55, 100);
+  font-size: 22px;
+  color: #163b72;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-/* Botão de comprar */
+/* ==================== BOTÃO DE COMPRA ==================== */
 .btn-preco {
-  background-color: rgb(21, 55, 100);
+  background: linear-gradient(135deg, #163b72, #2a6fcf);
   color: #fff;
   border: none;
-  padding: 14px 25px;
-  font-size: 18px;
-  border-radius: 8px;
+  padding: 14px 28px;
+  font-size: 17px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  margin-top: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  transition: background 0.3s, transform 0.25s, box-shadow 0.25s;
+  align-self: flex-start;
 }
-
 .btn-preco:hover {
-  background: #004a99;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #2a6fcf, #163b72);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(42, 111, 207, 0.3);
+}
+.btn-preco:active {
+  transform: scale(0.98);
 }
 
-/* Rodapé */
+/* ==================== BOTÃO VOLTAR ==================== */
+.btn-voltar {
+  display: inline-block;
+  background: #e5e9f2;
+  color: #163b72;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+  margin-bottom: 25px;
+}
+.btn-voltar:hover {
+  background: #163b72;
+  color: #fff;
+}
+
+/* ==================== RODAPÉ ==================== */
 .rodape {
-  background: rgb(21, 55, 100);
+  background: #163b72;
   color: #fff;
   text-align: center;
-  padding: 15px 0;
-  margin-top: 40px;
+  padding: 18px 0;
+  margin-top: 60px;
   font-size: 14px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Responsividade */
-@media (max-width: 900px) {
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 950px) {
   .detalhes-produto {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
-
-  .galeria-imagens .img-detalhe {
-    max-width: 100%;
+  .container {
+    padding: 25px;
+  }
+  .container h2 {
+    font-size: 26px;
+  }
+  .btn-preco {
+    width: 100%;
+    text-align: center;
   }
 }
 
