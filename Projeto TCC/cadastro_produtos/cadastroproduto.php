@@ -25,7 +25,7 @@
             border-radius: 6px;
             font-size: 14px;
             font-family: inherit;
-            background-color: #4d4970;
+            background-color: #292929;
             transition: border-color 0.2s ease-in-out;
         }
 

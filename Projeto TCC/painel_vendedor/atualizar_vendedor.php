@@ -53,7 +53,7 @@ if (!empty($nome) && !empty($email)) {
             $_SESSION['vendedor_foto'] = $fotoBinario;
         }
 
-        header("Location: pagina_vendedor.php?msg=perfil_atualizado");
+        header("Location: painel_vendedor.php?msg=perfil_atualizado");
         exit;
     } catch (PDOException $e) {
         die("Erro ao atualizar perfil: " . $e->getMessage());

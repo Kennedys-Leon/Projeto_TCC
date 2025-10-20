@@ -425,7 +425,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             });
         </script>
-        
     </head>
 <body>
 
@@ -440,7 +439,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button class="close-btn" id="close-sidebar" aria-label="Fechar menu">&times;</button>
         <ul>
 
-        <li><a href="pagina_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
+        <li><a href="painel_vendedor.php"><img src="../img/casa.png" alt="Início" style="width:16px; height:16px; vertical-align:middle;"> Início</a></li>
 
 
             <?php if (isset($_SESSION['vendedor_nome'])): ?>
@@ -681,54 +680,74 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
         <!-- Meu Perfil -->
-        <div id="perfil" class="tab-content">
-            <div class="perfil-container">
-                <h2 class="perfil-titulo">Meu Perfil</h2>
+<div id="perfil" class="tab-content">
+    <div class="perfil-container">
+        <h2 class="perfil-titulo">Meu Perfil</h2>
 
-                <!-- Foto de Perfil -->
-                <div class="perfil-imagem">
-                    <?php if (!empty($foto_de_perfil)): ?>
-                        <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
-                    <?php else: ?>
-                        <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
-                    <?php endif; ?>
-                </div>
-
-                <!-- Formulário de edição -->
-                <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
-                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px;">
-                        <!-- Imagem de Perfil -->
-                        <div class="perfil-imagem" style="margin: 0;">
-                            <?php if (!empty($foto_de_perfil)): ?>
-                                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
-                            <?php else: ?>
-                                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0">
-                            <?php endif; ?>
-                    
-                    <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
-
-                    <label>CPF:</label>
-                    <input type="text" id="CampCPF" name="cpf" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
-
-                    <label>CNPJ:</label>
-                    <input type="text" id="CampCNPJ" name="cnpj" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
-
-                    <label>Sua foto de preferência:</label>
-                    <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
-                        <button type="button" id="openModalBtnPerfil" class="btn" style="width: 200px;">Escolher arquivo</button>
-                        <img id="previewPerfil" src="#" alt="Pré-visualização da foto de perfil" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
-                    </div>
-                    <input type="file" id="foto_perfil" name="foto" accept="image/*" style="display:none;">
-
-                    <button type="submit">Salvar Alterações</button>
-
-                    <div class="botoes-inicio">
-                        <button type="button" onclick="window.location.href='pagina_vendedor.php'" style="margin-top:10px;">Retornar a Página Inicial</button>
-                    </div>
-                </form>
-            </div>
+        <!-- Foto de Perfil -->
+        <div class="perfil-imagem">
+            <?php if (!empty($foto_de_perfil)): ?>
+                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
+            <?php else: ?>
+                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
+            <?php endif; ?>
         </div>
+
+        <!-- Formulário de Edição -->
+        <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
+
+            <label for="foto_perfil">Sua foto de preferência:</label>
+            <div class="perfil-upload">
+                <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
+                <input type="file" id="foto_perfil" name="foto" accept="image/*" style="display:none;">
+                <img id="previewPerfil" src="#" alt="Pré-visualização da foto" style="display:none;">
+            </div>
+
+            <label for="CampNome">Nome:</label>
+            <input type="text" id="CampNome" name="nome" value="<?php echo htmlspecialchars($vendedor['nome'] ?? ''); ?>">
+
+            <label for="CampTelefone">Telefone:</label>
+            <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
+
+            <label for="CampEmail">E-mail:</label>
+            <input type="email" id="CampEmail" name="email" value="<?php echo htmlspecialchars($vendedor['email'] ?? ''); ?>">
+
+            <label for="CampCPF">CPF:</label>
+            <input type="text" id="CampCPF" name="cpf" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
+
+            <label for="CampCNPJ">CNPJ:</label>
+            <input type="text" id="CampCNPJ" name="cnpj" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
+
+            <label for="CampSenha">Senha:</label>
+            <input type="password" id="CampSenha" name="senha" placeholder="••••••••">
+
+            <button type="submit">Salvar Alterações</button>
+
+            <div class="botoes-inicio">
+                <button type="button" onclick="window.location.href='painel_vendedor.php'">Retornar à Página Inicial</button>
+            </div>
+        </form>
     </div>
+</div>
+
+        <script>
+        document.getElementById('openModalBtnPerfil').addEventListener('click', function() {
+            document.getElementById('foto_perfil').click();
+        });
+
+        document.getElementById('foto_perfil').addEventListener('change', function(e) {
+            const preview = document.getElementById('previewPerfil');
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    preview.src = evt.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        </script>
 
     <footer>
         <p>Todos os Direitos Reservados - MaxAcess © 2025</p>

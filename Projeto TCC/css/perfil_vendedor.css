@@ -1,14 +1,74 @@
-/* Estilo inspirado no login de vendedor para o perfil do painel */
+/* Contêiner principal */
 .perfil-container {
-
-  padding: 32px 40px;
+  background: #0b2e4a;
+  padding: 40px;
   border-radius: 14px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 2px 16px rgba(40, 40, 60, 0.10);
+  box-shadow: 0 2px 16px rgba(40, 40, 60, 0.1);
 }
 
+/* Título */
+.perfil-titulo {
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #b0b3c6;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Foto de perfil */
+.perfil-imagem {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.perfil-imagem-display {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255,255,255,0.15);
+}
+
+/* Upload da nova foto */
+.perfil-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.perfil-upload .btn {
+  background: #39395a;
+  color: #eaeaea;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.perfil-upload .btn:hover {
+  background: #23233a;
+  transform: scale(1.03);
+}
+
+.perfil-upload img {
+  width: 120px;
+  height: 120px;
+  margin-top: 10px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Campos do formulário */
 .perfil-form label {
   display: block;
   margin-bottom: 6px;
@@ -18,7 +78,7 @@
 
 .perfil-form input[type="text"],
 .perfil-form input[type="email"],
-.perfil-form input[type="file"] {
+.perfil-form input[type="password"] {
   width: 100%;
   padding: 10px 12px;
   margin-bottom: 14px;
@@ -36,6 +96,7 @@
   outline: none;
 }
 
+/* Botões */
 .perfil-form button {
   background: #39395a;
   color: #eaeaea;
@@ -47,6 +108,7 @@
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s, transform 0.15s;
+  margin-bottom: 10px;
 }
 
 .perfil-form button:hover {
@@ -54,22 +116,6 @@
   transform: scale(1.03);
 }
 
-.perfil-titulo {
-  margin-bottom: 20px;
-  font-size: 22px;
-  color: #b0b3c6;
+.botoes-inicio {
   text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* Adicione ou ajuste: */
-.perfil-imagem {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 18px;
-}
-.perfil-imagem-display {
-    margin: 0 0 18px 0; /* Remove auto, deixa só margem inferior */
 }

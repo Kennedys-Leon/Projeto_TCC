@@ -27,7 +27,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Projeto TCC - MaxAcess</title>
 
     <!-- Seus estilos -->
-    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="stylesheet" href="css/estilo.css"/>
     <link rel="stylesheet" href="css/cart.css">
 
     <!-- Estilo da sidebar (só a lateral) -->
@@ -278,7 +278,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="card-produto">
                         <img src="img/steam.jpeg" alt="Jogos Steam">
                         <p>STEAM JOGOS (CÓDIGOS DE ATIVAÇÃO) - CONTA STEAM OFICIAL (ENTREGA AUTOMÁTICA)</p>
-                        <button class="btn-preco">Adicionar ao Carrinho</button>
+                        <button class="btn-preco" data-nome="Chaves de ativação steam" data-preco="49.90">
+                            Adicionar ao Carrinho
+                        </button>
                     </div>
                     <div class="card-produto">
                         <img src="img/chave.png" alt="Steam Key Aleatória">
