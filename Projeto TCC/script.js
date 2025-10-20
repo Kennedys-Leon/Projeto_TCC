@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCartCount() {
         const cartIcon = document.getElementById('cart-icon');
         if (!cartIcon) return;
-        cartIcon.setAttribute('data-count', cartItems.length);
+        const totalItens = cartItems.reduce((acc, item) => acc + (item.quantidade || 1), 0);
+        cartIcon.setAttribute('data-count', totalItens);
     }
 
     function updateCartModal() {
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItems.forEach((item, idx) => {
             const li = document.createElement('li');
-            li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)}`;
+            li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)} x ${item.quantidade}`;
 
             const rm = document.createElement('button');
             rm.textContent = 'Remover';
@@ -109,17 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             li.appendChild(rm);
             list.appendChild(li);
-            total += item.preco;
+            total += item.preco * item.quantidade;
         });
 
         totalEl.textContent = `R$ ${total.toFixed(2)}`;
     }
 
-    const cartIcon   = document.getElementById('cart-icon');
-    const cartLink   = document.getElementById('open-cart'); // link da sidebar
-    const cartModal  = document.getElementById('cart-modal');
-    const closeBtn   = document.querySelector('.cart-close-btn');
+    // Seletores
+    const cartIcon  = document.getElementById('cart-icon');
+    const cartLink  = document.getElementById('open-cart');
+    const cartModal = document.getElementById('cart-modal');
+    const closeBtn  = document.querySelector('.cart-close-btn');
 
+    // Abrir carrinho
     function openCart(e) {
         if (e) e.preventDefault();
         if (!cartModal) return;
@@ -130,22 +133,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartIcon) cartIcon.addEventListener('click', openCart);
     if (cartLink) cartLink.addEventListener('click', openCart);
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => cartModal.style.display = 'none');
-    }
+    // Fechar modal
+    if (closeBtn) closeBtn.addEventListener('click', () => cartModal.style.display = 'none');
     window.addEventListener('click', (e) => {
         if (e.target === cartModal) cartModal.style.display = 'none';
     });
 
-    // Botões de "R$ 25,00 +" adicionam item
+    // Adicionar item ao carrinho
     document.querySelectorAll('.btn-preco').forEach(btn => {
         btn.addEventListener('click', () => {
             const card = btn.closest('.card-produto');
             if (!card) return;
-            const nome  = card.querySelector('p')?.textContent || 'Produto';
-            // pega o número do botão (ex.: "R$ 25,00 +")
-            const preco = parseFloat(btn.textContent.replace(/[^\d,]/g,'').replace(',', '.')) || 0;
-            cartItems.push({ nome, preco });
+            const nome = card.querySelector('p')?.textContent || 'Produto';
+            const preco = parseFloat(btn.textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+
+            if (!nome || preco <= 0) return; // <-- agora está no lugar certo
+
+            const existente = cartItems.find(item => item.nome === nome && item.preco === preco);
+            if (existente) {
+                existente.quantidade = (existente.quantidade || 1) + 1;
+            } else {
+                cartItems.push({ nome, preco, quantidade: 1 });
+            }
+
             saveCart();
             updateCartCount();
             Swal.fire('Adicionado!', `${nome} foi adicionado ao carrinho.`, 'success');
@@ -153,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateCartCount();
-
+    
 
     /* =========================
        SIDEBAR (abre/fecha)

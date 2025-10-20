@@ -43,10 +43,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu lateral" aria-expanded="false">☰</button>
         
 
-
-        <!-- Ícone do carrinho original (continua funcionando) -->
-        
-
         <div class="logo-user-container">
             <div class="logo">
                 <img src="img/logo.png" alt="MaxAcess" class="logo-img" />
@@ -87,9 +83,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-
-
-                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
+                <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
                 <li><a href="informacoes_cabecalho/servicos.php">Serviços</a></li>
                 
@@ -117,6 +111,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div id="cart-modal" class="cart-modal" role="dialog" aria-labelledby="cart-modal-header" aria-describedby="cart-modal-content" aria-hidden="true">
                     <div class="cart-modal-content" id="cart-modal-content">
                         <div class="cart-modal-header">
+                        <div id="cart-icon" class="cart-icon" data-count="0" title="Ver carrinho 🛒">🛒</div>
                             <h2 id="cart-modal-header">Seu Carrinho</h2>
                             <button class="cart-close-btn" aria-label="Fechar carrinho">&times;</button>
                         </div>
@@ -155,7 +150,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </li>
         <li>
             <a href="carrinho/checkout.php" id="open-cart">
-                <img src="img/carrinho-de-compras.png" alt="Carrinho de compras" width="16" height="16"> Carrinho
+                <img src="img/carrinho-de-compras.png" alt="Carrinho de compras" width="16" height="16"> Meu Carrinho
             </a>
         </li>
 
@@ -176,7 +171,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php else: ?>
             <li>
                 <a href="cadastro_vendedor/cadastrovendedor.php">
-                    <img src="img/megafone.png" alt="Anunciar produto" width="16" height="16"> Quero Vender
+                    <img src="img/megafone.png" alt="Anunciar produto" width="16" height="16"> Anunciar
                 </a>
             </li>
             <li>
@@ -322,9 +317,14 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 Ver Detalhes
                             </a>
                             <?php if (isset($_SESSION['usuario_nome'])): ?>
-                                <a href="add_carrinho.php?id=<?= $produto['idproduto'] ?>" class="btn-preco">
-                                    Adicionar ao Carrinho
-                                </a>
+                            <button
+                                class="btn-preco"
+                                data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+                                data-preco="<?= number_format($produto['preco'], 2, '.', '') ?>"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+
                             <?php else: ?>
                                 <button 
                                     class="btn-detalhes"
@@ -349,21 +349,130 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="script.js"></script>
     <script>
-    const btn = document.getElementById('categorias-btn');
-const megaMenu = document.getElementById('mega-menu');
+        const btn = document.getElementById('categorias-btn');
+        const megaMenu = document.getElementById('mega-menu');
 
-btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
-});
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+            });
 
-// Fecha o menu se clicar fora
-document.addEventListener('click', function(e) {
-    if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
-        megaMenu.style.display = 'none';
-    }
-});
-</script>
+            // Fecha o menu se clicar fora
+            document.addEventListener('click', function(e) {
+                if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
+                    megaMenu.style.display = 'none';
+                }
+            });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+
+        function updateCartCount() {
+            const cartIcon = document.getElementById('cart-icon');
+            if (!cartIcon) return;
+            const totalItens = cartItems.reduce((acc, item) => acc + (item.quantidade || 1), 0);
+            cartIcon.setAttribute('data-count', totalItens);
+        }
+
+        function updateCartModal() {
+            const list = document.querySelector('.cart-items');
+            const emptyMsg = document.getElementById('cart-empty-message');
+            const totalEl = document.getElementById('cart-total-price');
+
+            if (!list || !emptyMsg || !totalEl) return;
+
+            list.innerHTML = '';
+            if (cartItems.length === 0) {
+                emptyMsg.style.display = 'block';
+                totalEl.textContent = 'R$ 0,00';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            let total = 0;
+
+            cartItems.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)} x ${item.quantidade}`;
+
+                const rm = document.createElement('button');
+                rm.textContent = 'Remover';
+                rm.style.marginLeft = '8px';
+                rm.addEventListener('click', () => {
+                    cartItems.splice(idx, 1);
+                    saveCart();
+                    updateCartCount();
+                    updateCartModal();
+                });
+
+                li.appendChild(rm);
+                list.appendChild(li);
+                total += item.preco * item.quantidade;
+            });
+
+            totalEl.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('.btn-preco').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nome = btn.dataset.nome || btn.closest('.card-produto')?.querySelector('p')?.textContent || 'Produto';
+                const preco = parseFloat(btn.dataset.preco || btn.textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+
+                const logado = <?= isset($_SESSION['usuario_nome']) ? 'true' : 'false' ?>;
+                if (!logado) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Faça login para adicionar ao carrinho',
+                        confirmButtonText: 'Entrar',
+                        confirmButtonColor: '#8C5B3F'
+                    }).then(() => window.location.href = 'login/login.php');
+                    return;
+                }
+
+                const existente = cartItems.find(item => item.nome === nome && item.preco === preco);
+                if (existente) {
+                    existente.quantidade = (existente.quantidade || 1) + 1;
+                } else {
+                    cartItems.push({ nome, preco, quantidade: 1 });
+                }
+
+                saveCart();
+                updateCartCount();
+                Swal.fire('Adicionado!', `${nome} foi adicionado ao carrinho.`, 'success');
+            });
+        });
+
+        // Botão de finalizar compra
+        document.querySelector('.cart-checkout-btn')?.addEventListener('click', () => {
+            if (cartItems.length === 0) {
+                Swal.fire('Carrinho vazio', 'Adicione algum item antes de prosseguir.', 'info');
+                return;
+            }
+
+            // Envia os itens via POST para checkout.php
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'carrinho/checkout.php';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'cart';
+            input.value = JSON.stringify(cartItems);
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        });
+
+        updateCartCount();
+    </script>
+
 </body>
 <div vw class="enabled">
     <div vw-access-button class="active"></div>
