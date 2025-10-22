@@ -514,7 +514,20 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     updateCartModal();
 </script>
 
-
+<script>
+    const btn = document.getElementById('categorias-btn');
+const megaMenu = document.getElementById('mega-menu');
+btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+});
+// Fecha o menu se clicar fora
+document.addEventListener('click', function(e) {
+    if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
+        megaMenu.style.display = 'none';
+    }
+});
+</script>
 </body>
 <div vw class="enabled">
     <div vw-access-button class="active"></div>
