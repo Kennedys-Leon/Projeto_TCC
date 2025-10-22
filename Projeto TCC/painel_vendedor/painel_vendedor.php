@@ -646,7 +646,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td style="text-align:center; white-space:normal; word-wrap:break-word;">
                         <?php echo htmlspecialchars($p['descricao']); ?>
                     </td>
-                    <td>
+                    <td class="acoes">
                     
                         <a href="editar_produto.php?id=<?php echo $p['idproduto']; ?>" class="btn">Editar</a>
 
@@ -674,6 +674,38 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 .produtos-tabela td img {
                     display: block;
                     margin: 0 auto;
+                }
+
+                /* Evita que a linha fique branca ao passar o mouse */
+                .produtos-tabela tbody tr:hover,
+                .produtos-tabela tr:hover {
+                    background-color: transparent !important;
+                    color: inherit !important;
+                }
+                .produtos-tabela tr:hover td {
+                    background-color: transparent !important;
+                    color: inherit !important;
+                }
+
+                /* Se quiser um leve destaque escuro ao hover em vez de branco, use:
+                .produtos-tabela tr:hover {
+                    background-color: rgba(255,255,255,0.03) !important;
+                }
+                */
+
+                /* Garantir que a coluna de Ações não seja truncada */
+                .produtos-tabela td.acoes {
+                    white-space: nowrap;
+                    overflow: visible;
+                    max-width: none;
+                    text-overflow: clip;
+                    display: inline-flex;
+                    gap: 8px;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .produtos-tabela td.acoes .btn {
+                    margin: 0;
                 }
                 </style>
         </div>
