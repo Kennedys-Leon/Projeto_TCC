@@ -21,7 +21,7 @@
                     <li><span>✔</span> Anúncio Prata</li>
                     <li><span>✔</span> Taxa básica de <strong>9,99%</strong></li>
                 </ul>
-                <a href="#" class="btn-contratar">Selecionar Plano</a>
+                <a href="comprar_plano.php?plano=prata" class="btn-contratar">Selecionar Plano</a>
             </div>
 
             <div class="plano ouro">
@@ -32,7 +32,7 @@
                     <li><span>✔</span> Mais visibilidade</li>
                     <li><span>✔</span> Taxa de <strong>11,99%</strong></li>
                 </ul>
-                <a href="#" class="btn-contratar">Selecionar Plano</a>
+                <a href="comprar_plano.php?plano=ouro" class="btn-contratar">Selecionar Plano</a>
             </div>
 
             <div class="plano diamante">
@@ -44,14 +44,14 @@
                     <li><span>✔</span> Máxima visibilidade</li>
                     <li><span>✔</span> Taxa de <strong>12,99%</strong></li>
                 </ul>
-                <a href="#" class="btn-contratar">Selecionar Plano</a>
+                <a href="comprar_plano.php?plano=diamante" class="btn-contratar">Selecionar Plano</a>
             </div>
         </div>
     </div>
 
     <footer>
         <p>© 2025 MaxAcess - Todos os direitos reservados.</p>
-        <p><a href="../index.php">Voltar para a página inicial</a></p>
+        <p><a href="../servicos.php">Voltar para a página inicial</a></p>
     </footer>
 </body>
 </html>
