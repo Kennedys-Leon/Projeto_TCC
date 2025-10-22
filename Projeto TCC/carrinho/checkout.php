@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
+// 🔒 Verifica se o usuário está logado
+if (!isset($_SESSION['usuario_nome'])) {
     echo "
     <html lang='pt-BR'>
     <head>
@@ -50,12 +51,38 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// Lê o carrinho da sessão
-$carrinho = $_SESSION['carrinho'] ?? [];
+// 🛒 Captura o carrinho enviado via POST (enviado pelo JS do index)
+$carrinho = [];
+if (isset($_POST['cart'])) {
+    $json = $_POST['cart'];
+    $decoded = json_decode($json, true);
+
+    if (is_array($decoded)) {
+        foreach ($decoded as $item) {
+            if (!isset($item['nome'], $item['preco'])) continue;
+            $carrinho[] = [
+                'nome' => strip_tags($item['nome']),
+                'preco' => (float)$item['preco'],
+                'quantidade' => isset($item['quantidade']) ? (int)$item['quantidade'] : 1
+            ];
+        }
+    }
+}
+
+// 🧭 Caso o carrinho não venha pelo POST (fallback)
+if (empty($carrinho) && isset($_SESSION['carrinho'])) {
+    $carrinho = $_SESSION['carrinho'];
+}
+
+// 💾 Atualiza a sessão para manter sincronizado
+$_SESSION['carrinho'] = $carrinho;
+
+// 💰 Calcula o total
 $total = 0;
 foreach ($carrinho as $item) {
     $total += $item['preco'] * $item['quantidade'];
 }
+$_SESSION['total'] = $total;
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +118,7 @@ foreach ($carrinho as $item) {
                         <tr>
                             <td><?= htmlspecialchars($item['nome']) ?></td>
                             <td>R$ <?= number_format($item['preco'], 2, ',', '.') ?></td>
-                            <td><?= $item['quantidade'] ?></td>
+                            <td><?= intval($item['quantidade']) ?></td>
                             <td>R$ <?= number_format($item['preco'] * $item['quantidade'], 2, ',', '.') ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -103,7 +130,7 @@ foreach ($carrinho as $item) {
             </div>
 
             <div class="checkout-acoes">
-                <a href="../index.php" class="btn-voltar">Continuar Comprando</a>
+                <a href="../index.php" class="btn-voltar">← Continuar Comprando</a>
                 <a href="pagamento.php" class="btn-finalizar">Finalizar Pagamento</a>
             </div>
         <?php endif; ?>
@@ -114,6 +141,8 @@ foreach ($carrinho as $item) {
         <div class="vw-plugin-top-wrapper"></div>
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 </html>

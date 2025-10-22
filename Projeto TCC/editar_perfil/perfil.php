@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// encaminhar POST para o processador sem mudar o resto da página
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require __DIR__ . '/salvar_perfil.php';
+    exit;
+}
+
 $nome      = $_SESSION['nome']      ?? ($_SESSION['usuario_nome'] ?? "");
 $cpf       = $_SESSION['cpf']       ?? "";
 $cep       = $_SESSION['cep']       ?? "";
@@ -54,19 +60,32 @@ if (!empty($_SESSION['usuario_foto'])) {
             font-size: 1rem;
             text-align: center;
         }
+
+        /* drop area */
+        .drop-area {
+            border: 2px dashed #9d9dfc;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            max-width: 280px;
+            margin: 0 auto 12px auto;
+            background: #fff;
+        }
+        .drop-area.dragover {
+            background: #f0f0ff;
+        }
     </style>
 </head>
+
 <body>
-    <form class="form-cadastro" method="POST" action="salvar_perfil.php" enctype="multipart/form-data">
+    <form id="formPerfil" class="form-cadastro" method="POST" action="perfil.php" enctype="multipart/form-data">
         <h2>Meu Perfil</h2>
 
         <!-- Mensagem de sucesso -->
         <?php if (isset($_GET['sucesso'])): ?>
-            <p class="sucesso">✅ Perfil atualizado com sucesso!</p>
+            <p class="sucesso">Perfil atualizado com sucesso!</p>
         <?php endif; ?>
-
-        <!-- Foto de perfil -->
-        <img src="<?= $foto ?>" alt="Foto de Perfil" class="foto-perfil">
 
         <div class="linha">
             <div class="campo">
@@ -75,23 +94,23 @@ if (!empty($_SESSION['usuario_foto'])) {
             </div>
             <div class="campo">
                 <label for="cpf">CPF</label>
-                <input type="text" name="cpf" id="cpf" maxlength="11" value="<?= htmlspecialchars($cpf) ?>">
+                <input type="text" name="cpf" id="cpf" maxlength="14" value="<?= htmlspecialchars($cpf) ?>" placeholder="000.000.000-00">
             </div>
         </div>
         <div class="linha">
             <div class="campo">
                 <label for="cep">CEP</label>
-                <input type="text" name="cep" id="cep" maxlength="8" value="<?= htmlspecialchars($cep) ?>" required>
+                <input type="text" name="cep" id="cep" maxlength="9" value="<?= htmlspecialchars($cep) ?>" required>
             </div>
             <div class="campo">
                 <label for="telefone">Telefone</label>
-                <input type="text" name="telefone" id="telefone" maxlength="14" value="<?= htmlspecialchars($telefone) ?>">
+                <input type="text" name="telefone" id="telefone" maxlength="14" value="<?= htmlspecialchars($telefone) ?>" placeholder="(XX) XXXXX-XXXX">
             </div>
         </div>
         <div class="linha">
             <div class="campo">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>">
+                <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>" placeholder="name@example.com">
             </div>
             <div class="campo">
                 <label for="senha">Senha</label>
@@ -118,9 +137,19 @@ if (!empty($_SESSION['usuario_foto'])) {
                 <input type="text" name="estado" id="estado" value="<?= htmlspecialchars($estado) ?>" readonly>
             </div>
         </div>
-        <div class="alterar-foto-container">
-            <label for="foto_perfil">Alterar Foto de Perfil</label>
-            <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
+
+        <!-- Colocando alteração de foto no final do formulário -->
+        <div style="margin-top:20px; text-align:center;">
+            <!-- Foto de perfil (preview) -->
+            <img id="previewImg" src="<?= $foto ?>" alt="Foto de Perfil" class="foto-perfil">
+
+            <!-- Drop area para foto (arrastar ou clicar) -->
+            <div id="dropArea" class="drop-area" style="margin-top:10px;">Arraste a imagem aqui ou clique para selecionar</div>
+            <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*" style="display:none;">
+
+            <div class="alterar-foto-container" style="margin-top:8px;">
+                <label for="foto_perfil" style="cursor:pointer;">Alterar Foto de Perfil</label>
+            </div>
         </div>
 
         <input type="submit" value="Salvar Alterações" class="btn-vermelho">
@@ -151,119 +180,89 @@ if (!empty($_SESSION['usuario_foto'])) {
             }
         });
 
+        // ======= Funções de máscara =======
+        function mascaraCPF(valor) {
+            return valor
+                .replace(/\D/g, "")
+                .replace(/(\d{3})(\d)/, "$1.$2")
+                .replace(/(\d{3})(\d)/, "$1.$2")
+                .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        }
+
+        function mascaraCEP(valor) {
+            return valor
+                .replace(/\D/g, "")
+                .replace(/(\d{5})(\d)/, "$1-$2");
+        }
+
+        function mascaraTelefone(valor) {
+            return valor
+                .replace(/\D/g, "")
+                .replace(/^(\d{2})(\d)/g, "($1) $2")
+                .replace(/(\d{4,5})(\d{4})$/, "$1-$2");
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-    // ======= Funções de máscara =======
-    function mascaraCPF(valor) {
-        return valor
-            .replace(/\D/g, "")
-            .replace(/(\d{3})(\d)/, "$1.$2")
-            .replace(/(\d{3})(\d)/, "$1.$2")
-            .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    }
+            const cpfEl = document.getElementById("cpf");
+            const cepEl = document.getElementById("cep");
+            const telefoneEl = document.getElementById("telefone");
 
-    function mascaraCEP(valor) {
-        return valor
-            .replace(/\D/g, "")
-            .replace(/(\d{5})(\d)/, "$1-$2");
-    }
+            if (cpfEl) cpfEl.addEventListener("input", () => { cpfEl.value = mascaraCPF(cpfEl.value); });
+            if (cepEl) cepEl.addEventListener("input", () => { cepEl.value = mascaraCEP(cepEl.value); });
+            if (telefoneEl) telefoneEl.addEventListener("input", () => { telefoneEl.value = mascaraTelefone(telefoneEl.value); });
 
-    function mascaraTelefone(valor) {
-        return valor
-            .replace(/\D/g, "")
-            .replace(/^(\d{2})(\d)/g, "($1) $2")
-            .replace(/(\d{4,5})(\d{4})$/, "$1-$2");
-    }
+            // ===== Drop / preview logic (mesma lógica do cadastro) =====
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('foto_perfil');
+            const previewImg = document.getElementById('previewImg');
 
-    // ======= Referências (podem ser null) =======
-    const cpfEl = document.getElementById("cpf");
-    const cepEl = document.getElementById("cep");
-    const telefoneEl = document.getElementById("telefone");
-    const form = document.getElementById("formCadastro");
+            function mostrarPreviewFile(file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    if (previewImg) {
+                        previewImg.src = ev.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
 
-    // só registra listeners se o elemento existir
-    if (cpfEl) cpfEl.addEventListener("input", () => { cpfEl.value = mascaraCPF(cpfEl.value); });
-    if (cepEl) cepEl.addEventListener("input", () => { cepEl.value = mascaraCEP(cepEl.value); });
-    if (telefoneEl) telefoneEl.addEventListener("input", () => { telefoneEl.value = mascaraTelefone(telefoneEl.value); });
-
-    // ======= Validação CPF =======
-    function validarCPF(cpf) {
-        if (!cpf) return false;
-        cpf = cpf.replace(/\D/g, "");
-        if (cpf.length !== 11) return false;
-        if (/^(\d)\1{10}$/.test(cpf)) return false;
-
-        let soma = 0, resto;
-        for (let i = 1; i <= 9; i++) {
-            soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-        }
-        resto = (soma * 10) % 11;
-        if (resto === 10 || resto === 11) resto = 0;
-        if (resto !== parseInt(cpf.substring(9, 10))) return false;
-
-        soma = 0;
-        for (let i = 1; i <= 10; i++) {
-            soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-        }
-        resto = (soma * 10) % 11;
-        if (resto === 10 || resto === 11) resto = 0;
-        if (resto !== parseInt(cpf.substring(10, 11))) return false;
-
-        return true;
-    }
-
-    // ======= Mostrar erro (seguro) =======
-    function mostrarErro(campoId, idErro, msg) {
-        const input = document.getElementById(campoId);
-        const erro = document.getElementById(idErro);
-        if (!input || !erro) return; // evita crash se algum elemento faltar
-
-        if (msg) {
-            erro.innerText = msg;
-            erro.style.display = "block";
-            input.classList.add("erro");
-        } else {
-            erro.innerText = "";
-            erro.style.display = "none";
-            input.classList.remove("erro");
-        }
-    }
-
-    // ======= Validação no submit (só se o form existir) =======
-    if (form) {
-        form.addEventListener("submit", function (e) {
-            let valido = true;
-
-            if (cpfEl) {
-                const cpf = cpfEl.value;
-                if (!validarCPF(cpf)) {
-                    mostrarErro("cpf", "erro-cpf", "CPF inválido.");
-                    valido = false;
-                } else {
-                    mostrarErro("cpf", "erro-cpf", "");
+                // tenta colocar o arquivo no input real para envio
+                if (fileInput && typeof DataTransfer !== "undefined") {
+                    const dt = new DataTransfer();
+                    dt.items.add(file);
+                    fileInput.files = dt.files;
                 }
             }
 
-            if (cepEl) {
-                const cep = (cepEl.value || "").replace(/\D/g, "");
-                if (cep.length !== 8) {
-                    mostrarErro("cep", "erro-cep", "CEP deve conter 8 dígitos.");
-                    valido = false;
-                } else {
-                    mostrarErro("cep", "erro-cep", "");
-                }
+            if (dropArea) {
+                // clique abre seletor
+                dropArea.addEventListener('click', () => fileInput?.click());
+
+                // arrastar sobre
+                dropArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropArea.classList.add('dragover');
+                });
+                dropArea.addEventListener('dragleave', () => {
+                    dropArea.classList.remove('dragover');
+                });
+                dropArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropArea.classList.remove('dragover');
+                    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        mostrarPreviewFile(file);
+                    }
+                });
             }
 
-            if (telefoneEl) {
-                const telefone = telefoneEl.value || "";
-                if (telefone.length < 13 || telefone.length > 14) {
-                    mostrarErro("telefone", "erro-telefone", "Telefone deve ter entre 13 e 14 caracteres.");
-                    valido = false;
-                } else {
-                    mostrarErro("telefone", "erro-telefone", "");
-                }
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files && e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        mostrarPreviewFile(file);
+                    }
+                });
             }
-
-            if (!valido) e.preventDefault();
         });
     </script>
 </body>

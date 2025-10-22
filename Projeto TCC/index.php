@@ -111,12 +111,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div id="cart-modal" class="cart-modal" role="dialog" aria-labelledby="cart-modal-header" aria-describedby="cart-modal-content" aria-hidden="true">
                     <div class="cart-modal-content" id="cart-modal-content">
                         <div class="cart-modal-header">
-                        <div id="cart-icon" class="cart-icon" data-count="0" title="Ver carrinho 🛒">🛒</div>
-                            <h2 id="cart-modal-header">Seu Carrinho</h2>
+                        <div id="cart-icon" class="cart-icon" data-count="0" title="Ver carrinho">🛒</div>
+                            <h2 id="cart-modal-header">Meu Carrinho</h2>
                             <button class="cart-close-btn" aria-label="Fechar carrinho">&times;</button>
                         </div>
                         <ul class="cart-items" aria-label="Itens no carrinho"></ul>
-                        <p id="cart-empty-message" class="cart-empty-message">Seu carrinho está vazio.</p>
+                        <p id="cart-empty-message" class="cart-empty-message">Meu carrinho está vazio.</p>
                         <div class="cart-summary">
                             <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
                             <button class="cart-checkout-btn">Finalizar Compra</button>
@@ -181,7 +181,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
             <li>
                 <a href="login/login.php">
-                    <img src="img/chavis.png" alt="Entrar" width="16" height="16"> Entrar
+                    <img src="img/chavis.png" alt="Entrar" width="16" height="16"> Login
                 </a>
             </li>
         <?php endif; ?>
@@ -350,130 +350,170 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        const btn = document.getElementById('categorias-btn');
-        const megaMenu = document.getElementById('mega-menu');
-
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
-            });
-
-            // Fecha o menu se clicar fora
-            document.addEventListener('click', function(e) {
-                if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
-                    megaMenu.style.display = 'none';
-                }
-            });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-        function saveCart() {
-            localStorage.setItem('cart', JSON.stringify(cartItems));
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+
+    function updateCartCount() {
+        const cartIcon = document.getElementById('cart-icon');
+        if (!cartIcon) return;
+        const total = cartItems.reduce((acc, item) => acc + (item.quantidade || 1), 0);
+        cartIcon.setAttribute('data-count', total);
+    }
+
+    function updateCartModal() {
+        const list = document.querySelector('.cart-items');
+        const emptyMsg = document.getElementById('cart-empty-message');
+        const totalEl = document.getElementById('cart-total-price');
+
+        if (!list || !emptyMsg || !totalEl) return;
+
+        list.innerHTML = '';
+        if (cartItems.length === 0) {
+            emptyMsg.style.display = 'block';
+            totalEl.textContent = 'R$ 0,00';
+            return;
         }
 
-        function updateCartCount() {
-            const cartIcon = document.getElementById('cart-icon');
-            if (!cartIcon) return;
-            const totalItens = cartItems.reduce((acc, item) => acc + (item.quantidade || 1), 0);
-            cartIcon.setAttribute('data-count', totalItens);
-        }
+        emptyMsg.style.display = 'none';
+        let total = 0;
 
-        function updateCartModal() {
-            const list = document.querySelector('.cart-items');
-            const emptyMsg = document.getElementById('cart-empty-message');
-            const totalEl = document.getElementById('cart-total-price');
+        cartItems.forEach((item, idx) => {
+            const li = document.createElement('li');
+            li.className = 'cart-item';
+            li.innerHTML = `
+                <span class="cart-item-nome">${item.nome}</span>
+                <span class="cart-item-valor">R$ ${Number(item.preco).toFixed(2)} × ${item.quantidade}</span>
+            `;
 
-            if (!list || !emptyMsg || !totalEl) return;
+            const rm = document.createElement('button');
+            rm.textContent = 'Remover';
+            rm.className = 'remove-btn';
+            rm.setAttribute('data-index', idx); // importante para delegação
 
-            list.innerHTML = '';
-            if (cartItems.length === 0) {
-                emptyMsg.style.display = 'block';
-                totalEl.textContent = 'R$ 0,00';
-                return;
-            }
+            li.appendChild(rm);
+            list.appendChild(li);
 
-            emptyMsg.style.display = 'none';
-            let total = 0;
+            total += Number(item.preco) * (item.quantidade || 1);
+        });
 
-            cartItems.forEach((item, idx) => {
-                const li = document.createElement('li');
-                li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)} x ${item.quantidade}`;
+        totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
 
-                const rm = document.createElement('button');
-                rm.textContent = 'Remover';
-                rm.style.marginLeft = '8px';
-                rm.addEventListener('click', () => {
-                    cartItems.splice(idx, 1);
-                    saveCart();
-                    updateCartCount();
-                    updateCartModal();
-                });
-
-                li.appendChild(rm);
-                list.appendChild(li);
-                total += item.preco * item.quantidade;
-            });
-
-            totalEl.textContent = `R$ ${total.toFixed(2)}`;
-        }
-
-        document.querySelectorAll('.btn-preco').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const nome = btn.dataset.nome || btn.closest('.card-produto')?.querySelector('p')?.textContent || 'Produto';
-                const preco = parseFloat(btn.dataset.preco || btn.textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
-
-                const logado = <?= isset($_SESSION['usuario_nome']) ? 'true' : 'false' ?>;
-                if (!logado) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Faça login para adicionar ao carrinho',
-                        confirmButtonText: 'Entrar',
-                        confirmButtonColor: '#8C5B3F'
-                    }).then(() => window.location.href = 'login/login.php');
-                    return;
-                }
-
-                const existente = cartItems.find(item => item.nome === nome && item.preco === preco);
-                if (existente) {
-                    existente.quantidade = (existente.quantidade || 1) + 1;
-                } else {
-                    cartItems.push({ nome, preco, quantidade: 1 });
-                }
-
+    // Delegação: trata remoção sem re-bind de listeners
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('remove-btn')) {
+            const idx = parseInt(e.target.getAttribute('data-index'), 10);
+            if (!isNaN(idx)) {
+                cartItems.splice(idx, 1);
                 saveCart();
                 updateCartCount();
-                Swal.fire('Adicionado!', `${nome} foi adicionado ao carrinho.`, 'success');
-            });
-        });
+                updateCartModal();
+            }
+        }
+    });
 
-        // Botão de finalizar compra
-        document.querySelector('.cart-checkout-btn')?.addEventListener('click', () => {
-            if (cartItems.length === 0) {
-                Swal.fire('Carrinho vazio', 'Adicione algum item antes de prosseguir.', 'info');
+    // abrir/fechar modal
+    const cartIcon = document.getElementById('cart-icon');
+    const cartModal = document.getElementById('cart-modal');
+    const closeBtn = document.querySelector('.cart-close-btn');
+
+    function openCart() {
+        if (!cartModal) return;
+        cartModal.style.display = 'block';
+        cartModal.setAttribute('aria-hidden', 'false');
+        updateCartModal();
+    }
+
+    function closeCart() {
+        if (!cartModal) return;
+        cartModal.style.display = 'none';
+        cartModal.setAttribute('aria-hidden', 'true');
+    }
+
+    cartIcon?.addEventListener('click', openCart);
+    closeBtn?.addEventListener('click', closeCart);
+    window.addEventListener('click', (e) => {
+        if (e.target === cartModal) closeCart();
+    });
+
+    // botões "Adicionar ao Carrinho"
+    document.querySelectorAll('.btn-preco').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const nome = btn.dataset.nome || btn.closest('.card-produto')?.querySelector('p')?.textContent?.trim() || 'Produto';
+            const precoRaw = btn.dataset.preco ?? btn.textContent;
+            const preco = parseFloat(String(precoRaw).replace(/[^\d,.-]/g,'').replace(',', '.')) || 0;
+
+            const logado = <?= isset($_SESSION['usuario_nome']) ? 'true' : 'false' ?>;
+            if (!logado) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Faça login para continuar',
+                    text: 'É necessário estar logado para adicionar ao carrinho.',
+                    confirmButtonText: 'Entrar',
+                    confirmButtonColor: '#8C5B3F'
+                }).then(() => window.location.href = 'login/login.php');
                 return;
             }
 
-            // Envia os itens via POST para checkout.php
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'carrinho/checkout.php';
+            if (!nome || preco <= 0) {
+                Swal.fire('Erro', 'Produto inválido.', 'error');
+                return;
+            }
 
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'cart';
-            input.value = JSON.stringify(cartItems);
+            const existente = cartItems.find(i => i.nome === nome && Number(i.preco) === Number(preco));
+            if (existente) existente.quantidade = (existente.quantidade || 1) + 1;
+            else cartItems.push({ nome, preco: Number(preco), quantidade: 1 });
 
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            saveCart();
+            updateCartCount();
+            updateCartModal();
+
+            Swal.fire({ title: 'Adicionado!', text: `${nome} foi adicionado ao carrinho.`, icon: 'success', timer: 900, showConfirmButton:false });
+
+            openCart();
         });
+    });
 
-        updateCartCount();
-    </script>
+    // finalizar compra -> confirmação (mantém lógica atual)
+    document.querySelector('.cart-checkout-btn')?.addEventListener('click', () => {
+        if (cartItems.length === 0) {
+            Swal.fire('Carrinho vazio', 'Adicione algum item antes de prosseguir.', 'info');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Finalizar compra?',
+            text: 'Você será redirecionado ao checkout. Deseja prosseguir?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, finalizar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'carrinho/checkout.php';
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'cart';
+                input.value = JSON.stringify(cartItems);
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+
+    // inicializa visual
+    updateCartCount();
+    updateCartModal();
+</script>
+
 
 </body>
 <div vw class="enabled">

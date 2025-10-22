@@ -2,7 +2,7 @@
 session_start();
 
 // Verifica se o usuário está logado
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['usuario_nome'])) {
     echo "
     <html lang='pt-BR'>
     <head>

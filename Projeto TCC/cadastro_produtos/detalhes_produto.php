@@ -33,10 +33,10 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($produto['nome']); ?> - MaxAcess</title>
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 <style>
 /* ==================== GERAL ==================== */
@@ -209,7 +209,6 @@ body {
   }
 }
 
-
 </style>
 
 </head>
@@ -247,13 +246,13 @@ body {
                     <p><strong>Nome:</strong> <?php echo htmlspecialchars($produto['vendedor_nome']); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($produto['vendedor_email']); ?></p>
 
-                    <button class="btn-preco add-to-cart"
-    data-id="<?= $produto['idproduto'] ?>"
-    data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-    data-preco="<?= number_format($produto['preco'], 2, '.', '') ?>">
-    Adicionar ao Carrinho
-</button>
-
+                    <button class="btn-preco add-to-cart" type="button"
+                        data-id="<?= (int)$produto['idproduto'] ?>"
+                        data-nome="<?= htmlspecialchars($produto['nome'], ENT_QUOTES) ?>"
+                        data-preco="<?= number_format((float)$produto['preco'], 2, '.', '') ?>">
+                        Adicionar ao Carrinho
+                    </button>
+                    <a href="../index.php" class="voltar">⬅Retornar ao início</a>
                 </div>
             </div>
         </div>
@@ -263,56 +262,173 @@ body {
         <p>&copy; 2025 MaxAcess. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="script.js"></script>
+
+    <div id="cart-modal" class="cart-modal" style="display:none;">
+      <div class="cart-modal-content">
+        <div class="cart-modal-header">
+          <h2>Seu Carrinho</h2>
+          <span class="cart-close-btn">&times;</span>
+        </div>
+        <ul class="cart-items"></ul>
+        <p id="cart-empty-message" class="cart-empty-message">Seu carrinho está vazio.</p>
+        <div class="cart-summary">
+          <div class="cart-total">Total: <span id="cart-total-price">R$ 0,00</span></div>
+          <button class="cart-checkout-btn">Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const botoes = document.querySelectorAll('.add-to-cart');
+    console.log('[cart] script carregado (detalhes_produto)');
 
-    botoes.forEach(botao => {
-        botao.addEventListener('click', function () {
-            const id = this.dataset.id;
-            const nome = this.dataset.nome;
-            const preco = parseFloat(this.dataset.preco);
+    const botoesAdd = document.querySelectorAll('.add-to-cart');
+    console.log('[cart] botoes encontrados:', botoesAdd.length);
 
-            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const cartModal = document.getElementById('cart-modal');
+    const cartIcon = document.getElementById('cart-icon');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartEmptyMessage = document.getElementById('cart-empty-message');
+    const cartTotalEl = document.getElementById('cart-total-price');
+    const closeBtn = document.querySelector('.cart-close-btn');
+    const checkoutBtn = document.querySelector('.cart-checkout-btn');
 
-            const existente = carrinho.find(item => item.id === id);
-            if (existente) {
-                existente.quantidade += 1;
-            } else {
-                carrinho.push({
-                    id,
-                    nome,
-                    preco,
-                    quantidade: 1
+    function getCarrinho() {
+        try {
+            return JSON.parse(localStorage.getItem('carrinho')) || [];
+        } catch (e) {
+            console.error('[cart] erro parse localStorage', e);
+            return [];
+        }
+    }
+
+    function salvarCarrinho(carrinho) {
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        console.log('[cart] carrinho salvo:', carrinho);
+        atualizarCarrinhoUI();
+    }
+
+    function atualizarCarrinhoUI() {
+        const carrinho = getCarrinho();
+        if (cartIcon) cartIcon.setAttribute('data-count', carrinho.reduce((s, i) => s + i.quantidade, 0));
+        if (!(cartItemsContainer && cartTotalEl && cartEmptyMessage)) return;
+        cartItemsContainer.innerHTML = '';
+        if (carrinho.length === 0) {
+            cartEmptyMessage.style.display = 'block';
+        } else {
+            cartEmptyMessage.style.display = 'none';
+            carrinho.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+                li.innerHTML = `<span>${item.nome}</span><span>R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</span><button class="remove-item" data-id="${item.id}">✖</button>`;
+                cartItemsContainer.appendChild(li);
+            });
+            cartItemsContainer.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.dataset.id;
+                    let c = getCarrinho();
+                    c = c.filter(item => String(item.id) !== String(id));
+                    salvarCarrinho(c);
                 });
+            });
+        }
+        const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+        cartTotalEl.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
+
+    botoesAdd.forEach(botao => {
+        botao.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('[cart] clique em botao add', this.dataset);
+
+            const id = this.dataset.id ? String(this.dataset.id) : null;
+            const nome = this.dataset.nome ? String(this.dataset.nome).trim() : null;
+            // tenta normalizar separador decimal
+            const precoRaw = typeof this.dataset.preco !== 'undefined' ? String(this.dataset.preco).replace(',', '.') : '';
+            const preco = parseFloat(precoRaw);
+
+            if (!id || !nome || isNaN(preco)) {
+                console.warn('[cart] dados invalidos', { id, nome, precoRaw, preco });
+                Swal.fire({ icon: 'error', title: 'Erro', text: 'Dados do produto inválidos.'});
+                return;
             }
 
-            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            // salva no localStorage sempre, antes de qualquer modal/redirect
+            let carrinho = getCarrinho();
+            const existente = carrinho.find(item => String(item.id) === String(id));
+            if (existente) {
+                existente.quantidade = (existente.quantidade || 0) + 1;
+            } else {
+                carrinho.push({ id, nome, preco, quantidade: 1 });
+            }
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Adicionado ao carrinho!',
-                text: `"${nome}" foi adicionado com sucesso.`,
-                timer: 1800,
-                showConfirmButton: false
-            });
+            salvarCarrinho(carrinho);
 
-            atualizarResumoCarrinho(); // Se quiser atualizar o total no carrinho em tempo real
+            Swal.fire({ icon: 'success', title: 'Adicionado ao carrinho!', text: `"${nome}" adicionado.`, timer: 900, showConfirmButton: false });
+
+            // Se o modal existe nesta página, atualiza e abre.
+            if (cartModal) {
+                setTimeout(() => {
+                    cartModal.setAttribute('aria-hidden', 'false');
+                    cartModal.style.display = 'flex';
+                    atualizarCarrinhoUI();
+                }, 200);
+                return;
+            }
+
+            // Se não há modal, redireciona para a página do carrinho (delay curto para garantir escrita no localStorage)
+            console.log('[cart] sem modal, redirecionando para carrinho');
+            setTimeout(() => {
+                window.location.href = '../carrinho.php';
+            }, 250);
         });
     });
 
-    function atualizarResumoCarrinho() {
-        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-        const cartTotalEl = document.getElementById('cart-total-price');
-        if (cartTotalEl) {
-            cartTotalEl.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
-        }
+    // hooks para abrir/fechar modal se existirem
+    if (cartIcon && cartModal) {
+        cartIcon.addEventListener('click', () => { cartModal.style.display = 'flex'; atualizarCarrinhoUI(); });
     }
+    if (closeBtn && cartModal) {
+        closeBtn.addEventListener('click', () => { cartModal.style.display = 'none'; });
+    }
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            const carrinho = getCarrinho();
+            if (!carrinho.length) {
+                Swal.fire({ icon:'warning', title:'Carrinho vazio', text:'Adicione algum produto antes de finalizar.' });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Finalizar compra?',
+                text: 'Você será redirecionado ao checkout. Deseja prosseguir?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, finalizar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '../carrinho/checkout.php'; // ajuste este caminho se o checkout.php estiver em outra pasta
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'cart';
+                    input.value = JSON.stringify(carrinho);
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        });
+    }
+
+    atualizarCarrinhoUI();
 });
 </script>
+
 
 </body>
 <div vw-plugin-wrapper>

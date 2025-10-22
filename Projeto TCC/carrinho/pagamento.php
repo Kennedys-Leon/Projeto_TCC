@@ -2,7 +2,7 @@
 session_start();
 
 // Verifica login do usuário
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['usuario_nome'])) {
     echo "
     <html lang='pt-BR'>
     <head>
@@ -76,7 +76,7 @@ if (empty($_SESSION['carrinho'])) {
     </head>
     <body>
         <div class='mensagem'>
-            <h2>🛒 Seu carrinho está vazio.</h2>
+            <h2>Seu carrinho está vazio.</h2>
             <p><a href='../index.php'>Voltar à loja</a></p>
         </div>
     </body>
@@ -170,6 +170,7 @@ if (empty($_SESSION['carrinho'])) {
             </label>
 
             <button type="submit" class="btn-pagar">Confirmar Pagamento</button>
+            <a href="../index.php" class="voltar">⬅Retornar ao início</a>
         </form>
     </div>
 

@@ -54,14 +54,11 @@ session_start();
     </div>
   </div>
 
-</form>
-
-
-
+        </form>
             <button class="btn" type="submit" onclick="alert('Simulado Concretizado !')">Pagar Agora</button>
         </form>
 
-        <a href="pagamento.php" class="voltar"> Voltar</a>
+        <a href="pagamento.php" class="voltar">Voltar</a>
     </div>
 </body>
 <div vw-plugin-wrapper>
