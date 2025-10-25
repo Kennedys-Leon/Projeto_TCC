@@ -1,11 +1,11 @@
 <?php
 include '../conexao.php';
 
-// Buscar apenas produtos da categoria "Call of Duty"
+// Buscar apenas produtos da categoria "GTA V"
 $sql = "SELECT p.*, i.imagem 
         FROM produto p
         LEFT JOIN imagens i ON p.idproduto = i.idproduto
-        WHERE p.categoria = 'Call of Duty'
+        WHERE p.categoria = 'GTA V'
         GROUP BY p.idproduto
         ORDER BY p.data_pub DESC";
 $stmt = $pdo->query($sql);
@@ -17,7 +17,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MaxAcess - Call of Duty</title>
+  <title>MaxAcess - GTA V</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
@@ -33,7 +33,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </header>
 
   <section class="banner">
-    <h1>Produtos Call of Duty</h1>
+    <h1>Produtos GTA V</h1>
     <div class="search">
       <input type="text" id="search-input" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn" onclick="buscarProduto()">Buscar</button>
@@ -44,9 +44,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Call of Duty: Modern Warfare</a></li>
-        <li><a href="#">Call of Duty: Warzone</a></li>
-        <li><a href="#">Call of Duty: Black Ops</a></li>
+        <li><a href="#">Contas</a></li>
+        <li><a href="#">Dinheiro / RP</a></li>
+        <li><a href="#">Itens / Mods</a></li>
       </ul>
     </aside>
 
@@ -67,7 +67,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <?php endforeach; ?>
         <?php else: ?>
           <p style="text-align:center; font-size:18px; color:#888; margin-top:40px;">
-            Nenhum produto Call of Duty foi adicionado ainda. 😅<br>
+            Nenhum produto GTA V foi adicionado ainda. 😅<br>
             Em breve novos produtos estarão disponíveis!
           </p>
         <?php endif; ?>

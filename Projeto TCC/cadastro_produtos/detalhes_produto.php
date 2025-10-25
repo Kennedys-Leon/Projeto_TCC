@@ -39,174 +39,321 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/style.css">
 
 <style>
-/* ==================== GERAL ==================== */
-body {
-  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
-  background: #f4f6fb;
-  color: #2c3e50;
+/* ============================================
+   MAXACESS LIGHT PROFESSIONAL THEME 2025
+   Foco em legibilidade e conforto visual
+============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Container principal */
-.container {
-  max-width: 1100px;
-  margin: 50px auto;
-  padding: 30px 40px;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* ==================== TÍTULO ==================== */
-.container h2 {
-  font-size: 32px;
-  text-align: center;
-  color: #163b72;
-  margin-bottom: 30px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-bottom: 3px solid #163b72;
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-/* ==================== LAYOUT PRINCIPAL ==================== */
-.detalhes-produto {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-/* ==================== GALERIA DE IMAGENS ==================== */
-.galeria-imagens {
+body {
+  background: #fdfdfd;
+  color: #222;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-.galeria-imagens .img-detalhe {
+/* ==========================
+   TITULOS E LINKS
+========================== */
+h2 {
+  font-size: 2.4rem;
+  color: #cc2b5e; /* rosa coral elegante */
+  text-align: center;
+  margin: 50px 0 30px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(204, 43, 94, 0.25);
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: #cc2b5e;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+a:hover {
+  color: #ff5c8a;
+}
+
+/* ==========================
+   CONTEÚDO PRINCIPAL
+========================== */
+main.conteudo {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 25px 70px;
+}
+
+/* ==========================
+   DETALHES DO PRODUTO
+========================== */
+.detalhes-produto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+.detalhes-produto:hover {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================
+   GALERIA DE IMAGENS + LUPA
+========================== */
+.galeria-imagens {
+  position: relative;
+  flex: 1;
+  min-width: 320px;
+  text-align: center;
+}
+
+.galeria-imagens img {
   width: 100%;
   max-width: 480px;
   border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.galeria-imagens .img-detalhe:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: zoom-in;
 }
 
-/* ==================== INFO PRODUTO ==================== */
+.galeria-imagens img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.galeria-imagens::after {
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  color: #fff;
+  background: #cc2b5e;
+  border-radius: 50%;
+  padding: 10px 12px;
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.galeria-imagens:hover::after {
+  opacity: 1;
+}
+
+/* LUPA REAL */
+.zoom-lens {
+  position: absolute;
+  border: 2px solid rgba(204, 43, 94, 0.6);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 200%;
+  transition: opacity 0.2s;
+}
+
+/* ==========================
+   INFORMAÇÕES DO PRODUTO
+========================== */
 .info-produto {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex: 1;
+  min-width: 320px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 35px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-produto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .info-produto p {
-  font-size: 17px;
-  line-height: 1.6;
-  color: #34495e;
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+  color: #333;
 }
 
 .info-produto strong {
-  color: #163b72;
-}
-
-.info-produto hr {
-  margin: 20px 0;
-  border: none;
-  border-top: 1px solid #e0e0e0;
-}
-
-.info-produto h4 {
-  font-size: 22px;
-  color: #163b72;
+  color: #cc2b5e;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
-/* ==================== BOTÃO DE COMPRA ==================== */
+/* ==========================
+   BOTÕES
+========================== */
 .btn-preco {
-  background: linear-gradient(135deg, #163b72, #2a6fcf);
+  background: linear-gradient(135deg, #cc2b5e, #ff758c);
   color: #fff;
   border: none;
   padding: 14px 28px;
-  font-size: 17px;
   border-radius: 10px;
+  font-size: 1.05rem;
   cursor: pointer;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(204, 43, 94, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  transition: background 0.3s, transform 0.25s, box-shadow 0.25s;
-  align-self: flex-start;
+  letter-spacing: 1px;
 }
+
 .btn-preco:hover {
-  background: linear-gradient(135deg, #2a6fcf, #163b72);
+  background: linear-gradient(135deg, #ff7ea6, #ffa3b8);
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(42, 111, 207, 0.3);
-}
-.btn-preco:active {
-  transform: scale(0.98);
+  box-shadow: 0 6px 18px rgba(204, 43, 94, 0.25);
 }
 
-/* ==================== BOTÃO VOLTAR ==================== */
-.btn-voltar {
+a.voltar {
   display: inline-block;
-  background: #e5e9f2;
-  color: #163b72;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.25s, color 0.25s;
-  margin-bottom: 25px;
+  margin-top: 25px;
+  padding: 12px 22px;
+  border: 1px solid #cc2b5e;
+  border-radius: 10px;
+  color: #cc2b5e;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
-.btn-voltar:hover {
-  background: #163b72;
+a.voltar:hover {
+  background: #cc2b5e;
   color: #fff;
+  box-shadow: 0 0 15px rgba(204, 43, 94, 0.3);
 }
 
-/* ==================== RODAPÉ ==================== */
-.rodape {
-  background: #163b72;
-  color: #fff;
+/* ==========================
+   RODAPÉ
+========================== */
+footer.rodape {
+  background: #f8f8f8;
+  color: #555;
   text-align: center;
-  padding: 18px 0;
-  margin-top: 60px;
-  font-size: 14px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  letter-spacing: 0.3px;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px 10px;
+  font-size: 0.95rem;
+  border-top: 2px solid rgba(204, 43, 94, 0.2);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
-/* ==================== RESPONSIVIDADE ==================== */
-@media (max-width: 950px) {
+footer.rodape::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #cc2b5e, #ff8ea1, #ffbccb);
+}
+
+footer.rodape p {
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+footer.rodape span {
+  color: #cc2b5e;
+  font-weight: 600;
+}
+
+/* ==========================
+   ANIMAÇÕES
+========================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 900px) {
   .detalhes-produto {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    flex-direction: column;
+    align-items: center;
   }
-  .container {
-    padding: 25px;
-  }
-  .container h2 {
-    font-size: 26px;
-  }
-  .btn-preco {
-    width: 100%;
+  .info-produto {
     text-align: center;
   }
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-produto p {
+    font-size: 0.9rem;
+  }
+  footer.rodape {
+    font-size: 0.8rem;
+  }
+}
+/* ==========================
+   MODAL DE IMAGEM (FULL SCREEN)
+========================== */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.4s ease;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  animation: zoomIn 0.4s ease;
+}
+
+.image-modal .close-modal {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 2.2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+.image-modal .close-modal:hover {
+  color: #ffb0c7;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0.5; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 </style>
@@ -430,7 +577,53 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
+<script> //lupa
+document.addEventListener("DOMContentLoaded", function() {
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = modal.querySelector(".close-modal");
+
+  // Captura todas as imagens do produto
+  const productImages = document.querySelectorAll(".galeria-imagens img");
+
+  productImages.forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+    });
+  });
+
+  // Fecha ao clicar no X
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Fecha clicando fora da imagem
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Fecha com tecla ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      modal.style.display = "none";
+    }
+  });
+});
+</script>
+
+
+
+
 </body>
+<!-- Modal de Imagem em Tela Cheia -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal">&times;</span>
+  <img id="modalImage" src="" alt="Visualização do Produto">
+</div>
+
 <div vw-plugin-wrapper>
         <div class="vw-plugin-top-wrapper"></div>
     </div>

@@ -53,7 +53,7 @@ switch($plano) {
             <p class="erro">Plano selecionado é inválido. <a href="servicos.html">Voltar</a></p>
         <?php endif; ?>
 
-        <a href="servicos.html" class="btn-voltar">Voltar</a>
+        <a href="servicos.php" class="btn-voltar">Voltar</a>
     </div>
     <body class="<?php echo 'plano-' . strtolower($nome); ?>">
 
