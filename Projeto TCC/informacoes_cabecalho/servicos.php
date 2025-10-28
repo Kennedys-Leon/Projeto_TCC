@@ -51,7 +51,7 @@
 
     <footer>
         <p>© 2025 MaxAcess - Todos os direitos reservados.</p>
-        <p><a href="../servicos.php">Voltar para a página inicial</a></p>
+        <p><a href="../index.php">Voltar para a página inicial</a></p>
     </footer>
 </body>
 </html>
