@@ -767,7 +767,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($p['categoria']); ?></td>
                     <td><?php echo $p['quantidade_estoque']; ?></td>
                     <td><?php echo date("d/m/Y", strtotime($p['data_pub'])); ?></td>
-                    <td style="text-align:center; white-space:normal; word-wrap:break-word;">
+                    <!-- antes: <td style="text-align:center; white-space:normal; word-wrap:break-word;"> -->
+                    <td class="descricao" title="<?php echo htmlspecialchars($p['descricao']); ?>">
                         <?php echo htmlspecialchars($p['descricao']); ?>
                     </td>
                     <td class="acoes">
@@ -786,18 +787,32 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 .produtos-tabela th, .produtos-tabela td {
                     text-align: center;
                     vertical-align: middle;
-                    white-space: normal;
-                    word-wrap: break-word;
                 }
-                .produtos-tabela td {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    max-width: 180px;
+
+                /* Garantir truncamento em uma linha apenas para a descrição */
+                .produtos-tabela td.descricao {
+                    white-space: nowrap;         /* mantém em uma linha */
+                    overflow: hidden;            /* esconde o excedente */
+                    text-overflow: ellipsis;    /* mostra "..." */
+                    max-width: 100px;           /* ajuste para controlar comprimento */
+                    text-align: left;           /* alinhar texto para leitura */
+                    padding-right: 8px;
                 }
+
+                /* manter comportamento padrão para imagens e ações */
                 .produtos-tabela td img {
                     display: block;
                     margin: 0 auto;
+                }
+
+                .produtos-tabela td.acoes {
+                    white-space: nowrap;
+                    overflow: visible;
+                    max-width: none;
+                    display: inline-flex;
+                    gap: 8px;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 /* Evita que a linha fique branca ao passar o mouse */
@@ -809,27 +824,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 .produtos-tabela tr:hover td {
                     background-color: transparent !important;
                     color: inherit !important;
-                }
-
-                /* Se quiser um leve destaque escuro ao hover em vez de branco, use:
-                .produtos-tabela tr:hover {
-                    background-color: rgba(255,255,255,0.03) !important;
-                }
-                */
-
-                /* Garantir que a coluna de Ações não seja truncada */
-                .produtos-tabela td.acoes {
-                    white-space: nowrap;
-                    overflow: visible;
-                    max-width: none;
-                    text-overflow: clip;
-                    display: inline-flex;
-                    gap: 8px;
-                    justify-content: center;
-                    align-items: center;
-                }
-                .produtos-tabela td.acoes .btn {
-                    margin: 0;
                 }
                 </style>
         </div>
