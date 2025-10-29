@@ -39,10 +39,7 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/style.css">
 
 <style>
-/* ============================================
-   MAXACESS LIGHT PROFESSIONAL THEME 2025
-   Foco em legibilidade e conforto visual
-============================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
@@ -53,8 +50,8 @@ $imagens = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
 }
 
 body {
-  background: #fdfdfd;
-  color: #222;
+  background: #000; /* preto no lugar do cinza claro */
+  color: #fff; /* texto principal branco para contraste */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -68,7 +65,7 @@ body {
 ========================== */
 h2 {
   font-size: 2.4rem;
-  color: #cc2b5e; /* rosa coral elegante */
+  color: #cc2b5e;
   text-align: center;
   margin: 50px 0 30px;
   text-transform: uppercase;
@@ -107,14 +104,14 @@ main.conteudo {
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
-  background: #ffffff;
+  background: #111; /* preto suave */
   border-radius: 18px;
   padding: 40px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease;
 }
 .detalhes-produto:hover {
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================
@@ -125,6 +122,11 @@ main.conteudo {
   flex: 1;
   min-width: 320px;
   text-align: center;
+  
+  /* NOVO - centraliza horizontal e verticalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .galeria-imagens img {
@@ -132,31 +134,11 @@ main.conteudo {
   max-width: 480px;
   border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: zoom-in;
 }
 
-.galeria-imagens img:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-}
-
-.galeria-imagens::after {
-  position: absolute;
-  bottom: 18px;
-  right: 22px;
-  color: #fff;
-  background: #cc2b5e;
-  border-radius: 50%;
-  padding: 10px 12px;
-  font-size: 1.1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.galeria-imagens:hover::after {
-  opacity: 1;
-}
 
 /* LUPA REAL */
 .zoom-lens {
@@ -178,23 +160,24 @@ main.conteudo {
 .info-produto {
   flex: 1;
   min-width: 320px;
-  background: #fafafa;
-  border: 1px solid #ddd;
+  background: #000;
+  border: 1px solid #222;
   border-radius: 14px;
   padding: 35px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
 }
 
 .info-produto:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
 .info-produto p {
   margin-bottom: 16px;
   font-size: 1.05rem;
-  color: #333;
+  color: #eee;
 }
 
 .info-produto strong {
@@ -214,7 +197,7 @@ main.conteudo {
   font-size: 1.05rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(204, 43, 94, 0.2);
+  box-shadow: 0 4px 12px rgba(204, 43, 94, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -222,7 +205,7 @@ main.conteudo {
 .btn-preco:hover {
   background: linear-gradient(135deg, #ff7ea6, #ffa3b8);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(204, 43, 94, 0.25);
+  box-shadow: 0 6px 18px rgba(204, 43, 94, 0.4);
 }
 
 a.voltar {
@@ -245,13 +228,13 @@ a.voltar:hover {
    RODAPÉ
 ========================== */
 footer.rodape {
-  background: #f8f8f8;
-  color: #555;
+  background: #000;
+  color: #ccc;
   text-align: center;
   padding: 20px 10px;
   font-size: 0.95rem;
-  border-top: 2px solid rgba(204, 43, 94, 0.2);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+  border-top: 2px solid rgba(204, 43, 94, 0.4);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
   position: relative;
 }
 
@@ -306,6 +289,7 @@ footer.rodape span {
     font-size: 0.8rem;
   }
 }
+
 /* ==========================
    MODAL DE IMAGEM (FULL SCREEN)
 ========================== */
@@ -317,7 +301,7 @@ footer.rodape span {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.95);
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);
@@ -355,6 +339,7 @@ footer.rodape span {
   from { transform: scale(0.9); opacity: 0.5; }
   to { transform: scale(1); opacity: 1; }
 }
+
 
 </style>
 

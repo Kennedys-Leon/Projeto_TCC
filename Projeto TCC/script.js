@@ -186,28 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!clickInsideSidebar && !clickedToggle) closeSide();
         
     });
-        /* =========================
-       MODO DALTÔNICO (PRETO E BRANCO)
-    ========================== */
-        
-    const daltonicoSidebar = document.getElementById('modo-daltonico-sidebar');
-
-    if (daltonicoSidebar) {
-        const isColorblind = localStorage.getItem('colorblind_mode') === 'true';
-        if (isColorblind) {
-            document.body.classList.add('colorblind-mode');
-            daltonicoSidebar.setAttribute('aria-pressed', 'true');
-            daltonicoSidebar.textContent = '👁️ Modo Normal';
-        }
-
-        daltonicoSidebar.addEventListener('click', () => {
-            document.body.classList.toggle('colorblind-mode');
-            const ativo = document.body.classList.contains('colorblind-mode');
-            daltonicoSidebar.setAttribute('aria-pressed', ativo);
-            daltonicoSidebar.textContent = ativo ? '👁️ Modo Normal' : '👁️ Modo Daltônico';
-            localStorage.setItem('colorblind_mode', ativo);
-        });
-    }
 
 
 });
