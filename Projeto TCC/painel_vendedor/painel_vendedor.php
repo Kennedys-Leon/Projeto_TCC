@@ -730,10 +730,11 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p>Arraste a imagem aqui ou clique para escolher</p>
                         <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
                     </div>
-                    <img id="modalPreviewPerfil" src="#" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
+                    <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover;">
                     <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
                 </div>
             </div>
+
 
             <!-- Lista de Produtos -->
             <table class="produtos-tabela">
@@ -905,16 +906,61 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <script>
+                // === Abrir o modal ===
         document.getElementById('openModalBtnPerfil').addEventListener('click', function() {
-            document.getElementById('foto_perfil').click();
+            const modal = document.getElementById('fileModalPerfil');
+            modal.style.display = 'flex'; // Usa flex para centralizar o conteúdo
         });
 
-        document.getElementById('foto_perfil').addEventListener('change', function(e) {
-            const preview = document.getElementById('previewPerfil');
+        // === Fechar o modal ===
+        document.getElementById('closeModalBtnPerfil').addEventListener('click', function() {
+            const modal = document.getElementById('fileModalPerfil');
+            modal.style.display = 'none';
+        });
+
+        // === Clique na área para abrir o seletor ===
+        document.getElementById('dropAreaPerfil').addEventListener('click', function() {
+            document.getElementById('modalFileInputPerfil').click();
+        });
+
+        // === Quando um arquivo é escolhido ===
+        document.getElementById('modalFileInputPerfil').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(evt) {
+                    const preview = document.getElementById('modalPreviewPerfil');
+                    preview.src = evt.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // === Arrastar e soltar imagem ===
+        const dropArea = document.getElementById('dropAreaPerfil');
+
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#6f6ffc';
+            dropArea.style.background = '#1a1a1a';
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.style.borderColor = '#9d9dfc';
+            dropArea.style.background = 'transparent';
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#9d9dfc';
+            dropArea.style.background = 'transparent';
+
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const preview = document.getElementById('modalPreviewPerfil');
                     preview.src = evt.target.result;
                     preview.style.display = 'block';
                 };

@@ -139,17 +139,16 @@ if (!empty($_SESSION['usuario_foto'])) {
         </div>
 
         <!-- Colocando alteração de foto no final do formulário -->
+        <div class="alterar-foto-container" style="margin-top:8px;">
+                <label for="foto_perfil" style="cursor:pointer;">Alterar Foto de Perfil</label>
+        </div>
         <div style="margin-top:20px; text-align:center;">
             <!-- Foto de perfil (preview) -->
             <img id="previewImg" src="<?= $foto ?>" alt="Foto de Perfil" class="foto-perfil">
 
             <!-- Drop area para foto (arrastar ou clicar) -->
-            <div id="dropArea" class="drop-area" style="margin-top:10px;">Arraste a imagem aqui ou clique para selecionar</div>
+            <div id="dropArea" class="drop-area" style="margin-top:10px;">ARRASTE a imagem aqui ou clique para selecionar do seu dispositivo</div>
             <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*" style="display:none;">
-
-            <div class="alterar-foto-container" style="margin-top:8px;">
-                <label for="foto_perfil" style="cursor:pointer;">Alterar Foto de Perfil</label>
-            </div>
         </div>
 
         <input type="submit" value="Salvar Alterações" class="btn-vermelho">
