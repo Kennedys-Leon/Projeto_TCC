@@ -208,12 +208,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </li>
 
         <!-- 👁️ Modo daltônico (preto e branco) -->
-        <li>
-            <button type="button" id="modo-daltonico-sidebar" aria-pressed="false" aria-label="Ativar modo daltônico na sidebar">
-            <img src="img/eye.png" alt="Sair" width="16" height="16"> Modo Daltônico
-                
-            </button>
-        </li>
+       
     </ul>
 
     <!-- Bloco do usuário -->
@@ -515,17 +510,54 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </script>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('categorias-btn');
-const megaMenu = document.getElementById('mega-menu');
-btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
-});
-// Fecha o menu se clicar fora
-document.addEventListener('click', function(e) {
-    if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
-        megaMenu.style.display = 'none';
+    const megaMenu = document.getElementById('mega-menu');
+
+    if (!btn || !megaMenu) return;
+
+    // inicializa estado ARIA
+    btn.setAttribute('aria-expanded', 'false');
+
+    function openMenu() {
+        megaMenu.classList.add('show');
+        btn.setAttribute('aria-expanded', 'true');
+        // foca o primeiro link para acessibilidade
+        const primeiro = megaMenu.querySelector('a');
+        if (primeiro) primeiro.focus();
     }
+
+    function closeMenu() {
+        megaMenu.classList.remove('show');
+        btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        megaMenu.classList.toggle('show');
+        const aberto = megaMenu.classList.contains('show');
+        btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+        if (aberto) {
+            const primeiro = megaMenu.querySelector('a');
+            if (primeiro) primeiro.focus();
+        }
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', function (e) {
+        if (!megaMenu.classList.contains('show')) return;
+        if (!btn.contains(e.target) && !megaMenu.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Fecha com Esc
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && megaMenu.classList.contains('show')) {
+            closeMenu();
+            btn.focus();
+        }
+    });
 });
 </script>
 </body>

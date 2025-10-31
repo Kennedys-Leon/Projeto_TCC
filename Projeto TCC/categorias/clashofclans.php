@@ -1,11 +1,11 @@
 <?php
 include '../conexao.php';
 
-// Buscar apenas produtos da categoria "GTA V"
+// Buscar apenas produtos da categoria "Clash of Clans"
 $sql = "SELECT p.*, i.imagem 
         FROM produto p
         LEFT JOIN imagens i ON p.idproduto = i.idproduto
-        WHERE p.categoria = 'GTA V'
+        WHERE p.categoria = 'Clash of Clans'
         GROUP BY p.idproduto
         ORDER BY p.data_pub DESC";
 $stmt = $pdo->query($sql);
@@ -17,7 +17,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MaxAcess - GTA V</title>
+  <title>MaxAcess - Clash of Clans</title>
   <link rel="stylesheet" href="../css/categoria.css" />
 </head>
 <body>
@@ -33,7 +33,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </header>
 
   <section class="banner">
-    <h1>Produtos GTA V</h1>
+    <h1>Produtos Clash of Clans</h1>
     <div class="search">
       <input type="text" id="search-input" placeholder="Buscar produto..." class="search-input" />
       <button class="search-btn" onclick="buscarProduto()">Buscar</button>
@@ -44,9 +44,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <aside class="sidebar">
       <h3>Categorias</h3>
       <ul>
-        <li><a href="#">Contas</a></li>
-        <li><a href="#">Dinheiro / RP</a></li>
-        <li><a href="#">Itens / Mods</a></li>
+        <li><a href="#">Clash of Clans Iniciante</a></li>
+        <li><a href="#">Clash of Clans Avançado</a></li>
+        <li><a href="#">Clash of Clans Estratégico</a></li>
       </ul>
     </aside>
 
@@ -67,7 +67,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <?php endforeach; ?>
         <?php else: ?>
           <p style="text-align:center; font-size:18px; color:#888; margin-top:40px;">
-            Nenhum produto GTA V foi adicionado ainda. 😅<br>
+            Nenhum produto Clash of Clans foi adicionado ainda. 😅<br>
             Em breve novos produtos estarão disponíveis!
           </p>
         <?php endif; ?>

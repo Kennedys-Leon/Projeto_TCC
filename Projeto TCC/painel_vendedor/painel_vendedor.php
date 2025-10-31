@@ -110,6 +110,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/sidebar.css">
 
     <style>
+        /* substitua o bloco atual por este CSS mais organizado e responsivo */
         .perfil-imagem-display {
             width: 150px;
             height: 150px;
@@ -122,80 +123,199 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         select, input, textarea {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #bbb;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
             width: 100%;
             box-sizing: border-box;
             font-size: 14px;
+            background: #1b1830;
+            color: #eee;
         }
 
-        /* Styling for the product registration form */
+        /* Form card centralizado e largura máxima */
         .form-card {
             background: #2E3B4E;
-            padding: 20px;
+            padding: 22px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+            margin: 18px auto 20px auto;
+            max-width: 1000px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
+        /* Grid para campos do formulário: 1 coluna em mobile, 2 em telas maiores */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+        @media (min-width: 860px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+            /* campos que devem ocupar as duas colunas (data, descrição, imagem, botões) */
+            .form-grid .full-width {
+                grid-column: 1 / -1;
+            }
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            color: #fff;
-            font-weight: 500;
+            margin-bottom: 6px;
+            color: #e8eef6;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .form-input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #555;
+            padding: 10px 12px;
+            border: 1px solid #3b3b50;
             border-radius: 8px;
-            background: #1d1932;
+            background: #171425;
             color: #fff;
             font-size: 14px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            box-sizing: border-box;
+            transition: border-color .18s, box-shadow .18s;
         }
-
         .form-input:focus {
             border-color: #00c9ff;
-            box-shadow: 0 0 8px rgba(0,201,255,0.5);
+            box-shadow: 0 0 8px rgba(0,201,255,0.12);
             outline: none;
         }
 
         textarea.form-input {
             resize: vertical;
-            min-height: 80px;
-        }
-
-        select.form-input {
-            /* Inherits from .form-input */
+            min-height: 110px;
         }
 
         input[type="file"].form-input {
-            padding: 5px;
+            padding: 6px;
         }
 
-        .botoes-inicio .btn-primario {
-            background: #2E3B4E;
+        .botoes-inicio .btn-primario, .form-card .btn {
+            background: #36506a;
             color: #fff;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 18px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            margin-top: 10px;
             text-decoration: none;
             display: inline-block;
-            transition: background 0.2s;
+            transition: background .15s ease;
         }
-        .botoes-inicio .btn-primario:hover {
-            background: #1d1932;
+        .botoes-inicio .btn-primario:hover, .form-card .btn:hover {
+            background: #2b3f53;
+        }
+
+        /* preview de imagem */
+        #previewProduto, #previewPerfil {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin: 8px auto 0;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* pequenas melhorias visuais do botão de abrir modal */
+        #openModalBtnProduto, #openModalBtnPerfil {
+            width: 220px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* responsividade extra */
+        @media (max-width: 480px) {
+            .form-card { padding: 16px; }
+            #openModalBtnProduto, #openModalBtnPerfil { width: 100%; }
+        }
+
+        /* Novas regras para o bloco de Perfil (usar classes já existentes: form-input) */
+        .perfil-card {
+            background: #2E3B4E;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+            margin: 18px auto 20px auto;
+            max-width: 900px;
+        }
+        .perfil-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+        @media (min-width: 860px) {
+            .perfil-grid {
+                grid-template-columns: 220px 1fr;
+            }
+            .perfil-grid .perfil-image-col {
+                text-align: center;
+                padding-right: 12px;
+                border-right: 1px solid rgba(255,255,255,0.03);
+            }
+            .perfil-grid .perfil-form-col {
+                padding-left: 18px;
+            }
+        }
+        .perfil-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e8eef6;
+            font-weight: 600;
+        }
+        .perfil-upload { display:flex; flex-direction:column; align-items:center; gap:8px; }
+        .perfil-actions { margin-top: 12px; text-align: right; }
+        @media (max-width: 480px) {
+            .perfil-actions { text-align: center; }
+        }
+
+        /* botões laterais (baixo da imagem) */
+        .perfil-actions-left { margin-top:12px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+        .perfil-actions-left .btn {
+            width: 280px;
+            max-width: 90%;
+            background: #36506a;
+            color:#fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align:center;
+        }
+
+        /* deixa o botão de upload igual aos botões de ação */
+        .perfil-upload .btn {
+            width: 280px;           /* mesma largura dos botões laterais */
+            max-width: 90%;
+            background: #36506a;    /* mesma cor */
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            transition: background .15s ease;
+        }
+        .perfil-upload .btn:hover {
+            background: #2b3f53;
+        }
+
+        /* esconder os botões dentro do formulário (direita) em telas largas,
+           e esconder os botões laterais em telas pequenas para evitar duplicação */
+        @media (min-width: 860px) {
+            .perfil-form-col .perfil-actions { display:none; } /* usa botões laterais no desktop */
+            .perfil-actions-left { display:flex; }
+        }
+        @media (max-width: 859px) {
+            .perfil-actions-left { display:none; } /* usa botões do formulário no mobile */
+            .perfil-form-col .perfil-actions { display:block; text-align:center; }
+            .perfil-form-col .perfil-actions .btn { width: 100%; max-width: 360px; margin:8px auto; }
         }
     </style>
 
@@ -530,57 +650,61 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div id="formNovoProduto" style="display:none; margin-top:15px;">
                 <div class="form-card">
                     <form method="post" action="salvar_produto.php" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Nome do Produto:</label>
-                            <input type="text" name="nome" class="form-input" required maxlength="100">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Preço:</label>
-                            <input type="text" id="CampPreco" name="preco" class="form-input" placeholder="0,00" required maxlength="15">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Categoria:</label>
-                            <select id="CampCategoria" name="categoria" class="form-input" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="Contas de Streaming">Contas de Streaming</option>
-                                <option value="Gift Cards">Gift Cards</option>
-                                <option value="Itens Digitais em Jogos">Itens Digitais em Jogos</option>
-                                <option value="Contas de Jogos">Contas de Jogos</option>
-                                <option value="Jogos Digitais ou Mídia Física">Jogos Digitais ou Mídia Física</option>
-                                <option value="Keys de Jogos">Keys de Jogos</option>
-                                <option value="Outros">Outros</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Quantidade em Estoque:</label>
-                            <input type="number" name="quantidade" class="form-input" required min="1" max="9999">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Data de Publicação:</label>
-                            <input type="text" id="CampData_pub" name="data_pub" class="form-input" placeholder="dd/mm/aaaa" required maxlength="10">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Descrição do Produto:</label>
-                            <textarea name="descricao" class="form-input" rows="4" required maxlength="500"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Imagem do produto:</label>
-                            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
-                                <button type="button" id="openModalBtnProduto" class="btn" style="width: 200px;">Escolher arquivo</button>
-                                <img id="previewProduto" src="#" alt="Pré-visualização da imagem do Produto" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 8px; object-fit: cover;">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nome do Produto:</label>
+                                <input type="text" name="nome" class="form-input" required maxlength="100">
                             </div>
-                            <input type="file" id="imagem_produto" name="imagem" accept="image/*" style="display:none;" required>
+
+                            <div class="form-group">
+                                <label>Preço:</label>
+                                <input type="text" id="CampPreco" name="preco" class="form-input" placeholder="0,00" required maxlength="15">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>Categoria:</label>
+                                <select id="CampCategoria" name="categoria" class="form-input" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="Contas de Streaming">Contas de Streaming</option>
+                                    <option value="Gift Cards">Gift Cards</option>
+                                    <option value="Itens Digitais em Jogos">Itens Digitais em Jogos</option>
+                                    <option value="Contas de Jogos">Contas de Jogos</option>
+                                    <option value="Jogos Digitais ou Mídia Física">Jogos Digitais ou Mídia Física</option>
+                                    <option value="Keys de Jogos">Keys de Jogos</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantidade em Estoque:</label>
+                                <input type="number" name="quantidade" class="form-input" required min="1" max="9999">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Publicação:</label>
+                                <input type="text" id="CampData_pub" name="data_pub" class="form-input" placeholder="dd/mm/aaaa" required maxlength="10">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>Descrição do Produto:</label>
+                                <textarea name="descricao" class="form-input" rows="4" required maxlength="500"></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>Imagem do produto:</label>
+                                <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:10px;">
+                                    <button type="button" id="openModalBtnProduto" class="btn">Escolher arquivo</button>
+                                    <img id="previewProduto" src="#" alt="Pré-visualização da imagem do Produto" style="display:none;">
+                                </div>
+                                <input type="file" id="imagem_produto" name="imagem" accept="image/*" style="display:none;" required>
+                            </div>
+
+                            <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
+
+                            <div class="form-group full-width" style="text-align:center;">
+                                <button type="submit" class="btn">Salvar Produto</button>
+                            </div>
                         </div>
-
-                        <input type="hidden" name="idvendedor" value="<?php echo $vendedor_id; ?>">
-
-                        <button type="submit" class="btn">Salvar Produto</button>
                     </form>
                 </div>
             </div>
@@ -606,10 +730,11 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p>Arraste a imagem aqui ou clique para escolher</p>
                         <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
                     </div>
-                    <img id="modalPreviewPerfil" src="#" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
+                    <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover;">
                     <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
                 </div>
             </div>
+
 
             <!-- Lista de Produtos -->
             <table class="produtos-tabela">
@@ -643,7 +768,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($p['categoria']); ?></td>
                     <td><?php echo $p['quantidade_estoque']; ?></td>
                     <td><?php echo date("d/m/Y", strtotime($p['data_pub'])); ?></td>
-                    <td style="text-align:center; white-space:normal; word-wrap:break-word;">
+                    <!-- antes: <td style="text-align:center; white-space:normal; word-wrap:break-word;"> -->
+                    <td class="descricao" title="<?php echo htmlspecialchars($p['descricao']); ?>">
                         <?php echo htmlspecialchars($p['descricao']); ?>
                     </td>
                     <td class="acoes">
@@ -662,18 +788,32 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 .produtos-tabela th, .produtos-tabela td {
                     text-align: center;
                     vertical-align: middle;
-                    white-space: normal;
-                    word-wrap: break-word;
                 }
-                .produtos-tabela td {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    max-width: 180px;
+
+                /* Garantir truncamento em uma linha apenas para a descrição */
+                .produtos-tabela td.descricao {
+                    white-space: nowrap;         /* mantém em uma linha */
+                    overflow: hidden;            /* esconde o excedente */
+                    text-overflow: ellipsis;    /* mostra "..." */
+                    max-width: 100px;           /* ajuste para controlar comprimento */
+                    text-align: left;           /* alinhar texto para leitura */
+                    padding-right: 8px;
                 }
+
+                /* manter comportamento padrão para imagens e ações */
                 .produtos-tabela td img {
                     display: block;
                     margin: 0 auto;
+                }
+
+                .produtos-tabela td.acoes {
+                    white-space: nowrap;
+                    overflow: visible;
+                    max-width: none;
+                    display: inline-flex;
+                    gap: 8px;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 /* Evita que a linha fique branca ao passar o mouse */
@@ -686,99 +826,156 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     background-color: transparent !important;
                     color: inherit !important;
                 }
-
-                /* Se quiser um leve destaque escuro ao hover em vez de branco, use:
-                .produtos-tabela tr:hover {
-                    background-color: rgba(255,255,255,0.03) !important;
-                }
-                */
-
-                /* Garantir que a coluna de Ações não seja truncada */
-                .produtos-tabela td.acoes {
-                    white-space: nowrap;
-                    overflow: visible;
-                    max-width: none;
-                    text-overflow: clip;
-                    display: inline-flex;
-                    gap: 8px;
-                    justify-content: center;
-                    align-items: center;
-                }
-                .produtos-tabela td.acoes .btn {
-                    margin: 0;
-                }
                 </style>
         </div>
         
 
         <!-- Meu Perfil -->
-<div id="perfil" class="tab-content">
-    <div class="perfil-container">
-        <h2 class="perfil-titulo">Meu Perfil</h2>
+        <div id="perfil" class="tab-content">
+            <div class="perfil-card">
+                <div class="perfil-grid">
+                    <div class="perfil-image-col">
+                        <h2 class="perfil-titulo" style="margin-top:0; margin-bottom:14px;">Meu Perfil</h2>
+                        <?php if (!empty($foto_de_perfil)): ?>
+                            <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
+                        <?php else: ?>
+                            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
+                        <?php endif; ?>
 
-        <!-- Foto de Perfil -->
-        <div class="perfil-imagem">
-            <?php if (!empty($foto_de_perfil)): ?>
-                <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
-            <?php else: ?>
-                <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
-            <?php endif; ?>
+                        <div class="perfil-upload" style="margin-top:12px;">
+                            <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
+                            <!-- associa o input ao form mesmo estando fora do <form> -->
+                            <input type="file" id="foto_perfil" name="foto" form="perfilForm" accept="image/*" style="display:none;">
+                            <img id="previewPerfil" src="#" alt="Pré-visualização da foto" style="display:none; width:120px; height:120px; border-radius:50%; object-fit:cover; margin-top:8px;">
+                        </div>
+
+                        <!-- botões centralizados abaixo da imagem (lado esquerdo) -->
+                        <div class="perfil-actions-left">
+                            <!-- botão agora envia o form pelo navegador -->
+                            <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
+                            <button type="button" id="btnRetornarLateral" class="btn">Retornar à Página Inicial</button>
+                        </div>
+                    </div>
+
+                    <div class="perfil-form-col">
+                        <form id="perfilForm" method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
+                            <div style="display:grid; gap:12px;">
+                                <div>
+                                    <label for="CampNome">Nome:</label>
+                                    <input type="text" id="CampNome" name="nome" class="form-input" value="<?php echo htmlspecialchars($vendedor['nome'] ?? ''); ?>">
+                                </div>
+
+                                <div>
+                                    <label for="CampTelefone">Telefone:</label>
+                                    <input type="text" id="CampTelefone" name="telefone" class="form-input" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
+                                </div>
+
+                                <div>
+                                    <label for="CampEmail">E-mail:</label>
+                                    <input type="email" id="CampEmail" name="email" class="form-input" value="<?php echo htmlspecialchars($vendedor['email'] ?? ''); ?>">
+                                </div>
+
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                                    <div>
+                                        <label for="CampCPF">CPF:</label>
+                                        <input type="text" id="CampCPF" name="cpf" class="form-input" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
+                                    </div>
+                                    <div>
+                                        <label for="CampCNPJ">CNPJ:</label>
+                                        <input type="text" id="CampCNPJ" name="cnpj" class="form-input" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="CampSenha">Senha:</label>
+                                    <input type="password" id="CampSenha" name="senha" class="form-input" placeholder="••••••••">
+                                </div>
+
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Formulário de Edição -->
-        <form method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
-
-            <label for="foto_perfil">Sua foto de preferência:</label>
-            <div class="perfil-upload">
-                <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
-                <input type="file" id="foto_perfil" name="foto" accept="image/*" style="display:none;">
-                <img id="previewPerfil" src="#" alt="Pré-visualização da foto" style="display:none;">
-            </div>
-
-            <label for="CampNome">Nome:</label>
-            <input type="text" id="CampNome" name="nome" value="<?php echo htmlspecialchars($vendedor['nome'] ?? ''); ?>">
-
-            <label for="CampTelefone">Telefone:</label>
-            <input type="text" id="CampTelefone" name="telefone" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
-
-            <label for="CampEmail">E-mail:</label>
-            <input type="email" id="CampEmail" name="email" value="<?php echo htmlspecialchars($vendedor['email'] ?? ''); ?>">
-
-            <label for="CampCPF">CPF:</label>
-            <input type="text" id="CampCPF" name="cpf" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
-
-            <label for="CampCNPJ">CNPJ:</label>
-            <input type="text" id="CampCNPJ" name="cnpj" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
-
-            <label for="CampSenha">Senha:</label>
-            <input type="password" id="CampSenha" name="senha" placeholder="••••••••">
-
-            <button type="submit">Salvar Alterações</button>
-
-            <div class="botoes-inicio">
-                <button type="button" onclick="window.location.href='painel_vendedor.php'">Retornar à Página Inicial</button>
-            </div>
-        </form>
-    </div>
-</div>
-
         <script>
+                // === Abrir o modal ===
         document.getElementById('openModalBtnPerfil').addEventListener('click', function() {
-            document.getElementById('foto_perfil').click();
+            const modal = document.getElementById('fileModalPerfil');
+            modal.style.display = 'flex'; // Usa flex para centralizar o conteúdo
         });
 
-        document.getElementById('foto_perfil').addEventListener('change', function(e) {
-            const preview = document.getElementById('previewPerfil');
+        // === Fechar o modal ===
+        document.getElementById('closeModalBtnPerfil').addEventListener('click', function() {
+            const modal = document.getElementById('fileModalPerfil');
+            modal.style.display = 'none';
+        });
+
+        // === Clique na área para abrir o seletor ===
+        document.getElementById('dropAreaPerfil').addEventListener('click', function() {
+            document.getElementById('modalFileInputPerfil').click();
+        });
+
+        // === Quando um arquivo é escolhido ===
+        document.getElementById('modalFileInputPerfil').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(evt) {
+                    const preview = document.getElementById('modalPreviewPerfil');
                     preview.src = evt.target.result;
                     preview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
         });
+
+        // === Arrastar e soltar imagem ===
+        const dropArea = document.getElementById('dropAreaPerfil');
+
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#6f6ffc';
+            dropArea.style.background = '#1a1a1a';
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.style.borderColor = '#9d9dfc';
+            dropArea.style.background = 'transparent';
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#9d9dfc';
+            dropArea.style.background = 'transparent';
+
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const preview = document.getElementById('modalPreviewPerfil');
+                    preview.src = evt.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Ações dos botões laterais: submetem o formulário ou retornam à página
+        const btnSalvarLateral = document.getElementById('btnSalvarLateral');
+        const btnRetornarLateral = document.getElementById('btnRetornarLateral');
+        if (btnSalvarLateral) {
+            btnSalvarLateral.addEventListener('click', function() {
+                const form = document.querySelector('.perfil-form');
+                if (form) form.submit();
+            });
+        }
+        if (btnRetornarLateral) {
+            btnRetornarLateral.addEventListener('click', function() {
+                window.location.href = 'painel_vendedor.php';
+            });
+        }
         </script>
 
     <footer>

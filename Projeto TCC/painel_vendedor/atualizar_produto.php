@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include '../conexao.php';
@@ -16,12 +15,13 @@ $idvendedor = $_SESSION['vendedor_logado'];
 // ============================
 // Coleta e valida dados do formulário
 // ============================
-$idproduto   = $_POST['idproduto'] ?? null;
-$nome        = trim($_POST['nome'] ?? '');
-$preco       = $_POST['preco'] ?? '';
-$categoria   = $_POST['categoria'] ?? '';
-$quantidade  = $_POST['quantidade'] ?? 0;
-$descricao   = trim($_POST['descricao'] ?? '');
+$idproduto = $_POST['idproduto'] ?? null;
+$nome = trim($_POST['nome'] ?? '');
+$preco = $_POST['preco'] ?? '';
+$quantidade = $_POST['quantidade'] ?? 0;
+$categoria = $_POST['categoria'] ?? '';
+$descricao = trim($_POST['descricao'] ?? '');
+$data_pub = !empty($_POST['data_pub']) ? $_POST['data_pub'] : null;
 
 if (!$idproduto || empty($nome) || empty($preco) || empty($categoria) || $quantidade <= 0) {
     die("Preencha todos os campos obrigatórios.");
@@ -45,9 +45,9 @@ $preco = str_replace(['.', ','], ['', '.'], $preco);
 // Atualiza os dados principais do produto
 // ============================
 $stmt = $pdo->prepare("UPDATE produto 
-                       SET nome = ?, preco = ?, categoria = ?, quantidade_estoque = ?, descricao = ? 
+                       SET nome = ?, preco = ?, categoria = ?, quantidade_estoque = ?, descricao = ?, data_pub = ? 
                        WHERE idproduto = ?");
-$stmt->execute([$nome, $preco, $categoria, $quantidade, $descricao, $idproduto]);
+$stmt->execute([$nome, $preco, $categoria, $quantidade, $descricao, $data_pub, $idproduto]);
 
 // ============================
 // Atualiza a imagem (se enviada)
