@@ -64,6 +64,13 @@
         <input type="file" id="foto_de_perfil" name="foto_de_perfil" accept="image/*" style="display:none;">
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
+
+        <?php if (!empty($_GET['msg'])): ?>
+        <div style="color:#c00; font-weight:600; margin:12px 0;">
+            <?= htmlspecialchars(urldecode($_GET['msg'])) ?>
+        </div>
+        <?php endif; ?>
+
             <div class="botoes-inicio">
                 <a href="../login/login.php" class="btn-primario">Já possui uma conta? Entrar</a>
             </div>

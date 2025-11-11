@@ -76,6 +76,9 @@ if (!empty($_SESSION['usuario_foto'])) {
             background: #f0f0ff;
         }
     </style>
+
+    <!-- ADICIONE: SweetAlert2 (necessário para as confirmações) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -152,6 +155,11 @@ if (!empty($_SESSION['usuario_foto'])) {
         </div>
 
         <input type="submit" value="Salvar Alterações" class="btn-vermelho">
+
+        <!-- Botão para desativar conta -->
+        <button id="deactivate-btn" type="button" class="btn-vermelho" style="background:#c00; margin-top:10px;">
+            Desativar minha conta
+        </button>
 
         <div class="botoes-inicio">
             <a href="../index.php" class="btn-primario">⬅ Voltar para Página Inicial</a>
@@ -263,6 +271,38 @@ if (!empty($_SESSION['usuario_foto'])) {
                 });
             }
         });
+
+        // Handler para desativar conta (confirmação + POST para desativar_conta.php)
+        document.getElementById('deactivate-btn')?.addEventListener('click', function () {
+            Swal.fire({
+                title: 'Desativar conta?',
+                text: 'Sua conta será desativada e você será desconectado. Deseja continuar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, desativar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // envia requisição para desativação
+                    fetch('desativar_conta.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body: 'confirm=1',
+    credentials: 'same-origin' // garante envio do cookie de sessão
+})
+.then(response => response.json())
+.then(json => {
+    if (json.success) {
+        Swal.fire({ icon: 'success', title: 'Conta desativada', text: json.msg || 'Sua conta foi desativada com sucesso!', timer: 1600, showConfirmButton: false })
+            .then(() => window.location.href = '../index.php');
+    } else {
+        Swal.fire('Erro', json.msg || 'Não foi possível desativar sua conta.', 'error');
+    }
+})
+.catch(() => Swal.fire('Erro', 'Erro na requisição. Tente novamente.', 'error'));
+            }
+        });
+    });
     </script>
 </body>
 </html>

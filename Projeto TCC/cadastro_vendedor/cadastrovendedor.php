@@ -72,6 +72,12 @@
 
         <input type="submit" value="Criar conta" class="btn-vermelho">
 
+        <?php if (!empty($_GET['msg'])): ?>
+        <div style="color:#c00; font-weight:600; margin:12px 0;">
+            <?= htmlspecialchars(urldecode($_GET['msg'])) ?>
+        </div>
+        <?php endif; ?>
+
         <div class="botoes-inicio">
             <a href="../login_vendedor/login_vendedor.php" class="btn-primario">Já possui uma conta? Entrar</a>
         </div>

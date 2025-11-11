@@ -1,30 +1,53 @@
 <?php
-include '../conexao.php';
+session_start();
+include('../conexao.php'); // conexão PDO
 
-$nome  = trim(htmlspecialchars($_POST['nome']));
-$email = trim(htmlspecialchars($_POST['email']));
-$senha = trim($_POST['senha']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['senha'] ?? '';
 
-try {
-    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE nome = ? AND email = ? LIMIT 1");
-    $stmt->execute([$nome, $email]);
-
-    $usuario_db = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($usuario_db && password_verify($senha, $usuario_db['senha'])) {
-        session_start();
-        $_SESSION['usuario_logado'] = $usuario_db['idcadastro'];
-        $_SESSION['usuario_nome']   = htmlspecialchars($usuario_db['nome']);
-        $_SESSION['usuario_foto']   = $usuario_db['foto_de_perfil'];
-
-        header('Location: ../index.php');
-        exit();
-    } else {
-        header('Location: login.php?error=1');
-        exit();
+    if ($email === '' || $senha === '') {
+        header("Location: login.php?error=1");
+        exit;
     }
-} catch (PDOException $e) {
-    echo "Erro na consulta: " . $e->getMessage();
-    die();
+
+    try {
+        $sql = "SELECT idusuario, nome, senha, foto_de_perfil, ativo
+                FROM usuario
+                WHERE email = ?
+                LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Usuário encontrado?
+        if ($usuario) {
+
+            // Caso a conta esteja DESATIVADA
+            if ((int)$usuario['ativo'] === 0) {
+                // Redireciona com mensagem específica e opção de reativar
+                header("Location: login.php?error=2&email=" . urlencode($email));
+                exit;
+            }
+
+            // Verifica senha normalmente
+            if (password_verify($senha, $usuario['senha'])) {
+                $_SESSION['idusuario'] = (int)$usuario['idusuario'];
+                $_SESSION['usuario_nome'] = htmlspecialchars($usuario['nome'], ENT_QUOTES);
+                $_SESSION['usuario_foto'] = $usuario['foto_de_perfil'];
+
+                header("Location: ../index.php");
+                exit;
+            }
+        }
+
+        // Se chegou aqui → falha
+        header("Location: login.php?error=1");
+        exit;
+    } catch (PDOException $e) {
+        error_log("process_login erro: " . $e->getMessage());
+        header("Location: login.php?error=1");
+        exit;
+    }
 }
 ?>

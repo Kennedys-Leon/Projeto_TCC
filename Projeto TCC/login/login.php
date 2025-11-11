@@ -24,6 +24,17 @@
             <p class="error-msg" role="alert" style="color:#e74c3c; margin-top:8px; font-size:0.95rem;">Email ou senha incorreta.</p>
         <?php endif; ?>
 
+        <?php if (isset($_GET['error']) && $_GET['error'] == 2): ?>
+            <p class="error-msg" style="color:#e67e22; margin-top:8px; font-size:0.95rem;">
+                Sua conta está desativada. 
+                <a href="reativar_conta.php?email=<?= urlencode($_GET['email'] ?? '') ?>" 
+                style="color:#3498db; text-decoration:underline;">
+                Clique aqui para reativar sua conta.
+                </a>
+            </p>
+        <?php endif; ?>
+
+
         <input type="submit" value="Entrar" class="btn-vermelho">
 
         <div class="botoes-inicio">

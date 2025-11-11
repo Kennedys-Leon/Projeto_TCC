@@ -1,21 +1,30 @@
 <?php
 include '../conexao.php';
 
-$nome     = $_POST['nome'];
+$nome     = trim($_POST['nome'] ?? '');
 $cpf      = $_POST['cpf'];
 $cep      = $_POST['cep'];
 $telefone = $_POST['telefone'];
-$email    = $_POST['email'];
+$email    = trim($_POST['email'] ?? '');
 $senha    = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 
 
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE email = :email");
-$stmt->bindParam(':email', $email);
-$stmt->execute();
+// verifica se email ou nome já existem em usuario ou vendedor
+$checkSql = "
+    SELECT 'usuario' AS origem FROM usuario WHERE email = :email OR nome = :nome
+    UNION
+    SELECT 'vendedor' AS origem FROM vendedor WHERE email = :email OR nome = :nome
+    LIMIT 1
+";
+$stmt = $pdo->prepare($checkSql);
+$stmt->execute([':email' => $email, ':nome' => $nome]);
+$found = $stmt->fetchColumn();
 
-if ($stmt->fetchColumn() > 0) {
-    echo "<script>alert('E-mail já cadastrado!'); window.history.back();</script>";
-    exit();
+if ($found) {
+    // redireciona de volta com mensagem de erro
+    $msg = urlencode("Email ou Nome de usúario ja cadastrados!");
+    header("Location: cadastro.php?error=1&msg={$msg}");
+    exit;
 }
 
 $foto_de_perfil = null;
@@ -42,6 +51,10 @@ try {
     header("Location: ../login/login.php");
     exit();
 } catch (PDOException $e) {
-    echo "Erro: " . $e->getMessage();
+    // mostra erro em vermelho (para debug/usuário) e registra no log
+    $err = htmlspecialchars($e->getMessage(), ENT_QUOTES);
+    error_log("cadastrobd erro: " . $e->getMessage());
+    echo "<div style=\"color:#c00; font-weight:600; padding:16px;\">Erro ao cadastrar usuário: {$err}</div>";
+    exit;
 }
 ?>

@@ -71,19 +71,20 @@ CREATE TABLE IF NOT EXISTS produto (
 -- 4) TABELA: usuario
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuario (
-  idusuario INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(100),
-  cpf CHAR(14),
-  cep CHAR(9),
-  endereco VARCHAR(50),
-  cidade VARCHAR(50),
-  estado VARCHAR(50),
-  bairro VARCHAR(50),
-  telefone CHAR(14),
-  email VARCHAR(150),
-  senha VARCHAR(255),
-  foto_de_perfil LONGBLOB
+    idusuario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    cpf CHAR(14),
+    cep CHAR(9),
+    endereco VARCHAR(50),
+    cidade VARCHAR(50),
+    estado VARCHAR(50),
+    bairro VARCHAR(50),
+    telefone CHAR(14),
+    email VARCHAR(100) UNIQUE,
+    senha VARCHAR(255),
+    foto_de_perfil LONGBLOB
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- -----------------------------------------------------
 -- 5) TABELA: pedido
@@ -117,19 +118,6 @@ CREATE TABLE IF NOT EXISTS item_pedido (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- -----------------------------------------------------
--- 7) TABELA: loginusuario
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS loginusuario (
-  idlogin INT AUTO_INCREMENT PRIMARY KEY,
-  email VARCHAR(100),
-  senha VARCHAR(255),
-  idusuario INT NOT NULL,
-  CONSTRAINT fk_login_usuario FOREIGN KEY (idusuario)
-    REFERENCES usuario (idusuario)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
 -- 8) TABELA: imagens (produto)
@@ -190,6 +178,9 @@ VALUES
   (45.00, 50),
   (50.00, 100)
 ON DUPLICATE KEY UPDATE percentual = VALUES(percentual), min_vendas = VALUES(min_vendas);
+
+ALTER TABLE usuario ADD COLUMN status_conta ENUM('ativo', 'desativado') DEFAULT 'ativo';
+ALTER TABLE usuario ADD COLUMN ativo TINYINT(1) DEFAULT 1;
 
 -- =============================================================
 -- FIM
