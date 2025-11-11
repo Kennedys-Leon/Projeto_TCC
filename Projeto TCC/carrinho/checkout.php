@@ -51,6 +51,7 @@ if (!isset($_SESSION['usuario_nome'])) {
     exit;
 }
 
+
 // 🛒 Captura o carrinho enviado via POST (enviado pelo JS do index)
 $carrinho = [];
 if (isset($_POST['cart'])) {
@@ -144,5 +145,47 @@ $_SESSION['total'] = $total;
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnFinalizar = document.querySelector('.btn-finalizar');
+
+            if (btnFinalizar) {
+                btnFinalizar.addEventListener('click', async (e) => {
+                    e.preventDefault();
+
+                    try {
+                        const response = await fetch('verifica_dados_usuario.php', { method: 'POST' });
+                        const data = await response.json();
+
+                        if (data.success) {
+                            // Tudo certo -> ir para pagamento
+                            window.location.href = 'pagamento.php';
+                        } else {
+                            // Faltam informações -> alerta
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Informações incompletas',
+                                text: data.msg || 'Por favor, complete seus dados antes de continuar.',
+                                confirmButtonText: 'Ir para o perfil',
+                                confirmButtonColor: '#163b72'
+                            }).then(() => {
+                                window.location.href = '../editar_perfil/perfil.php';
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Ocorreu um problema ao verificar seus dados. Tente novamente.',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

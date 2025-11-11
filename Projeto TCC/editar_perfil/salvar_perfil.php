@@ -5,14 +5,14 @@ ini_set('display_errors', 1);
 
 include '../conexao.php';
 
-// Somente usuário (não vendedor) — usar o ID salvo na sessão
-$idusuario = $_SESSION['usuario_nome'] ?? null;
+// Garante que o usuário esteja logado
+$idusuario = $_SESSION['idusuario'] ?? null;
 if (!$idusuario) {
     header("Location: ../login/login.php");
     exit;
 }
 
-// Recebe campos
+// Recebe campos do formulário
 $nome     = trim($_POST['nome'] ?? '');
 $cpf      = trim($_POST['cpf'] ?? '');
 $cep      = trim($_POST['cep'] ?? '');
@@ -25,13 +25,25 @@ $email    = trim($_POST['email'] ?? '');
 $senha    = trim($_POST['senha'] ?? '');
 
 try {
-    // se veio arquivo válido, leia conteúdo e inclua no UPDATE
+    // Se veio arquivo válido, lê conteúdo e inclui no UPDATE
     $fotoBlob = null;
-    if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
-        $tmp = $_FILES['foto_perfil']['tmp_name'];
-        $fotoBlob = file_get_contents($tmp);
+    if (!empty($_FILES['foto_perfil']['tmp_name']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+        $fotoBlob = file_get_contents($_FILES['foto_perfil']['tmp_name']);
     }
 
+    // Se o usuário digitou uma nova senha, criptografa
+    if (!empty($senha)) {
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+    } else {
+        // mantém a senha atual, buscando do banco
+        $sqlSenha = "SELECT senha FROM usuario WHERE idusuario = :idusuario";
+        $stmtSenha = $pdo->prepare($sqlSenha);
+        $stmtSenha->bindValue(':idusuario', $idusuario, PDO::PARAM_INT);
+        $stmtSenha->execute();
+        $senhaHash = $stmtSenha->fetchColumn();
+    }
+
+    // Query condicional (com ou sem foto)
     if ($fotoBlob !== null) {
         $sql = "UPDATE usuario SET 
                     nome = :nome, cpf = :cpf, cep = :cep, endereco = :endereco,
@@ -39,18 +51,17 @@ try {
                     telefone = :telefone, email = :email, senha = :senha,
                     foto_de_perfil = :foto
                 WHERE idusuario = :idusuario";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':foto', $fotoBlob, PDO::PARAM_LOB);
     } else {
         $sql = "UPDATE usuario SET 
                     nome = :nome, cpf = :cpf, cep = :cep, endereco = :endereco,
                     cidade = :cidade, estado = :estado, bairro = :bairro,
                     telefone = :telefone, email = :email, senha = :senha
                 WHERE idusuario = :idusuario";
-        $stmt = $pdo->prepare($sql);
     }
 
-    // binds comuns
+    $stmt = $pdo->prepare($sql);
+
+    // Binds comuns
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':cpf', $cpf);
     $stmt->bindValue(':cep', $cep);
@@ -60,28 +71,30 @@ try {
     $stmt->bindValue(':bairro', $bairro);
     $stmt->bindValue(':telefone', $telefone);
     $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':senha', $senha);
+    $stmt->bindValue(':senha', $senhaHash);
     $stmt->bindValue(':idusuario', $idusuario, PDO::PARAM_INT);
 
-    $ok = $stmt->execute();
-    if (!$ok) {
-        $err = $stmt->errorInfo();
-        throw new Exception("Erro ao executar UPDATE: " . implode(' | ', $err));
+    if ($fotoBlob !== null) {
+        $stmt->bindValue(':foto', $fotoBlob, PDO::PARAM_LOB);
     }
 
-    // Atualiza sessão com os novos valores
-    $_SESSION['nome']     = $nome;
-    $_SESSION['cpf']      = $cpf;
-    $_SESSION['cep']      = $cep;
-    $_SESSION['endereco'] = $endereco;
-    $_SESSION['cidade']   = $cidade;
-    $_SESSION['estado']   = $estado;
-    $_SESSION['bairro']   = $bairro;
-    $_SESSION['telefone'] = $telefone;
-    $_SESSION['email']    = $email;
-    $_SESSION['senha']    = $senha;
+    $ok = $stmt->execute();
 
-    // Atualiza foto na sessão: mantém mesma estrutura usada por perfil.php (raw blob)
+    if (!$ok) {
+        throw new Exception("Erro ao executar UPDATE: " . implode(' | ', $stmt->errorInfo()));
+    }
+
+    // Atualiza sessão com novos dados
+    $_SESSION['usuario_nome'] = $nome;
+    $_SESSION['cpf'] = $cpf;
+    $_SESSION['cep'] = $cep;
+    $_SESSION['endereco'] = $endereco;
+    $_SESSION['cidade'] = $cidade;
+    $_SESSION['estado'] = $estado;
+    $_SESSION['bairro'] = $bairro;
+    $_SESSION['telefone'] = $telefone;
+    $_SESSION['email'] = $email;
+
     if ($fotoBlob !== null) {
         $_SESSION['usuario_foto'] = $fotoBlob;
     }
@@ -90,13 +103,11 @@ try {
     exit;
 
 } catch (Exception $e) {
-    // DEBUG: mostrar erro detalhado na tela (remover depois)
     echo "<h3>Erro ao atualizar perfil</h3>";
     echo "<pre>" . htmlspecialchars($e->getMessage()) . "</pre>";
     if (isset($stmt)) {
         echo "<h4>SQL errorInfo:</h4><pre>" . htmlspecialchars(print_r($stmt->errorInfo(), true)) . "</pre>";
     }
-    echo "<h4>POST:</h4><pre>" . htmlspecialchars(print_r($_POST, true)) . "</pre>";
-    echo "<h4>FILES:</h4><pre>" . htmlspecialchars(print_r($_FILES, true)) . "</pre>";
     exit;
 }
+?>

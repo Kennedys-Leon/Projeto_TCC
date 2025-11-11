@@ -117,7 +117,7 @@ if (!empty($_SESSION['usuario_foto'])) {
             </div>
             <div class="campo">
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" value="<?= htmlspecialchars($senha) ?>">
+                <input type="password" name="senha" id="senha" value="<?= htmlspecialchars($senha) ?>" placeholder="Digite sua nova senha aqui">
             </div>
         </div>
         <div class="linha">
