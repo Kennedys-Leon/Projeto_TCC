@@ -11,23 +11,31 @@ try {
 
     $stmt->bindParam(':nome', $nome);
     $stmt->bindParam(':email', $email);
-
     $stmt->execute();
 
     $vendedor = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($vendedor && password_verify($senha, $vendedor['senha'])) {
-        session_start();
-        $_SESSION['vendedor_logado'] = $vendedor['idvendedor'];
-        $_SESSION['vendedor_nome']   = htmlspecialchars($vendedor['nome']);
-        $_SESSION['vendedor_foto']   = $vendedor['foto_de_perfil'];
+    if ($vendedor) {
+        if ($vendedor['status_conta'] === 'desativado') {
+            // conta desativada → redireciona com sinalização
+            header('Location: login_vendedor.php?reativar=1&email=' . urlencode($email));
+            exit();
+        }
 
-        header('Location: ../painel_vendedor/painel_vendedor.php');
-        exit();
-    } else {
-        header('Location: login_vendedor.php?error=1');
-        exit();
+        if (password_verify($senha, $vendedor['senha'])) {
+            session_start();
+            $_SESSION['vendedor_logado'] = $vendedor['idvendedor'];
+            $_SESSION['vendedor_nome']   = htmlspecialchars($vendedor['nome']);
+            $_SESSION['vendedor_foto']   = $vendedor['foto_de_perfil'];
+
+            header('Location: ../painel_vendedor/painel_vendedor.php');
+            exit();
+        }
     }
+
+    header('Location: login_vendedor.php?error=1');
+    exit();
+
 } catch (PDOException $e) {
     echo "Erro na consulta: " . $e->getMessage();
     die();

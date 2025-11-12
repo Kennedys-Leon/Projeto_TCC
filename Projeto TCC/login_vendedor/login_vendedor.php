@@ -29,5 +29,53 @@
             <p style="color: red; margin-top: 10px;">Email ou senha incorretos.</p>
         <?php endif; ?>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.has('reativar') && params.get('reativar') === '1') {
+                const email = params.get('email') || '';
+
+                Swal.fire({
+                    title: 'Conta desativada',
+                    text: 'Sua conta está desativada. Deseja reativá-la agora?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sim, reativar',
+                    cancelButtonText: 'Não, sair'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('reativar_conta_vendedor.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: 'email=' + encodeURIComponent(email)
+                        })
+                        .then(res => res.json())
+                        .then(json => {
+                            if (json.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Conta reativada!',
+                                    text: json.msg || 'Você pode fazer login novamente.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = 'login_vendedor.php';
+                                });
+                            } else {
+                                Swal.fire('Erro', json.msg, 'error');
+                            }
+                        })
+                        .catch(() => Swal.fire('Erro', 'Erro ao processar a requisição.', 'error'));
+                    } else {
+                        window.location.href = '../index.php';
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

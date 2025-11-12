@@ -73,8 +73,6 @@ try {
     exit;
 }
 
-//github.com/gouveazs/PROJETO-TCC/blob/main/php/insercao/insercaoVendedor.php
-
 $pdo = null;
 ?>
 

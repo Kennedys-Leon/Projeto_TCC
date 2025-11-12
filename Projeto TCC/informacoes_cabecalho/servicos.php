@@ -13,6 +13,9 @@
         <p>
             Para vender através do MaxAcess é muito simples! Você pode criar um anúncio e escolher o melhor plano para seu negócio. Você só irá pagar a taxa caso venda o produto/serviço. As tarifas que oferecemos estão logo abaixo:
         </p>
+        <p>
+            <strong>Importante:</strong> As taxas são aplicadas sobre o valor total da venda, incluindo impostos e frete. APENAS PARA VENDEDORES.
+        </p>    
 
         <div class="planos-container">
             <div class="plano prata">

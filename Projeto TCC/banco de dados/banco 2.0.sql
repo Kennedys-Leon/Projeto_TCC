@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS item_pedido (
 
 
 -- -----------------------------------------------------
--- 8) TABELA: imagens (produto)
+-- 7) TABELA: imagens (produto)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS imagens (
   idimagens INT AUTO_INCREMENT PRIMARY KEY,
@@ -133,22 +133,7 @@ CREATE TABLE IF NOT EXISTS imagens (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
--- 9) TABELA: loginvendedor
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS loginvendedor (
-  idloginvendedor INT AUTO_INCREMENT PRIMARY KEY,
-  email VARCHAR(100),
-  senha VARCHAR(255),
-  nome VARCHAR(255),
-  idvendedor INT NOT NULL,
-  CONSTRAINT fk_login_vendedor FOREIGN KEY (idvendedor)
-    REFERENCES vendedor (idvendedor)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- -----------------------------------------------------
--- 10) TABELA: vendas
+-- 8) TABELA: vendas
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS vendas (
   idvenda INT AUTO_INCREMENT PRIMARY KEY,
@@ -168,7 +153,7 @@ CREATE TABLE IF NOT EXISTS vendas (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
--- 11) INSERÇÃO DE NÍVEIS DE PARTICIPAÇÃO PADRÃO
+-- 9) INSERÇÃO DE NÍVEIS DE PARTICIPAÇÃO PADRÃO
 -- -----------------------------------------------------
 INSERT INTO participacao_percentual (percentual, min_vendas)
 VALUES
@@ -181,6 +166,14 @@ ON DUPLICATE KEY UPDATE percentual = VALUES(percentual), min_vendas = VALUES(min
 
 ALTER TABLE usuario ADD COLUMN status_conta ENUM('ativo', 'desativado') DEFAULT 'ativo';
 ALTER TABLE usuario ADD COLUMN ativo TINYINT(1) DEFAULT 1;
+ALTER TABLE vendedor ADD COLUMN status_conta ENUM('ativo', 'desativado') DEFAULT 'ativo';
+ALTER TABLE vendedor ADD COLUMN ativo TINYINT(1) DEFAULT 1;
+
+ALTER TABLE item_pedido
+ADD COLUMN idvendedor INT NOT NULL,
+ADD CONSTRAINT fk_item_pedido_vendedor FOREIGN KEY (idvendedor)
+REFERENCES vendedor(idvendedor)
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- =============================================================
 -- FIM

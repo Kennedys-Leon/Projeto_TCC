@@ -71,7 +71,7 @@
 </head>
 <body>
     <form id="formProduto" action="cadastroprodutobd.php" method="post" class="form-cadastro" enctype="multipart/form-data">
-        <h2>Olá Vendedor, cadastre seus preciosos produtos!</h2>
+        <h2>Olá Vendedor, cadastre seus produtos!</h2>
 
         <div class="linha">
             <div class="campo">

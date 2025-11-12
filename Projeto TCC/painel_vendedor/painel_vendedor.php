@@ -853,6 +853,11 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="perfil-actions-left">
                             <!-- botão agora envia o form pelo navegador -->
                             <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
+
+                            <button id="deactivate-vendedor-btn" class="btn-desativar">
+                                Desativar conta
+                            </button>
+
                             <button type="button" id="btnRetornarLateral" class="btn">Retornar à Página Inicial</button>
                         </div>
                     </div>
@@ -978,6 +983,65 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         </script>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.getElementById('deactivate-vendedor-btn')?.addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Deseja desativar sua conta de vendedor?',
+                    text: 'Sua conta será desativada e você será desconectado imediatamente. Deseja continuar?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sim, desativar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#e74c3c',
+                    cancelButtonColor: '#3085d6',
+                    background: '#1e1e1e',
+                    color: '#fff'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('desativar_conta_vendedor.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                            body: 'confirm=1',
+                            credentials: 'same-origin'
+                        })
+                        .then(response => response.json())
+                        .then(json => {
+                            if (json.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Conta desativada',
+                                    text: json.msg || 'Sua conta de vendedor foi desativada com sucesso!',
+                                    timer: 1800,
+                                    background: '#1e1e1e',
+                                    color: '#fff',
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = '../index.php';
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erro',
+                                    text: json.msg || 'Não foi possível desativar sua conta.',
+                                    background: '#1e1e1e',
+                                    color: '#fff'
+                                });
+                            }
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro',
+                                text: 'Ocorreu um problema na requisição. Tente novamente.',
+                                background: '#1e1e1e',
+                                color: '#fff'
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
     <footer>
         <p>Todos os Direitos Reservados - MaxAcess © 2025</p>
     </footer>

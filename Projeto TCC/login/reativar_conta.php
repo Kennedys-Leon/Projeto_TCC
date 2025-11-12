@@ -2,10 +2,12 @@
 session_start();
 include('../conexao.php');
 
-$email = trim($_GET['email'] ?? '');
+header('Content-Type: application/json; charset=UTF-8');
+
+$email = trim($_POST['email'] ?? '');
 
 if ($email === '') {
-    header("Location: login.php?error=1");
+    echo json_encode(['success' => false, 'msg' => 'Email não informado.']);
     exit;
 }
 
@@ -15,15 +17,21 @@ try {
     $stmt->execute([$email]);
 
     if ($stmt->rowCount() > 0) {
-        header("Location: login.php?msg=" . urlencode("Conta reativada com sucesso! Faça login novamente."));
-        exit;
+        echo json_encode([
+            'success' => true,
+            'msg' => 'Conta reativada com sucesso! Faça login novamente.'
+        ]);
     } else {
-        header("Location: login.php?error=1");
-        exit;
+        echo json_encode([
+            'success' => false,
+            'msg' => 'Conta já está ativa ou o email não existe.'
+        ]);
     }
 } catch (PDOException $e) {
     error_log("reativar_conta erro: " . $e->getMessage());
-    header("Location: login.php?error=1");
-    exit;
+    echo json_encode([
+        'success' => false,
+        'msg' => 'Erro ao processar a solicitação. Tente novamente mais tarde.'
+    ]);
 }
 ?>
