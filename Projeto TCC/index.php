@@ -47,7 +47,36 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
             <ul>
-                <li class="dropdown"><a href="#" id="categorias-btn">Categorias ▼</a></li>
+            <li class="dropdown">
+                <a href="#" id="categorias-btn">Categorias ▼</a>
+
+                <!-- Mega Menu Completo -->
+                <div class="mega-menu" id="mega-menu">
+                <div class="categorias-grid">
+                    <a href="categorias/brawlstars.php"><img src="img/brawl.webp">Brawl Stars</a>
+                    <a href="categorias/fifa.php"><img src="img/fifa.jpeg">FIFA</a>
+                    <a href="categorias/fortnite.php"><img src="img/fortnite.jpeg">Fortnite</a>
+                    <a href="categorias/freefire.php"><img src="img/FF.jpeg">Free Fire</a>
+                    <a href="categorias/minecraft.php"><img src="img/minecraft.jpeg">Minecraft</a>
+                    <a href="categorias/roblox.php"><img src="img/roblox.jpeg">Roblox</a>
+                    <a href="categorias/cod.php"><img src="img/cod.webp">Call of Duty</a>
+                    <a href="categorias/valorant.php"><img src="img/val.jpg">Valorant</a>
+                    <a href="categorias/lol.php"><img src="img/lol.jpeg">League of Legends</a>
+                    <a href="categorias/csgo.php"><img src="img/cs.webp">CS:GO</a>
+                    <a href="categorias/gta.php"><img src="img/gta.png">GTA V</a>
+                    <a href="categorias/pubg.php"><img src="img/pubg7.webp">PUBG</a>
+                    <a href="categorias/clashroyale.php"><img src="img/clash.jpeg">Clash Royale</a>
+                    <a href="categorias/clashofclans.php"><img src="img/clans.jpg">Clash of Clans</a>
+                    <a href="categorias/pokemon.php"><img src="img/poke.jpg">Pokémon GO</a>
+                    <a href="categorias/stumbleguys.php"><img src="img/guys.jpg">Stumble Guys</a>
+                    <a href="categorias/rocketleague.php"><img src="img/league.jpg">Rocket League</a>
+                    <a href="categorias/fallguys.php"><img src="img/fall.webp">Fall Guys</a>
+                    <a href="categorias/thelastofus.php"><img src="img/joel.webp">The Last of Us</a>
+                    <a href="categorias/reddead.php"><img src="img/red.avif">Red Dead Redemption 2</a>
+                    <a href="categorias/spiderman.php"><img src="img/aranha.jpg">Spider-Man</a>
+                    <a href="categorias/stream.php"><img src="img/netflix.webp">Serviços Streams</a>
+                </div>
+                </div>
 
                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
@@ -392,8 +421,32 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     updateCartModal();
     </script>
 
-    <!-- VLibras -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+    <script>
+    const btnCategorias = document.getElementById('categorias-btn');
+    const megaMenu = document.getElementById('mega-menu');
+
+    btnCategorias.addEventListener('click', function(e) {
+        e.preventDefault();
+        megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!btnCategorias.contains(e.target) && !megaMenu.contains(e.target)) {
+            megaMenu.style.display = 'none';
+        }
+    });
+    </script>
+
 </body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </html>
