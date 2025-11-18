@@ -135,16 +135,33 @@ body.logged-in .button-login {
     font-weight: 600;
 }
 .cart-close-btn {
+    background: transparent;
+    border: none;
     color: #ecf0f1;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 700;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    line-height: 1;
+    box-shadow: none;
 }
 .cart-close-btn:hover,
 .cart-close-btn:focus {
-    color: #e74c3c;
-    text-decoration: none;
+    background-color: rgba(255,255,255,0.04);
+    color: #ffdddd;
+    transform: translateY(-1px);
+    outline: none;
+}
+.cart-modal-content .cart-close-btn {
+    /* garante prioridade sobre regras globais de botão */
+    background: transparent;
+    color: #ecf0f1;
 }
 .cart-items {
     list-style-type: none;
@@ -195,6 +212,32 @@ body.logged-in .button-login {
 }
 .cart-remove-btn:hover {
     transform: scale(1.1);
+}
+/* Estilos adicionais para o botão gerado dinamicamente (classe JS `remove-btn`) */
+.remove-btn,
+.cart-remove-btn.remove-btn {
+    display: inline-block;
+    padding: 6px 10px;
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1;
+    min-width: 64px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+.remove-btn:hover,
+.cart-remove-btn.remove-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+.remove-btn:focus,
+.cart-remove-btn.remove-btn:focus {
+    outline: 3px solid rgba(231, 76, 60, 0.18);
+    outline-offset: 2px;
 }
 .cart-summary {
     display: flex;

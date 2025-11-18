@@ -211,6 +211,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php if (isset($_SESSION['usuario_nome'])): ?>
                                     <button
                                         class="btn-preco"
+                                        data-id="<?= $produto['idproduto'] ?>"
                                         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
                                         data-preco="<?= number_format($produto['preco'], 2, '.', '') ?>">
                                         Adicionar ao Carrinho
@@ -277,7 +278,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             const rm = document.createElement('button');
             rm.textContent = 'Remover';
-            rm.className = 'remove-btn';
+            // aplicar classe que já tem estilos (`cart-remove-btn`) e manter `remove-btn` como gancho JS
+            rm.className = 'cart-remove-btn remove-btn';
             rm.setAttribute('data-index', idx);
 
             li.appendChild(rm);
@@ -324,6 +326,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     document.querySelectorAll('.btn-preco').forEach(btn => {
         btn.addEventListener('click', () => {
+            const id = btn.dataset.id ?? null;
             const nome = btn.dataset.nome || btn.closest('.card-produto')?.querySelector('p')?.textContent?.trim() || 'Produto';
             const precoRaw = btn.dataset.preco ?? btn.textContent;
             const preco = parseFloat(String(precoRaw).replace(/[^\d,.-]/g,'').replace(',', '.')) || 0;
@@ -345,9 +348,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return;
             }
 
-            const existente = cartItems.find(i => i.nome === nome && Number(i.preco) === Number(preco));
+            let existente;
+            if (id) existente = cartItems.find(i => i.id == id);
+            else existente = cartItems.find(i => i.nome === nome && Number(i.preco) === Number(preco));
+
             if (existente) existente.quantidade = (existente.quantidade || 1) + 1;
-            else cartItems.push({ nome, preco: Number(preco), quantidade: 1 });
+            else cartItems.push({ id: id ? id : null, nome, preco: Number(preco), quantidade: 1 });
 
             saveCart();
             updateCartCount();

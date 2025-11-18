@@ -118,6 +118,20 @@ table tr:hover {
     background-color:  rgb(3, 3, 8);;  /* Laranja queimado suave */
 }
 
+/* Variante de botão para ações perigosas/destrutivas */
+.btn-desativar {
+    background-color: #e74c3c; /* vermelho */
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(231,76,60,0.12);
+}
+.btn-desativar:hover {
+    background-color: #c0392b;
+}
+.btn-desativar:focus {
+    outline: 3px solid rgba(192,57,43,0.14);
+    outline-offset: 2px;
+}
+
 /* Destaque percentual */
 .percentual {
     font-size: 24px;

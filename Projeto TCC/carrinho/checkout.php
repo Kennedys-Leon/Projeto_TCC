@@ -62,6 +62,7 @@ if (isset($_POST['cart'])) {
         foreach ($decoded as $item) {
             if (!isset($item['nome'], $item['preco'])) continue;
             $carrinho[] = [
+                'id' => isset($item['id']) ? $item['id'] : null,
                 'nome' => strip_tags($item['nome']),
                 'preco' => (float)$item['preco'],
                 'quantidade' => isset($item['quantidade']) ? (int)$item['quantidade'] : 1
@@ -95,6 +96,18 @@ $_SESSION['total'] = $total;
     <link rel="stylesheet" href="../css/checkout.css">
 </head>
 <body>
+<?php
+// incluir conexão ao banco para buscar imagens dos produtos (opcional)
+include_once __DIR__ . '/../conexao.php';
+
+// preparar statement para buscar imagem por id (preferível) e por nome como fallback
+$stmtImgById = null;
+$stmtImgByName = null;
+if (isset($pdo)) {
+    $stmtImgById = $pdo->prepare("SELECT imagem FROM imagens WHERE idproduto = ? LIMIT 1");
+    $stmtImgByName = $pdo->prepare("SELECT i.imagem FROM produto p LEFT JOIN imagens i ON p.idproduto = i.idproduto WHERE p.nome = ? LIMIT 1");
+}
+?>
     <div class="checkout-container">
         <div class="checkout-header">
             <h2>Seu Carrinho</h2>
@@ -115,9 +128,43 @@ $_SESSION['total'] = $total;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($carrinho as $item): ?>
+                    <?php foreach ($carrinho as $item): 
+                        // tenta buscar imagem no banco usando id (se disponível) ou nome como fallback
+                        $imgSrc = null;
+                        if (isset($pdo)) {
+                            try {
+                                if (!empty($item['id']) && $stmtImgById) {
+                                    $stmtImgById->execute([ $item['id'] ]);
+                                    $rowImg = $stmtImgById->fetch(PDO::FETCH_ASSOC);
+                                    if ($rowImg && !empty($rowImg['imagem'])) {
+                                        $imgSrc = 'data:image/jpeg;base64,' . base64_encode($rowImg['imagem']);
+                                    }
+                                }
+
+                                if (empty($imgSrc) && $stmtImgByName) {
+                                    $stmtImgByName->execute([ $item['nome'] ]);
+                                    $rowImg = $stmtImgByName->fetch(PDO::FETCH_ASSOC);
+                                    if ($rowImg && !empty($rowImg['imagem'])) {
+                                        $imgSrc = 'data:image/jpeg;base64,' . base64_encode($rowImg['imagem']);
+                                    }
+                                }
+                            } catch (Exception $e) {
+                                // falha na busca da imagem — ignorar e usar placeholder
+                                $imgSrc = null;
+                            }
+                        }
+
+                        if (empty($imgSrc)) {
+                            $imgSrc = '../img/usuario.png';
+                        }
+                    ?>
                         <tr>
-                            <td><?= htmlspecialchars($item['nome']) ?></td>
+                            <td>
+                                <div class="produto-cell">
+                                    <img src="<?= $imgSrc ?>" alt="<?= htmlspecialchars($item['nome']) ?>" class="produto-thumb" />
+                                    <span class="produto-nome"><?= htmlspecialchars($item['nome']) ?></span>
+                                </div>
+                            </td>
                             <td>R$ <?= number_format($item['preco'], 2, ',', '.') ?></td>
                             <td><?= intval($item['quantidade']) ?></td>
                             <td>R$ <?= number_format($item['preco'] * $item['quantidade'], 2, ',', '.') ?></td>
