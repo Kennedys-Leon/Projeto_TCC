@@ -426,24 +426,23 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     updateCartCount();
     updateCartModal();
     </script>
-
     <script>
-    const btnCategorias = document.getElementById('categorias-btn');
-    const megaMenu = document.getElementById('mega-menu');
+const categoriasBtn = document.getElementById('categorias-btn');
+const megaMenu = document.getElementById('mega-menu');
 
-    btnCategorias.addEventListener('click', function(e) {
-        e.preventDefault();
-        megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
-    });
+// Alterna classe para abrir/fechar
+categoriasBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    megaMenu.classList.toggle('show'); // 'show' será a classe que exibe o menu
+});
 
-    // Fecha ao clicar fora
-    document.addEventListener('click', function(e) {
-        if (!btnCategorias.contains(e.target) && !megaMenu.contains(e.target)) {
-            megaMenu.style.display = 'none';
-        }
-    });
-    </script>
-
+// Fecha ao clicar fora
+document.addEventListener('click', function(e) {
+    if (!megaMenu.contains(e.target) && e.target !== categoriasBtn) {
+        megaMenu.classList.remove('show');
+    }
+});
+</script>
 </body>
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

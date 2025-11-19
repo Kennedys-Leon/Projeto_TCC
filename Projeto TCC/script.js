@@ -189,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clickedToggle = e.target === menuToggle;
         if (!clickInsideSidebar && !clickedToggle) closeSide();
         
+        
     });
 
 

@@ -709,24 +709,26 @@ body.dark-mode .servico-item p {
 }
 /* Mega menu escondido por padrão */
 .mega-menu {
-    display: none;
-    width: 100%;
-    background-color: #fff;
+    display: none; /* inicialmente escondido */
     position: absolute;
+    top: 100%; /* logo abaixo do botão */
     left: 0;
-    top: 70px; /* altura do header */
+    background: #fff;
+    width: 100%; /* ou o tamanho que quiser */
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    z-index: 999;
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
 }
 
-/* Grid de categorias */
 .categorias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 15px;
 }
+.mega-menu.show {
+    display: grid; /* ou block, dependendo do layout */
+}
+
 
 .categorias-grid a {
     display: flex;
