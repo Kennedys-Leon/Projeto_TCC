@@ -818,183 +818,179 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
         <!-- Meu Perfil -->
-        <div id="perfil" class="tab-content">
-            <div class="perfil-card">
-                <div class="perfil-grid">
-                    <div class="perfil-image-col">
-                        <h2 class="perfil-titulo" style="margin-top:0; margin-bottom:14px;">Meu Perfil</h2>
-                        <?php if (!empty($foto_de_perfil)): ?>
-                            <img src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>" alt="Foto de Perfil" class="perfil-imagem-display">
-                        <?php else: ?>
-                            <img src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg" alt="Foto de Perfil Padrão" class="perfil-imagem-display">
-                        <?php endif; ?>
+            <div id="perfil" class="tab-content">
+                <div class="perfil-card">
+                    <div class="perfil-grid">
 
-                        <div class="perfil-upload" style="margin-top:12px;">
-                            <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
-                            <!-- associa o input ao form mesmo estando fora do <form> -->
-                        </div>
+                        <!-- COLUNA ESQUERDA -->
+                        <div class="perfil-image-col">
+                            <h2 class="perfil-titulo">Meu Perfil</h2>
 
-                        <!-- MODAL DO PERFIL — AGORA FORA DAS ABAS (FUNCIONA 100%) -->
-                        <div id="fileModalPerfil" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
-                            <div style="background: #2a2a2aff; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; text-align: center; position: relative;">
-                                <h3>Escolha ou arraste a imagem</h3>
+                            <?php if (!empty($foto_de_perfil)): ?>
+                                <img id="fotoAtualPerfil"
+                                    src="data:image/jpeg;base64,<?= base64_encode($foto_de_perfil) ?>"
+                                    class="perfil-imagem-display">
+                            <?php else: ?>
+                                <img id="fotoAtualPerfil"
+                                    src="https://i.pinimg.com/736x/9f/4c/f0/9f4cf0f24b376077a2fcdab2e85c3584.jpg"
+                                    class="perfil-imagem-display">
+                            <?php endif; ?>
 
-                                <div id="dropAreaPerfil" style="border: 2px dashed #9d9dfc; border-radius: 10px; padding: 30px; cursor: pointer;">
-                                    <p>Arraste a imagem aqui ou clique para escolher</p>
-                                    <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
-                                </div>
+                            <div class="perfil-upload" style="margin-top:12px;">
+                                <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
+                                <img id="previewProduto" src="#" alt="Pré-visualização da imagem do Produto" style="display:none;">
+                            </div>
 
-                                <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover;">
-
-                                <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
+                            <!-- BOTÕES LATERAIS -->
+                            <div class="perfil-actions-left">
+                                <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
+                                <button id="deactivate-vendedor-btn" class="btn btn-desativar">Desativar conta</button>
+                                <button type="button" id="btnRetornarLateral" class="btn">Retornar à Página Inicial</button>
                             </div>
                         </div>
 
-                        <!-- botões centralizados abaixo da imagem (lado esquerdo) -->
-                        <div class="perfil-actions-left">
-                            <!-- botão agora envia o form pelo navegador -->
-                            <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
+                        <!-- FORMULÁRIO -->
+                        <div class="perfil-form-col">
+                            <form id="perfilForm" method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
 
-                            <button id="deactivate-vendedor-btn" class="btn btn-desativar">
-                                Desativar conta
-                            </button>
+                                <!-- AQUI ESTÁ O ÚNICO INPUT DE FOTO -->
+                                <input type="file" name="foto" id="foto_real" accept="image/*" style="display:none;">
 
-                            <button type="button" id="btnRetornarLateral" class="btn">Retornar à Página Inicial</button>
+                                <div style="display:grid; gap:12px;">
+                                    <div>
+                                        <label>Nome:</label>
+                                        <input type="text" name="nome" class="form-input"
+                                            value="<?= htmlspecialchars($vendedor['nome'] ?? '') ?>">
+                                    </div>
+
+                                    <div>
+                                        <label>Telefone:</label>
+                                        <input type="text" name="telefone" class="form-input" maxlength="15"
+                                            value="<?= htmlspecialchars($vendedor['telefone'] ?? '') ?>">
+                                    </div>
+
+                                    <div>
+                                        <label>Email:</label>
+                                        <input type="email" name="email" class="form-input"
+                                            value="<?= htmlspecialchars($vendedor['email'] ?? '') ?>">
+                                    </div>
+
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div>
+                                            <label>CPF:</label>
+                                            <input type="text" name="cpf" class="form-input" maxlength="14"
+                                                value="<?= htmlspecialchars($vendedor['cpf'] ?? '') ?>">
+                                        </div>
+
+                                        <div>
+                                            <label>CNPJ:</label>
+                                            <input type="text" name="cnpj" class="form-input" maxlength="18"
+                                                value="<?= htmlspecialchars($vendedor['cnpj'] ?? '') ?>">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label>Senha:</label>
+                                        <input type="password" name="senha" class="form-input">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-
-                    <div class="perfil-form-col">
-                        <form id="perfilForm" method="post" action="atualizar_vendedor.php" enctype="multipart/form-data" class="perfil-form">
-                            <div style="display:grid; gap:12px;">
-                                <div>
-                                    <label for="CampNome">Nome:</label>
-                                    <input type="text" id="CampNome" name="nome" class="form-input" value="<?php echo htmlspecialchars($vendedor['nome'] ?? ''); ?>">
-                                </div>
-
-                                <div>
-                                    <label for="CampTelefone">Telefone:</label>
-                                    <input type="text" id="CampTelefone" name="telefone" class="form-input" maxlength="15" value="<?php echo htmlspecialchars($vendedor['telefone'] ?? ''); ?>">
-                                </div>
-
-                                <div>
-                                    <label for="CampEmail">E-mail:</label>
-                                    <input type="email" id="CampEmail" name="email" class="form-input" value="<?php echo htmlspecialchars($vendedor['email'] ?? ''); ?>">
-                                </div>
-
-                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                                    <div>
-                                        <label for="CampCPF">CPF:</label>
-                                        <input type="text" id="CampCPF" name="cpf" class="form-input" maxlength="14" value="<?php echo htmlspecialchars($vendedor['cpf'] ?? ''); ?>">
-                                    </div>
-                                    <div>
-                                        <label for="CampCNPJ">CNPJ:</label>
-                                        <input type="text" id="CampCNPJ" name="cnpj" class="form-input" maxlength="18" value="<?php echo htmlspecialchars($vendedor['cnpj'] ?? ''); ?>">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label for="CampSenha">Senha:</label>
-                                    <input type="password" id="CampSenha" name="senha" class="form-input" placeholder="••••••••">
-                                </div>
-
-                                
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+
+
+            <!-- MODAL FINAL -->
+            <div id="fileModalPerfil"
+                style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);
+                    z-index:2000; justify-content:center; align-items:center;">
+
+                <div style="background:#2a2a2aff; padding:20px; border-radius:10px; width:400px; max-width:90%;
+                            text-align:center;">
+
+                    <h3>Escolha ou arraste a imagem</h3>
+
+                    <div id="dropAreaPerfil"
+                        style="border:2px dashed #9d9dfc; border-radius:10px; padding:30px; cursor:pointer;">
+                        <p>Clique ou arraste sua imagem aqui</p>
+
+                        <!-- INPUT DO MODAL (INVISÍVEL) -->
+                        <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
+                    </div>
+
+                    <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width:90px; height:90px; margin-top:15px;
+                            border-radius:10px; object-fit:cover;">
+
+                    <button id="closeModalBtnPerfil"
+                        style="margin-top:15px; background:#131318; color:#fff; border:none; padding:10px 20px;
+                            border-radius:7px; cursor:pointer;">
+                        Fechar
+                    </button>
+                </div>
+            </div>
+
 
         <script>
-               // === Abrir modal do Perfil ===
-        document.getElementById('openModalBtnPerfil').addEventListener('click', function () {
-            document.getElementById('fileModalPerfil').style.display = 'flex';
-        });
+            // === ELEMENTOS ===
+            const modal = document.getElementById('fileModalPerfil');
+            const btnAbrir = document.getElementById('openModalBtnPerfil');
+            const btnFechar = document.getElementById('closeModalBtnPerfil');
 
-        // === Fechar modal do Perfil ===
-        document.getElementById('closeModalBtnPerfil').addEventListener('click', function () {
-            document.getElementById('fileModalPerfil').style.display = 'none';
-        });
+            const dropArea = document.getElementById('dropAreaPerfil');
+            const modalInput = document.getElementById('modalFileInputPerfil');
 
-        // === Clique para abrir seletor ===
-        document.getElementById('dropAreaPerfil').addEventListener('click', function () {
-            document.getElementById('modalFileInputPerfil').click();
-        });
+            const previewModal = document.getElementById('modalPreviewPerfil');
+            const fotoReal = document.getElementById('foto_real');
+            const fotoPrincipal = document.getElementById('fotoAtualPerfil');
 
-        // === Preview no modal ===
-        document.getElementById('modalFileInputPerfil').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
+            // ==== abrir / fechar modal ====
+            btnAbrir.onclick = () => modal.style.display = 'flex';
+            btnFechar.onclick = () => modal.style.display = 'none';
+
+            // ==== função principal ====
+            function aplicarImagem(file) {
                 const reader = new FileReader();
-                reader.onload = function (evt) {
-                    document.getElementById('modalPreviewPerfil').src = evt.target.result;
-                    document.getElementById('modalPreviewPerfil').style.display = 'block';
+
+                reader.onload = e => {
+                    previewModal.src = e.target.result;
+                    previewModal.style.display = 'block';
+                    fotoPrincipal.src = e.target.result;
+
+                    // Envia o arquivo para o input REAL do formulário
+                    const dt = new DataTransfer();
+                    dt.items.add(file);
+                    fotoReal.files = dt.files;
                 };
-                reader.readAsDataURL(file);
 
-                // criar input REAL para o form
-                let inputReal = document.getElementById('foto_perfil_real');
-                if (!inputReal) {
-                    inputReal = document.createElement('input');
-                    inputReal.type = 'file';
-                    inputReal.name = 'foto';
-                    inputReal.id = 'foto_perfil_real';
-                    inputReal.style.display = 'none';
-                    inputReal.form = 'perfilForm';
-                    document.body.appendChild(inputReal);
-                }
-
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                inputReal.files = dt.files;
-            }
-        });
-
-        // === Arrastar e soltar imagem ===
-        const dropArea = document.getElementById('dropAreaPerfil');
-
-        dropArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropArea.style.borderColor = '#6f6ffc';
-            dropArea.style.background = '#1a1a1a';
-        });
-
-        dropArea.addEventListener('dragleave', () => {
-            dropArea.style.borderColor = '#9d9dfc';
-            dropArea.style.background = 'transparent';
-        });
-
-        dropArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropArea.style.borderColor = '#9d9dfc';
-            dropArea.style.background = 'transparent';
-
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const preview = document.getElementById('modalPreviewPerfil');
-                    preview.src = evt.target.result;
-                    preview.style.display = 'block';
-                };
                 reader.readAsDataURL(file);
             }
-        });
 
-        // Ações dos botões laterais: submetem o formulário ou retornam à página
-        const btnSalvarLateral = document.getElementById('btnSalvarLateral');
-        const btnRetornarLateral = document.getElementById('btnRetornarLateral');
-        if (btnSalvarLateral) {
-            btnSalvarLateral.addEventListener('click', function() {
-                const form = document.querySelector('.perfil-form');
-                if (form) form.submit();
+            // ==== clique ====
+            dropArea.onclick = () => modalInput.click();
+
+            modalInput.addEventListener('change', e => {
+                const f = e.target.files[0];
+                if (f) aplicarImagem(f);
             });
-        }
-        if (btnRetornarLateral) {
-            btnRetornarLateral.addEventListener('click', function() {
-                window.location.href = 'painel_vendedor.php';
+
+            // ==== drag & drop ====
+            dropArea.addEventListener('dragover', e => {
+                e.preventDefault();
+                dropArea.style.borderColor = '#6f6ffc';
             });
-        }
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.style.borderColor = '#9d9dfc';
+            });
+
+            dropArea.addEventListener('drop', e => {
+                e.preventDefault();
+                dropArea.style.borderColor = '#9d9dfc';
+
+                const f = e.dataTransfer.files[0];
+                if (f && f.type.startsWith("image/")) aplicarImagem(f);
+            });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
