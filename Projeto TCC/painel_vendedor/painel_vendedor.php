@@ -693,7 +693,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="form-group full-width">
                                 <label>Imagem do produto:</label>
                                 <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:10px;">
-                                    <button type="button" id="openModalBtnProduto" class="btn">Escolher arquivo</button>
+                                <button type="button" id="openModalBtnProduto" class="btn">Escolher arquivo</button>
                                     <img id="previewProduto" src="#" alt="Pré-visualização da imagem do Produto" style="display:none;">
                                 </div>
                                 <input type="file" id="imagem_produto" name="imagem" accept="image/*" style="display:none;" required>
@@ -719,19 +719,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <img id="modalPreviewProduto" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover; display: block;">
                     <button id="closeModalBtnProduto" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
-                </div>
-            </div>
-
-            <!-- Adicione logo após o modal do produto -->
-            <div id="fileModalPerfil" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
-                <div style="background: #2a2a2aff; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; text-align: center; position: relative;">
-                    <h3>Escolha ou arraste a imagem</h3>
-                    <div id="dropAreaPerfil" style="border: 2px dashed #9d9dfc; border-radius: 10px; padding: 30px; cursor: pointer;">
-                        <p>Arraste a imagem aqui ou clique para escolher</p>
-                        <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
-                    </div>
-                    <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover;">
-                    <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
                 </div>
             </div>
 
@@ -845,8 +832,22 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="perfil-upload" style="margin-top:12px;">
                             <button type="button" id="openModalBtnPerfil" class="btn">Selecione uma foto</button>
                             <!-- associa o input ao form mesmo estando fora do <form> -->
-                            <input type="file" id="foto_perfil" name="foto" form="perfilForm" accept="image/*" style="display:none;">
-                            <img id="previewPerfil" src="#" alt="Pré-visualização da foto" style="display:none; width:120px; height:120px; border-radius:50%; object-fit:cover; margin-top:8px;">
+                        </div>
+
+                        <!-- MODAL DO PERFIL — AGORA FORA DAS ABAS (FUNCIONA 100%) -->
+                        <div id="fileModalPerfil" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
+                            <div style="background: #2a2a2aff; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; text-align: center; position: relative;">
+                                <h3>Escolha ou arraste a imagem</h3>
+
+                                <div id="dropAreaPerfil" style="border: 2px dashed #9d9dfc; border-radius: 10px; padding: 30px; cursor: pointer;">
+                                    <p>Arraste a imagem aqui ou clique para escolher</p>
+                                    <input type="file" id="modalFileInputPerfil" accept="image/*" style="display:none;">
+                                </div>
+
+                                <img id="modalPreviewPerfil" src="../img/bobeira.jpg" alt="Pré-visualização da imagem" style="display:none; width: 50px; height: 50px; margin: 15px auto 0 auto; border-radius: 8px; object-fit: cover;">
+
+                                <button id="closeModalBtnPerfil" style="margin-top: 15px; background: #131318; color: #eaeaea; border: none; padding: 10px 20px; border-radius: 7px; cursor: pointer;">Fechar</button>
+                            </div>
                         </div>
 
                         <!-- botões centralizados abaixo da imagem (lado esquerdo) -->
@@ -905,34 +906,47 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <script>
-                // === Abrir o modal ===
-        document.getElementById('openModalBtnPerfil').addEventListener('click', function() {
-            const modal = document.getElementById('fileModalPerfil');
-            modal.style.display = 'flex'; // Usa flex para centralizar o conteúdo
+               // === Abrir modal do Perfil ===
+        document.getElementById('openModalBtnPerfil').addEventListener('click', function () {
+            document.getElementById('fileModalPerfil').style.display = 'flex';
         });
 
-        // === Fechar o modal ===
-        document.getElementById('closeModalBtnPerfil').addEventListener('click', function() {
-            const modal = document.getElementById('fileModalPerfil');
-            modal.style.display = 'none';
+        // === Fechar modal do Perfil ===
+        document.getElementById('closeModalBtnPerfil').addEventListener('click', function () {
+            document.getElementById('fileModalPerfil').style.display = 'none';
         });
 
-        // === Clique na área para abrir o seletor ===
-        document.getElementById('dropAreaPerfil').addEventListener('click', function() {
+        // === Clique para abrir seletor ===
+        document.getElementById('dropAreaPerfil').addEventListener('click', function () {
             document.getElementById('modalFileInputPerfil').click();
         });
 
-        // === Quando um arquivo é escolhido ===
-        document.getElementById('modalFileInputPerfil').addEventListener('change', function(e) {
+        // === Preview no modal ===
+        document.getElementById('modalFileInputPerfil').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const preview = document.getElementById('modalPreviewPerfil');
-                    preview.src = evt.target.result;
-                    preview.style.display = 'block';
+                reader.onload = function (evt) {
+                    document.getElementById('modalPreviewPerfil').src = evt.target.result;
+                    document.getElementById('modalPreviewPerfil').style.display = 'block';
                 };
                 reader.readAsDataURL(file);
+
+                // criar input REAL para o form
+                let inputReal = document.getElementById('foto_perfil_real');
+                if (!inputReal) {
+                    inputReal = document.createElement('input');
+                    inputReal.type = 'file';
+                    inputReal.name = 'foto';
+                    inputReal.id = 'foto_perfil_real';
+                    inputReal.style.display = 'none';
+                    inputReal.form = 'perfilForm';
+                    document.body.appendChild(inputReal);
+                }
+
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                inputReal.files = dt.files;
             }
         });
 
