@@ -47,7 +47,36 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navbar">
             <ul>
-                <li class="dropdown"><a href="#" id="categorias-btn">Categorias ▼</a></li>
+            <li class="dropdown">
+                <a href="#" id="categorias-btn">Categorias ▼</a>
+
+                <!-- Mega Menu Completo -->
+                <div class="mega-menu" id="mega-menu">
+                <div class="categorias-grid">
+                    <a href="categorias/brawlstars.php"><img src="img/brawl.webp">Brawl Stars</a>
+                    <a href="categorias/fifa.php"><img src="img/fifa.jpeg">FIFA</a>
+                    <a href="categorias/fortnite.php"><img src="img/fortnite.jpeg">Fortnite</a>
+                    <a href="categorias/freefire.php"><img src="img/FF.jpeg">Free Fire</a>
+                    <a href="categorias/minecraft.php"><img src="img/minecraft.jpeg">Minecraft</a>
+                    <a href="categorias/roblox.php"><img src="img/roblox.jpeg">Roblox</a>
+                    <a href="categorias/cod.php"><img src="img/cod.webp">Call of Duty</a>
+                    <a href="categorias/valorant.php"><img src="img/val.jpg">Valorant</a>
+                    <a href="categorias/lol.php"><img src="img/lol.jpeg">League of Legends</a>
+                    <a href="categorias/csgo.php"><img src="img/cs.webp">CS:GO</a>
+                    <a href="categorias/gta.php"><img src="img/gta.png">GTA V</a>
+                    <a href="categorias/pubg.php"><img src="img/pubg7.webp">PUBG</a>
+                    <a href="categorias/clashroyale.php"><img src="img/clash.jpeg">Clash Royale</a>
+                    <a href="categorias/clashofclans.php"><img src="img/clans.jpg">Clash of Clans</a>
+                    <a href="categorias/pokemon.php"><img src="img/poke.jpg">Pokémon GO</a>
+                    <a href="categorias/stumbleguys.php"><img src="img/guys.jpg">Stumble Guys</a>
+                    <a href="categorias/rocketleague.php"><img src="img/league.jpg">Rocket League</a>
+                    <a href="categorias/fallguys.php"><img src="img/fall.webp">Fall Guys</a>
+                    <a href="categorias/thelastofus.php"><img src="img/joel.webp">The Last of Us</a>
+                    <a href="categorias/reddead.php"><img src="img/red.avif">Red Dead Redemption 2</a>
+                    <a href="categorias/spiderman.php"><img src="img/aranha.jpg">Spider-Man</a>
+                    <a href="categorias/stream.php"><img src="img/netflix.webp">Serviços Streams</a>
+                </div>
+                </div>
 
                 <li><a href="informacoes_cabecalho/como_funciona.php">Como Funciona?</a></li>
                 <li><a href="informacoes_cabecalho/sobre.php">Sobre</a></li>
@@ -211,6 +240,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php if (isset($_SESSION['usuario_nome'])): ?>
                                     <button
                                         class="btn-preco"
+                                        data-id="<?= $produto['idproduto'] ?>"
                                         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
                                         data-preco="<?= number_format($produto['preco'], 2, '.', '') ?>">
                                         Adicionar ao Carrinho
@@ -277,7 +307,8 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             const rm = document.createElement('button');
             rm.textContent = 'Remover';
-            rm.className = 'remove-btn';
+            // aplicar classe que já tem estilos (`cart-remove-btn`) e manter `remove-btn` como gancho JS
+            rm.className = 'cart-remove-btn remove-btn';
             rm.setAttribute('data-index', idx);
 
             li.appendChild(rm);
@@ -324,6 +355,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     document.querySelectorAll('.btn-preco').forEach(btn => {
         btn.addEventListener('click', () => {
+            const id = btn.dataset.id ?? null;
             const nome = btn.dataset.nome || btn.closest('.card-produto')?.querySelector('p')?.textContent?.trim() || 'Produto';
             const precoRaw = btn.dataset.preco ?? btn.textContent;
             const preco = parseFloat(String(precoRaw).replace(/[^\d,.-]/g,'').replace(',', '.')) || 0;
@@ -345,9 +377,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return;
             }
 
-            const existente = cartItems.find(i => i.nome === nome && Number(i.preco) === Number(preco));
+            let existente;
+            if (id) existente = cartItems.find(i => i.id == id);
+            else existente = cartItems.find(i => i.nome === nome && Number(i.preco) === Number(preco));
+
             if (existente) existente.quantidade = (existente.quantidade || 1) + 1;
-            else cartItems.push({ nome, preco: Number(preco), quantidade: 1 });
+            else cartItems.push({ id: id ? id : null, nome, preco: Number(preco), quantidade: 1 });
 
             saveCart();
             updateCartCount();
@@ -392,8 +427,32 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     updateCartModal();
     </script>
 
-    <!-- VLibras -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+    <script>
+    const btnCategorias = document.getElementById('categorias-btn');
+    const megaMenu = document.getElementById('mega-menu');
+
+    btnCategorias.addEventListener('click', function(e) {
+        e.preventDefault();
+        megaMenu.style.display = megaMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!btnCategorias.contains(e.target) && !megaMenu.contains(e.target)) {
+            megaMenu.style.display = 'none';
+        }
+    });
+    </script>
+
 </body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </html>

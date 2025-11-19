@@ -854,7 +854,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <!-- botão agora envia o form pelo navegador -->
                             <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
 
-                            <button id="deactivate-vendedor-btn" class="btn-desativar">
+                            <button id="deactivate-vendedor-btn" class="btn btn-desativar">
                                 Desativar conta
                             </button>
 

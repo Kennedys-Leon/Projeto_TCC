@@ -245,6 +245,28 @@ body {
   font-size: 1rem;
 }
 
+/* Thumbnail inside product cell */
+.produto-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.produto-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.produto-nome {
+  display: inline-block;
+  max-width: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .checkout-tabela td:nth-child(2),
 .checkout-tabela td:nth-child(4) {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;

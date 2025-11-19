@@ -96,17 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItems.forEach((item, idx) => {
             const li = document.createElement('li');
-            li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)} x ${item.quantidade}`;
+            li.className = 'cart-item';
+            li.innerHTML = `
+                <span class="cart-item-nome">${item.nome}</span>
+                <span class="cart-item-valor">R$ ${item.preco.toFixed(2)} × ${item.quantidade}</span>
+            `;
 
             const rm = document.createElement('button');
             rm.textContent = 'Remover';
-            rm.style.marginLeft = '8px';
-            rm.addEventListener('click', () => {
-                cartItems.splice(idx, 1);
-                saveCart();
-                updateCartCount();
-                updateCartModal();
-            });
+            // aplicar mesmas classes que o CSS espera
+            rm.className = 'cart-remove-btn remove-btn';
+            rm.setAttribute('data-index', idx);
 
             li.appendChild(rm);
             list.appendChild(li);
@@ -144,16 +144,20 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const card = btn.closest('.card-produto');
             if (!card) return;
-            const nome = card.querySelector('p')?.textContent || 'Produto';
-            const preco = parseFloat(btn.textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+            const id = btn.dataset.id ?? null;
+            const nome = btn.dataset.nome || card.querySelector('p')?.textContent || 'Produto';
+            const preco = parseFloat((btn.dataset.preco ?? btn.textContent).toString().replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
 
             if (!nome || preco <= 0) return; // <-- agora está no lugar certo
 
-            const existente = cartItems.find(item => item.nome === nome && item.preco === preco);
+            let existente;
+            if (id) existente = cartItems.find(item => item.id == id);
+            else existente = cartItems.find(item => item.nome === nome && item.preco === preco);
+
             if (existente) {
                 existente.quantidade = (existente.quantidade || 1) + 1;
             } else {
-                cartItems.push({ nome, preco, quantidade: 1 });
+                cartItems.push({ id: id ? id : null, nome, preco, quantidade: 1 });
             }
 
             saveCart();
