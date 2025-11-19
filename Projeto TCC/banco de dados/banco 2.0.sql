@@ -164,6 +164,22 @@ VALUES
   (50.00, 100)
 ON DUPLICATE KEY UPDATE percentual = VALUES(percentual), min_vendas = VALUES(min_vendas);
 
+-- -----------------------------------------------------
+-- 10) TABELA: Recuperação de senha
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS recuperacao_senha (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idusuario INT NOT NULL,
+    codigo VARCHAR(6) NOT NULL,
+    expiracao DATETIME NOT NULL,
+    usado TINYINT(1) DEFAULT 0,
+
+    CONSTRAINT fk_recuperacao_usuario
+        FOREIGN KEY (idusuario)
+        REFERENCES usuario(idusuario)
+        ON DELETE CASCADE
+);
+
 ALTER TABLE usuario ADD COLUMN status_conta ENUM('ativo', 'desativado') DEFAULT 'ativo';
 ALTER TABLE usuario ADD COLUMN ativo TINYINT(1) DEFAULT 1;
 ALTER TABLE vendedor ADD COLUMN status_conta ENUM('ativo', 'desativado') DEFAULT 'ativo';
