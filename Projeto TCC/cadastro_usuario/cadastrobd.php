@@ -73,7 +73,7 @@ try {
         $mail->addAddress($email); // ← ENVIA PARA O USUÁRIO
 
         $mail->isHTML(true);
-        $mail->Subject = 'Cadastro realizado com sucesso ✔️';
+        $mail->Subject = 'Cadastro realizado com sucesso :)';
         $mail->Body = "
             <h2>Bem-vindo, $nome!</h2>
             <p>Seu cadastro foi concluído com sucesso na Max Acess.</p>

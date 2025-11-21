@@ -36,6 +36,9 @@
             </li>
         </ol>
         <p>Dúvidas? Entre em contato pelo nosso suporte!</p>
+        <p>Contate nosso número de telefone: (35)99128-1510</p>
+        <p>ou</p>
+        <p>Nosso e-mail: tccecommercegames@gmail.com</p>
     </div>
 </body>
 </html>

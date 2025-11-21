@@ -117,7 +117,7 @@ if (!empty($_SESSION['usuario_foto'])) {
             </div>
             <div class="campo">
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" value="<?= htmlspecialchars($senha) ?>" placeholder="Digite sua nova senha aqui">
+                <a href="../login/recuperar_senha.php" class="btn-primario">Deseja trocar sua senha? Clique aqui!</a>
             </div>
         </div>
         <div class="linha">

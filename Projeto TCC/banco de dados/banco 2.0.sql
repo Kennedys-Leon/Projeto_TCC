@@ -169,14 +169,18 @@ ON DUPLICATE KEY UPDATE percentual = VALUES(percentual), min_vendas = VALUES(min
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS recuperacao_senha (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    idusuario INT NOT NULL,
+    idusuario INT NULL,
+    idvendedor INT NULL,
     codigo VARCHAR(6) NOT NULL,
     expiracao DATETIME NOT NULL,
     usado TINYINT(1) DEFAULT 0,
 
-    CONSTRAINT fk_recuperacao_usuario
-        FOREIGN KEY (idusuario)
+    CONSTRAINT fk_rec_usuario FOREIGN KEY (idusuario)
         REFERENCES usuario(idusuario)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_rec_vendedor FOREIGN KEY (idvendedor)
+        REFERENCES vendedor(idvendedor)
         ON DELETE CASCADE
 );
 
@@ -190,6 +194,14 @@ ADD COLUMN idvendedor INT NOT NULL,
 ADD CONSTRAINT fk_item_pedido_vendedor FOREIGN KEY (idvendedor)
 REFERENCES vendedor(idvendedor)
 ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE usuario 
+ADD COLUMN reset_token VARCHAR(255) NULL,
+ADD COLUMN token_expira DATETIME NULL;
+
+ALTER TABLE vendedor 
+ADD COLUMN reset_token VARCHAR(255) NULL,
+ADD COLUMN token_expira DATETIME NULL;
 
 -- =============================================================
 -- FIM

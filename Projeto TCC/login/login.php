@@ -22,7 +22,7 @@
         <input type="submit" value="Entrar" class="btn-vermelho">
 
         <div class="botoes-inicio">
-            <a href="esqueci_senha.php" class="btn-primario">Esqueceu sua senha?</a><br>
+            <a href="recuperar_senha.php" class="btn-primario">Esqueceu sua senha?</a><br>
             <p>----------------------------------------------------------------------</p>
             <a href="../cadastro_usuario/cadastro.php" class="btn-primario">Não tem conta? Cadastre-se</a> 
         </div>

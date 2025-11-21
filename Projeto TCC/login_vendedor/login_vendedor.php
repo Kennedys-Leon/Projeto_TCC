@@ -22,6 +22,8 @@
         <input type="submit" value="Entrar" class="btn-vermelho">
 
         <div class="botoes-inicio">
+            <a href="../login/recuperar_senha.php" class="btn-primario">Esqueceu sua senha?</a><br>
+            <p>----------------------------------------------------------------------</p>
             <a href="../cadastro_vendedor/cadastrovendedor.php" class="btn-primario">Não tem conta? Cadastre-se agora!</a>
         </div>
 

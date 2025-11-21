@@ -845,7 +845,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="perfil-actions-left">
                                 <button type="submit" id="btnSalvarLateral" form="perfilForm" class="btn">Salvar Alterações</button>
                                 <button id="deactivate-vendedor-btn" class="btn btn-desativar">Desativar conta</button>
-                                <button type="button" id="btnRetornarLateral" class="btn">Retornar à Página Inicial</button>
                             </div>
                         </div>
 
@@ -891,7 +890,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                     <div>
                                         <label>Senha:</label>
-                                        <input type="password" name="senha" class="form-input">
+                                        <a href="../login/recuperar_senha.php" class="btn-primario">Deseja trocar sua senha? Clique aqui!</a>
                                     </div>
                                 </div>
                             </form>
