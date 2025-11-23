@@ -45,6 +45,42 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
+<div id="acessibilidade-widget">
+  <button id="acess-btn" aria-label="Abrir painel de acessibilidade">♿</button>
+
+  <div id="acess-panel">
+    <div id="audioReaderPanel" style="display:none;" class="audio-panel">
+    <p>🔊 Leitura de Texto</p>
+    <button onclick="speakSelectedText()">Ler Seleção</button>
+    <button onclick="speakPage()">Ler Página</button>
+    <button onclick="window.speechSynthesis.pause()">Pausar</button>
+    <button onclick="window.speechSynthesis.resume()">Continuar</button>
+    <button onclick="window.speechSynthesis.cancel()">Parar</button>
+
+    <label>Velocidade:
+        <input type="range" min="0.5" max="2" step="0.1" value="1" id="speechRate">
+    </label>
+</div>
+
+<button id="openAudioPanel" onclick="toggleAudioPanel()">🔊 Áudio</button>
+
+    <button class="acess-option" onclick="toggleContraste()">Alto Contraste</button>
+    <button class="acess-option" onclick="modoDaltonismo()">Modo Daltonismo</button>
+    <button class="acess-option" onclick="toggleLeitura()">Modo Leitura</button>
+    <button class="acess-option" onclick="toggleAnimations()">Desativar Animações</button>
+    <button class="acess-option" onclick="toggleUnderline()">Sublinhar Links</button>
+    <button class="acess-option" onclick="toggleCursor()">Cursor Grande</button>
+    <button class="acess-option" onclick="ajustarFonte(1)">Aumentar Fonte</button>
+    <button onclick="toggleAntiFlash()" id="antiFlashBtn">⚠ Anti-Flash</button>
+
+    <button class="acess-option" onclick="ajustarFonte(-1)">Diminuir Fonte</button>
+    <button class="acess-option" onclick="toggleEspacamento()">Espaçamento do Texto</button>
+    <button class="acess-option reset" onclick="resetAcess()">Redefinir Tudo</button>
+  </div>
+</div>
+
+
+
         <nav class="navbar">
             <ul>
             <li class="dropdown">
@@ -444,14 +480,142 @@ document.addEventListener('click', function(e) {
 });
 </script>
 </body>
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+   <script>
+   // Painel
+const panel = document.getElementById("acess-panel");
+document.getElementById("acess-btn").onclick = () => {
+  panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+};
+
+// Salvar preferências
+function salvar() {
+  localStorage.setItem("acessPreferencias", document.body.className);
+}
+
+// Alto contraste
+function toggleContraste() {
+  document.body.classList.toggle("contraste");
+  salvar();
+}
+
+// Daltonismo (agora REAL, sem filtros)
+function modoDaltonismo() {
+  document.body.classList.toggle("daltonismo");
+  salvar();
+}
+
+// Modo leitura
+function toggleLeitura() {
+  document.body.classList.toggle("leitura");
+  salvar();
+}
+
+// Remover animações
+function toggleAnimations() {
+  document.body.classList.toggle("no-anim");
+  salvar();
+}
+
+// Sublinhar links
+function toggleUnderline() {
+  document.body.classList.toggle("links");
+  salvar();
+}
+
+// Cursor grande
+function toggleCursor() {
+  document.body.classList.toggle("cursor-grande");
+  salvar();
+}
+
+// Espaçamento de texto
+function toggleEspacamento() {
+  document.body.classList.toggle("espacamento");
+  salvar();
+}
+
+// Aumentar/diminuir fonte
+let fonte = 100;
+function ajustarFonte(valor) {
+  fonte += valor * 10;
+  document.body.style.fontSize = fonte + "%";
+  salvar();
+}
+
+// Reset
+function resetAcess() {
+  document.body.className = "";
+  document.body.style.fontSize = "100%";
+  localStorage.removeItem("acessPreferencias");
+}
+
+// Restaurar preferências ao abrir o site
+window.onload = () => {
+  const prefs = localStorage.getItem("acessPreferencias");
+  if (prefs) document.body.className = prefs;
+};
+function toggleAudioPanel() {
+    const panel = document.getElementById("audioReaderPanel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+}
+
+// Ler texto selecionado
+function speakSelectedText() {
+    let text = window.getSelection().toString();
+    if (!text.trim()) {
+        alert("Selecione algum texto primeiro!");
+        return;
+    }
+    speak(text);
+}
+
+// Ler página inteira
+function speakPage() {
+    let text = document.body.innerText;
+    speak(text);
+}
+
+function speak(text) {
+    window.speechSynthesis.cancel();
+    let utter = new SpeechSynthesisUtterance(text);
+    utter.rate = document.getElementById("speechRate").value;
+    window.speechSynthesis.speak(utter);
+    
+}
+function toggleAntiFlash() {
+    document.body.classList.toggle("antiflash");
+}
+// Ler texto apenas quando foco é dado via TAB
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Tab") {
+        document.addEventListener("focusin", speakOnFocus, { once: true });
+    }
+});
+
+function speakOnFocus(event) {
+    let element = event.target;
+
+    // pega texto interno do elemento focado
+    let text = element.innerText || element.value;
+
+    if (!text || text.trim() === "") return;
+
+    // lê o texto
+    autoSpeak(text);
+}
+
+function autoSpeak(text) {
+    window.speechSynthesis.cancel();
+
+    let utter = new SpeechSynthesisUtterance(text);
+
+    // usa velocidade do painel, se existir
+    let rateEl = document.getElementById("speechRate");
+    if (rateEl) utter.rate = rateEl.value;
+
+    window.speechSynthesis.speak(utter);
+}
+
+</script>
+
 </html>

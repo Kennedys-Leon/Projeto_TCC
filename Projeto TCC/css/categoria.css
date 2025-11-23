@@ -411,3 +411,74 @@ tr:hover {
     padding: 8px;
   }
 }
+/* Barra superior */
+#acessibilidade-barra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #0033aa;
+    padding: 8px;
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#acessibilidade-barra .btn-acc {
+    background: #fff;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Painel */
+#painel-acessibilidade {
+    display: none;
+    position: fixed;
+    top: 45px;
+    right: 10px;
+    width: 250px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #0005;
+    z-index: 9999;
+}
+
+#painel-acessibilidade button {
+    width: 100%;
+    margin-top: 6px;
+    padding: 8px;
+    border: none;
+    background: #0033aa;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#painel-acessibilidade .reset { background: #aa0000; }
+#painel-acessibilidade .salvar { background: #008800; }
+
+/* Acessibilidades */
+.alto-contraste { background: #000 !important; color: #fff !important; }
+.tons-cinza { filter: grayscale(100%); }
+.daltonismo { filter: url('#svgDaltonismo'); }
+.cursor-grande { cursor: url('data:image/png;base64,iVBOR...'), auto; }
+.texto-espacamento { letter-spacing: 2px; line-height: 1.8; }
+
+.sem-animacoes * {
+    animation: none !important;
+    transition: none !important;
+}
+
+.modo-leitura {
+    background: #fcf8d6 !important;
+    color: #222 !important;
+}
+
+.foco-ampliado *:focus {
+    outline: 3px solid #ff0 !important;
+    transform: scale(1.05);
+}

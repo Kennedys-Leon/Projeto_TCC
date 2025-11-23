@@ -767,21 +767,160 @@ body.dark-mode .categorias-grid a:hover {
     background-color: #333;
 }
 
-  
-  #modo-daltonico:hover {
-    transform: scale(1.05);
-    background: linear-gradient(90deg, #005fa3, #00aaff);
-  }
-  
-  /* ===== Efeito preto e branco ===== */
-  body.colorblind-mode {
-    filter: grayscale(100%) contrast(1.2);
-    transition: filter 0.3s ease-in-out;
-  }
-  
-  /* Ajuste para evitar distorção em imagens ou ícones */
-  body.colorblind-mode img,
-  body.colorblind-mode video {
-    filter: grayscale(100%) contrast(1.1);
-  }
-  
+  /* WIDGET */
+#acessibilidade-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  font-family: Arial, sans-serif;
+}
+
+#acess-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#acess-panel {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  width: 220px;
+  box-shadow: 0 0 10px #0004;
+  margin-bottom: 8px;
+}
+
+.acess-option {
+  margin: 5px 0;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acess-option.reset { background: #b30000; }
+
+/* ----------- MODOS DE ACESSIBILIDADE ----------- */
+
+/* ALTO CONTRASTE REAL */
+body.contraste * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+/* MODO DALTONISMO (paleta acessível Okabe-Ito) */
+body.daltonismo {
+  --primary: #0072B2;
+  --secondary: #009E73;
+  --danger: #D55E00;
+  --yellow: #F0E442;
+  --pink: #CC79A7;
+  --purple: #6A3D9A;
+}
+
+body.daltonismo * {
+  color: var(--primary) !important;
+}
+
+/* Links em daltonismo */
+body.daltonismo a {
+  color: var(--pink) !important;
+}
+
+/* Fundo */
+body.daltonismo {
+  background: #f4f4f4 !important;
+}
+
+/* MODO LEITURA */
+body.leitura * {
+  font-family: "Georgia", serif !important;
+  line-height: 1.8 !important;
+}
+
+/* DESATIVAR ANIMAÇÕES */
+body.no-anim * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* SUBLINHAR LINKS */
+body.links a {
+  text-decoration: underline !important;
+}
+
+/* CURSOR GRANDE */
+body.cursor-grande {
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur117.cur'), auto !important;
+}
+
+body.cursor-grande * {
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur117.cur'), auto !important;
+}
+
+/* ESPAÇAMENTO DE TEXTO */
+body.espacamento * {
+  letter-spacing: 1.5px !important;
+  word-spacing: 4px !important;
+}
+.audio-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1a1a1a;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px black;
+    z-index: 9999;
+}
+.audio-panel button {
+    display: block;
+    margin: 5px 0;
+    width: 100%;
+}
+#openAudioPanel {
+    position: fixed;
+    bottom: 20px;
+    right: 180px;
+    padding: 12px;
+    background: #0066ff;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#antiFlashBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ffcc00;
+    color: #000;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.antiflash * {
+    animation: none !important;
+    transition: none !important;
+}
+.antiflash img {
+    filter: brightness(80%) saturate(50%);
+}
+.antiflash video {
+    display: none !important;
+}
+.antiflash .gif, .antiflash img[src*=".gif"] {
+    display: none !important;
+}
+
