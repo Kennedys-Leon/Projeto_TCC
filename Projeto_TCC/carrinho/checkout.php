@@ -137,7 +137,21 @@ if (isset($pdo)) {
                                     $stmtImgById->execute([ $item['id'] ]);
                                     $rowImg = $stmtImgById->fetch(PDO::FETCH_ASSOC);
                                     if ($rowImg && !empty($rowImg['imagem'])) {
-                                        $imgSrc = 'data:image/jpeg;base64,' . base64_encode($rowImg['imagem']);
+                                        $imgData = $rowImg['imagem'];
+                                        if (is_resource($imgData)) {
+                                            $imgData = stream_get_contents($imgData);
+                                        }
+                                        if ($imgData !== null && $imgData !== '') {
+                                            $finfo = false;
+                                            if (function_exists('finfo_buffer')) {
+                                                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                $mime = finfo_buffer($finfo, $imgData) ?: 'image/jpeg';
+                                                finfo_close($finfo);
+                                            } else {
+                                                $mime = 'image/jpeg';
+                                            }
+                                            $imgSrc = 'data:' . $mime . ';base64,' . base64_encode($imgData);
+                                        }
                                     }
                                 }
 
@@ -145,7 +159,21 @@ if (isset($pdo)) {
                                     $stmtImgByName->execute([ $item['nome'] ]);
                                     $rowImg = $stmtImgByName->fetch(PDO::FETCH_ASSOC);
                                     if ($rowImg && !empty($rowImg['imagem'])) {
-                                        $imgSrc = 'data:image/jpeg;base64,' . base64_encode($rowImg['imagem']);
+                                        $imgData = $rowImg['imagem'];
+                                        if (is_resource($imgData)) {
+                                            $imgData = stream_get_contents($imgData);
+                                        }
+                                        if ($imgData !== null && $imgData !== '') {
+                                            $finfo = false;
+                                            if (function_exists('finfo_buffer')) {
+                                                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                $mime = finfo_buffer($finfo, $imgData) ?: 'image/jpeg';
+                                                finfo_close($finfo);
+                                            } else {
+                                                $mime = 'image/jpeg';
+                                            }
+                                            $imgSrc = 'data:' . $mime . ';base64,' . base64_encode($imgData);
+                                        }
                                     }
                                 }
                             } catch (Exception $e) {
